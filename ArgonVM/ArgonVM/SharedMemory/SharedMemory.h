@@ -53,7 +53,7 @@ typedef struct _VMThreadMemory
     // ST = 4
     // LP = 5
     // GP0 = 6
-    Word registers[37];
+    Word registers[38];
     Word localSpaceCapacity; // The amount of space available for thread local and stack
     void* localSpace; // The space allocated for thread local storage and stack
     } VMThreadMemory;

@@ -203,13 +203,13 @@ public class VMThread:AbstractModel
     @inline(__always)
     private func MAKE(_ instruction:VMInstruction) throws
         {
-        let address = popPointer(self.threadMemory)
         let parmCount = instruction.immediate
         var count:Word = 0
         if parmCount == 2
             {
             count = popWord(self.threadMemory)
             }
+        let address = popPointer(self.threadMemory)
         if let vectorPointer = try self.memory.traits(atName: "Argon::Vector"),address == vectorPointer
             {
             setThreadRegisterPointerValue(self.threadMemory,MachineRegister.R0.rawValue,try self.memory.allocate(vectorWithCapacity: Int(count)))
@@ -718,7 +718,6 @@ public class VMThread:AbstractModel
     private func POP(_ instruction:VMInstruction) throws
         {
         let register1 = instruction.register1.rawValue
-        let immediate = ArgonWord(instruction.immediate)
         let mode = instruction.mode
         if mode == .register
             {
@@ -726,6 +725,7 @@ public class VMThread:AbstractModel
             }
         else if mode == .indirect
             {
+            let immediate = ArgonWord(instruction.immediate)
             let pointer = wordAsPointer(Word(immediate) + threadRegisterWordValue(self.threadMemory,register1))
             setWordAtIndexAtPointer(popWord(self.threadMemory), 0, pointer)
             }

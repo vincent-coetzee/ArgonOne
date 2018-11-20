@@ -15,6 +15,7 @@
 		BF1EDF8C2189AA4B00F36C77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF1EDF8B2189AA4B00F36C77 /* Assets.xcassets */; };
 		BF1EDF8F2189AA4B00F36C77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF1EDF8D2189AA4B00F36C77 /* Main.storyboard */; };
 		BF1EDF9B2189AA4B00F36C77 /* ArgonVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDF9A2189AA4B00F36C77 /* ArgonVMTests.swift */; };
+		BF27619321A47C6F004B0521 /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF27619221A47C6F004B0521 /* NSColor+Extensions.swift */; };
 		BF28AAFE21962B3800410CDD /* PassthroughReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAB821962B3700410CDD /* PassthroughReference.swift */; };
 		BF28AAFF21962B3800410CDD /* KeyedStorageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAB921962B3700410CDD /* KeyedStorageContainer.swift */; };
 		BF28AB0021962B3800410CDD /* MemoryAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AABA21962B3700410CDD /* MemoryAlignment.swift */; };
@@ -119,6 +120,7 @@
 		BF1EDF962189AA4B00F36C77 /* ArgonVMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArgonVMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF1EDF9A2189AA4B00F36C77 /* ArgonVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonVMTests.swift; sourceTree = "<group>"; };
 		BF1EDF9C2189AA4B00F36C77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF27619221A47C6F004B0521 /* NSColor+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSColor+Extensions.swift"; path = "../../../ArgonCompiler/Argon/UX/NSColor+Extensions.swift"; sourceTree = "<group>"; };
 		BF28AAB821962B3700410CDD /* PassthroughReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassthroughReference.swift; sourceTree = "<group>"; };
 		BF28AAB921962B3700410CDD /* KeyedStorageContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyedStorageContainer.swift; sourceTree = "<group>"; };
 		BF28AABA21962B3700410CDD /* MemoryAlignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryAlignment.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 		BFFC0A2F21A096C4002544FD /* Modules UX */ = {
 			isa = PBXGroup;
 			children = (
+				BF27619221A47C6F004B0521 /* NSColor+Extensions.swift */,
 				BF0D777921A0847F003E8D9B /* ArgonElementCellView.swift */,
 				BFFC0A3021A0970C002544FD /* ModulesOrganizer.swift */,
 				BF1EDF892189AA4900F36C77 /* ViewController.swift */,
@@ -554,6 +557,7 @@
 				BF28AB3921962B3800410CDD /* SharedMemoryManager.swift in Sources */,
 				BF28AB0721962B3800410CDD /* BinaryEncoder.swift in Sources */,
 				BFFC0A3121A0970C002544FD /* ModulesOrganizer.swift in Sources */,
+				BF27619321A47C6F004B0521 /* NSColor+Extensions.swift in Sources */,
 				BF28AB0821962B3800410CDD /* EncodedData.swift in Sources */,
 				BF28AB772198310800410CDD /* ClosurePointerWrapper.swift in Sources */,
 				BF28AB2921962B3800410CDD /* ArgonCodeBlock.swift in Sources */,

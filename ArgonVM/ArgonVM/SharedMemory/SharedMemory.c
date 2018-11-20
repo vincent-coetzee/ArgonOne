@@ -129,6 +129,8 @@ int sharedMemoryOpen(const char* name)
 #define kGP0 6
 #define kThreadRegisterCount (37)
 
+#define kInitialTaggedPointerListCount (20000)
+
 #define _WordAsPointer(w) (((void*)w))
 #define _PointerAsWord(p) (((Word)p))
 
@@ -144,7 +146,7 @@ VMThreadMemory* _Nonnull allocateThreadMemoryWithCapacity(Word capacity)
     memset(&context->registers,0,sizeof(context->registers));
     context->localSpaceCapacity = capacity;
     context->localSpace = malloc(capacity);
-    context->registers[kST] = _PointerAsWord(context->localSpace + capacity - sizeof(Word));
+    context->registers[kST] = _PointerAsWord(context->localSpace + capacity - kWordSize);
     context->registers[kSP] = context->registers[kST];
     context->registers[kLP] = _PointerAsWord(context->localSpace);
     return(context);
@@ -211,14 +213,16 @@ void pushPointer(VMThreadMemory* context,void* word)
 
 Word popWord(VMThreadMemory* context)
     {
-    context->registers[kSP] -= kWordSize;
-    return(*((Word*)context->registers[kSP]));
+    Word value = *((WordPointer)context->registers[kSP]);
+    context->registers[kSP] += kWordSize;
+    return(value);
     }
 
 void* _Nonnull popPointer(VMThreadMemory* context)
     {
-    context->registers[kSP] -= kWordSize;
-    return(*((WordPointer*)context->registers[kSP]));
+    WordPointer value = *((WordPointer*)context->registers[kSP]);
+    context->registers[kSP] += kWordSize;
+    return(value);
     }
 
 long stackDepth(VMThreadMemory* context)

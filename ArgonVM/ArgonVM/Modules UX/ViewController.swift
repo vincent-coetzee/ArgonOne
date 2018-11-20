@@ -25,11 +25,23 @@ class ViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource
     private var instructionList:[VMInstruction] = []
     private var registerFields:[NSTextField?] = Array(repeating: nil, count: 38)
     private var mainThread:VMThread!
-    private var stackWords:[Word] = []
+    private var stackLines:[String] = []
+    private var changedDataColor = NSColor.jade
+    private var staleDataColor = NSColor.white
+    private var IPMappings:[Int32:Int] = [:]
     
     override func viewDidLoad()
         {
         super.viewDidLoad()
+        do
+            {
+            try ArgonRepository.saveToHomeStore()
+            try ArgonRepository.loadFromHomeStore()
+            }
+        catch
+            {
+            print("Error saving Argon Repository was \(error)")
+            }
         self.initUnarchiving()
         self.initRegisterFields()
         }
@@ -68,6 +80,7 @@ class ViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource
             while index < Int32(instructionCount)
                 {
                 let instruction = VMInstruction(wordAtIndexAtPointer(index,instructionPointer))
+                instruction.IP = instructionList.count
                 index += 1
                 if instruction.mode == .address
                     {
@@ -77,8 +90,27 @@ class ViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource
                 instructionList.append(instruction)
                 }
             assemblerTableView.reloadData()
-            assemblerTableView.selectRowIndexes(IndexSet(integer: Int(IP)), byExtendingSelection: false)
+            self.indexInstructionList(instructionList)
+            let viewIndex = IPMappings[IP]!
+            assemblerTableView.selectRowIndexes(IndexSet(integer: viewIndex), byExtendingSelection: false)
             assemblerTableView.scrollRowToVisible(Int(IP))
+            }
+        }
+    
+    private func indexInstructionList(_ list:[VMInstruction])
+        {
+        IPMappings = [:]
+        var offset = 0
+        for index in 0..<list.count
+            {
+            let instruction = list[index]
+            IPMappings[Int32(offset)] = instruction.IP
+            offset += 1
+            if instruction.mode == .address
+                {
+                offset += 1
+                }
+            print("Mapping \(offset) -> \(instruction.IP)")
             }
         }
     
@@ -108,7 +140,10 @@ class ViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource
         {
         for index in Int(6)..<Int(threadRegisterCount(thread.threadMemory)+1)
             {
-            registerFields[index]?.stringValue = "\(threadRegisterWordValue(thread.threadMemory,index))"
+            let oldValue = registerFields[index]!.stringValue
+            let newValue = "\(threadRegisterWordValue(thread.threadMemory,index))"
+            registerFields[index]?.stringValue = newValue
+            registerFields[index]?.textColor = oldValue == newValue ? staleDataColor : changedDataColor
             }
         conditionSegmentedControl.setSelected(Argon.valueOf(bits: 1,at: Word(VMThread.kFlagZeroBit), in: thread.conditions) == 1,forSegment: 0)
         conditionSegmentedControl.setSelected(Argon.valueOf(bits: 1, at: Word(VMThread.kFlagLessThanBit), in: thread.conditions) == 1,forSegment: 2)
@@ -119,10 +154,22 @@ class ViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource
         conditionSegmentedControl.setSelected(Argon.valueOf(bits: 1, at: Word(VMThread.kFlagNotZeroBit), in: thread.conditions) == 1,forSegment: 1)
         conditionSegmentedControl.setSelected(Argon.valueOf(bits: 1, at: Word(VMThread.kFlagNotEqualBit), in: thread.conditions) == 1,forSegment: 7)
         let threadMemory = thread.threadMemory
-        registerFields[2]?.stringValue = "\(threadRegisterWordValue(threadMemory,MachineRegister.SP.rawValue))"
-        registerFields[1]?.stringValue = "\(threadRegisterWordValue(threadMemory,MachineRegister.BP.rawValue))"
-        registerFields[4]?.stringValue = "\(threadRegisterWordValue(threadMemory,MachineRegister.ST.rawValue))"
-        registerFields[3]?.stringValue = "\(thread.IP)"
+        var oldValue = registerFields[2]!.stringValue
+        var newValue = "\(threadRegisterWordValue(threadMemory,MachineRegister.SP.rawValue))"
+        registerFields[2]?.stringValue = newValue
+        registerFields[2]?.textColor = oldValue == newValue ? staleDataColor : changedDataColor
+        oldValue = registerFields[1]!.stringValue
+        newValue = "\(threadRegisterWordValue(threadMemory,MachineRegister.BP.rawValue))"
+        registerFields[1]?.stringValue = newValue
+        registerFields[1]?.textColor = oldValue == newValue ? staleDataColor : changedDataColor
+        oldValue = registerFields[4]!.stringValue
+        newValue = "\(threadRegisterWordValue(threadMemory,MachineRegister.ST.rawValue))"
+        registerFields[4]?.stringValue = newValue
+        registerFields[4]?.textColor = oldValue == newValue ? staleDataColor : changedDataColor
+        oldValue = registerFields[3]!.stringValue
+        newValue = "\(thread.IP)"
+        registerFields[3]?.stringValue = newValue
+        registerFields[3]?.textColor = oldValue == newValue ? staleDataColor : changedDataColor
         }
     
     @IBAction func onStepClicked(_ sender:Any?)
@@ -131,21 +178,44 @@ class ViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource
         self.update(from: mainThread)
         self.updateStackTableView(from: mainThread)
         let IP = mainThread.IP
-        assemblerTableView.selectRowIndexes(IndexSet(integer: IndexSet.Element(IP)), byExtendingSelection: false)
+        print("Actual IP is \(IP)")
+        print("Mapping actual IP(\(IP)) to \(IPMappings[IP])")
+        assemblerTableView.selectRowIndexes(IndexSet(integer: IndexSet.Element(IPMappings[IP]!)), byExtendingSelection: false)
         }
         
     private func updateStackTableView(from thread:VMThread)
         {
-        var words:[Word] = []
+        var words:[String] = []
         var stackElement = threadRegisterWordValue(thread.threadMemory,MachineRegister.ST.rawValue)
         let stackTop = threadRegisterWordValue(thread.threadMemory,MachineRegister.SP.rawValue)
-        while stackElement != stackTop
+        let bp = threadRegisterWordValue(thread.threadMemory,MachineRegister.BP.rawValue)
+        while stackElement > stackTop
             {
-            words.append(wordAtIndexAtPointer(0,wordAsPointer(stackElement)))
+            var line = "\(wordAtIndexAtPointer(0,wordAsPointer(stackElement)))"
+            if stackElement == stackTop
+                {
+                line = "SP        " + line
+                }
+            else if stackElement > bp && bp > 0
+                {
+                let delta = max(bp,stackElement) - min(stackElement,bp)
+                let number = String(format: "%04d",delta)
+                line = "[BP-\(number)] " + line
+                }
+            else if stackElement == bp && bp > 0
+                {
+                line = "BP        " + line
+                }
+            else if stackElement < bp && bp > 0
+                {
+                let delta = max(bp,stackElement) - min(stackElement,bp)
+                let number = String(format: "%04d",delta)
+                line = "[BP+\(number)] " + line
+                }
+            words.append(line)
             stackElement -= Word(ArgonWordSize)
             }
-        words.append(wordAtIndexAtPointer(0,wordAsPointer(stackElement)))
-        stackWords = words
+        stackLines = words
         stackTableView.reloadData()
         }
     
@@ -192,7 +262,7 @@ class ViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource
             }
         else if tableView == stackTableView
             {
-            return(stackWords.count)
+            return(stackLines.count)
             }
         return(0)
         }
@@ -208,6 +278,7 @@ class ViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource
     
     public func outlineViewSelectionDidChange(_ notification: Notification)
         {
+        IPMappings = [:]
         self.stepButton.isEnabled = false
         let selectedRow = packagesOutlineView.selectedRow
         let selectedItem = packagesOutlineView.item(atRow: selectedRow)
@@ -216,12 +287,13 @@ class ViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource
             {
             let wrapper = CodeBlockPointerWrapper(codePointer)
             instructionList = wrapper.instructionList
+            self.indexInstructionList(instructionList)
             self.stepButton.isEnabled = wrapper.runnable
             }
         else
             {
             instructionList = []
-            stackWords = []
+            stackLines = []
             self.resetVirtualMachineView()
             }
         assemblerTableView.reloadData()
@@ -259,7 +331,7 @@ class ViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource
         else
             {
             let view = stackTableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "StackCellView"), owner: nil) as! NSTableCellView
-            view.textField!.stringValue = "\(stackWords[row])"
+            view.textField!.stringValue = stackLines[row]
             return(view)
             }
         }
@@ -315,6 +387,7 @@ class ViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource
         packagesOutlineView.reloadData()
         mainThread = try linkedPackage.prepareForRun()
         mainThread?.add(dependent: self)
+        self.updateStackTableView(from: mainThread!)
         }
     }
 

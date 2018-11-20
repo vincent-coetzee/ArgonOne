@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ArgonCompiler/Argon/Virtual Machine/Machine/VMInstruction.swift"
-            timestampString = "564352045.87208"
+            timestampString = "564443346.3904099"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "706"
@@ -26,27 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ArgonCompiler/Argon/Virtual Machine/Machine/VMThread.swift"
-            timestampString = "564359764.01"
+            timestampString = "564443346.390489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "451"
-            endingLineNumber = "451"
-            landmarkName = "RET(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../ArgonCompiler/Argon/Virtual Machine/Machine/VMThread.swift"
-            timestampString = "564359764.010363"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
             landmarkName = "MAKE(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,28 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ArgonCompiler/Argon/Virtual Machine/Machine/VMThread.swift"
-            timestampString = "564359764.010608"
+            timestampString = "564443346.390545"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "497"
             endingLineNumber = "497"
             landmarkName = "SPAWN(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../ArgonCompiler/Argon/Virtual Machine/Machine/VMThread.swift"
-            timestampString = "564359764.010848"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "645"
-            endingLineNumber = "645"
-            landmarkName = "primitivePrint(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

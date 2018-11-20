@@ -74,14 +74,15 @@ public class CodeBlockPointerWrapper:InstancePointerWrapper
         while index < Int32(self.instructionCount)
             {
             let word = wordAtIndexAtPointer(index,instructionPointer)
-            index += 1
             let instruction = VMInstruction(word)
+            instruction.IP = list.count
+            list.append(instruction)
+            index += 1
             if instruction.mode == .address
                 {
                 instruction.addressWord = wordAtIndexAtPointer(index,instructionPointer)
                 index += 1
                 }
-            list.append(instruction)
             }
         return(list)
         }

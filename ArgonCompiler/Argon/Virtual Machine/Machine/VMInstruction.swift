@@ -712,7 +712,8 @@ public class VMInstruction:NSObject
     
     public func disassemble() -> String
         {
-        let header = "  "
+        let ipAddress = String(format:"%06d",IP)
+        let header = "\(ipAddress): "
         let footer = comment ?? ""
         switch(self.mode)
             {

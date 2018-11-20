@@ -25,6 +25,7 @@ public enum VirtualMachineFault:Error
     case undefinedGenericMethod(String)
     case instructionExtensionMissing
     case failedToGrow
+    case loadRepositoryFailed
     }
 
 public enum VirtualMachineSignal:Int,Error
