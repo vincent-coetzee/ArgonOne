@@ -1,0 +1,15 @@
+ArgonVM/Index/*
+ArgonVM/DerivedData/*
+ArgonVM/Build/*
+ArgonVMBase/Index/*
+ArgonVMBase/DerivedData/*
+ArgonVMBase/Build/*
+ArgonCompiler/Index/*
+ArgonCompiler/DerivedData/*
+ArgonComppiler/Build/*
+ArgonAssembler/Index/*
+ArgonAssembler/DerivedData/*
+ArgonAssembler/Build/*
+ArgonInspector/Index/*
+ArgonInspector/DerivedData/*
+ArgonInspector/Build/*
