@@ -1,0 +1,5 @@
+module SharedMemory [system] [extern_c] {
+    header "SharedMemory.h"
+    export *
+}
+

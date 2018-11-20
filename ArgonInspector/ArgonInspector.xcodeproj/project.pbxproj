@@ -1,0 +1,534 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BF21C83F21599DB700EB257E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF21C83E21599DB700EB257E /* AppDelegate.swift */; };
+		BF21C84121599DB700EB257E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF21C84021599DB700EB257E /* ViewController.swift */; };
+		BF21C84321599DB900EB257E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF21C84221599DB900EB257E /* Assets.xcassets */; };
+		BF21C84621599DB900EB257E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF21C84421599DB900EB257E /* Main.storyboard */; };
+		BF21C85221599DB900EB257E /* ArgonInspectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF21C85121599DB900EB257E /* ArgonInspectorTests.swift */; };
+		BF21C86121599DEC00EB257E /* MemoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF21C85C21599DD600EB257E /* MemoryViewController.swift */; };
+		BF21C86321599DEC00EB257E /* MemoryWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF21C85F21599DE600EB257E /* MemoryWindowController.swift */; };
+		BF50FB58215D72190018E7AF /* InstanceHeaderCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50FB57215D72190018E7AF /* InstanceHeaderCellView.swift */; };
+		BF50FB5A215D723D0018E7AF /* MemoryBlockListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50FB59215D723D0018E7AF /* MemoryBlockListView.swift */; };
+		BF50FB5C215D72660018E7AF /* ArgonSlotField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50FB5B215D72660018E7AF /* ArgonSlotField.swift */; };
+		BF50FB5F215D781D0018E7AF /* SlotCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50FB5D215D781C0018E7AF /* SlotCellView.swift */; };
+		BF50FB60215D781D0018E7AF /* SlotCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF50FB5E215D781D0018E7AF /* SlotCellView.xib */; };
+		BF50FB61215D78C60018E7AF /* InstanceHeaderCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF50FB56215D72180018E7AF /* InstanceHeaderCellView.xib */; };
+		BF9A7132215A528B006439DB /* SharedMemory.c in Sources */ = {isa = PBXBuildFile; fileRef = BF9A7131215A528B006439DB /* SharedMemory.c */; };
+		BF9A713B215A786D006439DB /* ArgonInspectorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A713A215A786D006439DB /* ArgonInspectorError.swift */; };
+		BF9A7145215A8B00006439DB /* ArgonInstanceHeaderField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A7144215A8B00006439DB /* ArgonInstanceHeaderField.swift */; };
+		BF9A7149215A905E006439DB /* ArgonInstanceElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A7148215A905E006439DB /* ArgonInstanceElement.swift */; };
+		BF9A714D215AC4F1006439DB /* MachinePointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9A714C215AC4F1006439DB /* MachinePointer.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BF21C84E21599DB900EB257E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF21C83321599DB700EB257E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF21C83A21599DB700EB257E;
+			remoteInfo = ArgonInspector;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BF21C83B21599DB700EB257E /* ArgonInspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArgonInspector.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF21C83E21599DB700EB257E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BF21C84021599DB700EB257E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BF21C84221599DB900EB257E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BF21C84521599DB900EB257E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BF21C84721599DB900EB257E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF21C84821599DB900EB257E /* ArgonInspector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ArgonInspector.entitlements; sourceTree = "<group>"; };
+		BF21C84D21599DB900EB257E /* ArgonInspectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArgonInspectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF21C85121599DB900EB257E /* ArgonInspectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonInspectorTests.swift; sourceTree = "<group>"; };
+		BF21C85321599DB900EB257E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF21C85C21599DD600EB257E /* MemoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryViewController.swift; sourceTree = "<group>"; };
+		BF21C85F21599DE600EB257E /* MemoryWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryWindowController.swift; sourceTree = "<group>"; };
+		BF50FB56215D72180018E7AF /* InstanceHeaderCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InstanceHeaderCellView.xib; sourceTree = "<group>"; };
+		BF50FB57215D72190018E7AF /* InstanceHeaderCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceHeaderCellView.swift; sourceTree = "<group>"; };
+		BF50FB59215D723D0018E7AF /* MemoryBlockListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryBlockListView.swift; sourceTree = "<group>"; };
+		BF50FB5B215D72660018E7AF /* ArgonSlotField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonSlotField.swift; sourceTree = "<group>"; };
+		BF50FB5D215D781C0018E7AF /* SlotCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotCellView.swift; sourceTree = "<group>"; };
+		BF50FB5E215D781D0018E7AF /* SlotCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlotCellView.xib; sourceTree = "<group>"; };
+		BF9A712F215A51B2006439DB /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = module.modulemap; path = SharedMemory/module.modulemap; sourceTree = "<group>"; };
+		BF9A7130215A520B006439DB /* SharedMemory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SharedMemory.h; path = SharedMemory/SharedMemory.h; sourceTree = "<group>"; };
+		BF9A7131215A528B006439DB /* SharedMemory.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = SharedMemory.c; path = SharedMemory/SharedMemory.c; sourceTree = "<group>"; };
+		BF9A713A215A786D006439DB /* ArgonInspectorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonInspectorError.swift; sourceTree = "<group>"; };
+		BF9A7144215A8B00006439DB /* ArgonInstanceHeaderField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonInstanceHeaderField.swift; sourceTree = "<group>"; };
+		BF9A7148215A905E006439DB /* ArgonInstanceElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonInstanceElement.swift; sourceTree = "<group>"; };
+		BF9A714C215AC4F1006439DB /* MachinePointer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MachinePointer.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BF21C83821599DB700EB257E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF21C84A21599DB900EB257E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BF21C83221599DB700EB257E = {
+			isa = PBXGroup;
+			children = (
+				BF21C83D21599DB700EB257E /* ArgonInspector */,
+				BF21C85021599DB900EB257E /* ArgonInspectorTests */,
+				BF21C83C21599DB700EB257E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BF21C83C21599DB700EB257E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BF21C83B21599DB700EB257E /* ArgonInspector.app */,
+				BF21C84D21599DB900EB257E /* ArgonInspectorTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BF21C83D21599DB700EB257E /* ArgonInspector */ = {
+			isa = PBXGroup;
+			children = (
+				BF50FB5D215D781C0018E7AF /* SlotCellView.swift */,
+				BF50FB5E215D781D0018E7AF /* SlotCellView.xib */,
+				BF50FB5B215D72660018E7AF /* ArgonSlotField.swift */,
+				BF50FB57215D72190018E7AF /* InstanceHeaderCellView.swift */,
+				BF50FB56215D72180018E7AF /* InstanceHeaderCellView.xib */,
+				BF50FB59215D723D0018E7AF /* MemoryBlockListView.swift */,
+				BF9A712E215A5194006439DB /* SharedMemory */,
+				BF21C83E21599DB700EB257E /* AppDelegate.swift */,
+				BF21C84021599DB700EB257E /* ViewController.swift */,
+				BF21C85C21599DD600EB257E /* MemoryViewController.swift */,
+				BF21C85F21599DE600EB257E /* MemoryWindowController.swift */,
+				BF21C84221599DB900EB257E /* Assets.xcassets */,
+				BF21C84421599DB900EB257E /* Main.storyboard */,
+				BF21C84721599DB900EB257E /* Info.plist */,
+				BF21C84821599DB900EB257E /* ArgonInspector.entitlements */,
+				BF9A713A215A786D006439DB /* ArgonInspectorError.swift */,
+				BF9A7144215A8B00006439DB /* ArgonInstanceHeaderField.swift */,
+				BF9A7148215A905E006439DB /* ArgonInstanceElement.swift */,
+				BF9A714C215AC4F1006439DB /* MachinePointer.swift */,
+			);
+			path = ArgonInspector;
+			sourceTree = "<group>";
+		};
+		BF21C85021599DB900EB257E /* ArgonInspectorTests */ = {
+			isa = PBXGroup;
+			children = (
+				BF21C85121599DB900EB257E /* ArgonInspectorTests.swift */,
+				BF21C85321599DB900EB257E /* Info.plist */,
+			);
+			path = ArgonInspectorTests;
+			sourceTree = "<group>";
+		};
+		BF9A712E215A5194006439DB /* SharedMemory */ = {
+			isa = PBXGroup;
+			children = (
+				BF9A712F215A51B2006439DB /* module.modulemap */,
+				BF9A7130215A520B006439DB /* SharedMemory.h */,
+				BF9A7131215A528B006439DB /* SharedMemory.c */,
+			);
+			name = SharedMemory;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BF21C83A21599DB700EB257E /* ArgonInspector */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF21C85621599DB900EB257E /* Build configuration list for PBXNativeTarget "ArgonInspector" */;
+			buildPhases = (
+				BF21C83721599DB700EB257E /* Sources */,
+				BF21C83821599DB700EB257E /* Frameworks */,
+				BF21C83921599DB700EB257E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ArgonInspector;
+			productName = ArgonInspector;
+			productReference = BF21C83B21599DB700EB257E /* ArgonInspector.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BF21C84C21599DB900EB257E /* ArgonInspectorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF21C85921599DB900EB257E /* Build configuration list for PBXNativeTarget "ArgonInspectorTests" */;
+			buildPhases = (
+				BF21C84921599DB900EB257E /* Sources */,
+				BF21C84A21599DB900EB257E /* Frameworks */,
+				BF21C84B21599DB900EB257E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF21C84F21599DB900EB257E /* PBXTargetDependency */,
+			);
+			name = ArgonInspectorTests;
+			productName = ArgonInspectorTests;
+			productReference = BF21C84D21599DB900EB257E /* ArgonInspectorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BF21C83321599DB700EB257E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1000;
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = "Vincent Coetzee";
+				TargetAttributes = {
+					BF21C83A21599DB700EB257E = {
+						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+					BF21C84C21599DB900EB257E = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = BF21C83A21599DB700EB257E;
+					};
+				};
+			};
+			buildConfigurationList = BF21C83621599DB700EB257E /* Build configuration list for PBXProject "ArgonInspector" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BF21C83221599DB700EB257E;
+			productRefGroup = BF21C83C21599DB700EB257E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BF21C83A21599DB700EB257E /* ArgonInspector */,
+				BF21C84C21599DB900EB257E /* ArgonInspectorTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BF21C83921599DB700EB257E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF50FB61215D78C60018E7AF /* InstanceHeaderCellView.xib in Resources */,
+				BF50FB60215D781D0018E7AF /* SlotCellView.xib in Resources */,
+				BF21C84321599DB900EB257E /* Assets.xcassets in Resources */,
+				BF21C84621599DB900EB257E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF21C84B21599DB900EB257E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BF21C83721599DB700EB257E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF50FB5C215D72660018E7AF /* ArgonSlotField.swift in Sources */,
+				BF9A714D215AC4F1006439DB /* MachinePointer.swift in Sources */,
+				BF21C86321599DEC00EB257E /* MemoryWindowController.swift in Sources */,
+				BF9A7149215A905E006439DB /* ArgonInstanceElement.swift in Sources */,
+				BF50FB5F215D781D0018E7AF /* SlotCellView.swift in Sources */,
+				BF21C86121599DEC00EB257E /* MemoryViewController.swift in Sources */,
+				BF9A7145215A8B00006439DB /* ArgonInstanceHeaderField.swift in Sources */,
+				BF9A713B215A786D006439DB /* ArgonInspectorError.swift in Sources */,
+				BF50FB58215D72190018E7AF /* InstanceHeaderCellView.swift in Sources */,
+				BF21C84121599DB700EB257E /* ViewController.swift in Sources */,
+				BF21C83F21599DB700EB257E /* AppDelegate.swift in Sources */,
+				BF9A7132215A528B006439DB /* SharedMemory.c in Sources */,
+				BF50FB5A215D723D0018E7AF /* MemoryBlockListView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF21C84921599DB900EB257E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF21C85221599DB900EB257E /* ArgonInspectorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BF21C84F21599DB900EB257E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF21C83A21599DB700EB257E /* ArgonInspector */;
+			targetProxy = BF21C84E21599DB900EB257E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BF21C84421599DB900EB257E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF21C84521599DB900EB257E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BF21C85421599DB900EB257E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BF21C85521599DB900EB257E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		BF21C85721599DB900EB257E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DLH9UBQV34;
+				INFOPLIST_FILE = ArgonInspector/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.macsemantics.ArgonInspector;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/ArgonInspector/SharedMemory";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		BF21C85821599DB900EB257E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DLH9UBQV34;
+				INFOPLIST_FILE = ArgonInspector/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.macsemantics.ArgonInspector;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/ArgonInspector/SharedMemory";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		BF21C85A21599DB900EB257E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DLH9UBQV34;
+				INFOPLIST_FILE = ArgonInspectorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.macsemantics.ArgonInspectorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArgonInspector.app/Contents/MacOS/ArgonInspector";
+			};
+			name = Debug;
+		};
+		BF21C85B21599DB900EB257E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DLH9UBQV34;
+				INFOPLIST_FILE = ArgonInspectorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.macsemantics.ArgonInspectorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArgonInspector.app/Contents/MacOS/ArgonInspector";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BF21C83621599DB700EB257E /* Build configuration list for PBXProject "ArgonInspector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF21C85421599DB900EB257E /* Debug */,
+				BF21C85521599DB900EB257E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF21C85621599DB900EB257E /* Build configuration list for PBXNativeTarget "ArgonInspector" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF21C85721599DB900EB257E /* Debug */,
+				BF21C85821599DB900EB257E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF21C85921599DB900EB257E /* Build configuration list for PBXNativeTarget "ArgonInspectorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF21C85A21599DB900EB257E /* Debug */,
+				BF21C85B21599DB900EB257E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BF21C83321599DB700EB257E /* Project object */;
+}

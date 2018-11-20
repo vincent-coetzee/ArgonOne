@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Ho4-li-vBS" customClass="SectionSlotEntryView" customModule="Argon">
+            <rect key="frame" x="0.0" y="0.0" width="356" height="24"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sYz-cf-fy0">
+                    <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="24" id="JBR-Gj-zjt"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="KfQ-Iw-cmJ"/>
+                </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1CP-rP-rPR">
+                    <rect key="frame" x="28" y="3" width="204" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="AZZ-GG-3fx"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" alignment="left" title="Label" id="elA-5C-I8t">
+                        <font key="font" size="12" name="Menlo-Bold"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="placeholderTextColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <customView horizontalHuggingPriority="249" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="J2s-xZ-6cg" customClass="CartoucheView" customModule="Argon">
+                    <rect key="frame" x="236" y="0.0" width="120" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="oeo-Wg-9Bs"/>
+                    </constraints>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="J2s-xZ-6cg" secondAttribute="trailing" id="00w-Gw-ZOd"/>
+                <constraint firstItem="J2s-xZ-6cg" firstAttribute="leading" secondItem="1CP-rP-rPR" secondAttribute="trailing" constant="6" id="1pK-TL-y8a"/>
+                <constraint firstAttribute="bottom" secondItem="sYz-cf-fy0" secondAttribute="bottom" id="2FP-3J-Xmn"/>
+                <constraint firstItem="sYz-cf-fy0" firstAttribute="leading" secondItem="Ho4-li-vBS" secondAttribute="leading" id="4vj-tE-C4j"/>
+                <constraint firstItem="sYz-cf-fy0" firstAttribute="top" secondItem="Ho4-li-vBS" secondAttribute="top" id="7BS-to-7du"/>
+                <constraint firstItem="1CP-rP-rPR" firstAttribute="centerY" secondItem="Ho4-li-vBS" secondAttribute="centerY" id="IcV-Ti-gmP"/>
+                <constraint firstItem="J2s-xZ-6cg" firstAttribute="top" secondItem="Ho4-li-vBS" secondAttribute="top" id="mdV-VW-mlh"/>
+                <constraint firstAttribute="bottom" secondItem="J2s-xZ-6cg" secondAttribute="bottom" id="nyj-RY-YrM"/>
+                <constraint firstItem="1CP-rP-rPR" firstAttribute="leading" secondItem="sYz-cf-fy0" secondAttribute="trailing" constant="6" id="zNV-7K-1cz"/>
+            </constraints>
+            <connections>
+                <outlet property="cartoucheView" destination="J2s-xZ-6cg" id="obX-Pz-1QW"/>
+                <outlet property="cartoucheWidthConstraint" destination="oeo-Wg-9Bs" id="9LJ-QK-2As"/>
+                <outlet property="iconImage" destination="sYz-cf-fy0" id="ghe-aR-JVM"/>
+                <outlet property="label" destination="1CP-rP-rPR" id="OF0-Yq-Emf"/>
+                <outlet property="labelWidthConstraint" destination="AZZ-GG-3fx" id="TcD-0v-G5i"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="30"/>
+        </customView>
+    </objects>
+</document>

@@ -1,0 +1,856 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BF0D777821A04A7D003E8D9B /* ArgonMethodDirective.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0D777721A04A7D003E8D9B /* ArgonMethodDirective.swift */; };
+		BF0D777A21A0847F003E8D9B /* ArgonElementCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0D777921A0847F003E8D9B /* ArgonElementCellView.swift */; };
+		BF1ADA5121A21EE700FB38FE /* SharedMemory.c in Sources */ = {isa = PBXBuildFile; fileRef = BF1ADA4E21A21EE600FB38FE /* SharedMemory.c */; };
+		BF1EDF882189AA4900F36C77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDF872189AA4900F36C77 /* AppDelegate.swift */; };
+		BF1EDF8A2189AA4900F36C77 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDF892189AA4900F36C77 /* ViewController.swift */; };
+		BF1EDF8C2189AA4B00F36C77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF1EDF8B2189AA4B00F36C77 /* Assets.xcassets */; };
+		BF1EDF8F2189AA4B00F36C77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF1EDF8D2189AA4B00F36C77 /* Main.storyboard */; };
+		BF1EDF9B2189AA4B00F36C77 /* ArgonVMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDF9A2189AA4B00F36C77 /* ArgonVMTests.swift */; };
+		BF28AAFE21962B3800410CDD /* PassthroughReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAB821962B3700410CDD /* PassthroughReference.swift */; };
+		BF28AAFF21962B3800410CDD /* KeyedStorageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAB921962B3700410CDD /* KeyedStorageContainer.swift */; };
+		BF28AB0021962B3800410CDD /* MemoryAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AABA21962B3700410CDD /* MemoryAlignment.swift */; };
+		BF28AB0121962B3800410CDD /* BinaryCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AABB21962B3700410CDD /* BinaryCodingKey.swift */; };
+		BF28AB0221962B3800410CDD /* DecodingError+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AABC21962B3700410CDD /* DecodingError+Extensions.swift */; };
+		BF28AB0321962B3800410CDD /* UnkeyedStorageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AABD21962B3700410CDD /* UnkeyedStorageContainer.swift */; };
+		BF28AB0421962B3800410CDD /* StorageContainerReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AABE21962B3700410CDD /* StorageContainerReaderWriter.swift */; };
+		BF28AB0521962B3800410CDD /* StrorageContainerReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AABF21962B3700410CDD /* StrorageContainerReference.swift */; };
+		BF28AB0621962B3800410CDD /* SingleValueContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAC021962B3700410CDD /* SingleValueContainer.swift */; };
+		BF28AB0721962B3800410CDD /* BinaryEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAC121962B3700410CDD /* BinaryEncoder.swift */; };
+		BF28AB0821962B3800410CDD /* EncodedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAC221962B3700410CDD /* EncodedData.swift */; };
+		BF28AB0921962B3800410CDD /* CodingKey+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAC321962B3700410CDD /* CodingKey+Extensions.swift */; };
+		BF28AB0A21962B3800410CDD /* EncodedType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAC421962B3700410CDD /* EncodedType.swift */; };
+		BF28AB0B21962B3800410CDD /* NullStorageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAC521962B3700410CDD /* NullStorageContainer.swift */; };
+		BF28AB0C21962B3800410CDD /* BinaryDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAC621962B3700410CDD /* BinaryDecoder.swift */; };
+		BF28AB0D21962B3800410CDD /* StorageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAC721962B3700410CDD /* StorageContainer.swift */; };
+		BF28AB1021962B3800410CDD /* CodeBlockPointerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AACB21962B3800410CDD /* CodeBlockPointerWrapper.swift */; };
+		BF28AB1121962B3800410CDD /* MapPointerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AACC21962B3800410CDD /* MapPointerWrapper.swift */; };
+		BF28AB1221962B3800410CDD /* InstancePointerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AACD21962B3800410CDD /* InstancePointerWrapper.swift */; };
+		BF28AB1421962B3800410CDD /* GenericMethodPointerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AACF21962B3800410CDD /* GenericMethodPointerWrapper.swift */; };
+		BF28AB1521962B3800410CDD /* VectorPointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAD021962B3800410CDD /* VectorPointer.swift */; };
+		BF28AB1821962B3800410CDD /* SlotPointerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAD321962B3800410CDD /* SlotPointerWrapper.swift */; };
+		BF28AB1921962B3800410CDD /* AssociationVectorPointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAD421962B3800410CDD /* AssociationVectorPointer.swift */; };
+		BF28AB1B21962B3800410CDD /* AllocationBlockPointerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAD621962B3800410CDD /* AllocationBlockPointerWrapper.swift */; };
+		BF28AB1C21962B3800410CDD /* TraitsPointerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAD721962B3800410CDD /* TraitsPointerWrapper.swift */; };
+		BF28AB1D21962B3800410CDD /* StringPointerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAD821962B3800410CDD /* StringPointerWrapper.swift */; };
+		BF28AB1F21962B3800410CDD /* MethodPointerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AADA21962B3800410CDD /* MethodPointerWrapper.swift */; };
+		BF28AB2121962B3800410CDD /* ArgonLibraryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AADD21962B3800410CDD /* ArgonLibraryFile.swift */; };
+		BF28AB2221962B3800410CDD /* ArgonExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AADE21962B3800410CDD /* ArgonExport.swift */; };
+		BF28AB2321962B3800410CDD /* ArgonGenericMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AADF21962B3800410CDD /* ArgonGenericMethod.swift */; };
+		BF28AB2421962B3800410CDD /* ArgonNamedConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAE021962B3800410CDD /* ArgonNamedConstant.swift */; };
+		BF28AB2521962B3800410CDD /* ArgonTraits.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAE121962B3800410CDD /* ArgonTraits.swift */; };
+		BF28AB2621962B3800410CDD /* ArgonLocalVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAE221962B3800410CDD /* ArgonLocalVariable.swift */; };
+		BF28AB2721962B3800410CDD /* ArgonExecutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAE321962B3800410CDD /* ArgonExecutable.swift */; };
+		BF28AB2821962B3800410CDD /* ArgonModulePart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAE421962B3800410CDD /* ArgonModulePart.swift */; };
+		BF28AB2921962B3800410CDD /* ArgonCodeBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAE521962B3800410CDD /* ArgonCodeBlock.swift */; };
+		BF28AB2A21962B3800410CDD /* ArgonModuleEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAE621962B3800410CDD /* ArgonModuleEntry.swift */; };
+		BF28AB2B21962B3800410CDD /* ArgonModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAE721962B3800410CDD /* ArgonModule.swift */; };
+		BF28AB2C21962B3800410CDD /* ArgonImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAE821962B3800410CDD /* ArgonImport.swift */; };
+		BF28AB2D21962B3800410CDD /* ArgonRelocationTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAE921962B3800410CDD /* ArgonRelocationTable.swift */; };
+		BF28AB2E21962B3800410CDD /* ArgonLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAEA21962B3800410CDD /* ArgonLibrary.swift */; };
+		BF28AB2F21962B3800410CDD /* ArgonRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAEB21962B3800410CDD /* ArgonRepository.swift */; };
+		BF28AB3021962B3800410CDD /* ArgonClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAEC21962B3800410CDD /* ArgonClosure.swift */; };
+		BF28AB3121962B3800410CDD /* ArgonMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAED21962B3800410CDD /* ArgonMethod.swift */; };
+		BF28AB3221962B3800410CDD /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAEE21962B3800410CDD /* Timer.swift */; };
+		BF28AB3321962B3800410CDD /* WriteBarrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAEF21962B3800410CDD /* WriteBarrier.swift */; };
+		BF28AB3421962B3800410CDD /* VMOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAF121962B3800410CDD /* VMOperation.swift */; };
+		BF28AB3521962B3800410CDD /* VMInstructionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAF221962B3800410CDD /* VMInstructionMode.swift */; };
+		BF28AB3621962B3800410CDD /* VMInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAF321962B3800410CDD /* VMInstruction.swift */; };
+		BF28AB3721962B3800410CDD /* VirtualMachineFault.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAF421962B3800410CDD /* VirtualMachineFault.swift */; };
+		BF28AB3821962B3800410CDD /* VMRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAF521962B3800410CDD /* VMRegister.swift */; };
+		BF28AB3921962B3800410CDD /* SharedMemoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAF621962B3800410CDD /* SharedMemoryManager.swift */; };
+		BF28AB3A21962B3800410CDD /* Instructions.txt in Resources */ = {isa = PBXBuildFile; fileRef = BF28AAF721962B3800410CDD /* Instructions.txt */; };
+		BF28AB3B21962B3800410CDD /* VirtualMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAF821962B3800410CDD /* VirtualMachine.swift */; };
+		BF28AB3C21962B3800410CDD /* Memory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAF921962B3800410CDD /* Memory.swift */; };
+		BF28AB3D21962B3800410CDD /* VMInstructionMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAFA21962B3800410CDD /* VMInstructionMaker.swift */; };
+		BF28AB3E21962B3800410CDD /* VMInstructionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AAFB21962B3800410CDD /* VMInstructionList.swift */; };
+		BF28AB4021962B9000410CDD /* Argon.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AB3F21962B9000410CDD /* Argon.swift */; };
+		BF28AB4221962BC900410CDD /* ThreeAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AB4121962BC900410CDD /* ThreeAddress.swift */; };
+		BF28AB4421962D2900410CDD /* ArgonName.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AB4321962D2900410CDD /* ArgonName.swift */; };
+		BF28AB4A21962DD900410CDD /* DependentSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AB4621962DD900410CDD /* DependentSet.swift */; };
+		BF28AB4B21962DD900410CDD /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AB4721962DD900410CDD /* Model.swift */; };
+		BF28AB4C21962DD900410CDD /* Dependent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AB4821962DD900410CDD /* Dependent.swift */; };
+		BF28AB4D21962DD900410CDD /* AbtractModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AB4921962DD900410CDD /* AbtractModel.swift */; };
+		BF28AB4F21962E3500410CDD /* ArgonValueLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AB4E21962E3400410CDD /* ArgonValueLocation.swift */; };
+		BF28AB692196D83D00410CDD /* ArgonParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AB682196D83C00410CDD /* ArgonParameter.swift */; };
+		BF28AB6B2196DAF500410CDD /* ArgonLinker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AB6A2196DAF500410CDD /* ArgonLinker.swift */; };
+		BF28AB71219712F300410CDD /* ArgonGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AB70219712F300410CDD /* ArgonGlobal.swift */; };
+		BF28AB772198310800410CDD /* ClosurePointerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF28AB762198310800410CDD /* ClosurePointerWrapper.swift */; };
+		BF52472F219872260072A6D7 /* ArgonLineTrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF52472E219872260072A6D7 /* ArgonLineTrace.swift */; };
+		BF524731219879E30072A6D7 /* VMThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF524730219879E30072A6D7 /* VMThread.swift */; };
+		BFE7885B219A053200D9DBC1 /* ArgonString.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE78859219A053200D9DBC1 /* ArgonString.swift */; };
+		BFE7885C219A053200D9DBC1 /* ArgonSymbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE7885A219A053200D9DBC1 /* ArgonSymbol.swift */; };
+		BFFC0A3121A0970C002544FD /* ModulesOrganizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFC0A3021A0970C002544FD /* ModulesOrganizer.swift */; };
+		BFFC0A3321A09F8C002544FD /* ArgonLinkedPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFC0A3221A09F8C002544FD /* ArgonLinkedPackage.swift */; };
+		BFFC0A3521A0B66F002544FD /* ModuleDisplayPart.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFC0A3421A0B66F002544FD /* ModuleDisplayPart.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BF1EDF972189AA4B00F36C77 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF1EDF7C2189AA4900F36C77 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF1EDF832189AA4900F36C77;
+			remoteInfo = ArgonVM;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BF0D777721A04A7D003E8D9B /* ArgonMethodDirective.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArgonMethodDirective.swift; path = "../../Parser and Nodes/Generic Method and Method Instances/ArgonMethodDirective.swift"; sourceTree = "<group>"; };
+		BF0D777921A0847F003E8D9B /* ArgonElementCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonElementCellView.swift; sourceTree = "<group>"; };
+		BF1ADA4E21A21EE600FB38FE /* SharedMemory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = SharedMemory.c; sourceTree = "<group>"; };
+		BF1ADA4F21A21EE600FB38FE /* SharedMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedMemory.h; sourceTree = "<group>"; };
+		BF1ADA5021A21EE600FB38FE /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		BF1EDF842189AA4900F36C77 /* ArgonVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArgonVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF1EDF872189AA4900F36C77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BF1EDF892189AA4900F36C77 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BF1EDF8B2189AA4B00F36C77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BF1EDF8E2189AA4B00F36C77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BF1EDF902189AA4B00F36C77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF1EDF912189AA4B00F36C77 /* ArgonVM.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ArgonVM.entitlements; sourceTree = "<group>"; };
+		BF1EDF962189AA4B00F36C77 /* ArgonVMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArgonVMTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF1EDF9A2189AA4B00F36C77 /* ArgonVMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonVMTests.swift; sourceTree = "<group>"; };
+		BF1EDF9C2189AA4B00F36C77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF28AAB821962B3700410CDD /* PassthroughReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassthroughReference.swift; sourceTree = "<group>"; };
+		BF28AAB921962B3700410CDD /* KeyedStorageContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyedStorageContainer.swift; sourceTree = "<group>"; };
+		BF28AABA21962B3700410CDD /* MemoryAlignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryAlignment.swift; sourceTree = "<group>"; };
+		BF28AABB21962B3700410CDD /* BinaryCodingKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryCodingKey.swift; sourceTree = "<group>"; };
+		BF28AABC21962B3700410CDD /* DecodingError+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DecodingError+Extensions.swift"; sourceTree = "<group>"; };
+		BF28AABD21962B3700410CDD /* UnkeyedStorageContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnkeyedStorageContainer.swift; sourceTree = "<group>"; };
+		BF28AABE21962B3700410CDD /* StorageContainerReaderWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageContainerReaderWriter.swift; sourceTree = "<group>"; };
+		BF28AABF21962B3700410CDD /* StrorageContainerReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrorageContainerReference.swift; sourceTree = "<group>"; };
+		BF28AAC021962B3700410CDD /* SingleValueContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleValueContainer.swift; sourceTree = "<group>"; };
+		BF28AAC121962B3700410CDD /* BinaryEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryEncoder.swift; sourceTree = "<group>"; };
+		BF28AAC221962B3700410CDD /* EncodedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncodedData.swift; sourceTree = "<group>"; };
+		BF28AAC321962B3700410CDD /* CodingKey+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CodingKey+Extensions.swift"; sourceTree = "<group>"; };
+		BF28AAC421962B3700410CDD /* EncodedType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncodedType.swift; sourceTree = "<group>"; };
+		BF28AAC521962B3700410CDD /* NullStorageContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullStorageContainer.swift; sourceTree = "<group>"; };
+		BF28AAC621962B3700410CDD /* BinaryDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryDecoder.swift; sourceTree = "<group>"; };
+		BF28AAC721962B3700410CDD /* StorageContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageContainer.swift; sourceTree = "<group>"; };
+		BF28AACB21962B3800410CDD /* CodeBlockPointerWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeBlockPointerWrapper.swift; sourceTree = "<group>"; };
+		BF28AACC21962B3800410CDD /* MapPointerWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPointerWrapper.swift; sourceTree = "<group>"; };
+		BF28AACD21962B3800410CDD /* InstancePointerWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstancePointerWrapper.swift; sourceTree = "<group>"; };
+		BF28AACF21962B3800410CDD /* GenericMethodPointerWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericMethodPointerWrapper.swift; sourceTree = "<group>"; };
+		BF28AAD021962B3800410CDD /* VectorPointer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorPointer.swift; sourceTree = "<group>"; };
+		BF28AAD321962B3800410CDD /* SlotPointerWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlotPointerWrapper.swift; sourceTree = "<group>"; };
+		BF28AAD421962B3800410CDD /* AssociationVectorPointer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssociationVectorPointer.swift; sourceTree = "<group>"; };
+		BF28AAD621962B3800410CDD /* AllocationBlockPointerWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllocationBlockPointerWrapper.swift; sourceTree = "<group>"; };
+		BF28AAD721962B3800410CDD /* TraitsPointerWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraitsPointerWrapper.swift; sourceTree = "<group>"; };
+		BF28AAD821962B3800410CDD /* StringPointerWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringPointerWrapper.swift; sourceTree = "<group>"; };
+		BF28AADA21962B3800410CDD /* MethodPointerWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MethodPointerWrapper.swift; sourceTree = "<group>"; };
+		BF28AADD21962B3800410CDD /* ArgonLibraryFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonLibraryFile.swift; sourceTree = "<group>"; };
+		BF28AADE21962B3800410CDD /* ArgonExport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonExport.swift; sourceTree = "<group>"; };
+		BF28AADF21962B3800410CDD /* ArgonGenericMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonGenericMethod.swift; sourceTree = "<group>"; };
+		BF28AAE021962B3800410CDD /* ArgonNamedConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonNamedConstant.swift; sourceTree = "<group>"; };
+		BF28AAE121962B3800410CDD /* ArgonTraits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonTraits.swift; sourceTree = "<group>"; };
+		BF28AAE221962B3800410CDD /* ArgonLocalVariable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonLocalVariable.swift; sourceTree = "<group>"; };
+		BF28AAE321962B3800410CDD /* ArgonExecutable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonExecutable.swift; sourceTree = "<group>"; };
+		BF28AAE421962B3800410CDD /* ArgonModulePart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonModulePart.swift; sourceTree = "<group>"; };
+		BF28AAE521962B3800410CDD /* ArgonCodeBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonCodeBlock.swift; sourceTree = "<group>"; };
+		BF28AAE621962B3800410CDD /* ArgonModuleEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonModuleEntry.swift; sourceTree = "<group>"; };
+		BF28AAE721962B3800410CDD /* ArgonModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonModule.swift; sourceTree = "<group>"; };
+		BF28AAE821962B3800410CDD /* ArgonImport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonImport.swift; sourceTree = "<group>"; };
+		BF28AAE921962B3800410CDD /* ArgonRelocationTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonRelocationTable.swift; sourceTree = "<group>"; };
+		BF28AAEA21962B3800410CDD /* ArgonLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonLibrary.swift; sourceTree = "<group>"; };
+		BF28AAEB21962B3800410CDD /* ArgonRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonRepository.swift; sourceTree = "<group>"; };
+		BF28AAEC21962B3800410CDD /* ArgonClosure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonClosure.swift; sourceTree = "<group>"; };
+		BF28AAED21962B3800410CDD /* ArgonMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonMethod.swift; sourceTree = "<group>"; };
+		BF28AAEE21962B3800410CDD /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = "../../../ArgonCompiler/Argon/Virtual Machine/Timer.swift"; sourceTree = "<group>"; };
+		BF28AAEF21962B3800410CDD /* WriteBarrier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WriteBarrier.swift; path = "../../../ArgonCompiler/Argon/Virtual Machine/WriteBarrier.swift"; sourceTree = "<group>"; };
+		BF28AAF121962B3800410CDD /* VMOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMOperation.swift; sourceTree = "<group>"; };
+		BF28AAF221962B3800410CDD /* VMInstructionMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMInstructionMode.swift; sourceTree = "<group>"; };
+		BF28AAF321962B3800410CDD /* VMInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMInstruction.swift; sourceTree = "<group>"; };
+		BF28AAF421962B3800410CDD /* VirtualMachineFault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualMachineFault.swift; sourceTree = "<group>"; };
+		BF28AAF521962B3800410CDD /* VMRegister.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMRegister.swift; sourceTree = "<group>"; };
+		BF28AAF621962B3800410CDD /* SharedMemoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedMemoryManager.swift; sourceTree = "<group>"; };
+		BF28AAF721962B3800410CDD /* Instructions.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Instructions.txt; sourceTree = "<group>"; };
+		BF28AAF821962B3800410CDD /* VirtualMachine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VirtualMachine.swift; sourceTree = "<group>"; };
+		BF28AAF921962B3800410CDD /* Memory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Memory.swift; sourceTree = "<group>"; };
+		BF28AAFA21962B3800410CDD /* VMInstructionMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMInstructionMaker.swift; sourceTree = "<group>"; };
+		BF28AAFB21962B3800410CDD /* VMInstructionList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMInstructionList.swift; sourceTree = "<group>"; };
+		BF28AB3F21962B9000410CDD /* Argon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Argon.swift; path = ../../ArgonCompiler/Argon/Argon.swift; sourceTree = "<group>"; };
+		BF28AB4121962BC900410CDD /* ThreeAddress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThreeAddress.swift; path = ../../ArgonCompiler/Argon/Compiler/ThreeAddress.swift; sourceTree = "<group>"; };
+		BF28AB4321962D2900410CDD /* ArgonName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArgonName.swift; path = "../../ArgonCompiler/Argon/Parser and Nodes/Support Types/ArgonName.swift"; sourceTree = "<group>"; };
+		BF28AB4621962DD900410CDD /* DependentSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependentSet.swift; sourceTree = "<group>"; };
+		BF28AB4721962DD900410CDD /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		BF28AB4821962DD900410CDD /* Dependent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dependent.swift; sourceTree = "<group>"; };
+		BF28AB4921962DD900410CDD /* AbtractModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AbtractModel.swift; sourceTree = "<group>"; };
+		BF28AB4E21962E3400410CDD /* ArgonValueLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArgonValueLocation.swift; path = ../../ArgonCompiler/Argon/Compiler/ArgonValueLocation.swift; sourceTree = "<group>"; };
+		BF28AB682196D83C00410CDD /* ArgonParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonParameter.swift; sourceTree = "<group>"; };
+		BF28AB6A2196DAF500410CDD /* ArgonLinker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonLinker.swift; sourceTree = "<group>"; };
+		BF28AB70219712F300410CDD /* ArgonGlobal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonGlobal.swift; sourceTree = "<group>"; };
+		BF28AB762198310800410CDD /* ClosurePointerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClosurePointerWrapper.swift; sourceTree = "<group>"; };
+		BF52472E219872260072A6D7 /* ArgonLineTrace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArgonLineTrace.swift; path = "../../ArgonCompiler/Argon/Parser and Nodes/Support Types/ArgonLineTrace.swift"; sourceTree = "<group>"; };
+		BF524730219879E30072A6D7 /* VMThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMThread.swift; sourceTree = "<group>"; };
+		BFE78859219A053200D9DBC1 /* ArgonString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonString.swift; sourceTree = "<group>"; };
+		BFE7885A219A053200D9DBC1 /* ArgonSymbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArgonSymbol.swift; sourceTree = "<group>"; };
+		BFFC0A3021A0970C002544FD /* ModulesOrganizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulesOrganizer.swift; sourceTree = "<group>"; };
+		BFFC0A3221A09F8C002544FD /* ArgonLinkedPackage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonLinkedPackage.swift; sourceTree = "<group>"; };
+		BFFC0A3421A0B66F002544FD /* ModuleDisplayPart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleDisplayPart.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BF1EDF812189AA4900F36C77 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF1EDF932189AA4B00F36C77 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BF1ADA4D21A21EE600FB38FE /* SharedMemory */ = {
+			isa = PBXGroup;
+			children = (
+				BF1ADA4E21A21EE600FB38FE /* SharedMemory.c */,
+				BF1ADA4F21A21EE600FB38FE /* SharedMemory.h */,
+				BF1ADA5021A21EE600FB38FE /* module.modulemap */,
+			);
+			path = SharedMemory;
+			sourceTree = "<group>";
+		};
+		BF1EDF7B2189AA4900F36C77 = {
+			isa = PBXGroup;
+			children = (
+				BF1EDF862189AA4900F36C77 /* ArgonVM */,
+				BF1EDF992189AA4B00F36C77 /* ArgonVMTests */,
+				BF1EDF852189AA4900F36C77 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BF1EDF852189AA4900F36C77 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BF1EDF842189AA4900F36C77 /* ArgonVM.app */,
+				BF1EDF962189AA4B00F36C77 /* ArgonVMTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BF1EDF862189AA4900F36C77 /* ArgonVM */ = {
+			isa = PBXGroup;
+			children = (
+				BF1ADA4D21A21EE600FB38FE /* SharedMemory */,
+				BFFC0A2F21A096C4002544FD /* Modules UX */,
+				BF52472E219872260072A6D7 /* ArgonLineTrace.swift */,
+				BF28AB4E21962E3400410CDD /* ArgonValueLocation.swift */,
+				BF28AB4521962DD900410CDD /* Dependency Management */,
+				BF28AB4321962D2900410CDD /* ArgonName.swift */,
+				BF28AB4121962BC900410CDD /* ThreeAddress.swift */,
+				BF28AB3F21962B9000410CDD /* Argon.swift */,
+				BFA7C97D218E6990001C9640 /* Virtual Machine */,
+				BF1EDF872189AA4900F36C77 /* AppDelegate.swift */,
+				BF1EDF8B2189AA4B00F36C77 /* Assets.xcassets */,
+				BF1EDF8D2189AA4B00F36C77 /* Main.storyboard */,
+				BF1EDF902189AA4B00F36C77 /* Info.plist */,
+				BF1EDF912189AA4B00F36C77 /* ArgonVM.entitlements */,
+			);
+			path = ArgonVM;
+			sourceTree = "<group>";
+		};
+		BF1EDF992189AA4B00F36C77 /* ArgonVMTests */ = {
+			isa = PBXGroup;
+			children = (
+				BF1EDF9A2189AA4B00F36C77 /* ArgonVMTests.swift */,
+				BF1EDF9C2189AA4B00F36C77 /* Info.plist */,
+			);
+			path = ArgonVMTests;
+			sourceTree = "<group>";
+		};
+		BF28AAB721962B3700410CDD /* Binary Coding */ = {
+			isa = PBXGroup;
+			children = (
+				BF28AABB21962B3700410CDD /* BinaryCodingKey.swift */,
+				BF28AAC621962B3700410CDD /* BinaryDecoder.swift */,
+				BF28AAC121962B3700410CDD /* BinaryEncoder.swift */,
+				BF28AAC321962B3700410CDD /* CodingKey+Extensions.swift */,
+				BF28AABC21962B3700410CDD /* DecodingError+Extensions.swift */,
+				BF28AAC221962B3700410CDD /* EncodedData.swift */,
+				BF28AAC421962B3700410CDD /* EncodedType.swift */,
+				BF28AAB921962B3700410CDD /* KeyedStorageContainer.swift */,
+				BF28AABA21962B3700410CDD /* MemoryAlignment.swift */,
+				BF28AAC521962B3700410CDD /* NullStorageContainer.swift */,
+				BF28AAB821962B3700410CDD /* PassthroughReference.swift */,
+				BF28AAC021962B3700410CDD /* SingleValueContainer.swift */,
+				BF28AAC721962B3700410CDD /* StorageContainer.swift */,
+				BF28AABE21962B3700410CDD /* StorageContainerReaderWriter.swift */,
+				BF28AABF21962B3700410CDD /* StrorageContainerReference.swift */,
+				BF28AABD21962B3700410CDD /* UnkeyedStorageContainer.swift */,
+			);
+			name = "Binary Coding";
+			path = "../../../ArgonCompiler/Argon/Virtual Machine/Binary Coding";
+			sourceTree = "<group>";
+		};
+		BF28AACA21962B3800410CDD /* Object Pointers */ = {
+			isa = PBXGroup;
+			children = (
+				BF28AAD621962B3800410CDD /* AllocationBlockPointerWrapper.swift */,
+				BF28AAD421962B3800410CDD /* AssociationVectorPointer.swift */,
+				BF28AB762198310800410CDD /* ClosurePointerWrapper.swift */,
+				BF28AACB21962B3800410CDD /* CodeBlockPointerWrapper.swift */,
+				BF28AACF21962B3800410CDD /* GenericMethodPointerWrapper.swift */,
+				BF28AACD21962B3800410CDD /* InstancePointerWrapper.swift */,
+				BF28AACC21962B3800410CDD /* MapPointerWrapper.swift */,
+				BF28AADA21962B3800410CDD /* MethodPointerWrapper.swift */,
+				BF28AAD321962B3800410CDD /* SlotPointerWrapper.swift */,
+				BF28AAD821962B3800410CDD /* StringPointerWrapper.swift */,
+				BF28AAD721962B3800410CDD /* TraitsPointerWrapper.swift */,
+				BF28AAD021962B3800410CDD /* VectorPointer.swift */,
+			);
+			name = "Object Pointers";
+			path = "../../../ArgonCompiler/Argon/Virtual Machine/Object Pointers";
+			sourceTree = "<group>";
+		};
+		BF28AADC21962B3800410CDD /* Repository and Exports */ = {
+			isa = PBXGroup;
+			children = (
+				BF28AAEC21962B3800410CDD /* ArgonClosure.swift */,
+				BF28AAE521962B3800410CDD /* ArgonCodeBlock.swift */,
+				BF28AAE321962B3800410CDD /* ArgonExecutable.swift */,
+				BF28AADE21962B3800410CDD /* ArgonExport.swift */,
+				BF28AADF21962B3800410CDD /* ArgonGenericMethod.swift */,
+				BF28AB70219712F300410CDD /* ArgonGlobal.swift */,
+				BF28AAE821962B3800410CDD /* ArgonImport.swift */,
+				BF28AAEA21962B3800410CDD /* ArgonLibrary.swift */,
+				BF28AADD21962B3800410CDD /* ArgonLibraryFile.swift */,
+				BFFC0A3221A09F8C002544FD /* ArgonLinkedPackage.swift */,
+				BF28AB6A2196DAF500410CDD /* ArgonLinker.swift */,
+				BF28AAE221962B3800410CDD /* ArgonLocalVariable.swift */,
+				BF28AAED21962B3800410CDD /* ArgonMethod.swift */,
+				BF0D777721A04A7D003E8D9B /* ArgonMethodDirective.swift */,
+				BF28AAE721962B3800410CDD /* ArgonModule.swift */,
+				BF28AAE621962B3800410CDD /* ArgonModuleEntry.swift */,
+				BF28AAE421962B3800410CDD /* ArgonModulePart.swift */,
+				BF28AAE021962B3800410CDD /* ArgonNamedConstant.swift */,
+				BF28AB682196D83C00410CDD /* ArgonParameter.swift */,
+				BF28AAE921962B3800410CDD /* ArgonRelocationTable.swift */,
+				BF28AAEB21962B3800410CDD /* ArgonRepository.swift */,
+				BFE78859219A053200D9DBC1 /* ArgonString.swift */,
+				BFE7885A219A053200D9DBC1 /* ArgonSymbol.swift */,
+				BF28AAE121962B3800410CDD /* ArgonTraits.swift */,
+			);
+			name = "Repository and Exports";
+			path = "../../../ArgonCompiler/Argon/Virtual Machine/Repository and Exports";
+			sourceTree = "<group>";
+		};
+		BF28AAF021962B3800410CDD /* Machine */ = {
+			isa = PBXGroup;
+			children = (
+				BF28AAF721962B3800410CDD /* Instructions.txt */,
+				BF28AAF921962B3800410CDD /* Memory.swift */,
+				BF28AAF621962B3800410CDD /* SharedMemoryManager.swift */,
+				BF28AAF821962B3800410CDD /* VirtualMachine.swift */,
+				BF28AAF421962B3800410CDD /* VirtualMachineFault.swift */,
+				BF28AAF321962B3800410CDD /* VMInstruction.swift */,
+				BF28AAFA21962B3800410CDD /* VMInstructionMaker.swift */,
+				BF28AAFB21962B3800410CDD /* VMInstructionList.swift */,
+				BF28AAF221962B3800410CDD /* VMInstructionMode.swift */,
+				BF28AAF121962B3800410CDD /* VMOperation.swift */,
+				BF28AAF521962B3800410CDD /* VMRegister.swift */,
+				BF524730219879E30072A6D7 /* VMThread.swift */,
+			);
+			name = Machine;
+			path = "../../../ArgonCompiler/Argon/Virtual Machine/Machine";
+			sourceTree = "<group>";
+		};
+		BF28AB4521962DD900410CDD /* Dependency Management */ = {
+			isa = PBXGroup;
+			children = (
+				BF28AB4621962DD900410CDD /* DependentSet.swift */,
+				BF28AB4721962DD900410CDD /* Model.swift */,
+				BF28AB4821962DD900410CDD /* Dependent.swift */,
+				BF28AB4921962DD900410CDD /* AbtractModel.swift */,
+			);
+			name = "Dependency Management";
+			path = "../../ArgonCompiler/Argon/Dependency Management";
+			sourceTree = "<group>";
+		};
+		BFA7C97D218E6990001C9640 /* Virtual Machine */ = {
+			isa = PBXGroup;
+			children = (
+				BF28AAB721962B3700410CDD /* Binary Coding */,
+				BF28AAF021962B3800410CDD /* Machine */,
+				BF28AACA21962B3800410CDD /* Object Pointers */,
+				BF28AADC21962B3800410CDD /* Repository and Exports */,
+				BF28AAEE21962B3800410CDD /* Timer.swift */,
+				BF28AAEF21962B3800410CDD /* WriteBarrier.swift */,
+			);
+			path = "Virtual Machine";
+			sourceTree = "<group>";
+		};
+		BFFC0A2F21A096C4002544FD /* Modules UX */ = {
+			isa = PBXGroup;
+			children = (
+				BF0D777921A0847F003E8D9B /* ArgonElementCellView.swift */,
+				BFFC0A3021A0970C002544FD /* ModulesOrganizer.swift */,
+				BF1EDF892189AA4900F36C77 /* ViewController.swift */,
+				BFFC0A3421A0B66F002544FD /* ModuleDisplayPart.swift */,
+			);
+			path = "Modules UX";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BF1EDF832189AA4900F36C77 /* ArgonVM */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF1EDF9F2189AA4B00F36C77 /* Build configuration list for PBXNativeTarget "ArgonVM" */;
+			buildPhases = (
+				BF1EDF802189AA4900F36C77 /* Sources */,
+				BF1EDF812189AA4900F36C77 /* Frameworks */,
+				BF1EDF822189AA4900F36C77 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ArgonVM;
+			productName = ArgonVM;
+			productReference = BF1EDF842189AA4900F36C77 /* ArgonVM.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BF1EDF952189AA4B00F36C77 /* ArgonVMTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF1EDFA22189AA4B00F36C77 /* Build configuration list for PBXNativeTarget "ArgonVMTests" */;
+			buildPhases = (
+				BF1EDF922189AA4B00F36C77 /* Sources */,
+				BF1EDF932189AA4B00F36C77 /* Frameworks */,
+				BF1EDF942189AA4B00F36C77 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF1EDF982189AA4B00F36C77 /* PBXTargetDependency */,
+			);
+			name = ArgonVMTests;
+			productName = ArgonVMTests;
+			productReference = BF1EDF962189AA4B00F36C77 /* ArgonVMTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BF1EDF7C2189AA4900F36C77 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Vincent Coetzee";
+				TargetAttributes = {
+					BF1EDF832189AA4900F36C77 = {
+						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
+					};
+					BF1EDF952189AA4B00F36C77 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = BF1EDF832189AA4900F36C77;
+					};
+				};
+			};
+			buildConfigurationList = BF1EDF7F2189AA4900F36C77 /* Build configuration list for PBXProject "ArgonVM" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BF1EDF7B2189AA4900F36C77;
+			productRefGroup = BF1EDF852189AA4900F36C77 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BF1EDF832189AA4900F36C77 /* ArgonVM */,
+				BF1EDF952189AA4B00F36C77 /* ArgonVMTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BF1EDF822189AA4900F36C77 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF1EDF8C2189AA4B00F36C77 /* Assets.xcassets in Resources */,
+				BF1EDF8F2189AA4B00F36C77 /* Main.storyboard in Resources */,
+				BF28AB3A21962B3800410CDD /* Instructions.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF1EDF942189AA4B00F36C77 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BF1EDF802189AA4900F36C77 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF28AB3521962B3800410CDD /* VMInstructionMode.swift in Sources */,
+				BF0D777A21A0847F003E8D9B /* ArgonElementCellView.swift in Sources */,
+				BF28AB1121962B3800410CDD /* MapPointerWrapper.swift in Sources */,
+				BF28AB71219712F300410CDD /* ArgonGlobal.swift in Sources */,
+				BF28AB3D21962B3800410CDD /* VMInstructionMaker.swift in Sources */,
+				BFFC0A3321A09F8C002544FD /* ArgonLinkedPackage.swift in Sources */,
+				BF28AB1021962B3800410CDD /* CodeBlockPointerWrapper.swift in Sources */,
+				BF28AB0021962B3800410CDD /* MemoryAlignment.swift in Sources */,
+				BF28AB3321962B3800410CDD /* WriteBarrier.swift in Sources */,
+				BF28AB3E21962B3800410CDD /* VMInstructionList.swift in Sources */,
+				BF28AB2821962B3800410CDD /* ArgonModulePart.swift in Sources */,
+				BF28AB4221962BC900410CDD /* ThreeAddress.swift in Sources */,
+				BF28AB4B21962DD900410CDD /* Model.swift in Sources */,
+				BF28AB1421962B3800410CDD /* GenericMethodPointerWrapper.swift in Sources */,
+				BFFC0A3521A0B66F002544FD /* ModuleDisplayPart.swift in Sources */,
+				BF28AB0C21962B3800410CDD /* BinaryDecoder.swift in Sources */,
+				BF28AAFE21962B3800410CDD /* PassthroughReference.swift in Sources */,
+				BF28AB3B21962B3800410CDD /* VirtualMachine.swift in Sources */,
+				BF28AB692196D83D00410CDD /* ArgonParameter.swift in Sources */,
+				BF28AB3621962B3800410CDD /* VMInstruction.swift in Sources */,
+				BF1ADA5121A21EE700FB38FE /* SharedMemory.c in Sources */,
+				BF28AB2721962B3800410CDD /* ArgonExecutable.swift in Sources */,
+				BF28AB6B2196DAF500410CDD /* ArgonLinker.swift in Sources */,
+				BF28AB3221962B3800410CDD /* Timer.swift in Sources */,
+				BF28AB0921962B3800410CDD /* CodingKey+Extensions.swift in Sources */,
+				BF28AB3821962B3800410CDD /* VMRegister.swift in Sources */,
+				BF28AB2E21962B3800410CDD /* ArgonLibrary.swift in Sources */,
+				BF28AB1521962B3800410CDD /* VectorPointer.swift in Sources */,
+				BF1EDF8A2189AA4900F36C77 /* ViewController.swift in Sources */,
+				BF28AB4A21962DD900410CDD /* DependentSet.swift in Sources */,
+				BF28AB2621962B3800410CDD /* ArgonLocalVariable.swift in Sources */,
+				BF28AB0121962B3800410CDD /* BinaryCodingKey.swift in Sources */,
+				BF524731219879E30072A6D7 /* VMThread.swift in Sources */,
+				BF28AB0621962B3800410CDD /* SingleValueContainer.swift in Sources */,
+				BF28AB1821962B3800410CDD /* SlotPointerWrapper.swift in Sources */,
+				BF28AB1221962B3800410CDD /* InstancePointerWrapper.swift in Sources */,
+				BF28AB3721962B3800410CDD /* VirtualMachineFault.swift in Sources */,
+				BF28AB2221962B3800410CDD /* ArgonExport.swift in Sources */,
+				BF28AB4421962D2900410CDD /* ArgonName.swift in Sources */,
+				BF28AB2B21962B3800410CDD /* ArgonModule.swift in Sources */,
+				BFE7885C219A053200D9DBC1 /* ArgonSymbol.swift in Sources */,
+				BF28AB3021962B3800410CDD /* ArgonClosure.swift in Sources */,
+				BF28AB0421962B3800410CDD /* StorageContainerReaderWriter.swift in Sources */,
+				BF28AB3121962B3800410CDD /* ArgonMethod.swift in Sources */,
+				BF28AB3921962B3800410CDD /* SharedMemoryManager.swift in Sources */,
+				BF28AB0721962B3800410CDD /* BinaryEncoder.swift in Sources */,
+				BFFC0A3121A0970C002544FD /* ModulesOrganizer.swift in Sources */,
+				BF28AB0821962B3800410CDD /* EncodedData.swift in Sources */,
+				BF28AB772198310800410CDD /* ClosurePointerWrapper.swift in Sources */,
+				BF28AB2921962B3800410CDD /* ArgonCodeBlock.swift in Sources */,
+				BF0D777821A04A7D003E8D9B /* ArgonMethodDirective.swift in Sources */,
+				BF28AB0D21962B3800410CDD /* StorageContainer.swift in Sources */,
+				BF28AB1C21962B3800410CDD /* TraitsPointerWrapper.swift in Sources */,
+				BF28AB4D21962DD900410CDD /* AbtractModel.swift in Sources */,
+				BF28AB3C21962B3800410CDD /* Memory.swift in Sources */,
+				BF28AB2C21962B3800410CDD /* ArgonImport.swift in Sources */,
+				BFE7885B219A053200D9DBC1 /* ArgonString.swift in Sources */,
+				BF28AB2521962B3800410CDD /* ArgonTraits.swift in Sources */,
+				BF28AB2F21962B3800410CDD /* ArgonRepository.swift in Sources */,
+				BF52472F219872260072A6D7 /* ArgonLineTrace.swift in Sources */,
+				BF1EDF882189AA4900F36C77 /* AppDelegate.swift in Sources */,
+				BF28AB2321962B3800410CDD /* ArgonGenericMethod.swift in Sources */,
+				BF28AB2421962B3800410CDD /* ArgonNamedConstant.swift in Sources */,
+				BF28AB1D21962B3800410CDD /* StringPointerWrapper.swift in Sources */,
+				BF28AB3421962B3800410CDD /* VMOperation.swift in Sources */,
+				BF28AB0321962B3800410CDD /* UnkeyedStorageContainer.swift in Sources */,
+				BF28AB4C21962DD900410CDD /* Dependent.swift in Sources */,
+				BF28AB1B21962B3800410CDD /* AllocationBlockPointerWrapper.swift in Sources */,
+				BF28AB2121962B3800410CDD /* ArgonLibraryFile.swift in Sources */,
+				BF28AB2D21962B3800410CDD /* ArgonRelocationTable.swift in Sources */,
+				BF28AB0521962B3800410CDD /* StrorageContainerReference.swift in Sources */,
+				BF28AB4021962B9000410CDD /* Argon.swift in Sources */,
+				BF28AB1921962B3800410CDD /* AssociationVectorPointer.swift in Sources */,
+				BF28AB0A21962B3800410CDD /* EncodedType.swift in Sources */,
+				BF28AB2A21962B3800410CDD /* ArgonModuleEntry.swift in Sources */,
+				BF28AB1F21962B3800410CDD /* MethodPointerWrapper.swift in Sources */,
+				BF28AB4F21962E3500410CDD /* ArgonValueLocation.swift in Sources */,
+				BF28AB0B21962B3800410CDD /* NullStorageContainer.swift in Sources */,
+				BF28AAFF21962B3800410CDD /* KeyedStorageContainer.swift in Sources */,
+				BF28AB0221962B3800410CDD /* DecodingError+Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF1EDF922189AA4B00F36C77 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF1EDF9B2189AA4B00F36C77 /* ArgonVMTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BF1EDF982189AA4B00F36C77 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF1EDF832189AA4900F36C77 /* ArgonVM */;
+			targetProxy = BF1EDF972189AA4B00F36C77 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BF1EDF8D2189AA4B00F36C77 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF1EDF8E2189AA4B00F36C77 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BF1EDF9D2189AA4B00F36C77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BF1EDF9E2189AA4B00F36C77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		BF1EDFA02189AA4B00F36C77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = ArgonVM/ArgonVM.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DLH9UBQV34;
+				INFOPLIST_FILE = ArgonVM/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.macsemantics.ArgonVM;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/ArgonVM/SharedMemory";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		BF1EDFA12189AA4B00F36C77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = ArgonVM/ArgonVM.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DLH9UBQV34;
+				INFOPLIST_FILE = ArgonVM/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.macsemantics.ArgonVM;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/ArgonVM/SharedMemory";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		BF1EDFA32189AA4B00F36C77 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DLH9UBQV34;
+				INFOPLIST_FILE = ArgonVMTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.macsemantics.ArgonVMTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArgonVM.app/Contents/MacOS/ArgonVM";
+			};
+			name = Debug;
+		};
+		BF1EDFA42189AA4B00F36C77 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DLH9UBQV34;
+				INFOPLIST_FILE = ArgonVMTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.macsemantics.ArgonVMTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ArgonVM.app/Contents/MacOS/ArgonVM";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BF1EDF7F2189AA4900F36C77 /* Build configuration list for PBXProject "ArgonVM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF1EDF9D2189AA4B00F36C77 /* Debug */,
+				BF1EDF9E2189AA4B00F36C77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF1EDF9F2189AA4B00F36C77 /* Build configuration list for PBXNativeTarget "ArgonVM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF1EDFA02189AA4B00F36C77 /* Debug */,
+				BF1EDFA12189AA4B00F36C77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF1EDFA22189AA4B00F36C77 /* Build configuration list for PBXNativeTarget "ArgonVMTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF1EDFA32189AA4B00F36C77 /* Debug */,
+				BF1EDFA42189AA4B00F36C77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BF1EDF7C2189AA4900F36C77 /* Project object */;
+}

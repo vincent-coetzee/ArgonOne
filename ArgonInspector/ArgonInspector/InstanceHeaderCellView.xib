@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView identifier="InstanceHeaderCellView" id="qxo-Ni-eaU" customClass="InstanceHeaderCellView" customModule="Argon" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="n7r-Yu-YsN">
+                    <rect key="frame" x="152" y="49" width="56" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="52" id="EdL-Dj-hM2"/>
+                        <constraint firstAttribute="height" constant="16" id="McN-ed-J0w"/>
+                        <constraint firstAttribute="width" constant="52" id="fZS-jI-pzn"/>
+                    </constraints>
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="SLOTS" id="FRr-LS-euK">
+                        <font key="font" size="12" name="Menlo-Bold"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2dw-ax-GAe">
+                    <rect key="frame" x="78" y="8" width="400" height="18"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Label" id="KBL-Qx-12G">
+                        <font key="font" size="12" name="Menlo-Regular"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qhx-1d-ljK">
+                    <rect key="frame" x="78" y="28" width="108" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="104" id="OQE-lO-sI4"/>
+                    </constraints>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="INSTANCE" id="JrH-EK-2PI">
+                        <font key="font" size="12" name="Menlo-Regular"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c2J-qF-bql">
+                    <rect key="frame" x="169" y="29" width="39" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="J1c-1Y-57S"/>
+                        <constraint firstAttribute="width" constant="35" id="bKW-rp-5BI"/>
+                    </constraints>
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="23" id="RnB-v8-b97">
+                        <font key="font" size="12" name="Menlo-Regular"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="El9-tm-62q">
+                    <rect key="frame" x="204" y="49" width="63" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="59" id="IJm-GN-HgZ"/>
+                        <constraint firstAttribute="height" constant="16" id="IQb-SJ-e0U"/>
+                        <constraint firstAttribute="width" constant="59" id="mLC-55-z4J"/>
+                    </constraints>
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="EXTRA" id="DdH-vF-KJS">
+                        <font key="font" size="12" name="Menlo-Bold"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fER-Ni-M5L">
+                    <rect key="frame" x="229" y="29" width="38" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="8oc-Ag-deV"/>
+                        <constraint firstAttribute="width" constant="34" id="wcY-JH-hmp"/>
+                    </constraints>
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="5" id="Vke-oX-BAE">
+                        <font key="font" size="12" name="Menlo-Regular"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C9a-NF-OAq">
+                    <rect key="frame" x="288" y="49" width="46" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="42" id="DVZ-k9-5tG"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="aAy-WB-KTp"/>
+                        <constraint firstAttribute="height" constant="16" id="zzF-YR-KYv"/>
+                    </constraints>
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="FLAGS" id="len-AO-uGy">
+                        <font key="font" size="12" name="Menlo-Bold"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h7i-0l-WC5">
+                    <rect key="frame" x="300" y="29" width="34" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="OU3-Kc-JkL"/>
+                        <constraint firstAttribute="width" constant="30" id="yFR-el-zPK"/>
+                    </constraints>
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="5" id="xh5-aF-GpO">
+                        <font key="font" size="12" name="Menlo-Regular"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AjH-UO-9wP">
+                    <rect key="frame" x="338" y="49" width="90" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="16" id="KA5-Mb-Tbp"/>
+                        <constraint firstAttribute="width" constant="86" id="cDd-EQ-C3R"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="77" id="lHT-C6-SP1"/>
+                    </constraints>
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="GENERATION" id="LWg-zg-xca">
+                        <font key="font" size="12" name="Menlo-Bold"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Oal-A9-vBN">
+                    <rect key="frame" x="357" y="29" width="71" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="67" id="9re-pa-t2W"/>
+                        <constraint firstAttribute="height" constant="16" id="cg0-Kk-1Kt"/>
+                    </constraints>
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="5" id="Ldp-df-hcj">
+                        <font key="font" size="12" name="Menlo-Regular"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Yqd-0O-sxj">
+                    <rect key="frame" x="2" y="47" width="48" height="18"/>
+                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="000000" id="FTJ-JC-yJw">
+                        <font key="font" size="12" name="Menlo-Bold"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wmU-Xs-zyF">
+                    <rect key="frame" x="78" y="47" width="103" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="99" id="1sy-Qt-OyH"/>
+                    </constraints>
+                    <textFieldCell key="cell" lineBreakMode="clipping" title="TYPE" id="Ogd-NJ-xim">
+                        <font key="font" size="12" name="Menlo-Bold"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="C9a-NF-OAq" firstAttribute="leading" secondItem="El9-tm-62q" secondAttribute="trailing" constant="25" id="2ti-lp-nc4"/>
+                <constraint firstItem="AjH-UO-9wP" firstAttribute="leading" secondItem="C9a-NF-OAq" secondAttribute="trailing" constant="8" symbolic="YES" id="4f6-Tb-vTG"/>
+                <constraint firstItem="C9a-NF-OAq" firstAttribute="leading" secondItem="n7r-Yu-YsN" secondAttribute="trailing" constant="84" id="4tz-3e-NcE"/>
+                <constraint firstItem="h7i-0l-WC5" firstAttribute="top" secondItem="fER-Ni-M5L" secondAttribute="top" id="5Jh-2L-kiN"/>
+                <constraint firstItem="qhx-1d-ljK" firstAttribute="top" secondItem="wmU-Xs-zyF" secondAttribute="bottom" constant="1" id="C8w-g4-9CQ"/>
+                <constraint firstItem="Oal-A9-vBN" firstAttribute="top" secondItem="h7i-0l-WC5" secondAttribute="top" id="Ga6-jo-6zK"/>
+                <constraint firstItem="wmU-Xs-zyF" firstAttribute="leading" secondItem="qxo-Ni-eaU" secondAttribute="leading" constant="80" id="JmQ-ft-14x"/>
+                <constraint firstItem="fER-Ni-M5L" firstAttribute="top" secondItem="c2J-qF-bql" secondAttribute="top" id="Q0M-ZR-o1t"/>
+                <constraint firstItem="Yqd-0O-sxj" firstAttribute="top" secondItem="qxo-Ni-eaU" secondAttribute="top" constant="5" id="SnS-h4-tk3"/>
+                <constraint firstItem="fER-Ni-M5L" firstAttribute="trailing" secondItem="El9-tm-62q" secondAttribute="trailing" id="TfV-vE-eMD"/>
+                <constraint firstItem="c2J-qF-bql" firstAttribute="trailing" secondItem="n7r-Yu-YsN" secondAttribute="trailing" id="Tob-kJ-8h1"/>
+                <constraint firstItem="wmU-Xs-zyF" firstAttribute="top" secondItem="Yqd-0O-sxj" secondAttribute="top" id="We9-Yt-14j"/>
+                <constraint firstItem="El9-tm-62q" firstAttribute="top" secondItem="qxo-Ni-eaU" secondAttribute="top" constant="5" id="Y1x-pD-kVA"/>
+                <constraint firstItem="n7r-Yu-YsN" firstAttribute="top" secondItem="qxo-Ni-eaU" secondAttribute="top" constant="5" id="aJd-NL-ecR"/>
+                <constraint firstItem="qhx-1d-ljK" firstAttribute="leading" secondItem="wmU-Xs-zyF" secondAttribute="leading" id="af4-bZ-d9U"/>
+                <constraint firstItem="AjH-UO-9wP" firstAttribute="top" secondItem="qxo-Ni-eaU" secondAttribute="top" constant="5" id="bXq-o0-S5H"/>
+                <constraint firstItem="C9a-NF-OAq" firstAttribute="top" secondItem="qxo-Ni-eaU" secondAttribute="top" constant="5" id="jJv-ah-AOA"/>
+                <constraint firstItem="2dw-ax-GAe" firstAttribute="top" secondItem="qhx-1d-ljK" secondAttribute="bottom" constant="2" id="nU9-Uh-yl0"/>
+                <constraint firstItem="Yqd-0O-sxj" firstAttribute="leading" secondItem="qxo-Ni-eaU" secondAttribute="leading" constant="4" id="pKz-hM-D7L"/>
+                <constraint firstAttribute="bottom" secondItem="2dw-ax-GAe" secondAttribute="bottom" constant="8" id="poO-b7-WpC"/>
+                <constraint firstItem="n7r-Yu-YsN" firstAttribute="leading" secondItem="wmU-Xs-zyF" secondAttribute="trailing" constant="-25" id="rYc-q7-SEG"/>
+                <constraint firstItem="c2J-qF-bql" firstAttribute="top" secondItem="qhx-1d-ljK" secondAttribute="top" constant="1" id="v8p-jB-Vrm"/>
+                <constraint firstItem="Oal-A9-vBN" firstAttribute="trailing" secondItem="AjH-UO-9wP" secondAttribute="trailing" id="vSe-Rf-Vx6"/>
+                <constraint firstAttribute="trailing" secondItem="2dw-ax-GAe" secondAttribute="trailing" constant="4" id="yGs-dO-6De"/>
+                <constraint firstItem="2dw-ax-GAe" firstAttribute="leading" secondItem="qxo-Ni-eaU" secondAttribute="leading" constant="80" id="z3u-4m-48Y"/>
+                <constraint firstItem="h7i-0l-WC5" firstAttribute="trailing" secondItem="C9a-NF-OAq" secondAttribute="trailing" id="zhB-XK-D8n"/>
+            </constraints>
+            <connections>
+                <outlet property="addressField" destination="Yqd-0O-sxj" id="Use-Hh-QpS"/>
+                <outlet property="binaryField" destination="2dw-ax-GAe" id="PdN-ZE-tRE"/>
+                <outlet property="extraWordCountField" destination="fER-Ni-M5L" id="Gtg-Wu-7K2"/>
+                <outlet property="flagField" destination="h7i-0l-WC5" id="Y4a-zg-Le6"/>
+                <outlet property="generationField" destination="Oal-A9-vBN" id="Zmw-pK-yC7"/>
+                <outlet property="slotCountField" destination="c2J-qF-bql" id="EZG-no-fNr"/>
+                <outlet property="typeNameField" destination="qhx-1d-ljK" id="oHs-wr-ISP"/>
+            </connections>
+            <point key="canvasLocation" x="84" y="158"/>
+        </customView>
+    </objects>
+</document>

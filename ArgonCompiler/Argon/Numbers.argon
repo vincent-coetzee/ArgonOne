@@ -1,0 +1,36 @@
+//
+//
+// The numbers library for Argon
+//
+//
+
+library Numbers
+    {
+    constant Float.pi = 3.141592653589793
+    constant Float.e = 2,718281828459045
+
+    method log(number::Integer) -> Integer
+        {
+        }
+
+    method ln(number::Float) -> Float
+        {
+        }
+
+    method ln(number::Double) -> Double
+        {
+        }
+
+    @(inline)
+    method min(number1::Integer,number2::Integer) -> Integer
+        {
+        if number1 < number2
+            {
+            return(number1)
+            }
+        else
+            {
+            return(number2)
+            }
+        }
+    }

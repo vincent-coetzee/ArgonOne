@@ -1,0 +1,233 @@
+//
+//
+// An executable file for Argon
+//
+//
+executable GoFishing
+    {
+    import PeopleAndPlaces("/Users/vincent/Desktop/people.argonlib")
+    import Accounting()
+    import Zoology("/Users/vincent/Desktop/zoology.argonlib").Animal as BaseAnimal
+    
+    export Cetacean,Fish
+    export AquaticAnimal as WaterCreature
+    
+    constant kAverageWhaleWeightInKilograms = 4_000_000
+
+    let topLevelLocal = "this is a top level local string"
+
+    //
+    // A macro to demonstrate the free form nature of the use
+    // of macro polymorphic arguments, macros are resolved
+    // at compile tile, but can be exported from a module
+    //
+    // macro justInTime(first,second,third)
+    //    {
+    //    }
+    //
+    // A mixin with a generic type
+    //
+    traits AquaticAnimal<Type>
+        {
+        name::String
+        latinName::String
+        averageWeightInKilograms::Integer
+        preferredArea::Symbol
+        breathesAir::Boolean = #false
+        isMammal = #false
+        isEdible::Type
+        }
+
+    //
+    // An instanciated generic type in a trait
+    //
+    traits Cetacean::AquaticAnimal<Type=Boolean>
+        {
+        sucklesYoung::AquaticAnimal.Type
+
+        made()
+            {
+            this.breathesAir = #true
+            this.isMammal = #true
+            nextMethod()
+            }
+        }
+
+    //
+    // And a different instanciation
+    //
+    traits Fish::AquaticAnimal<Type=Symbol>
+        {
+        }
+
+    traits Shark::Fish
+        {
+        }
+
+    //
+    // A multimethod generic on the animal
+    //
+     @(inline,system)
+    method swimAround(animal::Cetacean,value::Integer) -> Integer
+        {
+        return(value)
+        }
+    //
+    // A second instance of the multimethod
+    //
+    @(inline,system)
+    method swimAround(animal::Fish,value::Integer) -> Integer
+        {
+        return(value)
+        }
+
+    @(inline,system)
+    method swimAround(animal::Fish,value::Number) -> Integer
+        {
+        return(3)
+        }
+
+     @(inline,system)
+    method swimAround(animal::Cetacean,value::Number) -> Integer
+        {
+        return(2)
+        }
+
+    @(inline,static)
+    method print(value::Behaviour)
+        {
+        primitive<1>
+        }
+
+    method random(someTraits::Traits,lowerBound::Number,upperBound::Number) -> Number
+        {
+        return(25)
+        }
+    //
+    // All executables need to have an entrypoint. The code in the entrypoint
+    // will be executed as soon as all the dependencies of the executable
+    // have been resolve and there are no unresolved symbols. Use the entrypoint
+    // as you would a main function in C
+    //
+    entrypoint()
+        {
+        //
+        // Use let to declare locally scoped variables. If you want or need the
+        // behavior of a global, declare a local outside of the scope of entrypoint
+        // it works out to the same thing.
+        //
+        let randomVariationInWeight = 500
+        let newWeight = kAverageWhaleWeightInKilograms + (randomVariationInWeight * 10 + 100) / 9
+        let newWeight = newWeight + ( 14 * 7 + 63)
+        let actionAmount = 14 * 7 + 63
+        let baseFigure = 14 * 7
+        actionAmount = actionAmount + baseFigure
+        baseFigure = actionAmount / 20
+        let finalResult = baseFigure + actionAmount
+        let aSymbol = #symbol1
+        let value = 0
+        print(value::value)
+        //
+        // A vector made with make, make is the mechanism
+        // for constructing instances of mixins
+        //
+        let vector = make(Vector,200)
+        //
+        // A closure that makes use of the vector
+        //
+        let aClosure =
+            {
+            in(inputVector::Vector) -> Vector
+            let index = 23
+            while index <= 47
+                {
+                vector[index] = index
+                index = index + 1
+                }
+            // Capture some things
+            let closureSymbol = aSymbol
+            let closureResult = finalResult
+            let closureValue = value
+            // Show that we can put anything into a vector
+            vector[index] = "This is a string that is going into the number vector"
+            return(vector)
+            }
+        //
+        // Split the closure off into another thread for execution
+        //
+        spawn(aClosure(inputVector::vector))
+        //
+        // A for loop, using an index induced by the loop
+        //
+        for index in (from 1,to 20,by 1)
+            {
+            let someValue = index * 12
+            print(value::someValue)
+            }
+        //
+        // Now call the closure with the vector as an argument
+        //
+        aClosure(inputVector::vector)
+        let newValue = aClosure(inputVector::vector)
+        //
+        // A with statement which grants easy access to the
+        // slots inside an instance
+        //
+        let nessie = make(Cetacean)
+        with(nessie)
+            {
+            name = "The Creature of Loch Ness"
+            latinName = "Lochinus Horribilis"
+            let index = 0
+            while index < 4
+                {
+                averageWeightInKilograms = averageWeightInKilograms + 25
+                }
+            print(value::averageWeightInKilograms)
+            }
+        //
+        // A switch statement on an arbitrary type. Argon does not required
+        // deterministic types be used in a switch statement as long as there
+        // is an "otherwise" clause to catch the overflow
+        //
+        switch(aSymbol)
+            {
+            case #symbol1:
+                value = 1
+            case #symbol2:
+                value = 2
+            case #symbol3:
+                value = 3
+            case #symbol4:
+                value = 4
+            otherwise:
+                value = 9
+            }
+        if randomVariationInWeight > 200
+            {
+            randomVariationInWeight = 200
+            }
+        else
+            {
+            randomVariationInWeight = randomVariationInWeight +7
+            }
+        newWeight = newWeight + 200
+        let whale = make(Cetacean)
+        let fish = make(Fish)
+        vector[0] = fish
+        vector[1] = whale
+        whale.isMammal = #true
+        print(value::vector[1])
+        swimAround(animal::whale,value::47)
+        swimAround(animal::fish,value::19)
+        let someIndex = 0
+        //
+        // A while loop using a local in the condition
+        //
+        while someIndex < 200
+            {
+            someIndex = someIndex + 12
+            print(value::someIndex)
+            }
+        }
+    }

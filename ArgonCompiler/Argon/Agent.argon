@@ -1,0 +1,224 @@
+//
+//
+//
+//
+//
+//
+
+library Persons
+    {
+    import PeopleAndPlaces("/Users/vincent/Desktop/people.argonlib")
+    import Accounting()
+
+    export Entity,Born
+    export Worker as Colleague
+
+    let libraryGlobal1 = 23
+    let libraryGlobal2 =
+        {
+        in(Void) -> Void
+        let string1 = "This is a closure string in a library"
+        }
+
+    traits Identity
+        {
+        number::String
+        }
+
+    traits Entity::Identity
+        {
+        name::String
+        names::Vector<String>
+        entityType::Symbol
+        identificationNumber::String
+        isNaturalBeing::Boolean
+        hasResidencePermit::Boolean
+        yearsSinceInception::Float
+        }
+
+    traits Born
+        {
+        dateOfBirth::Date
+        }
+
+    traits Worker
+        {
+        skills::Set<Symbol>
+        type::Symbol
+        }
+
+    traits Person::Entity,Born
+        {
+        }
+
+    traits WorkingPerson::Person,Worker
+        {
+        basePerson::Person
+        }
+
+    traits Iterable<Type>
+        {
+        start::Type
+        end::Type
+        interval::Type
+        }
+
+    traits Set
+        {
+        }
+
+    traits MutableSet::Set
+        {
+        }
+
+    traits StaticSet::MutableSet
+        {
+        }
+
+    traits Countable::Iterable
+        {
+        }
+
+    traits IntegerSet::Countable,Set
+        {
+        }
+
+    traits IntegerIterable::Iterable<Type=Integer>
+        {
+        someSlot::Iterable::Type
+        }
+
+    method print(anyThing::Identity)
+        {
+        }
+        
+    method calculateTables(person::Person)
+        {
+        }
+
+        method format(set::Set,looper::Iterable) -> String
+            {
+            return("name1")
+            }
+
+        method format(set::MutableSet,looper::IntegerSet) -> String
+            {
+            return("name2")
+            }
+
+        method format(set::Set,looper::Countable) -> String
+            {
+            return("name3")
+            }
+            
+        method format(set::StaticSet,looper::Countable) -> String
+            {
+            return("name4")
+            }
+
+    method findAge(person::WorkingPerson) -> String
+        {
+        //
+        // Some slots
+        //
+        person.type = #skilled
+        person.basePerson.name = "Joe Saxonovis"
+        //
+        // Some variables
+        //
+        let personName = person.name
+        let anotherPerson = person
+        let anotherSymbol::Symbol = #symbol
+        let someAge = 45
+        let someName = "Peter Pan"
+        let someBoolean::Boolean = true
+        let someSymbol = #developer
+        let someIterable = make(IntegerIterable,Entity)
+        let someBoolean = #true
+        //
+        // The NEW with clause
+        //
+        let anEntity = make(Entity)
+        with(anEntity)
+            {
+            name = "Peter"
+            names = "Pan","Peter","Longwood","John"
+            entityType = #mythicalPerson
+            identificationNumber = "87874987236"
+            isNaturalBeing = #true
+            hasResidencePermit = #false
+            yearsSinceEnception = 14.925
+            }
+        //
+        // Some methods
+        //
+        calculateTables(person)
+        let newAnswer = 6748 + 456 * 3422 - 456 / 4
+        let anotherBoolean = 645 <= 848
+        if someSymbol == #developer
+            {
+            print(someSymbol)
+            }
+        let latestSymbol = person
+        let closure =
+                {
+                in(ind1::Integer,ind2::Double) -> Integer
+                let number = 23
+                let libraryValue = libraryLocal1
+                return(number)
+                }
+          for index in sequence(from::23,to::47,by::3)
+                {
+                let someInsideValue = closure(47,63.5)
+                print(someInsideValue)
+                }
+          switch(someSymbol)
+                {
+                case #thisSymbol:
+                    print("Some symbol")
+                case #thatSymbol:
+                    print("That symbol")
+                otherwise:
+                }
+            let index = 0
+            while index < 50
+                {
+                print(someSymbol)
+                let nearestPlace = 98
+                let furthestPlace = nearestPlace * index
+                index = index + 1
+                }
+          let assignedClosureValue = closure(23,45.6)
+//        name(person,"Joe")
+//        print(person.name)
+//        name(person)
+//        let age = today(Date) - dateOfBirth(person)
+//        if age > 50
+//            {
+//            print("old")
+//            }
+//        let aName = name(person)
+        return("Joe Soap")
+        }
+
+//    method display(thing::<Born,Entity>) -> String
+  //      {
+    //    name + " age = " + age(thing) + " number " + thing.number
+      //  }
+//
+//    method age(born::Born) -> Integer raises
+//        {
+//        age = truncated(Date.today() - dateOfBirth)
+//        }
+//
+//    let person = <Born,Entity,Worker>
+//        {
+//        name = "Peter"
+//        number = "4203455166090"
+//        dateOfBirth = "12/12/1956"
+//        skills = (#developer,#architect,#designer)
+//        type = #developer
+ //       }
+
+    }
+

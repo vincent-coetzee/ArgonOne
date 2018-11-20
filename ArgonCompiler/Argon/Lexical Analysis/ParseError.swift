@@ -1,0 +1,111 @@
+//
+//  ArgonError.swift
+//  Argon
+//
+//  Created by Vincent Coetzee on 2018/09/14.
+//  Copyright © 2018 Vincent Coetzee. All rights reserved.
+//
+
+import Foundation
+
+public enum ParseError:Error
+    {
+    case invalidCharacter(String)
+    case libraryOrExecutableExpected
+    case identifierExpected
+    case leftBraceExpected
+    case leftBrocketExpected
+    case rightBraceExpected
+    case rightBrocketExpected
+    case leftParExpected
+    case rightParExpected
+    case rightBraExpected
+    case invalidSyntax
+    case exportsNotAllowedHere
+    case noEntryPointInLibrary
+    case traitsNameExpected
+    case traitsParentNameExpected
+    case notTraits(String)
+    case traitsSlotNameExpected
+    case conjunctionExpected
+    case typeExpected
+    case methodNameExpected
+    case invalidParameter
+    case parameterExpected
+    case parameterNameExpected
+    case parameterSpecializatonExpected
+    case badParameterSpecializaton
+    case parametersDoNotMatchGenericMethod
+    case noMatchingSpecializationOfGenericMethod
+    case slotTargetExpected
+    case invalidSetTarget
+    case accessorExpected
+    case slotNotFound
+    case expressionExpected
+    case invalidMethodReceiver
+    case temporaryNameExpected
+    case assignmentExpected
+    case methodPatternExpected
+    case methodReceiverExpected
+    case badReturnValue
+    case duplicateSlotName
+    case objectReferenceExpected
+    case inExpected
+    case fromExpected
+    case byExpected
+    case toExpected
+    case numberExpected
+    case commaExpected
+    case invalidType(String)
+    case nameNotDefined(String)
+    case invalidTemplateVariable(String)
+    case equalsExpected
+    case traitsExpected
+    case typeTemplateNameExpected
+    case undefinedTypeTemplate
+    case traitsNotDefined(String)
+    case undefinedSymbol(String)
+    case methodExpected(String)
+    case storedValueExpected
+    case caseExpected
+    case colonExpected
+    case onlyOneOtherwise
+    case makeExpectsTraitsParameters
+    case invalidNumberOfParameters
+    case booleanExpressionExpected
+    case caseTypeDiffersFromSwitchType
+    case parametersCanNotBeLValues
+    case readOnlyValuesCanNotBeLValues
+    case assignExpected
+    case stopExpected
+    case instanceExpected
+    case slotExpected
+    case exportSymbolUndefined(String)
+    case entryPointExpected
+    case statementsAfterReturn
+    case typeMismatch
+    case madeAlreadyDefined
+    case canNotAssignValueTypeToSlotType(String,String)
+    case templateTypeExpected
+    case nextMethodNotInMethod
+    case constantValueExpected
+    case parameterContravariantWithOtherInstanceOfGenericMethod(String,String)
+    case toTypeMustMatchFromType
+    case stepTypeMustMatchBoundTypes
+    case noSpecializationOfGenericMethodFits
+    case invalidReturnTypeSpecialization
+    case collectionExpected(String)
+    case invalidIndexType(String)
+    case slotCanNotBeAccessedHere
+    case expectedExpressionOfType(String)
+    case primitiveNumberExpected
+    case genericSlotInstanciationMissing
+    case invalidNumberOfArguments
+    case localDoesNotContainClosure
+    case closureOrClosureVariableExpected
+    case pathExpected
+    case directiveExpected
+    case invalidDirective
+    case parameterWithNameExpected(String)
+    case asExpected
+    }

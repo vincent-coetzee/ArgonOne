@@ -1,0 +1,62 @@
+
+
+Instruction Type
+
+double
+sourceIndirect
+targetIndirect
+sourceImmediate
+targetImmediate
+immediateIndirect
+targetOffset
+regregreg
+regreg
+reg
+
+Instruction Format
+
+RESERVED  TYPE  OPCODE   REG1    REG2    REG3   IMMEDIATE
+========  ====  =======  ======  ======  ======  ==============================
+  60        56       49      43      36      30                               0
+3210      9876  5432109  876543  210986  543210  987654321098765432109876543210
+XXXX      XXXX  XXXXXXX  XXXXXX  XXXXXX  XXXXXx  XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+LD [I+R1],R2
+LDHS
+LDHU
+LDQ
+LDB
+ST R1,[R2+I]
+STH
+STQ
+STB
+MOV I,R1
+BR I
+BRGTE R1,R2,R3+I
+ADD R1,R2,R3
+NOP
+DSP [R1+I] dispatch generic method at R1 + I
+LDS R1  Load base of data segment into R1
+LDS R1,R2 Load base of data segment into R2 and add contents of R1 to it
+
+PUSH R1
+PUSH I
+
+//
+// Load the base address of the data segment,
+// find the traits map, lookup traits, push
+// their pointers and make an instance
+//
+
+LDS 8,%0 // Move base of data segment + 8 into reg 0
+LDS [480],%1 // Address of name of traits
+PUSH %1 // push address
+MKE     // make an instance
+ST %0,[%FP + 8] // store the instance pointer in local 2
+LDS [488],%27
+ST %27,[%0 + 16]
+MOV #49644,%28
+MOV #27,%30
+INC %30
+INC [%30+10]
+BR -400
