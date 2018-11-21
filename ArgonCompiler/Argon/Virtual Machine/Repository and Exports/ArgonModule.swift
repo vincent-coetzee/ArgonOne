@@ -21,6 +21,7 @@ public enum ArgonModuleItemKind:Int
     case integer
     case float
     case boolean
+    case tree
     }
 
 public protocol ArgonModuleItem

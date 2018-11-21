@@ -50,7 +50,6 @@
 		BF1545A8217F7A98001D20B6 /* SourceTokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1545A7217F7A98001D20B6 /* SourceTokenizer.swift */; };
 		BF1545AA217F8929001D20B6 /* LineNumberRulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1545A9217F8929001D20B6 /* LineNumberRulerView.swift */; };
 		BF1545AC217F933F001D20B6 /* NSColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1545AB217F933F001D20B6 /* NSColor+Extensions.swift */; };
-		BF1ADA4721A1857C00FB38FE /* ArgonWordFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1ADA4621A1857C00FB38FE /* ArgonWordFile.swift */; };
 		BF1E1725217248100044913C /* ArgonRelationExpressionNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1E1724217248100044913C /* ArgonRelationExpressionNode.swift */; };
 		BF1E17272172B82B0044913C /* ArgonEntryPointNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1E17262172B82B0044913C /* ArgonEntryPointNode.swift */; };
 		BF1EE01B218A132C00F36C77 /* VMRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EE01A218A132C00F36C77 /* VMRegister.swift */; };
@@ -109,6 +108,11 @@
 		BF541FF1214829DC00961D52 /* ArgonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF541FF0214829DC00961D52 /* ArgonTests.swift */; };
 		BF541FFC214829FF00961D52 /* Agent.argon in Resources */ = {isa = PBXBuildFile; fileRef = BF541FFB214829FF00961D52 /* Agent.argon */; };
 		BF54E3C0216A616B00F614DE /* ArgonTraitsMethodNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF54E3BF216A616B00F614DE /* ArgonTraitsMethodNode.swift */; };
+		BF5F8D0D21A5C23A003D9D60 /* SymbolTreePointerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F8D0C21A5C23A003D9D60 /* SymbolTreePointerWrapper.swift */; };
+		BF5F8D0F21A5C30B003D9D60 /* ArgonTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F8D0E21A5C30B003D9D60 /* ArgonTree.swift */; };
+		BF5F8D1321A5EE2C003D9D60 /* ArgonHandlerStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F8D1221A5EE2C003D9D60 /* ArgonHandlerStatementNode.swift */; };
+		BF5F8D1521A5EE3F003D9D60 /* ArgonSignalStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F8D1421A5EE3F003D9D60 /* ArgonSignalStatementNode.swift */; };
+		BF5F8D1721A5EE53003D9D60 /* ArgonResumeStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5F8D1621A5EE53003D9D60 /* ArgonResumeStatementNode.swift */; };
 		BF73734A2172C19F000CA044 /* ArgonModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7373492172C19F000CA044 /* ArgonModule.swift */; };
 		BF73734C2172C27D000CA044 /* ArgonImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73734B2172C27D000CA044 /* ArgonImport.swift */; };
 		BF73734E2172C29D000CA044 /* ArgonLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF73734D2172C29D000CA044 /* ArgonLibrary.swift */; };
@@ -302,7 +306,6 @@
 		BF1545A7217F7A98001D20B6 /* SourceTokenizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceTokenizer.swift; sourceTree = "<group>"; };
 		BF1545A9217F8929001D20B6 /* LineNumberRulerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineNumberRulerView.swift; sourceTree = "<group>"; };
 		BF1545AB217F933F001D20B6 /* NSColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSColor+Extensions.swift"; sourceTree = "<group>"; };
-		BF1ADA4621A1857C00FB38FE /* ArgonWordFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonWordFile.swift; sourceTree = "<group>"; };
 		BF1E1724217248100044913C /* ArgonRelationExpressionNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonRelationExpressionNode.swift; sourceTree = "<group>"; };
 		BF1E17262172B82B0044913C /* ArgonEntryPointNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonEntryPointNode.swift; sourceTree = "<group>"; };
 		BF1EE01A218A132C00F36C77 /* VMRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMRegister.swift; sourceTree = "<group>"; };
@@ -367,6 +370,11 @@
 		BF541FF2214829DC00961D52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BF541FFB214829FF00961D52 /* Agent.argon */ = {isa = PBXFileReference; lastKnownFileType = text; path = Agent.argon; sourceTree = "<group>"; };
 		BF54E3BF216A616B00F614DE /* ArgonTraitsMethodNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonTraitsMethodNode.swift; sourceTree = "<group>"; };
+		BF5F8D0C21A5C23A003D9D60 /* SymbolTreePointerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolTreePointerWrapper.swift; sourceTree = "<group>"; };
+		BF5F8D0E21A5C30B003D9D60 /* ArgonTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonTree.swift; sourceTree = "<group>"; };
+		BF5F8D1221A5EE2C003D9D60 /* ArgonHandlerStatementNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonHandlerStatementNode.swift; sourceTree = "<group>"; };
+		BF5F8D1421A5EE3F003D9D60 /* ArgonSignalStatementNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonSignalStatementNode.swift; sourceTree = "<group>"; };
+		BF5F8D1621A5EE53003D9D60 /* ArgonResumeStatementNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonResumeStatementNode.swift; sourceTree = "<group>"; };
 		BF7373492172C19F000CA044 /* ArgonModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonModule.swift; sourceTree = "<group>"; };
 		BF73734B2172C27D000CA044 /* ArgonImport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonImport.swift; sourceTree = "<group>"; };
 		BF73734D2172C29D000CA044 /* ArgonLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonLibrary.swift; sourceTree = "<group>"; };
@@ -612,7 +620,7 @@
 				BFA1AF7A2199FD6D0042156C /* ArgonString.swift */,
 				BFA1AF7C219A008E0042156C /* ArgonSymbol.swift */,
 				BF1FBE89218BCA80000AAD5B /* ArgonTraits.swift */,
-				BF1ADA4621A1857C00FB38FE /* ArgonWordFile.swift */,
+				BF5F8D0E21A5C30B003D9D60 /* ArgonTree.swift */,
 			);
 			path = "Repository and Exports";
 			sourceTree = "<group>";
@@ -734,6 +742,7 @@
 				BF8FA530215686FE0077D370 /* StringPointerWrapper.swift */,
 				BF8FA52C215686C70077D370 /* TraitsPointerWrapper.swift */,
 				BF8FA52E215686E50077D370 /* VectorPointer.swift */,
+				BF5F8D0C21A5C23A003D9D60 /* SymbolTreePointerWrapper.swift */,
 			);
 			path = "Object Pointers";
 			sourceTree = "<group>";
@@ -800,11 +809,14 @@
 				BF29839C215BCB1C0060DEDE /* ArgonClosureNode.swift */,
 				BF14E297216EA55300B01EAE /* ArgonElseClauseNode.swift */,
 				BF50FB64215DE1B30018E7AF /* ArgonForStatementNode.swift */,
+				BF5F8D1221A5EE2C003D9D60 /* ArgonHandlerStatementNode.swift */,
 				BF29839E215BCE6F0060DEDE /* ArgonIfStatementNode.swift */,
 				BFF16A7021674F0600278734 /* ArgonInductionVariableNode.swift */,
+				BF5F8D1621A5EE53003D9D60 /* ArgonResumeStatementNode.swift */,
 				BFF767A1214E728D004FAA65 /* ArgonReturnStatementNode.swift */,
-				BF97046D21602B7900710C18 /* ArgonSwitchStatementNode.swift */,
+				BF5F8D1421A5EE3F003D9D60 /* ArgonSignalStatementNode.swift */,
 				BFCCD64721937E3000B5EAD8 /* ArgonSpawnStatementNode.swift */,
+				BF97046D21602B7900710C18 /* ArgonSwitchStatementNode.swift */,
 				BFA1B546214D98040085CDCF /* ArgonWhileStatementNode.swift */,
 				BF97CB692182598C0084B2E9 /* ArgonWithStatementNode.swift */,
 			);
@@ -1111,6 +1123,7 @@
 				BFF2706A216BB35B00CC9E0E /* ArgonClosureInvocationNode.swift in Sources */,
 				BF1545AA217F8929001D20B6 /* LineNumberRulerView.swift in Sources */,
 				BF14E294216E6F3F00B01EAE /* AllocationBlockPointerWrapper.swift in Sources */,
+				BF5F8D1321A5EE2C003D9D60 /* ArgonHandlerStatementNode.swift in Sources */,
 				BF3F7068218C89A40002052B /* ArgonCodeBlock.swift in Sources */,
 				BFA1B527214CB37D0085CDCF /* ArgonMethodNode.swift in Sources */,
 				BFA8E6282174D2E80054EB00 /* ArgonThisNode.swift in Sources */,
@@ -1170,7 +1183,6 @@
 				BF775E09217517BC007F5B0C /* ArgonNextMethodStatement.swift in Sources */,
 				BF8FA51321545B960077D370 /* ListViewCell.swift in Sources */,
 				BFDC6932218F339100B86775 /* ArgonClosureVariableNode.swift in Sources */,
-				BF1ADA4721A1857C00FB38FE /* ArgonWordFile.swift in Sources */,
 				BF1FBE8A218BCA80000AAD5B /* ArgonTraits.swift in Sources */,
 				BF1EE01D218A135F00F36C77 /* VMOperation.swift in Sources */,
 				BFA7C99B218F0AD1001C9640 /* ArgonLibraryFile.swift in Sources */,
@@ -1189,6 +1201,7 @@
 				BFF997902186345900F9F8CA /* Model.swift in Sources */,
 				BF8FA50F215458AB0077D370 /* ListView.swift in Sources */,
 				BF541FDC214829DB00961D52 /* AppDelegate.swift in Sources */,
+				BF5F8D1721A5EE53003D9D60 /* ArgonResumeStatementNode.swift in Sources */,
 				BF8628FC2184F35400347084 /* SectionView.swift in Sources */,
 				BFA3A384214931CC00D7BB04 /* Argon.swift in Sources */,
 				BF97CB6821823E2D0084B2E9 /* VMInstruction.swift in Sources */,
@@ -1306,6 +1319,7 @@
 				BF29839D215BCB1C0060DEDE /* ArgonClosureNode.swift in Sources */,
 				BF50C8F921827758000418F4 /* BrowserViewController.swift in Sources */,
 				BF030C3E217E9A9000BFEE59 /* ArgonVectorElementAssignmentNode.swift in Sources */,
+				BF5F8D1521A5EE3F003D9D60 /* ArgonSignalStatementNode.swift in Sources */,
 				BF3F7062218C5FEE0002052B /* ArgonGenericMethod.swift in Sources */,
 				BF0E3D19214C57A1004A402B /* ArgonParseScope.swift in Sources */,
 				BF8FA5182154975A0077D370 /* MemoryWindowController.swift in Sources */,
@@ -1313,10 +1327,12 @@
 				BF50FB65215DE1B30018E7AF /* ArgonForStatementNode.swift in Sources */,
 				BFDC6936218FA32D00B86775 /* ArgonPeepholeOptimizer.swift in Sources */,
 				BF50FB6F215ECF310018E7AF /* ArgonNamedNode.swift in Sources */,
+				BF5F8D0D21A5C23A003D9D60 /* SymbolTreePointerWrapper.swift in Sources */,
 				BFF9976D2185E36200F9F8CA /* CodingKey+Extensions.swift in Sources */,
 				BF3F7060218C543E0002052B /* ArgonValueLocation.swift in Sources */,
 				BF8FA51D2154F0CA0077D370 /* Timer.swift in Sources */,
 				BF73734A2172C19F000CA044 /* ArgonModule.swift in Sources */,
+				BF5F8D0F21A5C30B003D9D60 /* ArgonTree.swift in Sources */,
 				BFF997742185E36200F9F8CA /* PassthroughReference.swift in Sources */,
 				BF9A7134215A674F006439DB /* SharedMemoryManager.swift in Sources */,
 				BFF8006B21878657005A7E79 /* WidthAdjustableLabel.swift in Sources */,

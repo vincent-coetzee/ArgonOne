@@ -46,6 +46,9 @@ public enum ThreeAddressOperation
     case prim
     case spawn
     case clear
+    case handler
+    case signal
+    case resume
     
     public var isJump:Bool
         {

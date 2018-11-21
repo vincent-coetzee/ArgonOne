@@ -35,7 +35,6 @@ public enum Keyword:String,CaseIterable,Equatable,Codable
     case `for`
     case `while`
     case character
-    case raises
     case `import`
     case entrypoint
     case `return`
@@ -59,6 +58,9 @@ public enum Keyword:String,CaseIterable,Equatable,Codable
     case system
     case `static`
     case macro
+    case handler
+    case signal
+    case resume
     }
 
 public struct Token:CustomStringConvertible,Codable
@@ -263,6 +265,21 @@ public struct Token:CustomStringConvertible,Codable
         return(type == .keyword && keyword == .spawn)
         }
     
+    public var isHandler:Bool
+        {
+        return(type == .keyword && keyword == .handler)
+        }
+    
+    public var isResume:Bool
+        {
+        return(type == .keyword && keyword == .resume)
+        }
+    
+    public var isSignal:Bool
+        {
+        return(type == .keyword && keyword == .signal)
+        }
+    
     public var isBoolean:Bool
         {
         return(type == .symbol && (symbol == "#true" || symbol == "#false"))
@@ -418,20 +435,10 @@ public struct Token:CustomStringConvertible,Codable
         return(type == .doubleColon)
         }
     
-    public var isRaises:Bool
-        {
-        return(type == .keyword && keyword == .raises)
-        }
-    
     public var isIf:Bool
         {
         return(type == .keyword && keyword == .if)
         }
-    
-//    public var isSet:Bool
-//        {
-//        return(type == .keyword && keyword == .set)
-//        }
     
     public var isWhile:Bool
         {

@@ -157,6 +157,16 @@ public class ThreeAddressInstruction
         self.stackFrameNumber = stackFrameNumber
         }
     
+    init(operation:ThreeAddressOperation,operand1:ThreeAddress?,operand2:ThreeAddress?,comment:String? = nil,stackFrameNumber:Int? = nil)
+        {
+        self.lhs = nil
+        self.operand1 = operand1
+        self.operand2 = operand2
+        self.operation = operation
+        self.comment = comment
+        self.stackFrameNumber = stackFrameNumber
+        }
+    
     init(operation:ThreeAddressOperation,target:String,comment:String? = nil,stackFrameNumber:Int? = nil)
         {
         self.lhs = nil
@@ -277,11 +287,11 @@ public class ThreeAddressInstruction
             {
             print("\(lhs!.name) = \(operand1!.name)",terminator:"")
             }
-        else if operation == .param || operation == .return || operation == .enter || operation == .leave || operation == .prim || operation == .spawn || operation == .clear
+        else if operation == .param || operation == .return || operation == .enter || operation == .leave || operation == .prim || operation == .spawn || operation == .clear || operation == .handler || operation == .signal
             {
             print("\(operation) \(operand1!.name)",terminator:"")
             }
-        else if operation == .halt || operation == .nop || operation == .ret
+        else if operation == .halt || operation == .nop || operation == .ret || operation == .resume
             {
             print("\(operation)",terminator:"")
             }

@@ -53,7 +53,7 @@ typedef struct _VMThreadMemory
     // ST = 4
     // LP = 5
     // GP0 = 6
-    Word registers[37];
+    Word registers[38];
     Word localSpaceCapacity; // The amount of space available for thread local and stack
     void* localSpace; // The space allocated for thread local storage and stack
     } VMThreadMemory;
@@ -73,6 +73,9 @@ long long threadRegisterCount(VMThreadMemory* context);
 //
 // Working with Tags
 //
+_Bool isTaggedPointer(void* pointer);
+_Bool isTaggedHandler(void* pointer);
+void* _Nonnull taggedHandler(void* pointer);
 _Bool isTaggedWord(Word word);
 void* _Nonnull untaggedPointer(void* pointer);
 Word untaggedWord(Word word);
@@ -89,8 +92,6 @@ Word taggedBoolean(_Bool value);
 Word tagOfWord(Word);
 Word tagOfPointer(void* pointer);
 int wordTag(Word word);
-Word taggedRelocationOffset(Word value);
-Word untaggedRelocationOffset(Word value);
 void* _Nonnull taggedInstancePointer(void* value);
 void* _Nonnull taggedClosurePointer(void* pointer);
 void* _Nonnull taggedVectorPointer(void* pointer);
@@ -160,7 +161,6 @@ _Nonnull Space* allocateSpaceWithCapacity(int capacity);
 //
 // Pointer logic
 //
-_Bool isTaggedPointer(void* pointer);
 void setPointerAtIndexAtPointer(void* writtenPointer,int index,void* pointer);
 void* _Nonnull pointerAtIndexAtPointer(int index,void* pointer);
 void* _Nonnull decrementPointerBy(void* pointer,int size);

@@ -163,6 +163,12 @@ public class ThreeAddressCodeGenerator
             }
         }
     
+    public func encodeHandler(_ statement:ThreeAddressInstruction) throws
+        {
+        let operand2 = statement.operand2 as! Argon
+        instructions.append((VMInstruction.PUSH(address: 0)).wantsRelocation(of: {closure.asArgonClosure()}))
+        }
+    
     public func encodeClear(_ statement:ThreeAddressInstruction) throws
         {
         var parameterCount = statement.operand1 as! Int

@@ -26,6 +26,7 @@ public class ArgonMethodNode:ArgonExpressionNode,ArgonParseScope,ThreeAddress,Ar
     public var isPrimitive = false
     public var primitiveNumber:Int = 0
     public private(set) var id:Int
+    private var handlers:[ArgonHandlerStatementNode] = []
     
     public var lastLHS: ThreeAddress
         {
@@ -146,6 +147,11 @@ public class ArgonMethodNode:ArgonExpressionNode,ArgonParseScope,ThreeAddress,Ar
         self.name = ArgonName(name)
         id = Argon.nextCounter
         super.init()
+        }
+    
+    public func add(handler:ArgonHandlerStatementNode)
+        {
+        handlers.append(handler)
         }
     
     public override func threeAddress(pass:ThreeAddressPass) throws

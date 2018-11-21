@@ -642,7 +642,24 @@ public class VMThread:AbstractModel
     
     private func primitivePrint(_ pointer:Pointer)
         {
-
+        if isTaggedPointer(pointer)
+            {
+            let tag = tagOfPointer(pointer)
+            switch(tag)
+                {
+                case Argon.kTagString:
+                    print(StringPointerWrapper(pointer).string)
+                case Argon.kTagSymbol:
+                    print(StringPointerWrapper(pointer).string)
+                case Argon.kTagTraits:
+                    let wrapper = TraitsPointerWrapper(pointer)
+                    let name = wrapper.name
+                    let slotCount = wrapper.slotCount
+                    print("Traits(\(name),\(slotCount) slots")
+                default:
+                    print("Pointer(\(pointerAsWord(untaggedPointer(pointer)))")
+                }
+            }
         }
     
     @inline(__always)

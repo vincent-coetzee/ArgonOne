@@ -22,6 +22,6 @@ extension String
     
     public func asArgonSymbol() -> ArgonSymbol
         {
-        return(ArgonSymbol(string:self))
+        return(ArgonSymbol(symbol:self))
         }
     }

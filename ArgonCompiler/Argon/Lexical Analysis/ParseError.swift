@@ -108,4 +108,5 @@ public enum ParseError:Error
     case invalidDirective
     case parameterWithNameExpected(String)
     case asExpected
+    case symbolExpected
     }

@@ -41,11 +41,11 @@ int sharedMemoryOpen(const char* name)
 #define kBitsBoolean (((Word)3) << ((Word)59))
 #define kBitsInstance (((Word)4) << ((Word)59))
 #define kBitsDate (((Word)5) << ((Word)59))
-#define kBitsVector (((Word)6) << ((Word)59))
-#define kBitsMap (((Word)7) << ((Word)59))
-#define kBitsCodeBlock (((Word)8) << ((Word)59))
-#define kBitsBlock (((Word)9) << ((Word)59))
-#define kBitsRelocation (((Word)10) << ((Word)59))
+#define kBitsHandler (((Word)6) << ((Word)59))
+#define kBitsVector (((Word)7) << ((Word)59))
+#define kBitsMap (((Word)8) << ((Word)59))
+#define kBitsCodeBlock (((Word)9) << ((Word)59))
+#define kBitsBlock (((Word)10) << ((Word)59))
 #define kBitsMethod (((Word)11) << ((Word)59))
 #define kBitsClosure (((Word)12) << ((Word)59))
 #define kBitsTraits (((Word)13) << ((Word)59))
@@ -61,11 +61,11 @@ int sharedMemoryOpen(const char* name)
 #define kItemBoolean ((Word)3)
 #define kItemInstance ((Word)4)
 #define kItemDate ((Word)5)
-#define kItemVector ((Word)6)
-#define kItemMap ((Word)7)
-#define kItemCodeBlock ((Word)8)
-#define kItemBlock ((Word)9)
-#define kItemError ((Word)10)
+#define kItemHandler ((Word)6)
+#define kItemVector ((Word)7)
+#define kItemMap ((Word)8)
+#define kItemCodeBlock ((Word)9)
+#define kItemBlock ((Word)10)
 #define kItemMethod ((Word)11)
 #define kItemClosure ((Word)12)
 #define kItemTraits ((Word)13)
@@ -129,6 +129,8 @@ int sharedMemoryOpen(const char* name)
 #define kGP0 6
 #define kThreadRegisterCount (37)
 
+#define kInitialTaggedPointerListCount (20000)
+
 #define _WordAsPointer(w) (((void*)w))
 #define _PointerAsWord(p) (((Word)p))
 
@@ -144,7 +146,7 @@ VMThreadMemory* _Nonnull allocateThreadMemoryWithCapacity(Word capacity)
     memset(&context->registers,0,sizeof(context->registers));
     context->localSpaceCapacity = capacity;
     context->localSpace = malloc(capacity);
-    context->registers[kST] = _PointerAsWord(context->localSpace + capacity - sizeof(Word));
+    context->registers[kST] = _PointerAsWord(context->localSpace + capacity - kWordSize);
     context->registers[kSP] = context->registers[kST];
     context->registers[kLP] = _PointerAsWord(context->localSpace);
     return(context);
@@ -211,14 +213,16 @@ void pushPointer(VMThreadMemory* context,void* word)
 
 Word popWord(VMThreadMemory* context)
     {
-    context->registers[kSP] -= kWordSize;
-    return(*((Word*)context->registers[kSP]));
+    Word value = *((WordPointer)context->registers[kSP]);
+    context->registers[kSP] += kWordSize;
+    return(value);
     }
 
 void* _Nonnull popPointer(VMThreadMemory* context)
     {
-    context->registers[kSP] -= kWordSize;
-    return(*((WordPointer*)context->registers[kSP]));
+    WordPointer value = *((WordPointer*)context->registers[kSP]);
+    context->registers[kSP] += kWordSize;
+    return(value);
     }
 
 long stackDepth(VMThreadMemory* context)
@@ -273,16 +277,6 @@ Word untaggedDate(Word value)
 Word taggedDate(Word value)
     {
     return(value | kBitsDate);
-    }
-
-Word taggedRelocationOffset(Word value)
-    {
-    return(value | kBitsRelocation);
-    }
-
-Word untaggedRelocationOffset(Word value)
-    {
-    return(value & ~kBitsRelocation);
     }
 
 float untaggedFloat(Word value)
@@ -643,6 +637,19 @@ _Bool isTaggedPointer(void* pointer)
     {
     Word word = (Word)pointer;
     return(((word & kBitsMask) > kBitsDate));
+    }
+
+_Bool isTaggedHandler(void* pointer)
+    {
+    Word word = (Word)pointer;
+    return((word & kBitsHandler) == kBitsHandler);
+    }
+
+void* _Nonnull taggedHandler(void* pointer)
+    {
+    Word word = (Word)pointer;
+    word |= kBitsHandler;
+    return((void*)word);
     }
 
 _Bool isTaggedWord(Word word)

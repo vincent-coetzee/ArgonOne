@@ -30,6 +30,11 @@ public class ArgonLocalVariableNode:ArgonVariableNode,ArgonStackBasedValue
         super.init(name:name,traits:traits)
         }
     
+    public override init(name:ArgonName,traits:ArgonTraitsNode)
+        {
+        super.init(name:name,traits:traits)
+        }
+    
     public func asArgonLocalVariable() -> ArgonLocalVariable
         {
         let new = ArgonLocalVariable(fullName: self.name.string)

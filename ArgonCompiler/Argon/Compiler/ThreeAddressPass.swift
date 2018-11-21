@@ -48,6 +48,7 @@ public class ThreeAddressPass
         return(currentContainer!.lastLHS)
         }
     
+    @discardableResult
     public func add(_ instruction:ThreeAddressInstruction) -> Int
         {
         if pendingLabel != nil

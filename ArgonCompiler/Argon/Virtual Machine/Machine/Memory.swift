@@ -347,6 +347,30 @@ public class Memory
         return(taggedVectorPointer(address))
         }
     
+    public func allocate(treeWithCapacity capacity:Int,lookupTraits:Bool = false) throws -> Pointer
+        {
+        pthread_mutex_lock(memoryMutexPointer)
+        defer
+            {
+            pthread_mutex_unlock(memoryMutexPointer)
+            }
+        let maximumSize = (capacity * 3 / 2)*3
+        let slotCount = maximumSize + SymbolTreePointerWrapper.kFixedSlotCount
+        guard let address = SharedMemory.allocateInstance(toSpace,Int32(slotCount),Int32(Argon.kTypeSymbolTree)) else
+            {
+            throw(VirtualMachineSignal.outOfMemory)
+            }
+        if lookupTraits
+            {
+            setPointerAtIndexAtPointer(try self.traits(atName:"Argon::Vector")!, Int32(VectorPointer.kTraitsIndex), address)
+            }
+        setWordAtIndexAtPointer(0, Int32(VectorPointer.kCountIndex), address)
+        setWordAtIndexAtPointer(Word(maximumSize), Int32(VectorPointer.kCapacityIndex), address)
+        let allocationBlock = try self.allocate(allocationBlockWithSlotCount:maximumSize,lookupTraits:lookupTraits)
+        setPointerAtIndexAtPointer(allocationBlock, Int32(VectorPointer.kBlockPointerIndex), address)
+        return(taggedInstancePointer(address))
+        }
+    
     private func initBaseMethods() throws
         {
         let pointer = try self.allocate(mapWithFlags: 0)

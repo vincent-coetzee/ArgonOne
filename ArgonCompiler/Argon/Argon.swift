@@ -48,6 +48,8 @@ public struct Argon
     public static let kTypeGenericMethod:Int = 11
     public static let kTypeCodeBlock:Int = 12
     public static let kTypeAllocationBlock:Int = 13
+    public static let kTypeHandler:Int = 14
+    public static let kTypeSymbolTree:Int = 15
     
     public static let kDefaultMemorySegmentSize = 1024 * 1024 * 256 // 128 MB
     public static let kDefaultMemoryEdenSize = 1024 * 1024 * 64 // 16 MB
@@ -67,7 +69,7 @@ public struct Argon
     public static let kTagMap:UInt64 = UInt64(7) << UInt64(59)
     public static let kTagCodeBlock:UInt64 = UInt64(8) << UInt64(59)
     public static let kTagBlock:UInt64 = UInt64(9) << UInt64(59)
-    public static let kTagError:UInt64 = UInt64(10) << UInt64(59)
+    public static let kTagHandler:UInt64 = UInt64(10) << UInt64(59)
     public static let kTagMethod:UInt64 = UInt64(11) << UInt64(59)
     public static let kTagClosure:UInt64 = UInt64(12) << UInt64(59)
     public static let kTagTraits:UInt64 = UInt64(13) << UInt64(59)

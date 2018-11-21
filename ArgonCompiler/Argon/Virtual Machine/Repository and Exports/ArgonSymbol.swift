@@ -10,4 +10,13 @@ import Foundation
 
 public class ArgonSymbol:ArgonString
     {
-    }
+    public init(symbol:String)
+        {
+        super.init(string:symbol)
+        }
+    
+    public required init?(coder aDecoder: NSCoder)
+        {
+        super.init(coder:aDecoder)
+        }
+}

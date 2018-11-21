@@ -909,10 +909,6 @@ public class ArgonParser
             {
             return(try parseWhileStatement())
             }
-        else if token.isRaises
-            {
-            return(try parseRaisesStatement())
-            }
         else if token.isFor
             {
             return(try parseForLoopStatement())
@@ -929,6 +925,14 @@ public class ArgonParser
             {
             return(try parseNextMethodStatement())
             }
+        else if token.isResume
+            {
+            return(try parseResumeStatement())
+            }
+        else if token.isSignal
+            {
+            return(try parseSignalStatement())
+            }
         else if token.isSpawn
             {
             return(try parseSpawnStatement())
@@ -938,6 +942,103 @@ public class ArgonParser
             return(try parseIdentifierBasedStatement())
             }
         throw(ParseError.invalidSyntax)
+        }
+    
+    private func parseResumeStatement() throws -> ArgonResumeStatementNode
+        {
+        try self.nextToken()
+        if !token.isLeftPar
+            {
+            throw(ParseError.leftParExpected)
+            }
+        try self.nextToken()
+        if !token.isRightPar
+            {
+            throw(ParseError.rightParExpected)
+            }
+        try self.nextToken()
+        return(ArgonResumeStatementNode())
+        }
+    
+    private func parseSignalStatement() throws -> ArgonSignalStatementNode
+        {
+        try self.nextToken()
+        if !token.isLeftPar
+            {
+            throw(ParseError.leftParExpected)
+            }
+        var symbol:ArgonExpressionNode?
+        try self.parseParenthesis
+            {
+            symbol = try self.parseExpression()
+            if symbol!.traits != ArgonStandardsNode.shared.symbolTraits
+                {
+                throw(ParseError.symbolExpected)
+                }
+            }
+        return(ArgonSignalStatementNode(symbol:symbol!))
+        }
+    
+    private func parseHandlerStatement() throws -> ArgonHandlerStatementNode
+        {
+        let lineTrace = ArgonLineTrace(line: self.token.location.lineNumber,start:self.token.location.lineStart,end:self.token.location.lineStop)
+        try self.nextToken()
+        var conditionName:ArgonName = ArgonName()
+        var conditionSymbol:ArgonExpressionNode?
+        let location = token.location
+        var node:ArgonHandlerStatementNode?
+        try self.parseParenthesis
+            {
+            if !token.isIdentifier
+                {
+                throw(ParseError.identifierExpected)
+                }
+            conditionName = ArgonName(token.identifier!)
+            let conditionNode = ArgonInductionVariableNode(name: conditionName,traits:ArgonStandardsNode.shared.conditionTraits)
+            conditionNode.sourceLocation = location
+            ArgonStackFrame.current()?.add(variable: conditionNode)
+            conditionNode.symbolTableEntry = symbolTable.add(variable: conditionNode,at: scope.scopeName() + conditionNode.name)
+            conditionNode.scopedName = ArgonName(scope.enclosingModule().moduleName.string,conditionName.string)
+            try self.nextToken()
+            if !token.isConjunction
+                {
+                throw(ParseError.conjunctionExpected)
+                }
+            try self.nextToken()
+            conditionSymbol = try self.parseExpression()
+            if conditionSymbol!.traits != ArgonStandardsNode.shared.symbolTraits
+                {
+                throw(ParseError.symbolExpected)
+                }
+            node = ArgonHandlerStatementNode(containingScope:scope,conditionNode:conditionNode,conditionSymbol:conditionSymbol!)
+            scope.enclosingMethod()?.add(handler:node!)
+            }
+        if !token.isLeftBrace
+            {
+            throw(ParseError.leftBraceExpected)
+            }
+        node?.lineTrace = lineTrace
+        scope = node
+        let frame = ArgonStackFrame.push(scope:node!)
+        frame.name = "HANDLER LINE @ \(token.location.lineNumber)"
+        defer
+            {
+            ArgonStackFrame.pop()
+            }
+        node!.enclosingStackFrame = frame
+        defer
+            {
+            scope = node!.containingScope
+            }
+        try self.parseBraces
+            {
+            while !token.isRightBrace
+                {
+                let statement = try self.parseStatement()
+                node!.add(statement: statement)
+                }
+            }
+        return(node!)
         }
     
     private func parseSpawnStatement() throws -> ArgonSpawnStatementNode
@@ -2077,19 +2178,19 @@ public class ArgonParser
         node!.symbolTableEntry = symbolTable.add(constant: node!, at: scope.scopeName() + node!.name)
         }
     
-    private func parseLetStatement() throws -> ArgonVariableInitializationStatementNode
+    private func parseLetStatement() throws -> ArgonMethodStatementNode
         {
         try self.nextToken()
         let lineTrace = ArgonLineTrace(line: self.token.location.lineNumber,start:self.token.location.lineStart,end:self.token.location.lineStop)
+        if token.isHandler
+            {
+            return(try self.parseHandlerStatement())
+            }
         if !token.isIdentifier
             {
             throw(ParseError.temporaryNameExpected)
             }
         let nameOfVar = token.identifier!
-        if nameOfVar == "aClosure"
-            {
-            print()
-            }
         let location = token.location
         try self.nextToken()
         var type:ArgonType? = nil
@@ -2302,11 +2403,6 @@ public class ArgonParser
             }
         try self.nextToken()
         return(container)
-        }
-    
-    private func parseRaisesStatement() throws -> ArgonMethodStatementNode
-        {
-        return(ArgonMethodStatementNode())
         }
     
     private func parseImport() throws

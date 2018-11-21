@@ -15,7 +15,7 @@ public class ArgonTests
         {
         do
             {
-            testRelocationTags()
+            testHandlerTags()
             try testDataSegment()
             testVMInstructions()
             testInvokingClosure()
@@ -26,12 +26,12 @@ public class ArgonTests
             }
         }
     
-    public static func testRelocationTags()
+    public static func testHandlerTags()
         {
-        let offset:Word = 30677897
-        let tagged = taggedRelocationOffset(offset)
-        let untagged = untaggedRelocationOffset(tagged)
-        assert(offset == untagged)
+        let pointer = UnsafeMutableRawPointer.allocate(byteCount: 20,alignment: 1)
+        let tagged = taggedHandler(pointer)
+        let untagged = untaggedPointer(tagged)
+        assert(pointer == untagged)
         }
     
     public static func testDataSegment() throws

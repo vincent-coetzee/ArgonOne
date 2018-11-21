@@ -200,7 +200,7 @@ class ViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource
                 {
                 let delta = max(bp,stackElement) - min(stackElement,bp)
                 let number = String(format: "%04d",delta)
-                line = "[BP-\(number)] " + line
+                line = "[BP+\(number)] " + line
                 }
             else if stackElement == bp && bp > 0
                 {
@@ -210,7 +210,7 @@ class ViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource
                 {
                 let delta = max(bp,stackElement) - min(stackElement,bp)
                 let number = String(format: "%04d",delta)
-                line = "[BP+\(number)] " + line
+                line = "[BP-\(number)] " + line
                 }
             words.append(line)
             stackElement -= Word(ArgonWordSize)

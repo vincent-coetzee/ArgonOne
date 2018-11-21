@@ -41,11 +41,11 @@ int sharedMemoryOpen(const char* name)
 #define kBitsBoolean (((Word)3) << ((Word)59))
 #define kBitsInstance (((Word)4) << ((Word)59))
 #define kBitsDate (((Word)5) << ((Word)59))
-#define kBitsVector (((Word)6) << ((Word)59))
-#define kBitsMap (((Word)7) << ((Word)59))
-#define kBitsCodeBlock (((Word)8) << ((Word)59))
-#define kBitsBlock (((Word)9) << ((Word)59))
-#define kBitsRelocation (((Word)10) << ((Word)59))
+#define kBitsHandler (((Word)6) << ((Word)59))
+#define kBitsVector (((Word)7) << ((Word)59))
+#define kBitsMap (((Word)8) << ((Word)59))
+#define kBitsCodeBlock (((Word)9) << ((Word)59))
+#define kBitsBlock (((Word)10) << ((Word)59))
 #define kBitsMethod (((Word)11) << ((Word)59))
 #define kBitsClosure (((Word)12) << ((Word)59))
 #define kBitsTraits (((Word)13) << ((Word)59))
@@ -61,11 +61,11 @@ int sharedMemoryOpen(const char* name)
 #define kItemBoolean ((Word)3)
 #define kItemInstance ((Word)4)
 #define kItemDate ((Word)5)
-#define kItemVector ((Word)6)
-#define kItemMap ((Word)7)
-#define kItemCodeBlock ((Word)8)
-#define kItemBlock ((Word)9)
-#define kItemError ((Word)10)
+#define kItemHandler ((Word)6)
+#define kItemVector ((Word)7)
+#define kItemMap ((Word)8)
+#define kItemCodeBlock ((Word)9)
+#define kItemBlock ((Word)10)
 #define kItemMethod ((Word)11)
 #define kItemClosure ((Word)12)
 #define kItemTraits ((Word)13)
@@ -277,16 +277,6 @@ Word untaggedDate(Word value)
 Word taggedDate(Word value)
     {
     return(value | kBitsDate);
-    }
-
-Word taggedRelocationOffset(Word value)
-    {
-    return(value | kBitsRelocation);
-    }
-
-Word untaggedRelocationOffset(Word value)
-    {
-    return(value & ~kBitsRelocation);
     }
 
 float untaggedFloat(Word value)
@@ -647,6 +637,19 @@ _Bool isTaggedPointer(void* pointer)
     {
     Word word = (Word)pointer;
     return(((word & kBitsMask) > kBitsDate));
+    }
+
+_Bool isTaggedHandler(void* pointer)
+    {
+    Word word = (Word)pointer;
+    return((word & kBitsHandler) == kBitsHandler);
+    }
+
+void* _Nonnull taggedHandler(void* pointer)
+    {
+    Word word = (Word)pointer;
+    word |= kBitsHandler;
+    return((void*)word);
     }
 
 _Bool isTaggedWord(Word word)

@@ -112,6 +112,15 @@ executable GoFishing
     entrypoint()
         {
         //
+        // Put a notification handler in place, this remains in place until the
+        // function goes out of scope. Any handle only remains in place until the
+        // function that declares it goes out of scope.
+        let handler(condition::#invalidNumber)
+            {
+            print(value::"Handler 1 activated")
+            print(value::condition)
+            }
+        //
         // Use let to declare locally scoped variables. If you want or need the
         // behavior of a global, declare a local outside of the scope of entrypoint
         // it works out to the same thing.
@@ -143,6 +152,10 @@ executable GoFishing
                 {
                 vector[index] = index
                 index = index + 1
+                }
+            if index >= 47
+                {
+                signal(#invalidNumber)
                 }
             // Capture some things
             let closureSymbol = aSymbol
