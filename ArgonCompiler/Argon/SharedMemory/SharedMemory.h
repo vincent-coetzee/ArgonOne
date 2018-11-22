@@ -101,7 +101,9 @@ void* _Nonnull taggedMethodPointer(void* pointer);
 void* _Nonnull taggedMapPointer(void* pointer);
 void* _Nonnull taggedDatePointer(void* pointer);
 void* _Nonnull taggedStringPointer(void* pointer);
+void* _Nonnull taggedSymbolPointer(void* pointer);
 void* _Nonnull taggedTraitsPointer(void* pointer);
+void* _Nonnull taggedHandlerPointer(void* pointer);
 void* _Nonnull pointerTaggedWithTag(void* pointer,Word tag);
 //
 // Working with the stack

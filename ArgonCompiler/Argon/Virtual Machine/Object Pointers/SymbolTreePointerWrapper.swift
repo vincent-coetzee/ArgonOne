@@ -22,31 +22,31 @@ public class SymbolTreePointerWrapper:InstancePointerWrapper
         var treePointer = wordAsPointer(0)
         var wasLoaded = false
         
-        init(treePointer:Pointer,index:Int32,symbolPointer:Pointer)
+        init(treePointer:Pointer,nodeIndex:Int32,symbolPointer:Pointer)
             {
-            self.nodeIndex = index
+            self.nodeIndex = nodeIndex
             self.treePointer = treePointer
             self.symbolPointer = symbolPointer
             }
         
-        init(treePointer:Pointer,index:Int32)
+        init(treePointer:Pointer,nodeIndex:Int32)
             {
-            self.nodeIndex = index
+            self.nodeIndex = nodeIndex
             self.treePointer = treePointer
-            symbolPointer = pointerAtIndexAtPointer(index,treePointer)
-            leftIndex = Int32(wordAtIndexAtPointer(index+1,treePointer))
-            rightIndex = Int32(wordAtIndexAtPointer(index+2,treePointer))
+            symbolPointer = pointerAtIndexAtPointer(nodeIndex,treePointer)
+            leftIndex = Int32(wordAtIndexAtPointer(nodeIndex+1,treePointer))
+            rightIndex = Int32(wordAtIndexAtPointer(nodeIndex+2,treePointer))
             }
         
         func find(symbol:String) -> Pointer?
             {
-            let localString = StringPointerWrapper(symbolPointer).string
-            if  localString == symbol
+            let localSymbol = SymbolPointerWrapper(symbolPointer).symbol
+            if  localSymbol == symbol
                 {
                 return(symbolPointer)
                 }
             self.loadIfNeeded()
-            if symbol < localString
+            if symbol < localSymbol
                 {
                 return(left?.find(symbol:symbol))
                 }
@@ -68,8 +68,10 @@ public class SymbolTreePointerWrapper:InstancePointerWrapper
                 {
                 if left == nil
                     {
-                    let newPointer = try memory.allocate(string: symbol)
-                    left = Node(treePointer:treePointer,index:index,symbolPointer:newPointer)
+                    let newPointer = try memory.allocate(symbol: symbol)
+                    left = Node(treePointer:treePointer,nodeIndex:index,symbolPointer:newPointer)
+                    print("Saving \(symbol) on left at \(index)")
+                    leftIndex = index
                     self.write()
                     left!.write()
                     return(newPointer)
@@ -83,8 +85,10 @@ public class SymbolTreePointerWrapper:InstancePointerWrapper
                 {
                 if right == nil
                     {
-                    let newPointer = try memory.allocate(string: symbol)
-                    right = Node(treePointer:treePointer,index:index,symbolPointer:newPointer)
+                    let newPointer = try memory.allocate(symbol: symbol)
+                    right = Node(treePointer:treePointer,nodeIndex:index,symbolPointer:newPointer)
+                    print("Saving \(symbol) on right at \(index)")
+                    rightIndex = index
                     self.write()
                     right!.write()
                     return(newPointer)
@@ -102,11 +106,11 @@ public class SymbolTreePointerWrapper:InstancePointerWrapper
                 {
                 if leftIndex != 0
                     {
-                    left = Node(treePointer:treePointer,index:leftIndex)
+                    left = Node(treePointer:treePointer,nodeIndex:leftIndex)
                     }
                 if rightIndex != 0
                     {
-                    right = Node(treePointer:treePointer,index:rightIndex)
+                    right = Node(treePointer:treePointer,nodeIndex:rightIndex)
                     }
                 wasLoaded = true
                 }
@@ -125,7 +129,6 @@ public class SymbolTreePointerWrapper:InstancePointerWrapper
             setPointerAtIndexAtPointer(symbolPointer,nodeIndex,treePointer)
             if let leftNode = left
                 {
-                leftNode.write()
                 setWordAtIndexAtPointer(Word(leftNode.nodeIndex),nodeIndex+1,treePointer)
                 }
             else
@@ -134,7 +137,6 @@ public class SymbolTreePointerWrapper:InstancePointerWrapper
                 }
             if let rightNode = right
                 {
-                rightNode.write()
                 setWordAtIndexAtPointer(Word(rightNode.nodeIndex),nodeIndex+2,treePointer)
                 }
             else
@@ -187,7 +189,7 @@ public class SymbolTreePointerWrapper:InstancePointerWrapper
                 {
                 return(nil)
                 }
-            let node = Node(treePointer:self.pointer,index:rootIndex)
+            let node = Node(treePointer:self.pointer,nodeIndex:rootIndex)
             return(node)
             }
         set
@@ -195,9 +197,10 @@ public class SymbolTreePointerWrapper:InstancePointerWrapper
             if let value = newValue
                 {
                 let nextIndex = self.nextNodeIndex
+                value.nodeIndex = nextIndex
                 value.write()
                 setWordAtIndexAtPointer(Word(nextIndex),SymbolTreePointerWrapper.kRootNodeIndex,self.pointer)
-                setWordAtIndexAtPointer(Word(nextIndex + 3),SymbolTreePointerWrapper.kNextNodeIndexIndex,self.pointer)
+                self.nextNodeIndex = nextIndex + 3
                 }
             else
                 {
@@ -211,22 +214,23 @@ public class SymbolTreePointerWrapper:InstancePointerWrapper
         return(self.rootNode?.find(symbol:symbol))
         }
     
+    @discardableResult
     public func add(symbol:String,memory:Memory) throws -> Pointer
         {
         self.count = self.count + 1
-        let index = self.nextNodeIndex
+        let nextNodeIndex = self.nextNodeIndex
         var newPointer:Pointer
         if let root = self.rootNode
             {
-            newPointer = try root.add(symbol:symbol,at:index,in:memory)
+            newPointer = try root.add(symbol:symbol,at:nextNodeIndex,in:memory)
             }
         else
             {
-            newPointer = try memory.allocate(string: symbol)
-            self.rootNode = Node(treePointer:self.pointer,index: index,symbolPointer:newPointer)
+            newPointer = try memory.allocate(symbol: symbol)
+            self.rootNode = Node(treePointer:self.pointer,nodeIndex: nextNodeIndex,symbolPointer:newPointer)
 
             }
-        self.nextNodeIndex = index + 3
+        self.nextNodeIndex = nextNodeIndex + 3
         return(newPointer)
         }
     

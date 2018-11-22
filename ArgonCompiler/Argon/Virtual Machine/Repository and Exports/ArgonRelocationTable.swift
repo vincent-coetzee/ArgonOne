@@ -42,6 +42,10 @@ public class ArgonRelocationTableEntry:NSObject,NSCoding
             {
             return((lhs.item as! ArgonNamedConstant).fullName == (rhs.item as! ArgonNamedConstant).fullName)
             }
+        if lhs.kind == .handler
+            {
+            return((lhs.item as! ArgonHandler).id == (rhs.item as! ArgonHandler).id)
+            }
         return(false)
         }
     
@@ -73,6 +77,11 @@ public class ArgonRelocationTableEntry:NSObject,NSCoding
     public var genericMethod:ArgonGenericMethod
         {
         return(item as! ArgonGenericMethod)
+        }
+    
+    public var handler:ArgonHandler
+        {
+        return(item as! ArgonHandler)
         }
     
     public var item:Any
@@ -114,6 +123,12 @@ public class ArgonRelocationTableEntry:NSObject,NSCoding
         {
         item = global
         kind = .global
+        }
+    
+    init(handler:ArgonHandler)
+        {
+        item = handler
+        kind = .handler
         }
     
     public func encode(with aCoder: NSCoder)
@@ -161,6 +176,18 @@ public class ArgonRelocationTable:NSObject,NSCoding
             let part = closure()
             switch(part)
                 {
+                case is ArgonHandler:
+                    let piece = part as! ArgonHandler
+                    if let entry = entriesByPart[piece.id]
+                        {
+                        entry.labels.append(label)
+                        }
+                    else
+                        {
+                        let entry = ArgonRelocationTableEntry(handler: piece)
+                        entriesByPart[piece.id] = entry
+                        entry.labels.append(label)
+                        }
                 case is ArgonClosure:
                     let piece = part as! ArgonClosure
                     if let entry = entriesByPart[piece.id]

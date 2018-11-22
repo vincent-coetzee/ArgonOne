@@ -294,7 +294,7 @@ Word taggedFloat(float value)
     *wordPointer = (*wordPointer & ~kBitsMask) | kBitsFloat;
     return(*wordPointer);
     }
-    
+
 _Bool isMarkedAsParent(void* pointer)
     {
     Word word = ((Word)pointer);
@@ -337,7 +337,7 @@ Word clearWordNodeMarks(Word word)
     {
     return(word & ~kMarkMask);
     }
-    
+
 void* _Nonnull clearPointerNodeMarks(void* pointer)
     {
     Word word = ((Word)pointer);
@@ -395,6 +395,11 @@ void* _Nonnull taggedMethodPointer(void* pointer)
     return((void*)((((Word)pointer) & ~kBitsMask) | kBitsMethod));
     }
 
+void* _Nonnull taggedHandlerPointer(void* pointer)
+    {
+    return((void*)((((Word)pointer) & ~kBitsMask) | kBitsHandler));
+    }
+
 void* _Nonnull taggedMapPointer(void* pointer)
     {
     return((void*)((((Word)pointer) & ~kBitsMask) | kBitsMap));
@@ -424,7 +429,7 @@ Word pointerAsWord(void* pointer)
     {
     return(((Word)pointer));
     }
-    
+
 Word distanceBetweenPointers(void *pointer1,void* pointer2)
     {
     if (pointer1 > pointer2)
@@ -491,7 +496,7 @@ Space* allocateSpaceWithCapacity(int capacity)
     space->stackTop = space->baseAddress + space->capacity - kWordSize;
     return(space);
     }
-    
+
 void setWordAtOffsetInDataSegment(Word word,int offset,void* segment)
     {
     DataSegment* dataSegment = (DataSegment*)segment;
@@ -614,7 +619,7 @@ void* allocateInstance(Space* space,int slotCount,int type)
     *((Word*)instanceAddress) = header;
     return(instanceAddress);
     }
-    
+
 void setWordAtIndexAtPointer(Word word,int index,void* pointer)
     {
     Word* newOffset = ((Word*)(untaggedPointer(pointer) + (index*kWordSize)));

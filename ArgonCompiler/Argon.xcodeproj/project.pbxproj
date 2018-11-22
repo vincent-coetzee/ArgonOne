@@ -16,6 +16,10 @@
 		BF030C3C217E946E00BFEE59 /* BasicBlockDAG.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF030C3B217E946E00BFEE59 /* BasicBlockDAG.swift */; };
 		BF030C3E217E9A9000BFEE59 /* ArgonVectorElementAssignmentNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF030C3D217E9A9000BFEE59 /* ArgonVectorElementAssignmentNode.swift */; };
 		BF0380432164FD9400615D85 /* AssociationVectorPointer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0380422164FD9400615D85 /* AssociationVectorPointer.swift */; };
+		BF05A84F21A714F6002410A1 /* ArgonHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF05A84E21A714F6002410A1 /* ArgonHandler.swift */; };
+		BF05A85121A71B58002410A1 /* ArgonRegisterVariableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF05A85021A71B58002410A1 /* ArgonRegisterVariableNode.swift */; };
+		BF05A85321A729CF002410A1 /* HandlerPointerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF05A85221A729CF002410A1 /* HandlerPointerWrapper.swift */; };
+		BF05A85B21A742CC002410A1 /* SymbolPointerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF05A85A21A742CC002410A1 /* SymbolPointerWrapper.swift */; };
 		BF0D777621A0497B003E8D9B /* ArgonMethodDirective.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0D777521A0497B003E8D9B /* ArgonMethodDirective.swift */; };
 		BF0E3D07214C4D4F004A402B /* TokenStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0E3D06214C4D4F004A402B /* TokenStream.swift */; };
 		BF0E3D09214C4E25004A402B /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0E3D08214C4E25004A402B /* Token.swift */; };
@@ -272,6 +276,10 @@
 		BF030C3B217E946E00BFEE59 /* BasicBlockDAG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicBlockDAG.swift; sourceTree = "<group>"; };
 		BF030C3D217E9A9000BFEE59 /* ArgonVectorElementAssignmentNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonVectorElementAssignmentNode.swift; sourceTree = "<group>"; };
 		BF0380422164FD9400615D85 /* AssociationVectorPointer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssociationVectorPointer.swift; sourceTree = "<group>"; };
+		BF05A84E21A714F6002410A1 /* ArgonHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonHandler.swift; sourceTree = "<group>"; };
+		BF05A85021A71B58002410A1 /* ArgonRegisterVariableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonRegisterVariableNode.swift; sourceTree = "<group>"; };
+		BF05A85221A729CF002410A1 /* HandlerPointerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlerPointerWrapper.swift; sourceTree = "<group>"; };
+		BF05A85A21A742CC002410A1 /* SymbolPointerWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymbolPointerWrapper.swift; sourceTree = "<group>"; };
 		BF0D777521A0497B003E8D9B /* ArgonMethodDirective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonMethodDirective.swift; sourceTree = "<group>"; };
 		BF0E3D06214C4D4F004A402B /* TokenStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStream.swift; sourceTree = "<group>"; };
 		BF0E3D08214C4E25004A402B /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -621,6 +629,7 @@
 				BFA1AF7C219A008E0042156C /* ArgonSymbol.swift */,
 				BF1FBE89218BCA80000AAD5B /* ArgonTraits.swift */,
 				BF5F8D0E21A5C30B003D9D60 /* ArgonTree.swift */,
+				BF05A84E21A714F6002410A1 /* ArgonHandler.swift */,
 			);
 			path = "Repository and Exports";
 			sourceTree = "<group>";
@@ -735,14 +744,16 @@
 				BF28AB7821983A2800410CDD /* ClosurePointerWrapper.swift */,
 				BF007B99217140B3009258AD /* CodeBlockPointerWrapper.swift */,
 				BF7C2AFA21694B9000D66A71 /* GenericMethodPointerWrapper.swift */,
+				BF05A85221A729CF002410A1 /* HandlerPointerWrapper.swift */,
 				BF8FA532215687170077D370 /* InstancePointerWrapper.swift */,
 				BF8FA526215686710077D370 /* MapPointerWrapper.swift */,
 				BF8FA528215686930077D370 /* MethodPointerWrapper.swift */,
 				BF8FA52A215686AC0077D370 /* SlotPointerWrapper.swift */,
 				BF8FA530215686FE0077D370 /* StringPointerWrapper.swift */,
+				BF05A85A21A742CC002410A1 /* SymbolPointerWrapper.swift */,
+				BF5F8D0C21A5C23A003D9D60 /* SymbolTreePointerWrapper.swift */,
 				BF8FA52C215686C70077D370 /* TraitsPointerWrapper.swift */,
 				BF8FA52E215686E50077D370 /* VectorPointer.swift */,
-				BF5F8D0C21A5C23A003D9D60 /* SymbolTreePointerWrapper.swift */,
 			);
 			path = "Object Pointers";
 			sourceTree = "<group>";
@@ -840,6 +851,7 @@
 				BFA1B538214D25A20085CDCF /* ArgonUnaryOperationExpression.swift */,
 				BFF767A3214E7950004FAA65 /* ArgonVariableNode.swift */,
 				BF29839A215BC7110060DEDE /* ArgonVectorElementNode.swift */,
+				BF05A85021A71B58002410A1 /* ArgonRegisterVariableNode.swift */,
 			);
 			path = "Expression Nodes";
 			sourceTree = "<group>";
@@ -1148,6 +1160,7 @@
 				BF0E3D11214C5580004A402B /* ArgonScopeNode.swift in Sources */,
 				BF8FA531215686FE0077D370 /* StringPointerWrapper.swift in Sources */,
 				BFD75E3A21936812006A305C /* ArgonExecutableFileWindowController.swift in Sources */,
+				BF05A85B21A742CC002410A1 /* SymbolPointerWrapper.swift in Sources */,
 				BF0E3D07214C4D4F004A402B /* TokenStream.swift in Sources */,
 				BFF800792187ACF1005A7E79 /* Column.swift in Sources */,
 				BF9A714B215ABB7D006439DB /* ArgonInstanceElement.swift in Sources */,
@@ -1173,6 +1186,7 @@
 				BF7AC88A2182798E00A60398 /* BrowserWindowController.swift in Sources */,
 				BFF997A32186523E00F9F8CA /* DisplayItemList.swift in Sources */,
 				BF0E3D09214C4E25004A402B /* Token.swift in Sources */,
+				BF05A84F21A714F6002410A1 /* ArgonHandler.swift in Sources */,
 				BF1407472183984D005A07EE /* MethodInstanceDisplayWrapper.swift in Sources */,
 				BF8FA507215437250077D370 /* VirtualMachineFault.swift in Sources */,
 				BF8FA527215686710077D370 /* MapPointerWrapper.swift in Sources */,
@@ -1213,6 +1227,7 @@
 				BF29839B215BC7110060DEDE /* ArgonVectorElementNode.swift in Sources */,
 				BF1407522183A8CD005A07EE /* NamedConstantDisplayWrapper.swift in Sources */,
 				BF8FA529215686930077D370 /* MethodPointerWrapper.swift in Sources */,
+				BF05A85321A729CF002410A1 /* HandlerPointerWrapper.swift in Sources */,
 				BFA1B543214D8C760085CDCF /* ArgonParameterNode.swift in Sources */,
 				BF0E3D1B214C5B2A004A402B /* ArgonStandardsNode.swift in Sources */,
 				BFF767C6214ECC7C004FAA65 /* ArgonCompiler.swift in Sources */,
@@ -1318,6 +1333,7 @@
 				BF8FA52D215686C70077D370 /* TraitsPointerWrapper.swift in Sources */,
 				BF29839D215BCB1C0060DEDE /* ArgonClosureNode.swift in Sources */,
 				BF50C8F921827758000418F4 /* BrowserViewController.swift in Sources */,
+				BF05A85121A71B58002410A1 /* ArgonRegisterVariableNode.swift in Sources */,
 				BF030C3E217E9A9000BFEE59 /* ArgonVectorElementAssignmentNode.swift in Sources */,
 				BF5F8D1521A5EE3F003D9D60 /* ArgonSignalStatementNode.swift in Sources */,
 				BF3F7062218C5FEE0002052B /* ArgonGenericMethod.swift in Sources */,

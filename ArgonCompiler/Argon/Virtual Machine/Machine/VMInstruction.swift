@@ -428,6 +428,26 @@ public class VMInstruction:NSObject
         return(VMInstruction(.NOP))
         }
     
+    //
+    // Signal that a condition has occurred, this will
+    // cause the closest most appropriate handler to fire.
+    // The argument is the address of the symbol that
+    // maps to the symbol of the handler
+    //
+    public static func SIG(address:Word) -> VMInstruction
+        {
+        return(VMInstruction(.SIG,address:address,mode: .address))
+        }
+    //
+    // Generate a tagged pointer for the handler in question
+    // and push it onto the stack so that it can be found
+    // when a SIG is generated
+    //
+    public static func HAND(address:Word) -> VMInstruction
+        {
+        return(VMInstruction(.HAND,address:address,mode: .address))
+        }
+    
     public var mode:VMInstructionMode
         {
         get

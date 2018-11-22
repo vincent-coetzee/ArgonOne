@@ -68,6 +68,7 @@ class ViewController: NSViewController,NSTableViewDelegate,NSTableViewDataSource
         NSKeyedUnarchiver.setClass(ArgonLineTrace.self,forClassName:"Argon.ArgonLineTrace")
         NSKeyedUnarchiver.setClass(ArgonSlotLayout.self,forClassName:"Argon.ArgonSlotLayout")
         NSKeyedUnarchiver.setClass(ArgonTypeTemplate.self,forClassName:"Argon.ArgonTypeTemplate")
+        NSKeyedUnarchiver.setClass(ArgonHandler.self,forClassName:"Argon.ArgonHandler")
         }
     
     public func update(aspect: String, with: Any?, from: Model)

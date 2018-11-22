@@ -14,6 +14,7 @@ public class ArgonRegisterFile
     public private(set) static var R0:VMRegister = VMRegister(.R0)
     public private(set) static var BP:VMRegister = VMRegister(.BP)
     public private(set) static var SP:VMRegister = VMRegister(.SP)
+    public private(set) static var R1:VMRegister = VMRegister(.R1)
     
     public private(set) var registerCount:Int
     public private(set) var registers:[VMRegister] = []

@@ -50,6 +50,7 @@ public struct Argon
     public static let kTypeAllocationBlock:Int = 13
     public static let kTypeHandler:Int = 14
     public static let kTypeSymbolTree:Int = 15
+    public static let kTypeSymbol:Int = 16
     
     public static let kDefaultMemorySegmentSize = 1024 * 1024 * 256 // 128 MB
     public static let kDefaultMemoryEdenSize = 1024 * 1024 * 64 // 16 MB
@@ -82,8 +83,8 @@ public struct Argon
 
     public static let kDataSegmentStartOffset = 8
     
-    public static let kOffsetOfFirstRegisterForUse = 7
-    public static let kNumberOfReservedRegisters = 1
+    public static let kOffsetOfFirstRegisterForUse = 8
+    public static let kNumberOfReservedRegisters = 2
     public static let kOffsetOfFirstFloatingPointRegisterForUse = 39
     public static let kNumberOfRegisters = 32
     

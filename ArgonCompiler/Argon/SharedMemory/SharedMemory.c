@@ -395,6 +395,11 @@ void* _Nonnull taggedMethodPointer(void* pointer)
     return((void*)((((Word)pointer) & ~kBitsMask) | kBitsMethod));
     }
 
+void* _Nonnull taggedHandlerPointer(void* pointer)
+    {
+    return((void*)((((Word)pointer) & ~kBitsMask) | kBitsHandler));
+    }
+
 void* _Nonnull taggedMapPointer(void* pointer)
     {
     return((void*)((((Word)pointer) & ~kBitsMask) | kBitsMap));

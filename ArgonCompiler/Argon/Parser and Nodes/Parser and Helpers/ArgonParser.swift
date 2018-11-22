@@ -984,33 +984,18 @@ public class ArgonParser
         let lineTrace = ArgonLineTrace(line: self.token.location.lineNumber,start:self.token.location.lineStart,end:self.token.location.lineStop)
         try self.nextToken()
         var conditionName:ArgonName = ArgonName()
-        var conditionSymbol:ArgonExpressionNode?
+        var conditionSymbol:String?
         let location = token.location
         var node:ArgonHandlerStatementNode?
         try self.parseParenthesis
             {
-            if !token.isIdentifier
-                {
-                throw(ParseError.identifierExpected)
-                }
-            conditionName = ArgonName(token.identifier!)
-            let conditionNode = ArgonInductionVariableNode(name: conditionName,traits:ArgonStandardsNode.shared.conditionTraits)
-            conditionNode.sourceLocation = location
-            ArgonStackFrame.current()?.add(variable: conditionNode)
-            conditionNode.symbolTableEntry = symbolTable.add(variable: conditionNode,at: scope.scopeName() + conditionNode.name)
-            conditionNode.scopedName = ArgonName(scope.enclosingModule().moduleName.string,conditionName.string)
-            try self.nextToken()
-            if !token.isConjunction
-                {
-                throw(ParseError.conjunctionExpected)
-                }
-            try self.nextToken()
-            conditionSymbol = try self.parseExpression()
-            if conditionSymbol!.traits != ArgonStandardsNode.shared.symbolTraits
+            if !token.isSymbol
                 {
                 throw(ParseError.symbolExpected)
                 }
-            node = ArgonHandlerStatementNode(containingScope:scope,conditionNode:conditionNode,conditionSymbol:conditionSymbol!)
+            conditionSymbol = token.symbol
+            try self.nextToken()
+            node = ArgonHandlerStatementNode(containingScope:scope,conditionSymbol:conditionSymbol!)
             scope.enclosingMethod()?.add(handler:node!)
             }
         if !token.isLeftBrace

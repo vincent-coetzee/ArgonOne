@@ -8,24 +8,58 @@
 
 import Foundation
 
-public class ArgonHandlerStatementNode:ArgonCompoundMethodStatementNode,ArgonCodeContainer
+public class ArgonHandlerStatementNode:ArgonCompoundMethodStatementNode,ArgonCodeContainer,ThreeAddress
     {
+    public var isVariable:Bool
+        {
+        return(false)
+        }
+    
+    public var isParameter:Bool
+        {
+        return(false)
+        }
+    
+    public var isConstant: Bool
+        {
+        return(false)
+        }
+    
+    public var isTemporary: Bool
+        {
+        return(false)
+        }
+    
+    public var isStackBased: Bool
+        {
+        return(false)
+        }
+    
+    public var locations = ArgonValueLocationList()
+    public var name: ArgonName = ArgonName()
     public private(set) var id: Int
     public var instructionList: VMInstructionList
     public var threeAddressInstructions:[ThreeAddressInstruction] = []
-    public private(set) var conditionNode:ArgonInductionVariableNode
-    public private(set) var conditionSymbol:ArgonExpressionNode
+    public private(set) var conditionSymbol:String = ""
     
     public var lastLHS:ThreeAddress
         {
         return(threeAddressInstructions.last!.lhs!)
         }
     
-    public init(containingScope:ArgonParseScope,conditionNode:ArgonInductionVariableNode,conditionSymbol:ArgonExpressionNode)
+    public func asArgonHandler() -> ArgonHandler
+        {
+        let fullName = containingScope.enclosingModule().moduleName.string + ".HANDLER(\(id))"
+        let new = ArgonHandler(fullName: fullName,code: ArgonCodeBlock(instructionList))
+        new.id = id
+        new.conditionSymbol = conditionSymbol
+        return(new)
+        }
+        
+    public init(containingScope:ArgonParseScope,conditionSymbol:String)
         {
         self.instructionList = VMInstructionList()
         self.id = Argon.nextCounter
-        self.conditionNode = conditionNode
         self.conditionSymbol = conditionSymbol
         super.init(containingScope:containingScope)
         }
@@ -47,22 +81,24 @@ public class ArgonHandlerStatementNode:ArgonCompoundMethodStatementNode,ArgonCod
         instructionList.dump()
         }
     
+    public func isSame(as other: ThreeAddress) -> Bool
+        {
+        if type(of:self) == type(of:other)
+            {
+            let rhs = other as! ArgonHandlerStatementNode
+            if rhs.id == self.id
+                {
+                return(true)
+                }
+            }
+        return(false)
+        }
+    
     public override func threeAddress(pass: ThreeAddressPass) throws
         {
         pass.addLineTraceToNextStatement(lineTrace: self.lineTrace!)
-        var address:ThreeAddress
-        if conditionSymbol is ThreeAddress
-            {
-            address = conditionSymbol as! ThreeAddress
-            }
-        else
-            {
-            try conditionSymbol.threeAddress(pass: pass)
-            address = pass.lastLHS()
-            }
-        let label = pass.newLabel()
         pass.add(ThreeAddressInstruction(operation: .jump,target: label))
-        pass.add(ThreeAddressInstruction(operation: .handler,operand1: conditionNode,operand2: address))
+        pass.add(ThreeAddressInstruction(operation: .handler,operand1: self))
         try self.statements.threeAddress(pass: pass)
         pass.labelNextInstruction(with: label)
         }

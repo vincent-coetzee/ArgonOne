@@ -130,6 +130,10 @@ public class ThreeAddressCodeGenerator
                 instructions.append(.PRIM(immediate: statement.operand1 as! Int))
             case .clear:
                 try self.encodeClear(statement)
+            case .handler:
+                try self.encodeHandler(statement)
+            case .signal:
+                try self.encodeSignal(statement)
             default:
                 fatalError("Operation \(statement.operation) not handled")
             }
@@ -163,10 +167,17 @@ public class ThreeAddressCodeGenerator
             }
         }
     
+    public func encodeSignal(_ statement:ThreeAddressInstruction) throws
+        {
+        let constant = statement.operand1 as! ArgonConstantNode
+        let symbol = constant.literalSymbol!
+        instructions.append((VMInstruction.SIG(address:0)).wantsRelocation(of: {symbol.asArgonSymbol()}))
+        }
+    
     public func encodeHandler(_ statement:ThreeAddressInstruction) throws
         {
-        let operand2 = statement.operand2 as! Argon
-        instructions.append((VMInstruction.PUSH(address: 0)).wantsRelocation(of: {closure.asArgonClosure()}))
+        let handler = statement.operand1 as! ArgonHandlerStatementNode
+        instructions.append((VMInstruction.HAND(address: 0)).wantsRelocation(of: {handler.asArgonHandler()}))
         }
     
     public func encodeClear(_ statement:ThreeAddressInstruction) throws

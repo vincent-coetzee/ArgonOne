@@ -50,6 +50,9 @@ public enum VMOperation:Int
     case PRIM
     case STORE
     case SPAWN
+    case SIG
+    case HAND
+    case RES
     
     public var name:String
         {
@@ -57,6 +60,12 @@ public enum VMOperation:Int
             {
             case .HALT:
                 return("HALT")
+            case .HAND:
+                return("HAND")
+            case .RES:
+                return("RES")
+            case .SIG:
+                return("SIG")
             case .SPAWN:
                 return("SPAWN")
             case .STORE:

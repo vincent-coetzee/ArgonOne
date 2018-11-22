@@ -168,6 +168,26 @@ public class Memory
         return(taggedClosurePointer(pointer))
         }
     
+    public func allocate(handlerForSymbol symbol:String) throws -> Pointer
+        {
+        pthread_mutex_lock(memoryMutexPointer)
+        defer
+            {
+            pthread_mutex_unlock(memoryMutexPointer)
+            }
+        let slotCount = HandlerPointerWrapper.kFixedSlotCount
+        let symbolPointer = try self.allocate(string: symbol)
+        guard let pointer = SharedMemory.allocateInstance(toSpace,Int32(slotCount),Int32(Argon.kTypeHandler)) else
+            {
+            throw(VirtualMachineSignal.outOfMemory)
+            }
+        setPointerAtIndexAtPointer(try self.traits(atName:"Argon::Handler")!,HandlerPointerWrapper.kTraitsIndex,pointer)
+        setWordAtIndexAtPointer(0, HandlerPointerWrapper.kMonitorIndex, pointer)
+        setPointerAtIndexAtPointer(symbolPointer, HandlerPointerWrapper.kTypeSymbolIndex, pointer)
+        setWordAtIndexAtPointer(0, HandlerPointerWrapper.kCodeBlockIndex, pointer)
+        return(taggedHandlerPointer(pointer))
+        }
+    
     public func allocate(string:String,lookupTraits:Bool = false) throws -> UnsafeMutableRawPointer
         {
         pthread_mutex_lock(memoryMutexPointer)
@@ -191,6 +211,31 @@ public class Memory
         let stringPointer = StringPointerWrapper(pointer)
         stringPointer.string = string
         return(taggedStringPointer(pointer))
+        }
+    
+    public func allocate(symbol:String,lookupTraits:Bool = false) throws -> UnsafeMutableRawPointer
+        {
+        pthread_mutex_lock(memoryMutexPointer)
+        defer
+            {
+            pthread_mutex_unlock(memoryMutexPointer)
+            }
+        let wordsNeeded = ((symbol.count / 2) + 1) * 3 / 2
+        let capacity = wordsNeeded / 2
+        let slotCount = 5 + wordsNeeded
+        guard let pointer = SharedMemory.allocateInstance(toSpace,Int32(slotCount),Int32(Argon.kTypeSymbol)) else
+            {
+            throw(VirtualMachineSignal.outOfMemory)
+            }
+        if lookupTraits
+            {
+            setPointerAtIndexAtPointer(try self.traits(atName:"Argon::Symbol")!,Int32(StringPointerWrapper.kTraitsIndex),pointer)
+            }
+        setWordAtIndexAtPointer(Word(capacity), Int32(StringPointerWrapper.kCapacityIndex), pointer)
+        setWordAtIndexAtPointer(0, Int32(StringPointerWrapper.kSpareIndex), pointer)
+        let stringPointer = StringPointerWrapper(pointer)
+        stringPointer.string = symbol
+        return(taggedSymbolPointer(pointer))
         }
     
     public func allocate(genericMethodNamed name:String,parameterCount:Int,selectionTreeRoot root:GenericMethodParentNode) throws -> Pointer
@@ -356,19 +401,18 @@ public class Memory
             }
         let maximumSize = (capacity * 3 / 2)*3
         let slotCount = maximumSize + SymbolTreePointerWrapper.kFixedSlotCount
-        guard let address = SharedMemory.allocateInstance(toSpace,Int32(slotCount),Int32(Argon.kTypeSymbolTree)) else
+        guard let treePointer = SharedMemory.allocateInstance(toSpace,Int32(slotCount),Int32(Argon.kTypeSymbolTree)) else
             {
             throw(VirtualMachineSignal.outOfMemory)
             }
         if lookupTraits
             {
-            setPointerAtIndexAtPointer(try self.traits(atName:"Argon::Vector")!, Int32(VectorPointer.kTraitsIndex), address)
+            setPointerAtIndexAtPointer(try self.traits(atName:"Argon::SymbolTree")!, Int32(VectorPointer.kTraitsIndex), treePointer)
             }
-        setWordAtIndexAtPointer(0, Int32(VectorPointer.kCountIndex), address)
-        setWordAtIndexAtPointer(Word(maximumSize), Int32(VectorPointer.kCapacityIndex), address)
-        let allocationBlock = try self.allocate(allocationBlockWithSlotCount:maximumSize,lookupTraits:lookupTraits)
-        setPointerAtIndexAtPointer(allocationBlock, Int32(VectorPointer.kBlockPointerIndex), address)
-        return(taggedInstancePointer(address))
+        setWordAtIndexAtPointer(0, Int32(SymbolTreePointerWrapper.kNodeCountIndex), treePointer)
+        setWordAtIndexAtPointer(Word(maximumSize), Int32(SymbolTreePointerWrapper.kNodeCapacityIndex), treePointer)
+        setWordAtIndexAtPointer(Word(SymbolTreePointerWrapper.kFixedSlotCount + 1), Int32(SymbolTreePointerWrapper.kNextNodeIndexIndex), treePointer)
+        return(taggedInstancePointer(treePointer))
         }
     
     private func initBaseMethods() throws
@@ -386,6 +430,8 @@ public class Memory
         traitsMap = MapPointerWrapper(pointer,objectMemory:self)
         let behaviour = try self.allocate(traitsNamed: "Argon::Behaviour", slots:[],parents:Array<Pointer>())
         try traitsMap.setPointer(behaviour,forKey:"Argon::Behaviour")
+        let handler = try self.allocate(traitsNamed: "Argon::Handler", slots:[],parents:[behaviour])
+        try traitsMap.setPointer(handler,forKey:"Argon::Handler")
         let traits = try self.allocate(traitsNamed: "Argon::Traits", slots:[],parents:Array<Pointer>())
         try traitsMap.setPointer(traits,forKey:"Argon::Traits")
         let number = try self.allocate(traitsNamed: "Argon::Number",slots:[], parents: [behaviour])

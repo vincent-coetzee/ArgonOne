@@ -23,6 +23,7 @@ public class ArgonConstantNode:ArgonExpressionNode,ThreeAddress,ArgonConstantVal
     public static var nameCounter = 1
     
     public private(set) var literalString:String?
+    public private(set) var literalSymbol:String?
     public private(set) var literalInteger:Int?
     public private(set) var literalFloat:Float?
     public private(set) var literalBoolean:Bool?
@@ -49,7 +50,7 @@ public class ArgonConstantNode:ArgonExpressionNode,ThreeAddress,ArgonConstantVal
 
     public var symbolValue:String
         {
-        return(literalString!)
+        return(literalSymbol!)
         }
     
     public var booleanValue:Bool
@@ -78,7 +79,7 @@ public class ArgonConstantNode:ArgonExpressionNode,ThreeAddress,ArgonConstantVal
             }
         else if _traits == ArgonStandardsNode.shared.symbolTraits
             {
-            string = "Symbol(\(literalString!))"
+            string = "Symbol(\(literalSymbol!))"
             }
         else if _traits == ArgonStandardsNode.shared.stringTraits
             {
@@ -150,7 +151,7 @@ public class ArgonConstantNode:ArgonExpressionNode,ThreeAddress,ArgonConstantVal
         
    init(symbol:String)
         {
-        self.literalString = symbol
+        self.literalSymbol = symbol
         _traits = ArgonStandardsNode.shared.symbolTraits
         super.init()
         }

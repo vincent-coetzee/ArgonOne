@@ -112,6 +112,10 @@ public class VMThread:AbstractModel
         instruction.dump()
         switch(instruction.operation)
                 {
+                case .SIG:
+                    try self.SIG(instruction)
+                case .HAND:
+                    try self.HAND(instruction)
                 case .MAKE:
                     try self.MAKE(instruction)
                 case .DSP:
@@ -223,6 +227,39 @@ public class VMThread:AbstractModel
             setThreadRegisterPointerValue(self.threadMemory,MachineRegister.R0.rawValue,instance)
             return
             }
+        }
+    
+    @inline(__always)
+    private func SIG(_ instruction:VMInstruction) throws
+        {
+        let address = instruction.addressWord
+        let stackPointer = threadRegisterPointerValue(self.threadMemory,MachineRegister.SP.rawValue)
+        let topOfStackPointer = threadRegisterPointerValue(self.threadMemory,MachineRegister.ST.rawValue)
+        var pointer = stackPointer
+        while pointer < topOfStackPointer
+            {
+            if isTaggedHandler(pointerAtIndexAtPointer(0,pointer))
+                {
+                let wrapper = HandlerPointerWrapper(pointer)
+                if wrapper.symbol == SymbolPointerWrapper(wordAsPointer(address)).symbol
+                    {
+                    try self.invoke(handler: wrapper)
+                    }
+                }
+            pointer = incrementPointerBy(pointer,Int32(ArgonWordSize))
+            }
+        }
+    
+    @inline(__always)
+    private func invoke(handler:HandlerPointerWrapper) throws
+        {
+        }
+    
+    @inline(__always)
+    private func HAND(_ instruction:VMInstruction) throws
+        {
+        let handler = taggedHandler(wordAsPointer(instruction.addressWord))
+        pushPointer(self.threadMemory,handler)
         }
     
     @inline(__always)
