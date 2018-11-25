@@ -73,4 +73,5 @@ public enum RuntimeError:Error
     {
     case invalidPrimitive
     case librariesCanNotRun
+    case missingHandler(String)
     }

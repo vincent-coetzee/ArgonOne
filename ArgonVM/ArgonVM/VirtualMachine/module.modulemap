@@ -1,0 +1,7 @@
+
+module VirtualMachine [system] [extern_c] {
+    header "VirtualMachine.h"
+    header "ObjectMemory.h"
+    export *
+}
+

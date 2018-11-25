@@ -85,6 +85,8 @@ public class ArgonLinker
                     instruction.addressWord = pointerAsWord(entry.traits.pointer)
                 case .global:
                     instruction.addressWord = pointerAsWord(entry.global.pointer)
+                case .handler:
+                    instruction.addressWord = pointerAsWord(entry.handler.pointer)
                 default:
                     break
                 }
@@ -96,7 +98,8 @@ public class ArgonLinker
         let pointer = try self.memory!.allocate(codeBlock:executable.entryPoint.instructions)
         let codeBlock = CodeBlockPointerWrapper(pointer)
         codeBlock.runnable = true
-        vm!.memory.add(root: pointer)
+        let name = executable.fullName + ".entryPoint"
+        vm!.memory.addRoot(name: name, pointer: pointer)
         executable.entryPointCodePointer = pointer
         }
     
@@ -144,10 +147,6 @@ public class ArgonLinker
                     let closurePointer = ClosurePointerWrapper(entry.closure.pointer)
                     closurePointer.codeBlockPointer = try self.memory!.allocate(codeBlock:entry.closure.code.instructions)
                     CodeBlockPointerWrapper(closurePointer.codeBlockPointer).runnable = false
-                case .handler:
-                    let handlerPointer = HandlerPointerWrapper(entry.handler.pointer)
-                    handlerPointer.codeBlockPointer = try self.memory!.allocate(codeBlock:entry.handler.code.instructions)
-                    CodeBlockPointerWrapper(handlerPointer.codeBlockPointer).runnable = false
                 case .genericMethod:
                     for instance in entry.genericMethod.instances
                         {
@@ -169,7 +168,15 @@ public class ArgonLinker
                 case .string:
                     entry.string.pointer = try memory!.allocate(string: entry.string.string)
                 case .symbol:
-                    entry.symbol.pointer = try memory!.allocate(string: entry.symbol.string)
+                    let theString = entry.symbol.string
+                    if let pointer = try self.memory!.symbol(atSymbol: theString)
+                        {
+                        entry.symbol.pointer = pointer
+                        }
+                    else
+                        {
+                        entry.symbol.pointer = try self.memory!.setSymbol(theString)
+                        }
                 case .closure:
                     closureCount += 1
                     if !entry.closure.isInstalled
@@ -180,7 +187,16 @@ public class ArgonLinker
                 case .handler:
                     if !entry.handler.isInstalled
                         {
-                        entry.handler.pointer = try memory!.allocate(handlerForSymbol: entry.handler.conditionSymbol)
+                        let symbolPointer = try memory!.symbol(atSymbol: entry.handler.conditionSymbol.string)
+                        if symbolPointer == nil
+                            {
+                            entry.handler.conditionSymbol.pointer = try memory!.setSymbol(entry.handler.conditionSymbol.string)
+                            }
+                        else
+                            {
+                            entry.handler.conditionSymbol.pointer = symbolPointer!
+                            }
+                        entry.handler.pointer = try memory!.allocate(handlerForSymbol: entry.handler.conditionSymbol.pointer)
                         entry.handler.isInstalled = true
                         }
                 case .genericMethod:
@@ -233,28 +249,6 @@ public class ArgonLinker
         self.vm = vm
         self.memory = vm.memory
         self.symbolTree = SymbolTreePointerWrapper(try vm.memory.allocate(treeWithCapacity: 5000))
-        for index in 0..<50
-            {
-            let number = Int.random(in: 0..<100)
-            let symbol = "#SYMBOL-\(number)"
-            if symbol == "#SYMBOL-4"
-                {
-                print("halt")
-                }
-            try self.symbolTree.add(symbol: symbol, memory: vm.memory)
-            }
-        self.symbolTree.walk()
-        for index in 0..<50
-            {
-            let number = Int.random(in: 0..<100)
-            let symbol = "#SYMBOL-\(number)"
-            let pointer = self.symbolTree.find(symbol: symbol)
-            let wrapper = SymbolPointerWrapper(pointer!)
-            if wrapper.symbol != symbol
-                {
-                print("Symbol \(symbol) was not correctly found")
-                }
-            }
         self.relocations = executable.relocations
         try self.catalogue(traits: Array(executable.traits.values))
         try self.catalogue(entries: executable.relocations.entries)

@@ -12,6 +12,22 @@ import SharedMemory
 public typealias Pointer = UnsafeMutableRawPointer
 public typealias Word = UInt64
 
+extension Word
+    {
+    public init(pointer:Pointer)
+        {
+        self.init(UInt(bitPattern: pointer))
+        }
+    }
+
+extension Pointer
+    {
+    public init(word:Word)
+        {
+        self.init(bitPattern: UInt(word))!
+        }
+    }
+
 public class Memory
     {
     private static var memoryInstances:[Memory] = []
@@ -28,17 +44,17 @@ public class Memory
         return(nil)
         }
     
-    private static let kSourceStack = Int32(1)
-    private static let kSourceData = Int32(2)
-    public static let kSourceThreadRegister = Int32(3)
-    private static let kSourceGlobal = Int32(4)
+    public static let kSourceThreadInvalid = -1
+    public static let kSourceInvalid = -1
+    public static let kSourceThreadStack = 1
+    public static let kSourceData = 2
+    public static let kSourceThreadRegister = 3
+    public static let kSourceGlobal = 4
     
     private var fromSpace:UnsafeMutablePointer<Space>
     public private(set) var toSpace:UnsafeMutablePointer<Space>
     public private(set) var dataSegment = allocateDataSegmentWithCapacity(10)
-    private var globalRootArray = allocateRootArray()
-    private var methodMap:MapPointerWrapper!
-    private var traitsMap:MapPointerWrapper!
+    private var globalReferences:[String:GlobalMemoryReference] = [:]
     private var memoryMutexPointer = UnsafeMutablePointer<pthread_mutex_t>.allocate(capacity: 1)
     private var dataSegmentOffset = 8
     
@@ -60,6 +76,7 @@ public class Memory
         toSpace = allocateSpaceWithCapacity(Int32(capacity))
         try initBaseMethods()
         try initBaseTraits()
+        try initSymbolTree()
         Memory.memoryInstances.append(self)
         }
     
@@ -84,11 +101,31 @@ public class Memory
         return(false)
         }
     
-    public func add(root:Pointer)
+    public func addRoot(name:String,pointer:Pointer)
         {
-        addRootToRootArray(root,globalRootArray)
+        let index = globalReferences.count
+        let address = addressOfNextFreeWordsOfSizeInDataSegment(Int32(ArgonWordSize),dataSegment)
+        setPointerAtIndexAtPointer(pointer,0,address)
+        let reference = GlobalMemoryReference(name: name, dataSegmentAddress: address, index: index, address: pointer)
+        globalReferences[name] = reference
         }
     
+    private func updateGlobalsFrom(rootArray:Pointer)
+        {
+        for global in globalReferences.values
+            {
+            let holder = rootAtIndexInArray(rootArray,Int32(global.rootArrayIndex))
+            global.address = holder.pointee.address
+            }
+        }
+    
+    private func addGlobalsToRootArray(rootArray:Pointer)
+        {
+        for global in globalReferences.values
+            {
+            global.rootArrayIndex = addRootToRootArray(Memory.kSourceGlobal,Memory.kSourceThreadInvalid,global.index,global.address,rootArray)
+            }
+        }
     public func copyToSpace(size: Int, to pointer:UnsafeMutableRawPointer)
         {
         copySpaceOfSizeToPointer(toSpace,Int32(size),pointer)
@@ -168,7 +205,7 @@ public class Memory
         return(taggedClosurePointer(pointer))
         }
     
-    public func allocate(handlerForSymbol symbol:String) throws -> Pointer
+    public func allocate(handlerForSymbol symbolPointer:Pointer) throws -> Pointer
         {
         pthread_mutex_lock(memoryMutexPointer)
         defer
@@ -176,7 +213,6 @@ public class Memory
             pthread_mutex_unlock(memoryMutexPointer)
             }
         let slotCount = HandlerPointerWrapper.kFixedSlotCount
-        let symbolPointer = try self.allocate(string: symbol)
         guard let pointer = SharedMemory.allocateInstance(toSpace,Int32(slotCount),Int32(Argon.kTypeHandler)) else
             {
             throw(VirtualMachineSignal.outOfMemory)
@@ -184,7 +220,6 @@ public class Memory
         setPointerAtIndexAtPointer(try self.traits(atName:"Argon::Handler")!,HandlerPointerWrapper.kTraitsIndex,pointer)
         setWordAtIndexAtPointer(0, HandlerPointerWrapper.kMonitorIndex, pointer)
         setPointerAtIndexAtPointer(symbolPointer, HandlerPointerWrapper.kTypeSymbolIndex, pointer)
-        setWordAtIndexAtPointer(0, HandlerPointerWrapper.kCodeBlockIndex, pointer)
         return(taggedHandlerPointer(pointer))
         }
     
@@ -418,16 +453,20 @@ public class Memory
     private func initBaseMethods() throws
         {
         let pointer = try self.allocate(mapWithFlags: 0)
-        self.add(root: pointer)
-        methodMap = MapPointerWrapper(pointer,objectMemory: self)
-        let address = addressOfNextFreeWordsOfSizeInDataSegment(Int32(MemoryLayout<ArgonWord>.size),dataSegment)
-        setPointerAtIndexAtPointer(pointer,0,address)
+        self.addRoot(name: "methodMap",pointer: pointer)
         }
     
-    private func initBaseTraits() throws 
+    private func initSymbolTree() throws
+        {
+        let treePointer = try self.allocate(treeWithCapacity: 5000,lookupTraits:true)
+        self.addRoot(name: "symbolTree",pointer: treePointer)
+        }
+    
+    private func initBaseTraits() throws
         {
         let pointer = try self.allocate(mapWithFlags: 0)
-        traitsMap = MapPointerWrapper(pointer,objectMemory:self)
+        self.addRoot(name: "traits", pointer: pointer)
+        let traitsMap = MapPointerWrapper(pointer,objectMemory:self)
         let behaviour = try self.allocate(traitsNamed: "Argon::Behaviour", slots:[],parents:Array<Pointer>())
         try traitsMap.setPointer(behaviour,forKey:"Argon::Behaviour")
         let handler = try self.allocate(traitsNamed: "Argon::Handler", slots:[],parents:[behaviour])
@@ -452,7 +491,9 @@ public class Memory
         try traitsMap.setPointer(collection,forKey:"Argon::Collection")
         let block = try self.allocate(traitsNamed: "Argon::AllocationBlock",slots:[], parents: [collection])
         try traitsMap.setPointer(block,forKey:"Argon::AllocationBlock")
-        let vector = try self.allocate(traitsNamed: "Argon::Vector",slots:[MemorySlotLayout("header",0,integer),MemorySlotLayout("traits",ArgonWordSize,traits),MemorySlotLayout("monitor",2*ArgonWordSize,integer),MemorySlotLayout("count",3*ArgonWordSize,integer),MemorySlotLayout("capacity",4*ArgonWordSize,integer),MemorySlotLayout("block",5*ArgonWordSize,block),MemorySlotLayout("spare",6*ArgonWordSize,integer)], parents: [collection])
+        let symbolTree = try self.allocate(traitsNamed: "Argon::SymbolTree",slots:[], parents: [collection])
+        try traitsMap.setPointer(symbolTree,forKey:"Argon::SymbolTree")
+        let vector = try self.allocate(traitsNamed: "Argon::Vector",slots:[MemorySlotLayout("header",0,integer),MemorySlotLayout("traits",Int(ArgonWordSize),traits),MemorySlotLayout("monitor",2*Int(ArgonWordSize),integer),MemorySlotLayout("count",3*Int(ArgonWordSize),integer),MemorySlotLayout("capacity",4*Int(ArgonWordSize),integer),MemorySlotLayout("block",5*Int(ArgonWordSize),block),MemorySlotLayout("spare",6*Int(ArgonWordSize),integer)], parents: [collection])
         try traitsMap.setPointer(vector,forKey:"Argon::Vector")
         let codeBlock = try self.allocate(traitsNamed: "Argon::CodeBlock",slots:[], parents: [vector])
         try traitsMap.setPointer(codeBlock,forKey:"Argon::CodeBlock")
@@ -469,8 +510,9 @@ public class Memory
         try traitsMap.setPointer(try self.allocate(traitsNamed: "Argon::Tuple",slots:[], parents: [collection]),forKey:"Argon::Tuple")
         try traitsMap.setPointer(try self.allocate(traitsNamed: "Argon::Hashable",slots:[], parents: [comparable,equatable]),forKey:"Argon::Hashable")
         try traitsMap.setPointer(try self.allocate(traitsNamed: "Argon::BitSet",slots:[], parents: [collection]),forKey:"Argon::BitSet")
-        let address = addressOfNextFreeWordsOfSizeInDataSegment(Int32(MemoryLayout<ArgonWord>.size),dataSegment)
-        setPointerAtIndexAtPointer(pointer,0,address)
+        let dataBytes = dataSegment.advanced(by: 16)
+        let dataPointer = pointerAtIndexAtPointer(0,dataBytes)
+        setPointerAtIndexAtPointer(pointer,Argon.kDataSegmentIndexTraitsMap,dataPointer)
         traitsMap.dump()
         let aPointer = try traitsMap.pointer(forKey: "Argon::Closure")
         print(aPointer ?? "")
@@ -479,22 +521,32 @@ public class Memory
     
     public func traits(atName name:String) throws -> Pointer?
         {
-        return(try traitsMap.pointer(forKey: name))
+        return(try MapPointerWrapper(globalReferences["traitsMap"]!.address,objectMemory: self).pointer(forKey: name))
         }
     
     public func setTraits(_ traits:Pointer,atName name:String) throws
         {
-        try traitsMap.setPointer(traits,forKey: name)
+        try MapPointerWrapper(globalReferences["traitsMap"]!.address,objectMemory: self).setPointer(traits,forKey: name)
         }
     
     public func method(atName name:String) throws -> Pointer?
         {
-        return(try methodMap.pointer(forKey: name))
+        return(try MapPointerWrapper(globalReferences["methodMap"]!.address,objectMemory: self).pointer(forKey: name))
         }
     
     public func setMethod(_ pointer:Pointer,atName name:String) throws
         {
-        try methodMap.setPointer(pointer,forKey: name)
+        try MapPointerWrapper(globalReferences["methodMap"]!.address,objectMemory: self).setPointer(pointer,forKey: name)
+        }
+    
+    public func symbol(atSymbol symbol:String) throws -> Pointer?
+        {
+        return(SymbolTreePointerWrapper(globalReferences["symbolTree"]!.address).find(symbol:symbol))
+        }
+    
+    public func setSymbol(_ symbol:String) throws -> Pointer
+        {
+        return(try SymbolTreePointerWrapper(globalReferences["symbolTree"]!.address).add(symbol: symbol, memory: self))
         }
     
     public func collectGarbage(_ threads:[VMThread])
@@ -505,13 +557,21 @@ public class Memory
             pthread_mutex_unlock(memoryMutexPointer)
             }
         let rootArray = allocateRootArray()
-        addRootFromSourceToRootArray(traitsMap.pointer,Memory.kSourceGlobal,nil,Int32(0),rootArray)
+        self.addGlobalsToRootArray(rootArray:rootArray)
+        var index = 0
         for thread in threads
             {
-            thread.addRegistersContainingPointerToRootArray(rootArray)
+            thread.addRootContentsToRootArray(threadIndex:index,rootArray:rootArray)
+            index += 1
             }
         addDataContentsToRootArray(self.dataSegment,rootArray)
         copyRootsFromTo(rootArray,fromSpace, toSpace)
+        self.updateGlobalsFrom(rootArray:rootArray)
+        for thread in threads
+            {
+//            thread.updateRootContentsFrom(rootArray:rootArray)
+            }
+        freeRootArray(rootArray)
         }
     
     func testMaps() throws
@@ -583,8 +643,8 @@ public class Memory
             let rootArray = allocateRootArray()
             let testString = "The quick brown fox jumped over the lazy dog which was fast asleep on the couch in the lounge after a long night of raving."
             let string = try self.allocate(string:testString)
-            let stringIndex = addRootFromSourceToRootArray(string,Memory.kSourceGlobal,nil,1,rootArray)
-            print(stringIndex)
+//            let stringIndex = addRootFromSourceToRootArray(string,Memory.kSourceGlobal,nil,1,rootArray)
+//            print(stringIndex)
             let vector = try self.allocate(vectorWithCapacity: 150)
             let vectorPointer = VectorPointer(vector)
             for loop in 0..<125
@@ -592,7 +652,7 @@ public class Memory
                 let aString = "This is a string number \(loop)"
                 try vectorPointer.append(try self.allocate(string: aString))
                 }
-            let vectorIndex = addRootFromSourceToRootArray(vector,Memory.kSourceGlobal,nil,1,rootArray)
+//            let vectorIndex = addRootFromSourceToRootArray(vector,Memory.kSourceGlobal,nil,1,rootArray)
             for loop in 0..<125
                 {
                 let innerString = StringPointerWrapper(vectorPointer.pointerItem(at: loop))
@@ -607,7 +667,7 @@ public class Memory
                 let pointer = SharedMemory.allocateInstance(toSpace,2,Int32(InstancePointerWrapper.kTypeVector))
                 let object = SharedMemory.allocateInstance(toSpace,Int32(slotCount),Int32(InstancePointerWrapper.kTypeVector))
                 setPointerAtIndexAtPointer(pointer,1,object)
-                addRootFromSourceToRootArray(object,Memory.kSourceGlobal,nil,Int32(index),rootArray)
+//                addRootFromSourceToRootArray(object,Memory.kSourceGlobal,nil,Int32(index),rootArray)
                 }
             let anotherString = try self.allocate(string: "This is another string to store in a register")
 //            setPointerInRegister(registerSet,anotherString, 12)
@@ -661,14 +721,12 @@ public class Memory
             object = rootAtIndexInArray(rootArray,511).pointee.address
             word = wordAtIndexAtPointer(3, object)
             assert(word == 14986)
-            let endVector = VectorPointer(rootAtIndexInArray(rootArray,vectorIndex).pointee.address!)
-            for loop in 0..<125
-                {
-                let endStringPointer = StringPointerWrapper(endVector.pointerItem(at: loop))
-                assert(endStringPointer.string == "This is a string number \(loop)")
-                }
-            dumpMemoryInSpaceWithCount(fromSpace,100)
-            dumpMemoryInSpaceWithCount(toSpace,100)
+//            let endVector = VectorPointer(rootAtIndexInArray(rootArray,vectorIndex).pointee.address!)
+//            for loop in 0..<125
+//                {
+//                let endStringPointer = StringPointerWrapper(endVector.pointerItem(at: loop))
+//                assert(endStringPointer.string == "This is a string number \(loop)")
+//                }
             }
         catch
             {

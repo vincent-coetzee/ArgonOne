@@ -45,31 +45,6 @@ typedef struct _RootArray
     RootHolder* roots;
     } RootArray;
 
-typedef struct _VMThreadMemory
-    {
-    // BP = 1
-    // SP = 2
-    // IP = 3
-    // ST = 4
-    // LP = 5
-    // GP0 = 6
-    Word registers[38];
-    Word localSpaceCapacity; // The amount of space available for thread local and stack
-    void* localSpace; // The space allocated for thread local storage and stack
-    } VMThreadMemory;
-
-//
-// Working with Thread Contexts
-//
-VMThreadMemory* _Nonnull allocateThreadMemoryWithCapacity(Word capacity);
-void freeThreadMemory(VMThreadMemory* context);
-void setThreadRegisterWordValue(VMThreadMemory* context,long regiserIndex,Word value);
-void setThreadRegisterPointerValue(VMThreadMemory* context,long registerIndex,Pointer value);
-void* _Nonnull threadRegisterPointerValue(VMThreadMemory* context,long registerIndex);
-Word threadRegisterWordValue(VMThreadMemory* context,long registerIndex);
-void incrementThreadRegisterValue(VMThreadMemory* context,long registerIndex);
-void decrementThreadRegisterValue(VMThreadMemory* context,long registerIndex);
-long long threadRegisterCount(VMThreadMemory* context);
 //
 // Working with Tags
 //
@@ -106,17 +81,6 @@ void* _Nonnull taggedTraitsPointer(void* pointer);
 void* _Nonnull taggedHandlerPointer(void* pointer);
 void* _Nonnull pointerTaggedWithTag(void* pointer,Word tag);
 //
-// Working with the stack
-//
-void pushWord(VMThreadMemory* context,Word word);
-void pushWordPointer(VMThreadMemory* context,WordPointer pointer);
-void pushPointer(VMThreadMemory* context,void* pointer);
-Word popWord(VMThreadMemory* context);
-void* _Nonnull popPointer(VMThreadMemory* context);
-long stackDepth(VMThreadMemory* space);
-void* _Nonnull stackPointer(VMThreadMemory* space);
-int addStackContentsToRootArray(VMThreadMemory*,void* rootArray);
-//
 // Data Segment functions
 //
 void setWordAtPointer(Word word,void* pointer);
@@ -129,10 +93,6 @@ void freeDataSegment(void* segment);
 void* _Nonnull addressOfNextFreeWordsOfSizeInDataSegment(int size,void* segment);
 //
 // Spaces
-void copyStackFromToWithDepth(int depth,Space* fromSpace,Space* toSpace);
-void copyStackFromToWithDepth(int depth,Space* fromSpace,Space* toSpace);
-void walkObjectsInSpace(Space* space);
-void dumpMemoryInSpaceWithCount(Space* space,int count);
 void copySpaceOfSizeToPointer(Space* space,int size,void* pointer);
 Word spaceUsedInSpace(Space* space);
 void freeSpace(void* aSpace);

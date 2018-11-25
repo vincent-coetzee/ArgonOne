@@ -159,7 +159,7 @@ public class VMInstructionList:Collection
             {
             for caller in callerValues
                 {
-                caller.immediate = targets[caller.target!]!.IP - caller.IP
+                caller.immediate = targets[caller.target!]!.IP - caller.IP - 1
                 }
             }
         }

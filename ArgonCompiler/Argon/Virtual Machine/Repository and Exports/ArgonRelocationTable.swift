@@ -107,7 +107,7 @@ public class ArgonRelocationTableEntry:NSObject,NSCoding
         kind = .string
         }
     
-    init(symbol:ArgonString)
+    init(symbol:ArgonSymbol)
         {
         item = symbol
         kind = .symbol
@@ -238,6 +238,18 @@ public class ArgonRelocationTable:NSObject,NSCoding
                         }
                 case is ArgonString:
                     let piece = part as! ArgonString
+                    if let entry = entriesByPart[piece.id]
+                        {
+                        entry.labels.append(label)
+                        }
+                    else
+                        {
+                        let entry = ArgonRelocationTableEntry(string: piece)
+                        entriesByPart[piece.id] = entry
+                        entry.labels.append(label)
+                        }
+                case is ArgonSymbol:
+                    let piece = part as! ArgonSymbol
                     if let entry = entriesByPart[piece.id]
                         {
                         entry.labels.append(label)

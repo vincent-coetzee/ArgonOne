@@ -70,6 +70,7 @@ public class SymbolTreePointerWrapper:InstancePointerWrapper
                     {
                     let newPointer = try memory.allocate(symbol: symbol)
                     left = Node(treePointer:treePointer,nodeIndex:index,symbolPointer:newPointer)
+                    print("Node is \(localString)")
                     print("Saving \(symbol) on left at \(index)")
                     leftIndex = index
                     self.write()
@@ -87,6 +88,7 @@ public class SymbolTreePointerWrapper:InstancePointerWrapper
                     {
                     let newPointer = try memory.allocate(symbol: symbol)
                     right = Node(treePointer:treePointer,nodeIndex:index,symbolPointer:newPointer)
+                    print("Node is \(localString)")
                     print("Saving \(symbol) on right at \(index)")
                     rightIndex = index
                     self.write()
@@ -127,22 +129,8 @@ public class SymbolTreePointerWrapper:InstancePointerWrapper
         func write()
             {
             setPointerAtIndexAtPointer(symbolPointer,nodeIndex,treePointer)
-            if let leftNode = left
-                {
-                setWordAtIndexAtPointer(Word(leftNode.nodeIndex),nodeIndex+1,treePointer)
-                }
-            else
-                {
-                setWordAtIndexAtPointer(0,nodeIndex+1,treePointer)
-                }
-            if let rightNode = right
-                {
-                setWordAtIndexAtPointer(Word(rightNode.nodeIndex),nodeIndex+2,treePointer)
-                }
-            else
-                {
-                setWordAtIndexAtPointer(0,nodeIndex+2,treePointer)
-                }
+            setWordAtIndexAtPointer(Word(leftIndex),nodeIndex+1,treePointer)
+            setWordAtIndexAtPointer(Word(rightIndex),nodeIndex+2,treePointer)
             }
         }
     

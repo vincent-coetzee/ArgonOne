@@ -10,27 +10,17 @@ import Foundation
 
 public class ArgonSignalStatementNode:ArgonMethodStatementNode
     {
-    public private(set) var symbolExpression:ArgonExpressionNode
+    public private(set) var symbol:Symbol
     
-    public init(symbol:ArgonExpressionNode)
+    public init(symbol:Symbol)
         {
-        self.symbolExpression = symbol
+        self.symbol = symbol
         super.init()
         }
     
     public override func threeAddress(pass:ThreeAddressPass) throws
         {
-        var address:ThreeAddress
-        if symbolExpression is ThreeAddress
-            {
-            address = symbolExpression as! ThreeAddress
-            }
-        else
-            {
-            try symbolExpression.threeAddress(pass: pass)
-            address = pass.lastLHS()
-            }
-        pass.add(ThreeAddressInstruction(operation: .signal,operand1: address))
+        pass.add(ThreeAddressInstruction(operation: .signal,operand1: symbol))
         }
     }
 

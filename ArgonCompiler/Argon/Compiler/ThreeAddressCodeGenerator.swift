@@ -12,7 +12,7 @@ public class ThreeAddressCodeGenerator
     {
     public var instructions:[VMInstruction] = []
     private var dataSegmentOffset = Argon.kDataSegmentStartOffset
-    private var registerFile = ArgonRegisterFile(count: Argon.kNumberOfRegisters, floatingPoint: false)
+    private var registerFile = ArgonRegisterFile(count: Argon.kNumberOfGeneralPurposeRegisters, floatingPoint: false)
     private var relocationTable = ArgonRelocationTable.shared
     private var pendingLabels:[String] = []
     private var currentStackFrame:ArgonStackFrame?
@@ -20,7 +20,7 @@ public class ThreeAddressCodeGenerator
     
     public func reset()
         {
-        registerFile = ArgonRegisterFile(count: Argon.kNumberOfRegisters, floatingPoint: false)
+        registerFile = ArgonRegisterFile(count: Argon.kNumberOfGeneralPurposeRegisters, floatingPoint: false)
         }
     
     public func nextOffsetInDataSegment() -> Int
@@ -169,8 +169,7 @@ public class ThreeAddressCodeGenerator
     
     public func encodeSignal(_ statement:ThreeAddressInstruction) throws
         {
-        let constant = statement.operand1 as! ArgonConstantNode
-        let symbol = constant.literalSymbol!
+        let symbol = statement.operand1 as! Symbol
         instructions.append((VMInstruction.SIG(address:0)).wantsRelocation(of: {symbol.asArgonSymbol()}))
         }
     
@@ -440,6 +439,10 @@ public class ThreeAddressCodeGenerator
         let method = statement.operand1 as! ArgonGenericMethodNode
         let count = statement.operand2 as! Int
         instructions.append((VMInstruction.DSP(address: 0, count: count)).wantsRelocation(of: {method.asArgonGenericMethod()}))
+        if method.returnTraits.isVoid
+            {
+            return
+            }
         if statement.lhs!.isStackBased
             {
             let stackBased = statement.lhs as! ArgonStackBasedValue

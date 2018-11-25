@@ -40,7 +40,7 @@ public class ArgonHandlerStatementNode:ArgonCompoundMethodStatementNode,ArgonCod
     public private(set) var id: Int
     public var instructionList: VMInstructionList
     public var threeAddressInstructions:[ThreeAddressInstruction] = []
-    public private(set) var conditionSymbol:String = ""
+    public private(set) var conditionSymbol:Symbol = Symbol.symbol("")
     
     public var lastLHS:ThreeAddress
         {
@@ -52,11 +52,11 @@ public class ArgonHandlerStatementNode:ArgonCompoundMethodStatementNode,ArgonCod
         let fullName = containingScope.enclosingModule().moduleName.string + ".HANDLER(\(id))"
         let new = ArgonHandler(fullName: fullName,code: ArgonCodeBlock(instructionList))
         new.id = id
-        new.conditionSymbol = conditionSymbol
+        new.conditionSymbol = conditionSymbol.asArgonSymbol()
         return(new)
         }
         
-    public init(containingScope:ArgonParseScope,conditionSymbol:String)
+    public init(containingScope:ArgonParseScope,conditionSymbol:Symbol)
         {
         self.instructionList = VMInstructionList()
         self.id = Argon.nextCounter
@@ -94,8 +94,14 @@ public class ArgonHandlerStatementNode:ArgonCompoundMethodStatementNode,ArgonCod
         return(false)
         }
     
+    public override func add(variable: ArgonVariableNode)
+        {
+        self.enclosingScope()!.add(variable: variable)
+        }
+    
     public override func threeAddress(pass: ThreeAddressPass) throws
         {
+        let label = pass.newLabel()
         pass.addLineTraceToNextStatement(lineTrace: self.lineTrace!)
         pass.add(ThreeAddressInstruction(operation: .jump,target: label))
         pass.add(ThreeAddressInstruction(operation: .handler,operand1: self))

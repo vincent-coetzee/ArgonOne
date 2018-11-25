@@ -10,49 +10,49 @@ import Foundation
 
 public enum VMOperation:Int
     {
-    case BR
+    case BR    0
     case BRT
     case BRF
     case GT
     case GTE
-    case EQ
+    case EQ    5
     case NEQ
     case LTE
     case LT
     case NOP
-    case MOVIR
+    case MOVIR 10
     case MOVRR
     case MOVAR
     case MOVNR
     case MOVRN
-    case AND
+    case AND   15
     case OR
     case XOR
     case NOT
     case ADD
-    case SUB
+    case SUB 20
     case MUL
     case MOD
     case DIV
     case DSP
-    case LOAD
+    case LOAD 25
     case MAKE
     case PUSH
     case POP
     case ROL
-    case ROR
+    case ROR 30
     case RET
     case INC
     case DEC
     case CALL
-    case NXT
+    case NXT 35
     case HALT
     case PRIM
     case STORE
     case SPAWN
-    case SIG
+    case SIG 40
     case HAND
-    case RES
+    case RES 42
     
     public var name:String
         {

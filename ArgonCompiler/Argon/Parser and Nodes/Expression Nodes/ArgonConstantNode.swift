@@ -14,7 +14,7 @@ public protocol ArgonConstantValue
     var integerValue:Int { get }
     var floatingPointValue:Float { get }
     var stringValue:String { get }
-    var symbolValue:String { get }
+    var symbolValue:Symbol { get }
     var booleanValue:Bool { get }
     }
 
@@ -23,7 +23,7 @@ public class ArgonConstantNode:ArgonExpressionNode,ThreeAddress,ArgonConstantVal
     public static var nameCounter = 1
     
     public private(set) var literalString:String?
-    public private(set) var literalSymbol:String?
+    public private(set) var literalSymbol:Symbol?
     public private(set) var literalInteger:Int?
     public private(set) var literalFloat:Float?
     public private(set) var literalBoolean:Bool?
@@ -48,7 +48,7 @@ public class ArgonConstantNode:ArgonExpressionNode,ThreeAddress,ArgonConstantVal
         return(literalFloat!)
         }
 
-    public var symbolValue:String
+    public var symbolValue:Symbol
         {
         return(literalSymbol!)
         }
@@ -149,7 +149,7 @@ public class ArgonConstantNode:ArgonExpressionNode,ThreeAddress,ArgonConstantVal
         super.init()
         }
         
-   init(symbol:String)
+   init(symbol:Symbol)
         {
         self.literalSymbol = symbol
         _traits = ArgonStandardsNode.shared.symbolTraits

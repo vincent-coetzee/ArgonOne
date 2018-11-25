@@ -134,116 +134,16 @@ int sharedMemoryOpen(const char* name)
 #define _WordAsPointer(w) (((void*)w))
 #define _PointerAsWord(p) (((Word)p))
 
+#define kThreadIndexInvalid (-1)
+#define kSourceIndexInvalid (-1)
+#define kSourceThreadStack (1)
+#define kSourceData (2)
+#define kSourceThreadRegister (3)
+#define kSourceGlobal (4)
+
 void copySpaceToSpace(Space* toSpace,Space* fromSpace);
 int pointerTag(void* pointer,Word* word);
 
-//
-// Working with Thread Contexts
-//
-VMThreadMemory* _Nonnull allocateThreadMemoryWithCapacity(Word capacity)
-    {
-    VMThreadMemory* context = (VMThreadMemory*)malloc(sizeof(VMThreadMemory));
-    memset(&context->registers,0,sizeof(context->registers));
-    context->localSpaceCapacity = capacity;
-    context->localSpace = malloc(capacity);
-    context->registers[kST] = _PointerAsWord(context->localSpace + capacity - kWordSize);
-    context->registers[kSP] = context->registers[kST];
-    context->registers[kLP] = _PointerAsWord(context->localSpace);
-    return(context);
-    }
-
-void setThreadRegisterWordValue(VMThreadMemory* context,long registerIndex,Word value)
-    {
-    context->registers[registerIndex] = value;
-    }
-
-void setThreadRegisterPointerValue(VMThreadMemory* context,long registerIndex,Pointer value)
-    {
-    context->registers[registerIndex] = _PointerAsWord(value);
-    }
-
-void* _Nonnull threadRegisterPointerValue(VMThreadMemory* context,long registerIndex)
-    {
-    return((Pointer)context->registers[registerIndex]);
-    }
-
-Word threadRegisterWordValue(VMThreadMemory* context,long registerIndex)
-    {
-    return((long long)context->registers[registerIndex]);
-    }
-
-void incrementThreadRegisterValue(VMThreadMemory* context,long registerIndex)
-    {
-    context->registers[registerIndex]++;
-    }
-
-void decrementThreadRegisterValue(VMThreadMemory* context,long registerIndex)
-    {
-    context->registers[registerIndex]--;
-    }
-
-long long threadRegisterCount(VMThreadMemory* context)
-    {
-    return(kThreadRegisterCount);
-    }
-
-void freeThreadMemory(VMThreadMemory* context)
-    {
-    free(context->localSpace);
-    free(context);
-    }
-
-void pushWord(VMThreadMemory* context,Word word)
-    {
-    *((WordPointer)_WordAsPointer(context->registers[kSP])) = word;
-    context->registers[kSP] -= kWordSize;
-    }
-
-void pushWordPointer(VMThreadMemory* context,WordPointer word)
-    {
-    *((WordPointer*)_WordAsPointer(context->registers[kSP])) = word;
-    context->registers[kSP] -= kWordSize;
-    }
-
-void pushPointer(VMThreadMemory* context,void* word)
-    {
-    *((WordPointer*)context->registers[kSP]) = ((WordPointer)word);
-    context->registers[kSP] -= kWordSize;
-    }
-
-Word popWord(VMThreadMemory* context)
-    {
-    Word value = *((WordPointer)context->registers[kSP]);
-    context->registers[kSP] += kWordSize;
-    return(value);
-    }
-
-void* _Nonnull popPointer(VMThreadMemory* context)
-    {
-    WordPointer value = *((WordPointer*)context->registers[kSP]);
-    context->registers[kSP] += kWordSize;
-    return(value);
-    }
-
-long stackDepth(VMThreadMemory* context)
-    {
-    return(context->registers[kST] - context->registers[kSP]);
-    }
-
-int addStackContentsToRootArray(VMThreadMemory* context,void* rootArray)
-    {
-    int count = 0;
-    for (Word word = context->registers[kST] ;word >= context->registers[kSP];word -= kWordSize)
-        {
-        Pointer address = *((Pointer*) _WordAsPointer(word));
-        if (isTaggedPointer(address))
-            {
-            addRootFromSourceToRootArray(address,kSourceStack,context,((int)(word - context->registers[kSP])),rootArray);
-            count++;
-            }
-        }
-    return(count);
-    }
 //
 // Working with TAGS
 //
@@ -692,30 +592,13 @@ int addDataContentsToRootArray(void* theSegment,void* rootArray)
         if (isTaggedPointer(address))
             {
             count++;
-            addRootFromSourceToRootArray(address,kSourceData,NULL,index,rootArray);
+            addRootToRootArray(kSourceData,kThreadIndexInvalid,index,address,rootArray);
             }
         }
     return(count);
     }
 
-int addRootFromSourceToRootArray(void* root,int source,void* sourcePointer,int sourceNumber,void* pointer)
-    {
-    RootArray* array = (RootArray*) pointer;
-    if (array->currentIndex >= array->capacity - 1)
-        {
-        growRootArray(array);
-        }
-    RootHolder holder;
-    holder.address = root;
-    holder.source = source;
-    holder.sourceAddress = sourcePointer;
-    holder.sourceNumber = sourceNumber;
-    array->roots[array->currentIndex] = holder;
-    array->currentIndex++;
-    return(array->currentIndex - 1);
-    }
-
-void addRootToRootArray(void* root,void* rootArray)
+long addRootToRootArray(long sourceIndex,long threadIndex,long itemIndex,void* root,void* rootArray)
     {
     RootArray* array = ((RootArray*)rootArray);
     if (array->currentIndex >= array->capacity - 1)
@@ -724,11 +607,13 @@ void addRootToRootArray(void* root,void* rootArray)
         }
     RootHolder holder;
     holder.address = root;
-    holder.source = kSourceGlobal;
-    holder.sourceAddress = NULL;
-    holder.sourceNumber = 0;
+    holder.sourceIndex = (int)sourceIndex;
+    holder.threadIndex = (int)threadIndex;
+    holder.itemIndex = (int)itemIndex;
     array->roots[array->currentIndex] = holder;
+    long index = array->currentIndex;
     array->currentIndex++;
+    return(index);
     }
 
 void growRootArray(RootArray* array)
@@ -773,19 +658,6 @@ char* bitStringFor(char* string,Word word)
     return(string);
     }
 
-void dumpMemoryInSpaceWithCount(Space* space,int count)
-    {
-    char bitString[256];
-    
-    void*pointer = space->baseAddress;
-    for (int index =0;index<count;index++)
-        {
-        bitStringFor(bitString,*((Word*)pointer));
-        printf("%08X %s\n",(unsigned int)pointer,bitString);
-        pointer += kWordSize;
-        }
-    }
-
 int slotCountOfInstance(void* instance)
     {
     Word header = *((Word*)instance);
@@ -805,22 +677,6 @@ int typeOfInstance(void* instance)
     Word header = *((Word*)instance);
     int type = (header & kTagType) >> 8;
     return(type);
-    }
-
-
-void walkObjectsInSpace(Space* space)
-    {
-    int count = 0;
-    Pointer pointer = space->baseAddress;
-    while (pointer < space->offsetAddress)
-        {
-        count++;
-//        printf("OBJECT %08X %s\n",(unsigned int)pointer,bitStringFor(string,*((WordPointer)pointer)));
-        Word header = *((WordPointer)pointer);
-        int slotCount = (header & ((Word)kTagSlotCount))  >> ((Word)32);
-        pointer += slotCount*kWordSize;
-        }
-//    printf("FOUND %d OBJECTS\n",count);
     }
 
 unsigned long totalBytesCopied = 0;
@@ -920,26 +776,6 @@ void copyRootsFromTo(Pointer arrayBase,Space* fromSpace,Space* toSpace)
             }
         }
     printf("COPIED %ld BYTES WITH %ld OBJECTS",totalBytesCopied,totalObjectsCopied);
-    }
-
-
-void updateRootSources(void* registers,Space* space,void* dataSegment,void* array)
-    {
-    RootArray* rootArray = (RootArray*)array;
-    RootHolder* rootHolders = rootArray->roots;
-    for (int index = 0; index < rootArray->currentIndex; index++)
-        {
-        RootHolder holder = rootHolders[index];
-        if (holder.source == kSourceData)
-            {
-            printf("FIX THIS ERROR - NEED TO FIX updateRootSources");
-//            setPointerAtPointer(holder.address, holder.sourceNumber);
-            }
-        else if (holder.source == kSourceStack)
-            {
-            *((Pointer*)(((VMThreadMemory*)holder.sourceAddress)->registers[kSP] + holder.sourceNumber)) = holder.address;
-            }
-        }
     }
 
 static inline void* copyRoot(void* outerRoot,void** freePointer)

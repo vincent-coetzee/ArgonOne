@@ -25,7 +25,7 @@ public class ArgonNamedConstantNode:ArgonConstantNode
         _name = ArgonName(ArgonName(fullName).last)
         }
     
-    init(fullName:ArgonName,symbol:String)
+    init(fullName:ArgonName,symbol:Symbol)
         {
         self.fullName = fullName
         super.init(symbol:symbol)

@@ -11,7 +11,7 @@ import Foundation
 public class ArgonHandler:ArgonModulePart
     {
     public private(set) var code:ArgonCodeBlock
-    public var conditionSymbol:String = ""
+    public var conditionSymbol:ArgonSymbol = ArgonSymbol(symbol:"")
     
     public init(fullName:String,code:ArgonCodeBlock)
         {
@@ -29,7 +29,7 @@ public class ArgonHandler:ArgonModulePart
     public required init?(coder aDecoder: NSCoder)
         {
         code = aDecoder.decodeObject(forKey: "code") as! ArgonCodeBlock
-        conditionSymbol = aDecoder.decodeObject(forKey: "conditionSymbol") as! String
+        conditionSymbol = aDecoder.decodeObject(forKey: "conditionSymbol") as! ArgonSymbol
         super.init(coder:aDecoder)
         }
     }

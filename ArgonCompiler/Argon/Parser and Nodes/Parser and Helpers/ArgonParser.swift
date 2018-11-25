@@ -967,14 +967,15 @@ public class ArgonParser
             {
             throw(ParseError.leftParExpected)
             }
-        var symbol:ArgonExpressionNode?
+        var symbol:Symbol?
         try self.parseParenthesis
             {
-            symbol = try self.parseExpression()
-            if symbol!.traits != ArgonStandardsNode.shared.symbolTraits
+            if !token.isSymbol
                 {
                 throw(ParseError.symbolExpected)
                 }
+            symbol = Symbol.symbol(token.symbol)
+            try self.nextToken()
             }
         return(ArgonSignalStatementNode(symbol:symbol!))
         }
@@ -984,7 +985,7 @@ public class ArgonParser
         let lineTrace = ArgonLineTrace(line: self.token.location.lineNumber,start:self.token.location.lineStart,end:self.token.location.lineStop)
         try self.nextToken()
         var conditionName:ArgonName = ArgonName()
-        var conditionSymbol:String?
+        var conditionSymbol:Symbol?
         let location = token.location
         var node:ArgonHandlerStatementNode?
         try self.parseParenthesis
@@ -993,7 +994,7 @@ public class ArgonParser
                 {
                 throw(ParseError.symbolExpected)
                 }
-            conditionSymbol = token.symbol
+            conditionSymbol = Symbol.symbol(token.symbol)
             try self.nextToken()
             node = ArgonHandlerStatementNode(containingScope:scope,conditionSymbol:conditionSymbol!)
             scope.enclosingMethod()?.add(handler:node!)
@@ -1990,7 +1991,7 @@ public class ArgonParser
                 {
                 return(ArgonConstantNode(boolean:symbol == "#true"))
                 }
-            return(ArgonConstantNode(symbol:symbol))
+            return(ArgonConstantNode(symbol:Symbol.symbol(symbol)))
             }
         else if token.isIdentifier
             {
@@ -2136,7 +2137,7 @@ public class ArgonParser
         let fullName = ArgonName(scope.enclosingModule().moduleName.string,name.string)
         if token.isSymbol
             {
-            node = ArgonNamedConstantNode(fullName:fullName,symbol:token.symbol)
+            node = ArgonNamedConstantNode(fullName:fullName,symbol:Symbol.symbol(token.symbol))
             }
         else if token.isString
             {

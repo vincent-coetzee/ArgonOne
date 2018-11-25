@@ -23,22 +23,6 @@
 		BF1EDFE32189BB0E00F36C77 /* ParserStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFE22189BB0E00F36C77 /* ParserStatement.swift */; };
 		BF1EDFE52189C4A900F36C77 /* VMInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFE42189C4A900F36C77 /* VMInstruction.swift */; };
 		BF1EDFE72189C4D900F36C77 /* ArgonAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFE62189C4D900F36C77 /* ArgonAssembler.swift */; };
-		BF1EDFFA2189C57000F36C77 /* BinaryEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFEA2189C56F00F36C77 /* BinaryEncoder.swift */; };
-		BF1EDFFB2189C57000F36C77 /* BinaryDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFEB2189C56F00F36C77 /* BinaryDecoder.swift */; };
-		BF1EDFFC2189C57000F36C77 /* DecodingError+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFEC2189C56F00F36C77 /* DecodingError+Extensions.swift */; };
-		BF1EDFFD2189C57000F36C77 /* EncodedType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFED2189C56F00F36C77 /* EncodedType.swift */; };
-		BF1EDFFE2189C57000F36C77 /* UnkeyedStorageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFEE2189C56F00F36C77 /* UnkeyedStorageContainer.swift */; };
-		BF1EDFFF2189C57000F36C77 /* CodingKey+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFEF2189C56F00F36C77 /* CodingKey+Extensions.swift */; };
-		BF1EE0002189C57000F36C77 /* BinaryCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFF02189C56F00F36C77 /* BinaryCodingKey.swift */; };
-		BF1EE0012189C57000F36C77 /* EncodedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFF12189C57000F36C77 /* EncodedData.swift */; };
-		BF1EE0022189C57000F36C77 /* MemoryAlignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFF22189C57000F36C77 /* MemoryAlignment.swift */; };
-		BF1EE0032189C57000F36C77 /* NullStorageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFF32189C57000F36C77 /* NullStorageContainer.swift */; };
-		BF1EE0042189C57000F36C77 /* KeyedStorageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFF42189C57000F36C77 /* KeyedStorageContainer.swift */; };
-		BF1EE0052189C57000F36C77 /* StorageContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFF52189C57000F36C77 /* StorageContainer.swift */; };
-		BF1EE0062189C57000F36C77 /* StorageContainerReaderWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFF62189C57000F36C77 /* StorageContainerReaderWriter.swift */; };
-		BF1EE0072189C57000F36C77 /* PassthroughReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFF72189C57000F36C77 /* PassthroughReference.swift */; };
-		BF1EE0082189C57000F36C77 /* SingleValueContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFF82189C57000F36C77 /* SingleValueContainer.swift */; };
-		BF1EE0092189C57000F36C77 /* StrorageContainerReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EDFF92189C57000F36C77 /* StrorageContainerReference.swift */; };
 		BF1EE00B2189C5AA00F36C77 /* ArgonExecutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EE00A2189C5AA00F36C77 /* ArgonExecutable.swift */; };
 		BF1EE00D2189C5C100F36C77 /* ArgonModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EE00C2189C5C100F36C77 /* ArgonModule.swift */; };
 		BF1EE00F2189C65000F36C77 /* ArgonImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1EE00E2189C65000F36C77 /* ArgonImport.swift */; };
@@ -80,22 +64,6 @@
 		BF1EDFE22189BB0E00F36C77 /* ParserStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserStatement.swift; sourceTree = "<group>"; };
 		BF1EDFE42189C4A900F36C77 /* VMInstruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMInstruction.swift; sourceTree = "<group>"; };
 		BF1EDFE62189C4D900F36C77 /* ArgonAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonAssembler.swift; sourceTree = "<group>"; };
-		BF1EDFEA2189C56F00F36C77 /* BinaryEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryEncoder.swift; sourceTree = "<group>"; };
-		BF1EDFEB2189C56F00F36C77 /* BinaryDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryDecoder.swift; sourceTree = "<group>"; };
-		BF1EDFEC2189C56F00F36C77 /* DecodingError+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DecodingError+Extensions.swift"; sourceTree = "<group>"; };
-		BF1EDFED2189C56F00F36C77 /* EncodedType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncodedType.swift; sourceTree = "<group>"; };
-		BF1EDFEE2189C56F00F36C77 /* UnkeyedStorageContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnkeyedStorageContainer.swift; sourceTree = "<group>"; };
-		BF1EDFEF2189C56F00F36C77 /* CodingKey+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CodingKey+Extensions.swift"; sourceTree = "<group>"; };
-		BF1EDFF02189C56F00F36C77 /* BinaryCodingKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinaryCodingKey.swift; sourceTree = "<group>"; };
-		BF1EDFF12189C57000F36C77 /* EncodedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncodedData.swift; sourceTree = "<group>"; };
-		BF1EDFF22189C57000F36C77 /* MemoryAlignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryAlignment.swift; sourceTree = "<group>"; };
-		BF1EDFF32189C57000F36C77 /* NullStorageContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NullStorageContainer.swift; sourceTree = "<group>"; };
-		BF1EDFF42189C57000F36C77 /* KeyedStorageContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyedStorageContainer.swift; sourceTree = "<group>"; };
-		BF1EDFF52189C57000F36C77 /* StorageContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageContainer.swift; sourceTree = "<group>"; };
-		BF1EDFF62189C57000F36C77 /* StorageContainerReaderWriter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageContainerReaderWriter.swift; sourceTree = "<group>"; };
-		BF1EDFF72189C57000F36C77 /* PassthroughReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassthroughReference.swift; sourceTree = "<group>"; };
-		BF1EDFF82189C57000F36C77 /* SingleValueContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleValueContainer.swift; sourceTree = "<group>"; };
-		BF1EDFF92189C57000F36C77 /* StrorageContainerReference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrorageContainerReference.swift; sourceTree = "<group>"; };
 		BF1EE00A2189C5AA00F36C77 /* ArgonExecutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonExecutable.swift; sourceTree = "<group>"; };
 		BF1EE00C2189C5C100F36C77 /* ArgonModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonModule.swift; sourceTree = "<group>"; };
 		BF1EE00E2189C65000F36C77 /* ArgonImport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonImport.swift; sourceTree = "<group>"; };
@@ -168,7 +136,6 @@
 		BF1EDFD12189B50800F36C77 /* Assembler */ = {
 			isa = PBXGroup;
 			children = (
-				BF1EDFE92189C55800F36C77 /* Binary Coding */,
 				BF1EDFE82189C52000F36C77 /* Actual Assembler */,
 				BF1EDFDB2189B82B00F36C77 /* Parsing and Artefacts */,
 				BF1EDFD22189B51A00F36C77 /* Lexer */,
@@ -212,29 +179,6 @@
 				BF1EE0142189C92400F36C77 /* ArgonLibrary.swift */,
 			);
 			path = "Actual Assembler";
-			sourceTree = "<group>";
-		};
-		BF1EDFE92189C55800F36C77 /* Binary Coding */ = {
-			isa = PBXGroup;
-			children = (
-				BF1EDFF02189C56F00F36C77 /* BinaryCodingKey.swift */,
-				BF1EDFEB2189C56F00F36C77 /* BinaryDecoder.swift */,
-				BF1EDFEA2189C56F00F36C77 /* BinaryEncoder.swift */,
-				BF1EDFEF2189C56F00F36C77 /* CodingKey+Extensions.swift */,
-				BF1EDFEC2189C56F00F36C77 /* DecodingError+Extensions.swift */,
-				BF1EDFF12189C57000F36C77 /* EncodedData.swift */,
-				BF1EDFED2189C56F00F36C77 /* EncodedType.swift */,
-				BF1EDFF42189C57000F36C77 /* KeyedStorageContainer.swift */,
-				BF1EDFF22189C57000F36C77 /* MemoryAlignment.swift */,
-				BF1EDFF32189C57000F36C77 /* NullStorageContainer.swift */,
-				BF1EDFF72189C57000F36C77 /* PassthroughReference.swift */,
-				BF1EDFF82189C57000F36C77 /* SingleValueContainer.swift */,
-				BF1EDFF52189C57000F36C77 /* StorageContainer.swift */,
-				BF1EDFF62189C57000F36C77 /* StorageContainerReaderWriter.swift */,
-				BF1EDFF92189C57000F36C77 /* StrorageContainerReference.swift */,
-				BF1EDFEE2189C56F00F36C77 /* UnkeyedStorageContainer.swift */,
-			);
-			path = "Binary Coding";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -338,39 +282,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF1EE0042189C57000F36C77 /* KeyedStorageContainer.swift in Sources */,
 				BF1EE00F2189C65000F36C77 /* ArgonImport.swift in Sources */,
-				BF1EDFFD2189C57000F36C77 /* EncodedType.swift in Sources */,
 				BF1EDFE72189C4D900F36C77 /* ArgonAssembler.swift in Sources */,
 				BF1EE0172189CCF300F36C77 /* Register.swift in Sources */,
-				BF1EE0002189C57000F36C77 /* BinaryCodingKey.swift in Sources */,
 				BF1EDFB42189AAB100F36C77 /* AssemblyViewController.swift in Sources */,
-				BF1EE0022189C57000F36C77 /* MemoryAlignment.swift in Sources */,
-				BF1EE0072189C57000F36C77 /* PassthroughReference.swift in Sources */,
 				BF1EDFE12189BA7F00F36C77 /* ParserStatementBlock.swift in Sources */,
 				BF1EE0152189C92400F36C77 /* ArgonLibrary.swift in Sources */,
 				BF1EDFDD2189B85500F36C77 /* AssemblerParser.swift in Sources */,
 				BF1EE0112189C6C200F36C77 /* ArgonImportContentType.swift in Sources */,
-				BF1EDFFC2189C57000F36C77 /* DecodingError+Extensions.swift in Sources */,
 				BF1EDFD42189B53A00F36C77 /* ParsingError.swift in Sources */,
-				BF1EDFFF2189C57000F36C77 /* CodingKey+Extensions.swift in Sources */,
 				BF1EDFB22189AAB100F36C77 /* AppDelegate.swift in Sources */,
 				BF1EE00B2189C5AA00F36C77 /* ArgonExecutable.swift in Sources */,
 				BF1EDFDA2189B67B00F36C77 /* TokenStream.swift in Sources */,
 				BF1EDFE52189C4A900F36C77 /* VMInstruction.swift in Sources */,
-				BF1EE0012189C57000F36C77 /* EncodedData.swift in Sources */,
-				BF1EE0092189C57000F36C77 /* StrorageContainerReference.swift in Sources */,
 				BF1EDFD82189B65700F36C77 /* SourceLocation.swift in Sources */,
-				BF1EDFFB2189C57000F36C77 /* BinaryDecoder.swift in Sources */,
-				BF1EE0082189C57000F36C77 /* SingleValueContainer.swift in Sources */,
-				BF1EE0052189C57000F36C77 /* StorageContainer.swift in Sources */,
-				BF1EE0032189C57000F36C77 /* NullStorageContainer.swift in Sources */,
 				BF1EE00D2189C5C100F36C77 /* ArgonModule.swift in Sources */,
-				BF1EDFFA2189C57000F36C77 /* BinaryEncoder.swift in Sources */,
-				BF1EE0062189C57000F36C77 /* StorageContainerReaderWriter.swift in Sources */,
 				BF1EE0132189C7F800F36C77 /* ArgonExport.swift in Sources */,
 				BF1EDFDF2189BA0F00F36C77 /* ParserNode.swift in Sources */,
-				BF1EDFFE2189C57000F36C77 /* UnkeyedStorageContainer.swift in Sources */,
 				BF1EDFE32189BB0E00F36C77 /* ParserStatement.swift in Sources */,
 				BF1EDFD62189B56300F36C77 /* Token.swift in Sources */,
 			);

@@ -32,7 +32,7 @@ public class ArgonStandardsNode:ArgonTopLevelNode
     public private(set) var traitsTraits:ArgonTraitsNode
     public private(set) var doubleTraits:ArgonTraitsNode
     public private(set) var polymorphicArgumentTraits:ArgonTraitsNode
-    public private(set) var conditionTraits:ArgonTraitsNode
+    public private(set) var handlerBlockTraits:ArgonTraitsNode
     
     public override init(name:ArgonName)
         {
@@ -43,9 +43,9 @@ public class ArgonStandardsNode:ArgonTopLevelNode
         polymorphicArgumentTraits.asArgonTraits()
         behaviorTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Behaviour"))
         behaviorTraits.asArgonTraits()
-        conditionTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Condition"))
-        conditionTraits.parents = [behaviorTraits]
-        conditionTraits.asArgonTraits()
+        handlerBlockTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::HandlerBlock"))
+        handlerBlockTraits.parents = [behaviorTraits]
+        handlerBlockTraits.asArgonTraits()
         traitsTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::TraitsTraits"))
         anyTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Any"))
         anyTraits.parents = [behaviorTraits]

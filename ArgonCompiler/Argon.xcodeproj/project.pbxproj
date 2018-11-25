@@ -20,6 +20,8 @@
 		BF05A85121A71B58002410A1 /* ArgonRegisterVariableNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF05A85021A71B58002410A1 /* ArgonRegisterVariableNode.swift */; };
 		BF05A85321A729CF002410A1 /* HandlerPointerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF05A85221A729CF002410A1 /* HandlerPointerWrapper.swift */; };
 		BF05A85B21A742CC002410A1 /* SymbolPointerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF05A85A21A742CC002410A1 /* SymbolPointerWrapper.swift */; };
+		BF0BE4F321A8761600D98CD8 /* HandlerBlockPointerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0BE4F221A8761600D98CD8 /* HandlerBlockPointerWrapper.swift */; };
+		BF0BE4F521A8934A00D98CD8 /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0BE4F421A8934A00D98CD8 /* Symbol.swift */; };
 		BF0D777621A0497B003E8D9B /* ArgonMethodDirective.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0D777521A0497B003E8D9B /* ArgonMethodDirective.swift */; };
 		BF0E3D07214C4D4F004A402B /* TokenStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0E3D06214C4D4F004A402B /* TokenStream.swift */; };
 		BF0E3D09214C4E25004A402B /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0E3D08214C4E25004A402B /* Token.swift */; };
@@ -280,6 +282,8 @@
 		BF05A85021A71B58002410A1 /* ArgonRegisterVariableNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonRegisterVariableNode.swift; sourceTree = "<group>"; };
 		BF05A85221A729CF002410A1 /* HandlerPointerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlerPointerWrapper.swift; sourceTree = "<group>"; };
 		BF05A85A21A742CC002410A1 /* SymbolPointerWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SymbolPointerWrapper.swift; sourceTree = "<group>"; };
+		BF0BE4F221A8761600D98CD8 /* HandlerBlockPointerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandlerBlockPointerWrapper.swift; sourceTree = "<group>"; };
+		BF0BE4F421A8934A00D98CD8 /* Symbol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
 		BF0D777521A0497B003E8D9B /* ArgonMethodDirective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonMethodDirective.swift; sourceTree = "<group>"; };
 		BF0E3D06214C4D4F004A402B /* TokenStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenStream.swift; sourceTree = "<group>"; };
 		BF0E3D08214C4E25004A402B /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -568,6 +572,7 @@
 				BFCCD645219377FF00B5EAD8 /* ArgonThreadStackFrame.swift */,
 				BF447C69216989B80072BD2F /* ArgonType.swift */,
 				BF52472C2198609B0072A6D7 /* ArgonLineTrace.swift */,
+				BF0BE4F421A8934A00D98CD8 /* Symbol.swift */,
 			);
 			path = "Support Types";
 			sourceTree = "<group>";
@@ -754,6 +759,7 @@
 				BF5F8D0C21A5C23A003D9D60 /* SymbolTreePointerWrapper.swift */,
 				BF8FA52C215686C70077D370 /* TraitsPointerWrapper.swift */,
 				BF8FA52E215686E50077D370 /* VectorPointer.swift */,
+				BF0BE4F221A8761600D98CD8 /* HandlerBlockPointerWrapper.swift */,
 			);
 			path = "Object Pointers";
 			sourceTree = "<group>";
@@ -1192,6 +1198,7 @@
 				BF8FA527215686710077D370 /* MapPointerWrapper.swift in Sources */,
 				BFF9976F2185E36200F9F8CA /* EncodedData.swift in Sources */,
 				BF8FA521215669630077D370 /* ArgonBitSet.swift in Sources */,
+				BF0BE4F521A8934A00D98CD8 /* Symbol.swift in Sources */,
 				BFA1B53B214D28A50085CDCF /* ArgonArithmeticExpression.swift in Sources */,
 				BF541FDE214829DB00961D52 /* ArgonSourceFileViewController.swift in Sources */,
 				BF775E09217517BC007F5B0C /* ArgonNextMethodStatement.swift in Sources */,
@@ -1338,6 +1345,7 @@
 				BF5F8D1521A5EE3F003D9D60 /* ArgonSignalStatementNode.swift in Sources */,
 				BF3F7062218C5FEE0002052B /* ArgonGenericMethod.swift in Sources */,
 				BF0E3D19214C57A1004A402B /* ArgonParseScope.swift in Sources */,
+				BF0BE4F321A8761600D98CD8 /* HandlerBlockPointerWrapper.swift in Sources */,
 				BF8FA5182154975A0077D370 /* MemoryWindowController.swift in Sources */,
 				BF023E092194A65300EDB60D /* ArgonCapturedValue.swift in Sources */,
 				BF50FB65215DE1B30018E7AF /* ArgonForStatementNode.swift in Sources */,

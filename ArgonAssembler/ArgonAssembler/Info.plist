@@ -9,7 +9,7 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>arasm</string>
+				<string>argonasm</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>ArgonAssemblerFile.png</string>
@@ -49,5 +49,23 @@
 	<string>Main</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeDescription</key>
+			<string>Argon Assembly Language File</string>
+			<key>UTTypeIconFile</key>
+			<string>ArgonAssemblerFile</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.macsemantics.argon.assembler</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>argonasm</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>

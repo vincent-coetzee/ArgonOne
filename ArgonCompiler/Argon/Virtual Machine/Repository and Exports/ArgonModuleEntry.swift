@@ -19,9 +19,4 @@ extension String
         {
         return(ArgonString(string:self))
         }
-    
-    public func asArgonSymbol() -> ArgonSymbol
-        {
-        return(ArgonSymbol(symbol:self))
-        }
     }

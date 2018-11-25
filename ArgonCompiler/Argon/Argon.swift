@@ -11,7 +11,7 @@ import SharedMemory
 
 public typealias ArgonWord = UInt64
 
-public let ArgonWordSize = MemoryLayout<ArgonWord>.size
+public let ArgonWordSize = Word(MemoryLayout<ArgonWord>.size)
 
 extension ArgonWord
     {
@@ -51,6 +51,7 @@ public struct Argon
     public static let kTypeHandler:Int = 14
     public static let kTypeSymbolTree:Int = 15
     public static let kTypeSymbol:Int = 16
+    public static let kTypeHandlerBlock = 17
     
     public static let kDefaultMemorySegmentSize = 1024 * 1024 * 256 // 128 MB
     public static let kDefaultMemoryEdenSize = 1024 * 1024 * 64 // 16 MB
@@ -86,7 +87,13 @@ public struct Argon
     public static let kOffsetOfFirstRegisterForUse = 8
     public static let kNumberOfReservedRegisters = 2
     public static let kOffsetOfFirstFloatingPointRegisterForUse = 39
-    public static let kNumberOfRegisters = 32
+    public static let kNumberOfGeneralPurposeRegisters = 32
+    public static let kNumberOfFloatingPointRegisters = 32
+    public static let kNumberOfSpecialPurposeRegisters = 6
+    
+    public static let kDataSegmentIndexTraitsMap:Int32 = 0
+    public static let kDataSegmentIndexMethodMap:Int32 = 1
+    public static let kDataSegmentIndexSymbolTree:Int32 = 2
     
     private static var _counter = 1
     

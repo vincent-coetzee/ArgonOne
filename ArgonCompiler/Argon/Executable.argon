@@ -117,6 +117,9 @@ executable GoFishing
         // function that declares it goes out of scope.
         let handler(#invalidNumber)
             {
+            let someLocalOrOther = 423
+            someLocalOrOther = 47
+            print(value::someLocalOrOther)
             print(value::"Handler for #invalidNumber activated")
             }
         //
@@ -152,7 +155,7 @@ executable GoFishing
                 vector[index] = index
                 index = index + 1
                 }
-            if index >= 47
+            if index >= 43
                 {
                 signal(#invalidNumber)
                 }
