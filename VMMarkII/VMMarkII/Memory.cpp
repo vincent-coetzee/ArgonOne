@@ -25,7 +25,7 @@ Pointer Memory::allocateObject(int slotCount,int type,int flags,Pointer traits)
     object->setIsForwarded(false);
     object->setType(type);
     object->traits = traits;
-    return(pointer);
+    return(taggedObjectPointer(pointer));
     }
 
 Pointer Memory::allocateExtensionBlockWithCapacityInBytes(long capacity)
@@ -33,7 +33,7 @@ Pointer Memory::allocateExtensionBlockWithCapacityInBytes(long capacity)
     long totalBytes = (kExtensionBlockFixedSlotCount * kWordSize + capacity);
     Pointer pointer = toSpace->allocateBlockWithSizeInBytes(totalBytes);
     setWordAtIndexAtPointer(capacity,kExtensionBlockCountIndex,pointer);
-    return(pointer);
+    return(taggedExtensionBlockPointer(pointer));
     }
 
 Memory::Memory(long capacity)
@@ -42,6 +42,11 @@ Memory::Memory(long capacity)
     this->toSpace = new MemorySpace(capacity);
     this->finalSpace = new MemorySpace(capacity / 3);
     this->monitor = new Monitor();
+    }
+
+Pointer Memory::allocateBlock(int capacity)
+    {
+    return(toSpace->allocateBlockWithSizeInBytes(capacity));
     }
 
 Pointer Memory::allocateString(char* string)
@@ -54,8 +59,7 @@ Pointer Memory::allocateString(char* string)
     wrapper.setType(kTypeString);
     wrapper.setIsForwarded(false);
     wrapper.setString(string);
-    wrapper.extensionBlockPointer = zero;
-    return(pointer);
+    return(taggedStringPointer(pointer));
     }
 
 Pointer Memory::allocateMap(int capacity)

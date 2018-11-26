@@ -37,21 +37,29 @@ Pointer StringPointerWrapper::extensionBlockPointer()
     
 void StringPointerWrapper::setString(char* string)
     {
-    ExtensionBlockPointerWrapper* wrapper = new ExtensionBlockPointerWrapper(pointerAtIndex(kStringExtensionBlockIndex));
+    Pointer extensionPointer = pointerAtIndex(kStringExtensionBlockIndex);
+    ExtensionBlockPointerWrapper* wrapper;
     long bytesNeeded = strlen(string) + 1;
     setWordAtIndex(bytesNeeded-1,kStringCountIndex);
-    if (wrapper->capacity() > bytesNeeded)
+    if (extensionPointer != NULL)
         {
-        strcpy((char*)wrapper->bytesPointer(),string);
-        delete wrapper;
-        return;
+        wrapper = new ExtensionBlockPointerWrapper(extensionPointer);
+        if (wrapper->capacity() > bytesNeeded)
+            {
+            strcpy((char*)wrapper->bytesPointer(),string);
+            wrapper->setCount(bytesNeeded-1);
+            delete wrapper;
+            return;
+            }
         }
     long extraInBlock = bytesNeeded / 4;
     extraInBlock = extraInBlock < 20 ? 20 : extraInBlock;
-    bytesNeeded += extraInBlock;
-    Pointer extensionBlockPointer = Memory::shared->allocateExtensionBlockWithCapacityInBytes(bytesNeeded);
-    wrapper = new ExtensionBlockPointerWrapper(extensionBlockPointer);
+    Word totalBytes = bytesNeeded + extraInBlock;
+    extensionPointer = Memory::shared->allocateExtensionBlockWithCapacityInBytes(bytesNeeded);
+    wrapper = new ExtensionBlockPointerWrapper(extensionPointer);
     wrapper->setCount(bytesNeeded);
+    wrapper->setCapacity(totalBytes)
     strcpy((char*)wrapper->bytesPointer(),string);
+    setPointerAtIndex(extensionPointer,kStringExtensionBlockIndex);
     delete wrapper;
     }

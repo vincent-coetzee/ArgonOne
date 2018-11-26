@@ -21,6 +21,8 @@ void testObjects(void);
 void testTagging();
 void testRawPointers();
 void testMemory();
+void testPointers();
+void testStringPointers();
 
 int main(int argc, const char * argv[])
     {
@@ -30,12 +32,34 @@ int main(int argc, const char * argv[])
     std::cout << "Size of cond is " << sizeof(pthread_mutex_t) << "\n";
     std::cout << "Size of Word is " << sizeof(Word) << "\n";
     std::cout << "Size of char is " << sizeof(char) << "\n";
+    testStringPointers();
+    testPointers();
     testMemory();
     testTagging();
     testObjects();
     testArgonInstruction();
     return 0;
     };
+
+void testStringPointers()
+    {
+    StringPointerWrapper wrapper = StringPointerWrapper(Memory::shared->allocateString("This is a somewhat long test string that can be used where a string is needed"));
+    printf("The string is %s\n",wrapper.string());
+    };
+
+void testPointers()
+    {
+    Pointer block = Memory::shared->allocateBlock(320);
+    setWordAtIndexAtPointer(211,0,block);
+    Word testWord = wordAtIndexAtPointer(0,block);
+    assert(testWord == 211);
+    setWordAtIndexAtPointer(510000,3,block);
+    testWord = wordAtIndexAtPointer(3,block);
+    assert(testWord == 510000);
+    setPointerAtIndexAtPointer(block,0,block);
+    Pointer testPointer = pointerAtIndexAtPointer(0,block);
+    assert(testPointer == block);
+    }
 
 void testMemory()
     {

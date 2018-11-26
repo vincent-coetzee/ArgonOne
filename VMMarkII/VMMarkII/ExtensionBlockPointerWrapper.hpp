@@ -18,11 +18,11 @@
 //
 #define kExtensionBlockHeaderIndex (0)
 #define kExtensionBlockTraitsIndex (1)
-#define kExtensionBlockMutexIndex (2)
-#define kExtensionBlockConditionIndex (3)
-#define kExtensionBlockCountIndex (4)
-#define kExtensionBlockCapacityIndex (5)
-#define kExtensionBlockBytesIndex (6)
+#define kExtensionBlockMonitorIndex (2)
+#define kExtensionBlockCountIndex (3)
+#define kExtensionBlockCapacityIndex (4)
+#define kExtensionBlockBytesIndex (5)
+
 #define kExtensionBlockFixedSlotCount (7)
 
 class ExtensionBlockPointerWrapper: public ObjectPointerWrapper
@@ -31,6 +31,7 @@ class ExtensionBlockPointerWrapper: public ObjectPointerWrapper
         ExtensionBlockPointerWrapper(Pointer pointer);
         long count();
         long capacity();
+        void setCapacity(long capacity);
         void setCount(long count);
         Pointer bytesPointer();
     };

@@ -27,6 +27,11 @@ long ExtensionBlockPointerWrapper::capacity()
     return((long)wordAtIndexAtPointer(kExtensionBlockCapacityIndex,this->actualPointer));
     }
 
+void ExtensionBlockPointerWrapper::setCapacity(long capacity)
+    {
+    setWordAtIndexAtPointer((Word)capacity,kExtensionBlockCapacityIndex,this->actualPointer);
+    }
+
 Pointer ExtensionBlockPointerWrapper::bytesPointer()
     {
     WordPointer newPointer = (((WordPointer)this->actualPointer) + kExtensionBlockBytesIndex);

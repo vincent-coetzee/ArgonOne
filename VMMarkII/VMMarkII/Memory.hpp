@@ -24,6 +24,7 @@ class Memory
         Pointer allocateExtensionBlockWithCapacityInBytes(long capacity);
         Pointer allocateMap(int capacity);
         Pointer allocateTraits(char* name,Pointer* parents,long parentsCount);
+        Pointer allocateBlock(int capacity);
     public:
         static Memory* shared;
     private:

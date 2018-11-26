@@ -1,6 +1,9 @@
 //
 //
-// An executable file for Argon
+// An executable file for Argon, this is more to test all the pieces of the
+// language than anything else. It hardly showcases how generic methods will
+// work and it does not yet have support for Bytes, Floats and Dates, all
+// of which are planned.
 //
 //
 executable GoFishing
@@ -16,14 +19,6 @@ executable GoFishing
 
     let topLevelLocal = "this is a top level local string"
 
-    //
-    // A macro to demonstrate the free form nature of the use
-    // of macro polymorphic arguments, macros are resolved
-    // at compile tile, but can be exported from a module
-    //
-    // macro justInTime(first,second,third)
-    //    {
-    //    }
     //
     // A mixin with a generic type
     //
@@ -106,15 +101,24 @@ executable GoFishing
     //
     // All executables need to have an entrypoint. The code in the entrypoint
     // will be executed as soon as all the dependencies of the executable
-    // have been resolve and there are no unresolved symbols. Use the entrypoint
+    // have been resolved and there are no unresolved symbols. Use the entrypoint
     // as you would a main function in C
     //
     entrypoint()
         {
         //
-        // Put a notification handler in place, this remains in place until the
-        // function goes out of scope. Any handle only remains in place until the
-        // function that declares it goes out of scope.
+        // Put a signal handler in place, this remains in place until the
+        // function goes out of scope. A signal handler is similar to an
+        // exception handler in other languages. A signal handler handles one
+        // signal and one signal only. After a signal handler has been installed
+        // if a signal is generated anywhere else in the code while that handler
+        // is active, then the signal handler corresponding to that signal ( represented
+        // by a symbol ) will be activated and control will move to the signal handler.
+        // The signal handler may not handle the problem and then control will continue
+        // according to the dictates of the handler, alternatively, the handler may
+        // execute the "resume" method in which case control will return to the piece
+        // of code where the signal was generated.
+        //
         let handler(#invalidNumber)
             {
             let someLocalOrOther = 423
@@ -140,7 +144,11 @@ executable GoFishing
         print(value::value)
         //
         // A vector made with make, make is the mechanism
-        // for constructing instances of mixins
+        // for constructing instances of mixins, make can take
+        // any number of arguments, and apart from the first one
+        // which is used to perform the creation of an instance
+        // the rest will get passed to the instance that gets
+        // created.
         //
         let vector = make(Vector,200)
         //
@@ -168,7 +176,12 @@ executable GoFishing
             return(vector)
             }
         //
-        // Split the closure off into another thread for execution
+        // Split the closure off into another thread for execution.
+        // Using spawn creates a thread ( backed by a real pthread )
+        // of separate execution that will start executing the closure.
+        // The thread will termminate when the closure terminates.
+        // Use spawn and closures to enable concurrency in your
+        // executables.
         //
         spawn(aClosure(inputVector::vector))
         //
@@ -201,7 +214,7 @@ executable GoFishing
             print(value::averageWeightInKilograms)
             }
         //
-        // A switch statement on an arbitrary type. Argon does not required
+        // A switch statement on an arbitrary type. Argon does not require
         // deterministic types be used in a switch statement as long as there
         // is an "otherwise" clause to catch the overflow
         //
