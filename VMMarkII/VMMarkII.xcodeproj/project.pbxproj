@@ -16,6 +16,8 @@
 		BFF868B721AB014D00DE0593 /* ExtensionBlockPointerWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF868B521AB014D00DE0593 /* ExtensionBlockPointerWrapper.cpp */; };
 		BFF868BB21AB1B8100DE0593 /* Monitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF868B921AB1B8100DE0593 /* Monitor.cpp */; };
 		BFF868BE21AB1FEC00DE0593 /* MemorySpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF868BC21AB1FEC00DE0593 /* MemorySpace.cpp */; };
+		BFF868C421AC8A1D00DE0593 /* VectorPointerWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF868C221AC8A1D00DE0593 /* VectorPointerWrapper.cpp */; };
+		BFF868C721AC8A3000DE0593 /* MapPointerWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF868C521AC8A3000DE0593 /* MapPointerWrapper.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,6 +52,10 @@
 		BFF868BA21AB1B8100DE0593 /* Monitor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Monitor.hpp; sourceTree = "<group>"; };
 		BFF868BC21AB1FEC00DE0593 /* MemorySpace.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MemorySpace.cpp; sourceTree = "<group>"; };
 		BFF868BD21AB1FEC00DE0593 /* MemorySpace.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MemorySpace.hpp; sourceTree = "<group>"; };
+		BFF868C221AC8A1D00DE0593 /* VectorPointerWrapper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VectorPointerWrapper.cpp; sourceTree = "<group>"; };
+		BFF868C321AC8A1D00DE0593 /* VectorPointerWrapper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VectorPointerWrapper.hpp; sourceTree = "<group>"; };
+		BFF868C521AC8A3000DE0593 /* MapPointerWrapper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MapPointerWrapper.cpp; sourceTree = "<group>"; };
+		BFF868C621AC8A3000DE0593 /* MapPointerWrapper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MapPointerWrapper.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +106,10 @@
 				BFF868AA21AAD47F00DE0593 /* ObjectPointerWrapper.hpp */,
 				BFF868AC21AAF06B00DE0593 /* StringPointerWrapper.cpp */,
 				BFF868AD21AAF06B00DE0593 /* StringPointerWrapper.hpp */,
+				BFF868C221AC8A1D00DE0593 /* VectorPointerWrapper.cpp */,
+				BFF868C321AC8A1D00DE0593 /* VectorPointerWrapper.hpp */,
+				BFF868C521AC8A3000DE0593 /* MapPointerWrapper.cpp */,
+				BFF868C621AC8A3000DE0593 /* MapPointerWrapper.hpp */,
 			);
 			path = VMMarkII;
 			sourceTree = "<group>";
@@ -163,7 +173,9 @@
 				BFF8689E21AA9AD000DE0593 /* MachineInstruction.cpp in Sources */,
 				BFF8689621AA9A7F00DE0593 /* main.cpp in Sources */,
 				BFF868BE21AB1FEC00DE0593 /* MemorySpace.cpp in Sources */,
+				BFF868C721AC8A3000DE0593 /* MapPointerWrapper.cpp in Sources */,
 				BFF868B721AB014D00DE0593 /* ExtensionBlockPointerWrapper.cpp in Sources */,
+				BFF868C421AC8A1D00DE0593 /* VectorPointerWrapper.cpp in Sources */,
 				BFF868A521AAB5A700DE0593 /* Object.cpp in Sources */,
 				BFF868BB21AB1B8100DE0593 /* Monitor.cpp in Sources */,
 				BFF868A221AAB52700DE0593 /* Memory.cpp in Sources */,

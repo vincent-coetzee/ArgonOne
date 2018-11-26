@@ -15,14 +15,16 @@
 #include "Memory.hpp"
 #include "ObjectPointerWrapper.hpp"
 #include "StringPointerWrapper.hpp"
+#include "VectorPointerWrapper.hpp"
 
 void testArgonInstruction(void);
 void testObjects(void);
-void testTagging();
-void testRawPointers();
-void testMemory();
-void testPointers();
-void testStringPointers();
+void testTagging(void);
+void testRawPointers(void);
+void testMemory(void);
+void testPointers(void);
+void testStringPointers(void);
+void testVectorsAndGrowing(void);
 
 int main(int argc, const char * argv[])
     {
@@ -32,6 +34,7 @@ int main(int argc, const char * argv[])
     std::cout << "Size of cond is " << sizeof(pthread_mutex_t) << "\n";
     std::cout << "Size of Word is " << sizeof(Word) << "\n";
     std::cout << "Size of char is " << sizeof(char) << "\n";
+    testVectorsAndGrowing();
     testStringPointers();
     testPointers();
     testMemory();
@@ -41,6 +44,23 @@ int main(int argc, const char * argv[])
     return 0;
     };
 
+void testVectorsAndGrowing()
+    {
+    Pointer vector1 = Memory::shared->allocateVectorWithCapacityInWords(20);
+    VectorPointerWrapper wrapper = VectorPointerWrapper(vector1);
+    for (int index=0;index<50;index++)
+        {
+        wrapper.addWordElement(index);
+        printf("Added %ld to vector\n",(long)index);
+        printf("The count of the vector is %ld\n",wrapper.count());
+        }
+    for (int index=0;index<50;index++)
+        {
+        printf("Looking at index %ld\n",(long)index);
+        printf("Found %lld \n",wrapper.wordElementAtIndex(index));
+        }
+    }
+    
 void testStringPointers()
     {
     StringPointerWrapper wrapper = StringPointerWrapper(Memory::shared->allocateString("This is a somewhat long test string that can be used where a string is needed"));

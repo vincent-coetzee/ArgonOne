@@ -61,6 +61,10 @@ public enum Keyword:String,CaseIterable,Equatable,Codable
     case handler
     case signal
     case resume
+    case `operator`
+    case infix
+    case prefix
+    case postfix
     }
 
 public struct Token:CustomStringConvertible,Codable

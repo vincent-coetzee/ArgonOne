@@ -58,7 +58,7 @@ void StringPointerWrapper::setString(char* string)
     extensionPointer = Memory::shared->allocateExtensionBlockWithCapacityInBytes(bytesNeeded);
     wrapper = new ExtensionBlockPointerWrapper(extensionPointer);
     wrapper->setCount(bytesNeeded);
-    wrapper->setCapacity(totalBytes)
+    wrapper->setCapacity(totalBytes);
     strcpy((char*)wrapper->bytesPointer(),string);
     setPointerAtIndex(extensionPointer,kStringExtensionBlockIndex);
     delete wrapper;

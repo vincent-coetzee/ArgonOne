@@ -88,6 +88,10 @@ typedef void* Pointer;
 #define pointerAtIndexAtPointer(index,pointer) (*((Pointer*)(((WordPointer)untaggedPointer(pointer)) + index)))
 #define setWordAtIndexAtPointer(word,index,pointer) *(((WordPointer)untaggedPointer(pointer))+index) = word
 #define setPointerAtIndexAtPointer(newPointer,index,pointer) *((Pointer*)(((WordPointer)untaggedPointer(pointer))+index)) = newPointer
+#define wordAtPointer(p) (*((WordPointer)untaggedPointer(p)))
+#define pointerAtPointer(p) (*((Pointer*)untaggedPointer(p)))
+#define setWordAtPointer(w,p) *((WordPointer)untaggedPointer(p)) = w
+#define setPointerAtPointer(sp,p) *((Pointer*)untaggedPointer(p)) = sp
 //
 // Special register numbers
 //
@@ -108,6 +112,17 @@ typedef void* Pointer;
 #define kModeImmediate 5
 #define kModeRegister 6
 #define kModeIndirect 7
+//
+// Extension Block slot indices
+//
+#define kExtensionBlockHeaderIndex (0)
+#define kExtensionBlockTraitsIndex (1)
+#define kExtensionBlockMonitorIndex (2)
+#define kExtensionBlockCountIndex (3)
+#define kExtensionBlockCapacityIndex (4)
+#define kExtensionBlockBytesIndex (5)
+
+#define kExtensionBlockFixedSlotCount (6)
 //
 // Map slot indices
 //

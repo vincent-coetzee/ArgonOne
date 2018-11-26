@@ -13,8 +13,6 @@
 #include "ArgonTypes.hpp"
 #include "ObjectPointerWrapper.hpp"
 
-#endif /* StringPointerWrapper_hpp */
-
 class StringPointerWrapper : public ObjectPointerWrapper
     {
     public:
@@ -25,3 +23,7 @@ class StringPointerWrapper : public ObjectPointerWrapper
         void setExtensionBlockPointer(Pointer value);
         Pointer extensionBlockPointer();
     };
+    
+#endif /* StringPointerWrapper_hpp */
+
+

@@ -11,6 +11,7 @@
 #include <string.h>
 #include "ExtensionBlockPointerWrapper.hpp"
 #include "StringPointerWrapper.hpp"
+#include "VectorPointerWrapper.hpp"
 
 Memory* Memory::shared = new Memory(1024*1024*10);
 
@@ -32,7 +33,8 @@ Pointer Memory::allocateExtensionBlockWithCapacityInBytes(long capacity)
     {
     long totalBytes = (kExtensionBlockFixedSlotCount * kWordSize + capacity);
     Pointer pointer = toSpace->allocateBlockWithSizeInBytes(totalBytes);
-    setWordAtIndexAtPointer(capacity,kExtensionBlockCountIndex,pointer);
+    setWordAtIndexAtPointer(capacity/kWordSize,kExtensionBlockCapacityIndex,pointer);
+    setWordAtIndexAtPointer(0,kExtensionBlockCountIndex,pointer);
     return(taggedExtensionBlockPointer(pointer));
     }
 
@@ -60,6 +62,23 @@ Pointer Memory::allocateString(char* string)
     wrapper.setIsForwarded(false);
     wrapper.setString(string);
     return(taggedStringPointer(pointer));
+    }
+
+Pointer Memory::allocateVectorWithCapacityInWords(long capacityInWords)
+    {
+    long storageCapacity = capacityInWords * 3 / 2;
+    long storageCapacityInBytes = storageCapacity*kWordSize;
+    long totalBytes = kVectorFixedSlotCount * kWordSize;
+    Pointer pointer = toSpace->allocateBlockWithSizeInBytes(totalBytes);
+    VectorPointerWrapper wrapper(pointer);
+    wrapper.setGeneration(1);
+    wrapper.setSlotCount(kStringFixedSlotCount);
+    wrapper.setType(kTypeString);
+    wrapper.setIsForwarded(false);
+    wrapper.setCount(0);
+    wrapper.setCapacity(storageCapacity);
+    wrapper.setExtensionsBlockPointer(this->allocateExtensionBlockWithCapacityInBytes(storageCapacityInBytes));
+    return(taggedVectorPointer(pointer));
     }
 
 Pointer Memory::allocateMap(int capacity)

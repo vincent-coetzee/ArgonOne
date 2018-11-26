@@ -25,6 +25,7 @@ class Memory
         Pointer allocateMap(int capacity);
         Pointer allocateTraits(char* name,Pointer* parents,long parentsCount);
         Pointer allocateBlock(int capacity);
+        Pointer allocateVectorWithCapacityInWords(long capacity);
     public:
         static Memory* shared;
     private:
