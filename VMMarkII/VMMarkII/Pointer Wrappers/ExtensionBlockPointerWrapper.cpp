@@ -7,6 +7,7 @@
 //
 
 #include "ExtensionBlockPointerWrapper.hpp"
+#include "ArgonPointers.hpp"
 
 ExtensionBlockPointerWrapper::ExtensionBlockPointerWrapper(Pointer pointer) : ObjectPointerWrapper(pointer)
     {
@@ -32,7 +33,7 @@ void ExtensionBlockPointerWrapper::setCapacity(long capacity)
     setWordAtIndexAtPointer((Word)capacity,kExtensionBlockCapacityIndex,this->actualPointer);
     }
 
-Pointer ExtensionBlockPointerWrapper::bytesPointer()
+Pointer ExtensionBlockPointerWrapper::bytesPointer() const
     {
     WordPointer newPointer = (((WordPointer)this->actualPointer) + kExtensionBlockBytesIndex);
     return((Pointer)newPointer);

@@ -12,6 +12,9 @@
 #include "ExtensionBlockPointerWrapper.hpp"
 #include "StringPointerWrapper.hpp"
 #include "VectorPointerWrapper.hpp"
+#include "ArgonPointers.hpp"
+#include "MapPointerWrapper.hpp"
+#include "AssociationVectorPointerWrapper.hpp"
 
 Memory* Memory::shared = new Memory(1024*1024*10);
 
@@ -32,7 +35,13 @@ Pointer Memory::allocateObject(int slotCount,int type,int flags,Pointer traits)
 Pointer Memory::allocateExtensionBlockWithCapacityInBytes(long capacity)
     {
     long totalBytes = (kExtensionBlockFixedSlotCount * kWordSize + capacity);
+    long totalWords = (totalBytes / 8) + 1;
     Pointer pointer = toSpace->allocateBlockWithSizeInBytes(totalBytes);
+    ObjectPointerWrapper wrapper = ObjectPointerWrapper(pointer);
+    wrapper.setGeneration(1);
+    wrapper.setSlotCount(totalWords);
+    wrapper.setType(kTypeExtensionBlock);
+    wrapper.setIsForwarded(false);
     setWordAtIndexAtPointer(capacity/kWordSize,kExtensionBlockCapacityIndex,pointer);
     setWordAtIndexAtPointer(0,kExtensionBlockCountIndex,pointer);
     return(taggedExtensionBlockPointer(pointer));
@@ -72,7 +81,7 @@ Pointer Memory::allocateVectorWithCapacityInWords(long capacityInWords)
     Pointer pointer = toSpace->allocateBlockWithSizeInBytes(totalBytes);
     VectorPointerWrapper wrapper(pointer);
     wrapper.setGeneration(1);
-    wrapper.setSlotCount(kStringFixedSlotCount);
+    wrapper.setSlotCount(storageCapacity);
     wrapper.setType(kTypeString);
     wrapper.setIsForwarded(false);
     wrapper.setCount(0);
@@ -80,11 +89,37 @@ Pointer Memory::allocateVectorWithCapacityInWords(long capacityInWords)
     wrapper.setExtensionsBlockPointer(this->allocateExtensionBlockWithCapacityInBytes(storageCapacityInBytes));
     return(taggedVectorPointer(pointer));
     }
-
-Pointer Memory::allocateMap(int capacity)
+    
+Pointer Memory::allocateMap()
     {
-    return(NULL);
-    };
+    long storageCapacity = kMapFixedSlotCount + kMapHashBucketPrime;
+    long storageInBytes = storageCapacity * kWordSize;
+    Pointer pointer = toSpace->allocateBlockWithSizeInBytes(storageInBytes);
+    MapPointerWrapper wrapper = MapPointerWrapper(pointer);
+    wrapper.setGeneration(1);
+    wrapper.setSlotCount(storageCapacity);
+    wrapper.setType(kTypeMap);
+    wrapper.setIsForwarded(false);
+    wrapper.setCount(0);
+    wrapper.setCapacity(storageCapacity);
+    wrapper.setHashbucketCount(kMapHashBucketPrime);
+    return(taggedMapPointer(pointer));
+    }
+
+Pointer Memory::allocateAssociationVectorOfSizeInWords(long wordCount)
+    {
+    long storageCapacity = kAssociationVectorFixedSlotCount + (wordCount*2);
+    long storageInBytes = storageCapacity * kWordSize;
+    Pointer pointer = toSpace->allocateBlockWithSizeInBytes(storageInBytes);
+    AssociationVectorPointerWrapper wrapper = AssociationVectorPointerWrapper(pointer);
+    wrapper.setGeneration(1);
+    wrapper.setSlotCount(storageCapacity);
+    wrapper.setType(kTypeAssociationVector);
+    wrapper.setIsForwarded(false);
+    wrapper.setCount(0);
+    wrapper.setCapacity(storageCapacity);
+    return(taggedObjectPointer(pointer));
+    }
 
 Pointer Memory::allocateTraits(char* name,Pointer* parents,long parentsCount)
     {

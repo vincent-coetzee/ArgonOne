@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BFC9E0FB21ADB3DE004E4FE2 /* String.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFC9E0F921ADB3DE004E4FE2 /* String.cpp */; };
+		BFC9E0FE21ADCA23004E4FE2 /* AssociationVectorPointerWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFC9E0FC21ADCA23004E4FE2 /* AssociationVectorPointerWrapper.cpp */; };
+		BFC9E10421ADEB22004E4FE2 /* Hashable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFC9E10221ADEB22004E4FE2 /* Hashable.cpp */; };
 		BFF8689621AA9A7F00DE0593 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF8689521AA9A7F00DE0593 /* main.cpp */; };
 		BFF8689E21AA9AD000DE0593 /* MachineInstruction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF8689C21AA9AD000DE0593 /* MachineInstruction.cpp */; };
 		BFF868A221AAB52700DE0593 /* Memory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFF868A021AAB52700DE0593 /* Memory.cpp */; };
@@ -33,6 +36,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BFC9E0F821ADADF0004E4FE2 /* ArgonPointers.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ArgonPointers.hpp; sourceTree = "<group>"; };
+		BFC9E0F921ADB3DE004E4FE2 /* String.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = String.cpp; sourceTree = "<group>"; };
+		BFC9E0FA21ADB3DE004E4FE2 /* String.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = String.hpp; sourceTree = "<group>"; };
+		BFC9E0FC21ADCA23004E4FE2 /* AssociationVectorPointerWrapper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssociationVectorPointerWrapper.cpp; sourceTree = "<group>"; };
+		BFC9E0FD21ADCA23004E4FE2 /* AssociationVectorPointerWrapper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssociationVectorPointerWrapper.hpp; sourceTree = "<group>"; };
+		BFC9E10221ADEB22004E4FE2 /* Hashable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Hashable.cpp; sourceTree = "<group>"; };
+		BFC9E10321ADEB22004E4FE2 /* Hashable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Hashable.hpp; sourceTree = "<group>"; };
 		BFF8689221AA9A7F00DE0593 /* VMMarkII */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VMMarkII; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFF8689521AA9A7F00DE0593 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		BFF8689C21AA9AD000DE0593 /* MachineInstruction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MachineInstruction.cpp; sourceTree = "<group>"; };
@@ -69,6 +79,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BFC9E0FF21ADDC55004E4FE2 /* Pointer Wrappers */ = {
+			isa = PBXGroup;
+			children = (
+				BFF868C521AC8A3000DE0593 /* MapPointerWrapper.cpp */,
+				BFF868C621AC8A3000DE0593 /* MapPointerWrapper.hpp */,
+				BFF868A921AAD47F00DE0593 /* ObjectPointerWrapper.cpp */,
+				BFF868AA21AAD47F00DE0593 /* ObjectPointerWrapper.hpp */,
+				BFF868AC21AAF06B00DE0593 /* StringPointerWrapper.cpp */,
+				BFF868AD21AAF06B00DE0593 /* StringPointerWrapper.hpp */,
+				BFF868C221AC8A1D00DE0593 /* VectorPointerWrapper.cpp */,
+				BFF868C321AC8A1D00DE0593 /* VectorPointerWrapper.hpp */,
+				BFC9E0FC21ADCA23004E4FE2 /* AssociationVectorPointerWrapper.cpp */,
+				BFC9E0FD21ADCA23004E4FE2 /* AssociationVectorPointerWrapper.hpp */,
+				BFF868B521AB014D00DE0593 /* ExtensionBlockPointerWrapper.cpp */,
+				BFF868B621AB014D00DE0593 /* ExtensionBlockPointerWrapper.hpp */,
+			);
+			path = "Pointer Wrappers";
+			sourceTree = "<group>";
+		};
+		BFC9E10021ADDC7A004E4FE2 /* Virtual Machine */ = {
+			isa = PBXGroup;
+			children = (
+				BFF8689C21AA9AD000DE0593 /* MachineInstruction.cpp */,
+				BFF8689D21AA9AD000DE0593 /* MachineInstruction.hpp */,
+				BFF868A021AAB52700DE0593 /* Memory.cpp */,
+				BFF868A121AAB52700DE0593 /* Memory.hpp */,
+				BFF868BC21AB1FEC00DE0593 /* MemorySpace.cpp */,
+				BFF868BD21AB1FEC00DE0593 /* MemorySpace.hpp */,
+			);
+			path = "Virtual Machine";
+			sourceTree = "<group>";
+		};
+		BFC9E10121ADDC95004E4FE2 /* Concurrency */ = {
+			isa = PBXGroup;
+			children = (
+				BFF868B921AB1B8100DE0593 /* Monitor.cpp */,
+				BFF868BA21AB1B8100DE0593 /* Monitor.hpp */,
+			);
+			path = Concurrency;
+			sourceTree = "<group>";
+		};
 		BFF8688921AA9A7F00DE0593 = {
 			isa = PBXGroup;
 			children = (
@@ -88,28 +139,18 @@
 		BFF8689421AA9A7F00DE0593 /* VMMarkII */ = {
 			isa = PBXGroup;
 			children = (
+				BFC9E0F821ADADF0004E4FE2 /* ArgonPointers.hpp */,
 				BFF868B821AB0DB200DE0593 /* ArgonTypes.hpp */,
-				BFF868B521AB014D00DE0593 /* ExtensionBlockPointerWrapper.cpp */,
-				BFF868B621AB014D00DE0593 /* ExtensionBlockPointerWrapper.hpp */,
-				BFF8689C21AA9AD000DE0593 /* MachineInstruction.cpp */,
-				BFF8689D21AA9AD000DE0593 /* MachineInstruction.hpp */,
+				BFC9E10121ADDC95004E4FE2 /* Concurrency */,
 				BFF8689521AA9A7F00DE0593 /* main.cpp */,
-				BFF868A021AAB52700DE0593 /* Memory.cpp */,
-				BFF868A121AAB52700DE0593 /* Memory.hpp */,
-				BFF868BC21AB1FEC00DE0593 /* MemorySpace.cpp */,
-				BFF868BD21AB1FEC00DE0593 /* MemorySpace.hpp */,
-				BFF868B921AB1B8100DE0593 /* Monitor.cpp */,
-				BFF868BA21AB1B8100DE0593 /* Monitor.hpp */,
 				BFF868A321AAB5A700DE0593 /* Object.cpp */,
 				BFF868A421AAB5A700DE0593 /* Object.hpp */,
-				BFF868A921AAD47F00DE0593 /* ObjectPointerWrapper.cpp */,
-				BFF868AA21AAD47F00DE0593 /* ObjectPointerWrapper.hpp */,
-				BFF868AC21AAF06B00DE0593 /* StringPointerWrapper.cpp */,
-				BFF868AD21AAF06B00DE0593 /* StringPointerWrapper.hpp */,
-				BFF868C221AC8A1D00DE0593 /* VectorPointerWrapper.cpp */,
-				BFF868C321AC8A1D00DE0593 /* VectorPointerWrapper.hpp */,
-				BFF868C521AC8A3000DE0593 /* MapPointerWrapper.cpp */,
-				BFF868C621AC8A3000DE0593 /* MapPointerWrapper.hpp */,
+				BFC9E0FF21ADDC55004E4FE2 /* Pointer Wrappers */,
+				BFC9E0F921ADB3DE004E4FE2 /* String.cpp */,
+				BFC9E0FA21ADB3DE004E4FE2 /* String.hpp */,
+				BFC9E10021ADDC7A004E4FE2 /* Virtual Machine */,
+				BFC9E10221ADEB22004E4FE2 /* Hashable.cpp */,
+				BFC9E10321ADEB22004E4FE2 /* Hashable.hpp */,
 			);
 			path = VMMarkII;
 			sourceTree = "<group>";
@@ -171,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFF8689E21AA9AD000DE0593 /* MachineInstruction.cpp in Sources */,
+				BFC9E10421ADEB22004E4FE2 /* Hashable.cpp in Sources */,
 				BFF8689621AA9A7F00DE0593 /* main.cpp in Sources */,
 				BFF868BE21AB1FEC00DE0593 /* MemorySpace.cpp in Sources */,
 				BFF868C721AC8A3000DE0593 /* MapPointerWrapper.cpp in Sources */,
@@ -180,6 +222,8 @@
 				BFF868BB21AB1B8100DE0593 /* Monitor.cpp in Sources */,
 				BFF868A221AAB52700DE0593 /* Memory.cpp in Sources */,
 				BFF868AB21AAD47F00DE0593 /* ObjectPointerWrapper.cpp in Sources */,
+				BFC9E0FB21ADB3DE004E4FE2 /* String.cpp in Sources */,
+				BFC9E0FE21ADCA23004E4FE2 /* AssociationVectorPointerWrapper.cpp in Sources */,
 				BFF868AE21AAF06B00DE0593 /* StringPointerWrapper.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

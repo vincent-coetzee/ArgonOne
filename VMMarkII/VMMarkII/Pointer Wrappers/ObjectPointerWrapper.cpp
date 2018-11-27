@@ -7,6 +7,7 @@
 //
 
 #include "ObjectPointerWrapper.hpp"
+#include "ArgonPointers.hpp"
 
 ObjectPointerWrapper::ObjectPointerWrapper(Pointer pointer)
     {
@@ -84,7 +85,7 @@ Word ObjectPointerWrapper::wordAtIndex(long index)
     return(wordAtIndexAtPointer(index,this->actualPointer));
     };
 
-Pointer ObjectPointerWrapper::pointerAtIndex(long index)
+Pointer ObjectPointerWrapper::pointerAtIndex(long index) const
     {
     return(pointerAtIndexAtPointer(index,this->actualPointer));
     }

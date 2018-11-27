@@ -13,6 +13,18 @@
 #include "ObjectPointerWrapper.hpp"
 #include "Memory.hpp"
 
+//
+// Extension Block slot indices
+//
+#define kExtensionBlockHeaderIndex (0)
+#define kExtensionBlockTraitsIndex (1)
+#define kExtensionBlockMonitorIndex (2)
+#define kExtensionBlockCountIndex (3)
+#define kExtensionBlockCapacityIndex (4)
+#define kExtensionBlockBytesIndex (5)
+
+#define kExtensionBlockFixedSlotCount (6)
+
 
 class ExtensionBlockPointerWrapper: public ObjectPointerWrapper
     {
@@ -22,7 +34,7 @@ class ExtensionBlockPointerWrapper: public ObjectPointerWrapper
         long capacity();
         void setCapacity(long capacity);
         void setCount(long count);
-        Pointer bytesPointer();
+        Pointer bytesPointer() const;
     };
 
 #endif /* ExtensionBlockPointerWrapper_hpp */

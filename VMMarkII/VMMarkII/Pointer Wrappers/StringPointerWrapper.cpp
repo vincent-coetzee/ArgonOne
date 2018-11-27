@@ -10,6 +10,7 @@
 #include "ExtensionBlockPointerWrapper.hpp"
 #include "string.h"
 #include "ArgonTypes.hpp"
+#include "ArgonPointers.hpp"
 
 StringPointerWrapper::StringPointerWrapper(Pointer pointer) : ObjectPointerWrapper(pointer)
     {
@@ -20,7 +21,7 @@ long StringPointerWrapper::count()
     return(ExtensionBlockPointerWrapper(pointerAtIndex(kStringExtensionBlockIndex)).count());
     }
 
-char* StringPointerWrapper::string()
+char* StringPointerWrapper::string() const
     {
     return((char*)ExtensionBlockPointerWrapper(pointerAtIndex(kStringExtensionBlockIndex)).bytesPointer());
     }
@@ -28,6 +29,23 @@ char* StringPointerWrapper::string()
 void StringPointerWrapper::setExtensionBlockPointer(Pointer value)
     {
     setPointerAtIndexAtPointer(value,kStringExtensionBlockIndex,this->actualPointer);
+    }
+
+long StringPointerWrapper::hashValue()
+    {
+    long hash = 5381;
+    int c;
+    char *pointer = this->string();
+    while ((c = *pointer++))
+        {
+        hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+        }
+    return(hash);
+    }
+
+bool StringPointerWrapper::operator ==(StringPointerWrapper const &wrapper)
+    {
+    return(!strcmp(this->string(),wrapper.string()));
     }
 
 Pointer StringPointerWrapper::extensionBlockPointer()

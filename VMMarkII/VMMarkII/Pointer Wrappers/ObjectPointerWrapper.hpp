@@ -31,10 +31,10 @@ class ObjectPointerWrapper
         Pointer mutex();
         Pointer condition();
         Word wordAtIndex(long index);
-        Pointer pointerAtIndex(long index);
+        Pointer pointerAtIndex(long index) const;
         void setWordAtIndex(Word word,long index);
         void setPointerAtIndex(Pointer pointer,long index);
-    protected:
+    public:
         Pointer actualPointer;
         Object* objectPointer;
     };

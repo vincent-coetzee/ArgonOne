@@ -12,16 +12,32 @@
 #include <stdio.h>
 #include "ArgonTypes.hpp"
 #include "ObjectPointerWrapper.hpp"
+#include "Hashable.hpp"
 
-class StringPointerWrapper : public ObjectPointerWrapper
+//
+// String slot indices
+//
+#define kStringHeaderIndex 0
+#define kStringTraitsIndex 1
+#define kStringMonitorIndex 2
+#define kStringCountIndex 3
+#define kStringExtensionBlockIndex 4
+#define kStringFixedSlotCount 5
+//
+// The class
+//
+class StringPointerWrapper : public ObjectPointerWrapper,public Hashable
     {
     public:
         StringPointerWrapper(Pointer pointer);
         long count();
-        char* string();
+        char* string() const;
         void setString(char* string);
         void setExtensionBlockPointer(Pointer value);
         Pointer extensionBlockPointer();
+    public:
+        long virtual hashValue();
+        bool virtual operator ==(StringPointerWrapper const &wrapper);
     };
     
 #endif /* StringPointerWrapper_hpp */

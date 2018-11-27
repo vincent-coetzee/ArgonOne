@@ -53,45 +53,7 @@ typedef void* Pointer;
 #define kBitsTraits (((Word)13) << ((Word)59))
 #define kBitsString (((Word)14) << ((Word)59))
 #define kBitsSymbol (((Word)15) << ((Word)59))
-//
-// Tagging and untagging pointers
-//
-#define untaggedPointer(p) ((Pointer)((((Word)p) & ~kBitsMask)))
-#define taggedPointer(p,t) ((Pointer)((((Word)p) & ~kBitsMask) | t))
-#define taggedStringPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsString))
-#define taggedSymbolPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsSymbol))
-#define taggedTraitsPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsTraits))
-#define tagggedDatePointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsDate))
-#define taggedMapPointer(p) (void*)((((Word)p) & ~kBitsMask) | kBitsMap)
-#define taggedHandlerPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsHandler))
-#define taggedMethodPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsMethod))
-#define taggedCodeBlockPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsCodeBlock))
-#define taggedExtensionBlockPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsExtensionBlock))
-#define taggedVectorPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsVector))
-#define taggedClosurePointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsClosure))
-#define taggedObjectPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsObject))
-#define taggedBoolean(b) (kBitsBoolean | b)
-#define taggedByte(b) (kBitsByte | b)
-#define taggedFloat(f) (kBitsFloat | f)
-#define taggedInteger(i) (kBitsInteger | i)
-#define taggedDate(d) (kBitsDate | d)
-#define untaggedByte(b) ((unsigned char)value & 255)
-#define untaggedBoolean(b) (b & 1)
-#define untaggedDate(d) (d & ~kBitsMask)
-#define untaggedFloat(f) (f & ~kBitsFloat)
-#define untaggedInteger(i) (i & ~kBitsMask)
-//
-// Accessing words and pointers from
-// pointers.
-//
-#define wordAtIndexAtPointer(index,pointer) (*(((WordPointer)untaggedPointer(pointer)) + index))
-#define pointerAtIndexAtPointer(index,pointer) (*((Pointer*)(((WordPointer)untaggedPointer(pointer)) + index)))
-#define setWordAtIndexAtPointer(word,index,pointer) *(((WordPointer)untaggedPointer(pointer))+index) = word
-#define setPointerAtIndexAtPointer(newPointer,index,pointer) *((Pointer*)(((WordPointer)untaggedPointer(pointer))+index)) = newPointer
-#define wordAtPointer(p) (*((WordPointer)untaggedPointer(p)))
-#define pointerAtPointer(p) (*((Pointer*)untaggedPointer(p)))
-#define setWordAtPointer(w,p) *((WordPointer)untaggedPointer(p)) = w
-#define setPointerAtPointer(sp,p) *((Pointer*)untaggedPointer(p)) = sp
+
 //
 // Special register numbers
 //
@@ -101,62 +63,8 @@ typedef void* Pointer;
 #define kRegisterIP 3
 #define kRegisterST 4
 #define kRegisterLP 5
-//
-// Instruction field constants
-//
-#define kModeRegular 0
-#define kModeDouble 1
-#define kModeAddress 2
-#define kModeLeftIndirect 3
-#define kModeRightIndirect 4
-#define kModeImmediate 5
-#define kModeRegister 6
-#define kModeIndirect 7
-//
-// Extension Block slot indices
-//
-#define kExtensionBlockHeaderIndex (0)
-#define kExtensionBlockTraitsIndex (1)
-#define kExtensionBlockMonitorIndex (2)
-#define kExtensionBlockCountIndex (3)
-#define kExtensionBlockCapacityIndex (4)
-#define kExtensionBlockBytesIndex (5)
 
-#define kExtensionBlockFixedSlotCount (6)
-//
-// Map slot indices
-//
-#define kMapHeaderIndex (0)
-#define kMapTraitsIndex (1)
-#define kMapMonitorIndex (2)
-#define kMapCountIndex (3)
-#define kMapCapacityIndex (4)
-#define kMapHashbucketCountIndex (5)
 
-#define kMapFixedSlotCount (6)
-
-#define kMapHashPrime (199)
-#define kMapBucketPrime (109)
-//
-// Vector slot indices
-//
-#define kVectorHeaderIndex (0)
-#define kVectorTraitsIndex (1)
-#define kVectorMonitorIndex (2)
-#define kVectorCountIndex (3)
-#define kVectorCapacityIndex (4)
-#define kVectorExtensionBlockIndex (5)
-
-#define kVectorFixedSlotCount (6)
-//
-// String slot indices
-//
-#define kStringHeaderIndex 0
-#define kStringTraitsIndex 1
-#define kStringMonitorIndex 2
-#define kStringCountIndex 3
-#define kStringExtensionBlockIndex 4
-#define kStringFixedSlotCount 5
 //
 // Integers defining the types of objects
 // that are known to the system.
@@ -170,6 +78,10 @@ typedef void* Pointer;
 #define kTypeVector 6
 #define kTypeMap 7
 #define kTypeTree 8
+#define kTypeExtensionBlock (9)
+#define kTypeAssociationVector (10)
+
+
 //
 // Exceptions that can occur in the VM
 //
@@ -245,6 +157,5 @@ typedef enum _InstructionCode
     RES
     }
     InstructionCode;
-
 
 #endif /* ArgonTypes_hpp */

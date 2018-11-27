@@ -16,6 +16,10 @@
 #include "ObjectPointerWrapper.hpp"
 #include "StringPointerWrapper.hpp"
 #include "VectorPointerWrapper.hpp"
+#include "ArgonPointers.hpp"
+#include "AssociationVectorPointerWrapper.hpp"
+#include "MapPointerWrapper.hpp"
+#include "String.hpp"
 
 void testArgonInstruction(void);
 void testObjects(void);
@@ -25,6 +29,7 @@ void testMemory(void);
 void testPointers(void);
 void testStringPointers(void);
 void testVectorsAndGrowing(void);
+void testMaps(void);
 
 int main(int argc, const char * argv[])
     {
@@ -34,6 +39,7 @@ int main(int argc, const char * argv[])
     std::cout << "Size of cond is " << sizeof(pthread_mutex_t) << "\n";
     std::cout << "Size of Word is " << sizeof(Word) << "\n";
     std::cout << "Size of char is " << sizeof(char) << "\n";
+    testMaps();
     testVectorsAndGrowing();
     testStringPointers();
     testPointers();
@@ -43,6 +49,29 @@ int main(int argc, const char * argv[])
     testArgonInstruction();
     return 0;
     };
+
+void testMaps()
+    {
+    Pointer associations = Memory::shared->allocateAssociationVectorOfSizeInWords(200);
+    AssociationVectorPointerWrapper wrapper1 = AssociationVectorPointerWrapper(associations);
+    assert(wrapper1.count() == 0);
+    for (long index=0;index<190;index++)
+        {
+        wrapper1.addWordAssociation(index, index+1);
+        }
+    for (long index=0;index<190;index++)
+        {
+        Word aWord = wrapper1.wordAtHash(index);
+        std::cout << "Index = "  << index << " word found is " << aWord << "\n";
+        assert(aWord == index+1);
+        }
+    Pointer mapPointer = Memory::shared->allocateMap();
+    MapPointerWrapper map = MapPointerWrapper(mapPointer);
+    assert(map.count() == 0);
+    map.addWordForKey(201010,String((char*)"This is a new string"));
+    Word answer = map.wordForKey(String((char*)"This is a new string"));
+    std::cout << answer;
+    }
 
 void testVectorsAndGrowing()
     {
@@ -63,7 +92,7 @@ void testVectorsAndGrowing()
     
 void testStringPointers()
     {
-    StringPointerWrapper wrapper = StringPointerWrapper(Memory::shared->allocateString("This is a somewhat long test string that can be used where a string is needed"));
+    StringPointerWrapper wrapper = StringPointerWrapper(Memory::shared->allocateString((char*)"This is a somewhat long test string that can be used where a string is needed"));
     printf("The string is %s\n",wrapper.string());
     };
 

@@ -9,6 +9,8 @@
 #include "VectorPointerWrapper.hpp"
 #include "Memory.hpp"
 #include <string.h>
+#include "ArgonPointers.hpp"
+#include "ExtensionBlockPointerWrapper.hpp"
 
 VectorPointerWrapper::VectorPointerWrapper(Pointer pointer) : ObjectPointerWrapper(pointer)
     {

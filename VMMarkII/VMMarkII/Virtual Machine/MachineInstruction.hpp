@@ -12,6 +12,18 @@
 #include <stdio.h>
 #include "ArgonTypes.hpp"
 
+//
+// Instruction field constants
+//
+#define kModeRegular 0
+#define kModeDouble 1
+#define kModeAddress 2
+#define kModeLeftIndirect 3
+#define kModeRightIndirect 4
+#define kModeImmediate 5
+#define kModeRegister 6
+#define kModeIndirect 7
+
 class MachineInstruction
     {
     public:
