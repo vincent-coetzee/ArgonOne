@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include "ObjectPointerWrapper.hpp"
-#include "Memory.hpp"
+#include "ObjectMemory.hpp"
 
 //
 // Extension Block slot indices

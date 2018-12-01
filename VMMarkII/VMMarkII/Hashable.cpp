@@ -8,12 +8,4 @@
 
 #include "Hashable.hpp"
 
-long Hashable::hashValue()
-    {
-    return(0);
-    };
 
-bool Hashable::operator ==(Hashable const &hashable)
-    {
-    return(false);
-    };

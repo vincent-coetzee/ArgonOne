@@ -10,20 +10,24 @@
 #define String_hpp
 
 #include <stdio.h>
-#include "ArgonTypes.hpp"
+#include "CobaltTypes.hpp"
 #include "Hashable.hpp"
+#include <iostream>
 
 class String: public Hashable
     {
     public:
-        String(char* string);
+        String(char const* string);
         ~String();
         long count() const;
-        bool virtual operator ==(String const &string);
         String operator +(char* characters);
         String operator +(String const &string);
         char* characters() const;
-        long virtual hashValue();
+        long virtual hashValue() override;
+        void print();
+        friend std::ostream& operator<<(std::ostream& out, const String &string);
+        String& operator= (const String &string);
+        String& operator= (char const * string);
     private:
         char* actualCharacters;
         long characterCount;

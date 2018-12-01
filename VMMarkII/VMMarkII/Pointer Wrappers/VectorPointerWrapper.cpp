@@ -7,9 +7,9 @@
 //
 
 #include "VectorPointerWrapper.hpp"
-#include "Memory.hpp"
+#include "ObjectMemory.hpp"
 #include <string.h>
-#include "ArgonPointers.hpp"
+#include "CobaltPointers.hpp"
 #include "ExtensionBlockPointerWrapper.hpp"
 
 VectorPointerWrapper::VectorPointerWrapper(Pointer pointer) : ObjectPointerWrapper(pointer)
@@ -103,8 +103,7 @@ void VectorPointerWrapper::growVector()
     Word currentCapacity = wordAtIndexAtPointer(kExtensionBlockCapacityIndex,blockPointer);
     Word newCapacity = currentCapacity * 5 / 3;
     printf("Vector is growing to new size of %ld\n",(long)newCapacity);
-    long newCapacityInBytes = newCapacity * kWordSize;
-    Pointer newBlockPointer = untaggedPointer(Memory::shared->allocateExtensionBlockWithCapacityInBytes(newCapacityInBytes));
+    Pointer newBlockPointer = untaggedPointer(ObjectMemory::shared->allocateExtensionBlockWithCapacityInWords(newCapacity));
     setPointerAtIndexAtPointer(newBlockPointer,kVectorExtensionBlockIndex,this->actualPointer);
     WordPointer currentPointer = (WordPointer)blockPointer;
     WordPointer newPointer = (WordPointer)newBlockPointer;

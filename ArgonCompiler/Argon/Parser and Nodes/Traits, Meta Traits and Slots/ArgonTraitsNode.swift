@@ -124,6 +124,7 @@ public class ArgonTraitsNode:ArgonExpressionNode,ArgonParseScope,Comparable,Argo
     
     public var name:ArgonName = ArgonName("ERROR")
     private var slots = ArgonSlotList()
+    private var systemSlots = ArgonSlotList()
     public var typeTemplates:[ArgonTypeTemplateNode] = []
     public private(set) var slotLayouts:[ArgonName:ArgonSlotLayoutNode] = [:]
     public private(set) var instanceSlotCount:Int = 0
@@ -134,6 +135,11 @@ public class ArgonTraitsNode:ArgonExpressionNode,ArgonParseScope,Comparable,Argo
     public var fullName:ArgonName = ArgonName("")
     public var keyAsPointer = wordAsPointer(Word(Argon.nextCounter))
     public private(set) var id:Int
+    
+    public var isSystemTraits:Bool
+        {
+        return(false)
+        }
     
     public var isVariable:Bool
         {
@@ -534,18 +540,5 @@ public class ArgonTraitsNode:ArgonExpressionNode,ArgonParseScope,Comparable,Argo
     
     public override func threeAddress(pass:ThreeAddressPass) throws
         {
-        }
-    }
-
-public class ArgonProxyTraitsNode:ArgonTraitsNode
-    {
-    public override var isTraits: Bool
-        {
-        return(true)
-        }
-    
-    public override var isTypeTemplate: Bool
-        {
-        return(false)
         }
     }

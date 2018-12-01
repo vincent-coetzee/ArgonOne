@@ -7,8 +7,9 @@
 //
 
 #include "MapPointerWrapper.hpp"
-#include "ArgonPointers.hpp"
-#include "Memory.hpp"
+#include "CobaltPointers.hpp"
+#include "ObjectMemory.hpp"
+#include <stdlib.h>
 
 MapPointerWrapper::MapPointerWrapper(Pointer pointer) : ObjectPointerWrapper(pointer)
     {
@@ -34,83 +35,75 @@ void MapPointerWrapper::setCapacity(long count)
     setWordAtIndexAtPointer(count,kMapCapacityIndex,this->actualPointer);
     }
 
-long MapPointerWrapper::hashbucketCount()
+AssociationVectorPointerWrapper MapPointerWrapper::growAssociationVectorForHashbucket(long hashbucket,Pointer oldVectorPointer,long oldCapacity)
     {
-    return(wordAtIndexAtPointer(kMapHashbucketCountIndex,this->actualPointer));
-    }
-
-void MapPointerWrapper::setHashbucketCount(long count)
-    {
-    setWordAtIndexAtPointer(count,kMapHashbucketCountIndex,this->actualPointer);
-    }
-
-AssociationVectorPointerWrapper MapPointerWrapper::growAssociationVector(AssociationVectorPointerWrapper wrapper)
-    {
-    long newCapacity = wrapper.capacity() * 5 / 3;
-    Pointer newVector = Memory::shared->allocateAssociationVectorOfSizeInWords(newCapacity);
-    setPointerAtIndexAtPointer(newVector,kMapAssociationVectorIndex,this->actualPointer);
+    long newCapacity = oldCapacity * kMapAssociationVectorGrowthFactor;
+    Pointer newVector = ObjectMemory::shared->allocateAssociationVectorOfSizeInWords(newCapacity);
+    setPointerAtIndexAtPointer(newVector,kMapFixedSlotCount + hashbucket,this->actualPointer);
     AssociationVectorPointerWrapper newWrapper = AssociationVectorPointerWrapper(newVector);
-    newWrapper.copyContentsOf(wrapper.actualPointer);
+    newWrapper.copyContentsOf(oldVectorPointer);
     return(newWrapper);
     }
 
-Pointer MapPointerWrapper::createAssociationVector()
+Pointer MapPointerWrapper::createAssociationVectorForHashbucket(long hashbucket)
     {
-    Pointer associationsPointer = Memory::shared->allocateAssociationVectorOfSizeInWords(kMapHashBucketLengthPrime);
-    setPointerAtIndexAtPointer(associationsPointer,kMapAssociationVectorIndex,this->actualPointer);
+    Pointer associationsPointer = ObjectMemory::shared->allocateAssociationVectorOfSizeInWords(kMapInitialAssociationVectorSlotCount);
+    setPointerAtIndexAtPointer(associationsPointer,kMapFixedSlotCount + hashbucket,this->actualPointer);
     return(associationsPointer);
     }
 
-void MapPointerWrapper::addWordForKey(Word word,Hashable key)
+void MapPointerWrapper::addWordForKey(Word word,Hashable* key)
     {
-    long hashValue = key.hashValue();
-    long hashbucket = hashValue % wordAtIndexAtPointer(kMapHashbucketCountIndex,this->actualPointer);
+    long hashValue = clampedWord56(key->hashValue());
+    long hashbucket = abs(hashValue) % kMapNumberOfHashbuckets;
     Pointer associationsPointer = pointerAtIndexAtPointer(kMapFixedSlotCount+hashbucket,this->actualPointer);
     if (associationsPointer == NULL)
         {
-        associationsPointer = this->createAssociationVector();
+        associationsPointer = this->createAssociationVectorForHashbucket(hashbucket);
         }
     AssociationVectorPointerWrapper wrapper = AssociationVectorPointerWrapper(associationsPointer);
     if (wrapper.count() + 1 >= wrapper.capacity())
         {
-        wrapper = this->growAssociationVector(wrapper);
+        wrapper = this->growAssociationVectorForHashbucket(hashbucket,untaggedPointer(associationsPointer),wrapper.capacity());
         }
     wrapper.addWordAssociation(hashValue, word);
+    this->setCount(this->count()+1);
     }
 
-Word MapPointerWrapper::wordForKey(Hashable key)
+Word MapPointerWrapper::wordForKey(Hashable* key)
     {
-    long hashValue = key.hashValue();
-    long hashbucket = hashValue % wordAtIndexAtPointer(kMapHashbucketCountIndex,this->actualPointer);
+    long hashValue = clampedWord56(key->hashValue());
+    long hashbucket = abs(hashValue) % kMapNumberOfHashbuckets;
     Pointer associationsPointer = pointerAtIndexAtPointer(kMapFixedSlotCount+hashbucket,this->actualPointer);
     AssociationVectorPointerWrapper wrapper = AssociationVectorPointerWrapper(associationsPointer);
-    Word result = wrapper.wordAtHash(key.hashValue());
+    Word result = wrapper.wordAtHash(hashValue);
     return(result);
     }
 
-void MapPointerWrapper::addPointerForKey(Pointer pointer,Hashable key)
+void MapPointerWrapper::addPointerForKey(Pointer pointer,Hashable* key)
     {
-    long hashValue = key.hashValue();
-    long hashbucket = hashValue % wordAtIndexAtPointer(kMapHashbucketCountIndex,this->actualPointer);
+    long hashValue = clampedWord56(key->hashValue());
+    long hashbucket = abs(hashValue) % kMapNumberOfHashbuckets;
     Pointer associationsPointer = pointerAtIndexAtPointer(kMapFixedSlotCount+hashbucket,this->actualPointer);
     if (associationsPointer == NULL)
         {
-        associationsPointer = this->createAssociationVector();
+        associationsPointer = this->createAssociationVectorForHashbucket(hashbucket);
         }
     AssociationVectorPointerWrapper wrapper = AssociationVectorPointerWrapper(associationsPointer);
     if (wrapper.count() + 1 >= wrapper.capacity())
         {
-        wrapper = this->growAssociationVector(wrapper);
+        wrapper = this->growAssociationVectorForHashbucket(hashbucket,untaggedPointer(associationsPointer),wrapper.capacity());
         }
     wrapper.addAssociation(hashValue, pointer);
+    this->setCount(this->count()+1);
     }
 
-Pointer MapPointerWrapper::pointerForKey(Hashable key)
+Pointer MapPointerWrapper::pointerForKey(Hashable* key)
     {
-    long hashValue = key.hashValue();
-    long hashbucket = hashValue % wordAtIndexAtPointer(kMapHashbucketCountIndex,this->actualPointer);
+    long hashValue = clampedWord56(key->hashValue());
+    long hashbucket = abs(hashValue) % kMapNumberOfHashbuckets;
     Pointer associationsPointer = pointerAtIndexAtPointer(kMapFixedSlotCount+hashbucket,this->actualPointer);
     AssociationVectorPointerWrapper wrapper = AssociationVectorPointerWrapper(associationsPointer);
-    Pointer result = wrapper.pointerAtHash(key.hashValue());
+    Pointer result = wrapper.pointerAtHash(hashValue);
     return(result);
     }

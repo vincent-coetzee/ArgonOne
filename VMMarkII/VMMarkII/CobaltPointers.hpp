@@ -14,17 +14,7 @@
 //
 #define untaggedPointer(p) ((Pointer)((((Word)p) & ~kBitsMask)))
 #define taggedPointer(p,t) ((Pointer)((((Word)p) & ~kBitsMask) | t))
-#define taggedStringPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsString))
-#define taggedSymbolPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsSymbol))
-#define taggedTraitsPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsTraits))
-#define tagggedDatePointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsDate))
-#define taggedMapPointer(p) (void*)((((Word)p) & ~kBitsMask) | kBitsMap)
 #define taggedHandlerPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsHandler))
-#define taggedMethodPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsMethod))
-#define taggedCodeBlockPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsCodeBlock))
-#define taggedExtensionBlockPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsExtensionBlock))
-#define taggedVectorPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsVector))
-#define taggedClosurePointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsClosure))
 #define taggedObjectPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsObject))
 #define taggedBoolean(b) (kBitsBoolean | b)
 #define taggedByte(b) (kBitsByte | b)
@@ -36,6 +26,10 @@
 #define untaggedDate(d) (d & ~kBitsMask)
 #define untaggedFloat(f) (f & ~kBitsFloat)
 #define untaggedInteger(i) (i & ~kBitsMask)
+#define isTaggedPointer(p) ((((Word)p) & kBitsMask) != 0)
+#define isTaggedWord(w) ((w & kBitsMask) != 0)
+#define tagOfPointer(p) ((((Word)p) & kBitsMask) >> kBitsShift)
+#define pointerTaggedWithTag(p,t) (((Word)p) | ((t & kBitsMask) << kBitsShift))
 //
 // Accessing words and pointers from
 // pointers.
@@ -48,5 +42,17 @@
 #define pointerAtPointer(p) (*((Pointer*)untaggedPointer(p)))
 #define setWordAtPointer(w,p) *((WordPointer)untaggedPointer(p)) = w
 #define setPointerAtPointer(sp,p) *((Pointer*)untaggedPointer(p)) = sp
+//
+// Adjusting Pointers
+//
+#define pointerByAddingBytesToPointer(b,p) ((Pointer)(((char*)p)+b))
+#define pointerByAddingWordsToPointer(w,p) ((Pointer)(((WordPointer)p)+w))
+#define pointerByAddingLong(p,l)  ((Pointer)(((char*)p) + l))
+//
+// Some miscellaneous macros not really related to Pointers but
+// which sort of belong here
+//
+#define clampedLong56(l) (((Word)l) & ((Word)72057594037927935))
+#define clampedWord56(l) (((Word)l) & ((Word)72057594037927935))
 
 #endif /* ArgonPointers_h */

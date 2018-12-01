@@ -1251,7 +1251,15 @@ public class ArgonParser
             }
         return(body)
         }
-    
+    //
+    //
+    // Static means that the binding to the methos is static and that call will be used
+    // to transfer control to the method, not dispatch. Inline may be used in conjunction
+    // with static but can not be used without it. System means that normally hidden parts of
+    // the system,specifically the inner workings on objects are made available to the
+    // developer. Dyanmic means that the method implemenentation will be filled in later
+    //
+    //
     private func parseMethodDirectives() throws
         {
         try self.parseParenthesis

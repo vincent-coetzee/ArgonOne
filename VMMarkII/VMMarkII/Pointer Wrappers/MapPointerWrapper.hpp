@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include "ObjectPointerWrapper.hpp"
-#include "ArgonPointers.hpp"
+#include "CobaltPointers.hpp"
 #include "Hashable.hpp"
 #include "AssociationVectorPointerWrapper.hpp"
 
@@ -23,13 +23,13 @@
 #define kMapMonitorIndex (2)
 #define kMapCountIndex (3)
 #define kMapCapacityIndex (4)
-#define kMapHashbucketCountIndex (5)
-#define kMapAssociationVectorIndex (6)
+#define kMapAssociationVectorIndex (5)
 
-#define kMapFixedSlotCount (7)
+#define kMapFixedSlotCount (6)
 
-#define kMapHashBucketPrime (109)
-#define kMapHashBucketLengthPrime (199)
+#define kMapNumberOfHashbuckets (109)
+#define kMapInitialAssociationVectorSlotCount (199)
+#define kMapAssociationVectorGrowthFactor 9/5
 
 class MapPointerWrapper: public ObjectPointerWrapper
     {
@@ -39,15 +39,13 @@ class MapPointerWrapper: public ObjectPointerWrapper
         void setCount(long count);
         long capacity();
         void setCapacity(long count);
-        long hashbucketCount();
-        void setHashbucketCount(long count);
-        void addPointerForKey(Pointer pointer,Hashable key);
-        Pointer pointerForKey(Hashable key);
-        void addWordForKey(Word word,Hashable key);
-        Word wordForKey(Hashable key);
+        void addPointerForKey(Pointer pointer,Hashable* key);
+        Pointer pointerForKey(Hashable* key);
+        void addWordForKey(Word word,Hashable* key);
+        Word wordForKey(Hashable* key);
     private:
-        AssociationVectorPointerWrapper growAssociationVector(AssociationVectorPointerWrapper wrapper);
-        Pointer createAssociationVector();
+        AssociationVectorPointerWrapper growAssociationVectorForHashbucket(long hashbucket,Pointer oldVectorPointer,long oldCapacity);
+        Pointer createAssociationVectorForHashbucket(long hashbucket);
     };
 
 #endif /* MapPointerWrapper_hpp */

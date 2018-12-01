@@ -10,8 +10,9 @@
 #define ObjectPointer_hpp
 
 #include <stdio.h>
-#include "ArgonTypes.hpp"
+#include "CobaltTypes.hpp"
 #include "Object.hpp"
+#include "Monitor.hpp"
 
 class ObjectPointerWrapper
     {
@@ -27,6 +28,8 @@ class ObjectPointerWrapper
         void setFlags(long flags);
         long generation();
         void setGeneration(long count);
+        bool isHeader();
+        void setIsHeader(bool flag);
         Pointer traits();
         Pointer mutex();
         Pointer condition();

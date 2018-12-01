@@ -8,24 +8,32 @@
 
 #include "Object.hpp"
 
-#define kHeaderReservedMask (((Word)7) << ((Word)57))
-#define kHeaderForwardedMask (((Word)1) << ((Word)56))
-#define kHeaderSlotCountMask (((Word)65535) << ((Word)40))
-#define kHeaderGenerationMask (((Word)65535) << ((Word)24))
-#define kHeaderTypeMask (((Word)65535) << ((Word)8))
-#define kHeaderFlagsMask (((Word)255) << ((Word)0))
-
-#define kHeaderReservedShift ((Word)57)
-#define kHeaderForwardedShift ((Word)56)
-#define kHeaderSlotCountShift ((Word)40)
-#define kHeaderGenerationShift ((Word)24)
-#define kHeaderTypeShift ((Word)8)
-#define kHeaderFlagsShift ((Word)0)
-
-Object::_ArgonObject()
+Object::Object()
     {
-    header = 0;
     };
+
+Object::Object(Word headerValue)
+    {
+    header = headerValue;
+    };
+
+Object::~Object()
+    {
+    }
+    
+bool Object::isHeader()
+    {
+    return(((header & kHeaderMarkerMask) >> kHeaderMarkerShift) == 1 ? true : false);
+    }
+
+void Object::setIsHeader(bool flag)
+    {
+    Word bit = ((flag == true) ? 1 : 0);
+    bit <<= kHeaderMarkerShift;
+    bit &= kHeaderMarkerMask;
+    header &= ~kHeaderMarkerMask;
+    header |= bit;
+    }
 
 bool Object::isForwarded()
     {
@@ -71,7 +79,7 @@ void Object::setGeneration(long count)
 
 long Object::type()
     {
-return((long)(header & kHeaderTypeMask) >> kHeaderTypeShift);
+    return((long)(header & kHeaderTypeMask) >> kHeaderTypeShift);
     };
 
 void Object::setType(long type)

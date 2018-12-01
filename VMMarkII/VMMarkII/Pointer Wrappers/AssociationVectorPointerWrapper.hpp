@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include "ObjectPointerWrapper.hpp"
-#include "ArgonPointers.hpp"
+#include "CobaltPointers.hpp"
 
 //
 // Vector slot indices

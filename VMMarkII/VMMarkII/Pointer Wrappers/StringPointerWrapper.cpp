@@ -9,8 +9,8 @@
 #include "StringPointerWrapper.hpp"
 #include "ExtensionBlockPointerWrapper.hpp"
 #include "string.h"
-#include "ArgonTypes.hpp"
-#include "ArgonPointers.hpp"
+#include "CobaltTypes.hpp"
+#include "CobaltPointers.hpp"
 
 StringPointerWrapper::StringPointerWrapper(Pointer pointer) : ObjectPointerWrapper(pointer)
     {
@@ -53,7 +53,7 @@ Pointer StringPointerWrapper::extensionBlockPointer()
     return(pointerAtIndexAtPointer(kStringExtensionBlockIndex,this->actualPointer));
     }
     
-void StringPointerWrapper::setString(char* string)
+void StringPointerWrapper::setString(char const* string)
     {
     Pointer extensionPointer = pointerAtIndex(kStringExtensionBlockIndex);
     ExtensionBlockPointerWrapper* wrapper;
@@ -73,11 +73,23 @@ void StringPointerWrapper::setString(char* string)
     long extraInBlock = bytesNeeded / 4;
     extraInBlock = extraInBlock < 20 ? 20 : extraInBlock;
     Word totalBytes = bytesNeeded + extraInBlock;
-    extensionPointer = Memory::shared->allocateExtensionBlockWithCapacityInBytes(bytesNeeded);
+    Word totalWords = (totalBytes / kWordSize) + 1;
+    extensionPointer = ObjectMemory::shared->allocateExtensionBlockWithCapacityInWords(totalWords);
     wrapper = new ExtensionBlockPointerWrapper(extensionPointer);
     wrapper->setCount(bytesNeeded);
     wrapper->setCapacity(totalBytes);
     strcpy((char*)wrapper->bytesPointer(),string);
     setPointerAtIndex(extensionPointer,kStringExtensionBlockIndex);
     delete wrapper;
+    }
+
+bool StringPointerWrapper::operator ==(Pointer const &pointer)
+    {
+    StringPointerWrapper wrapper = StringPointerWrapper(pointer);
+    return(strcmp(wrapper.string(),this->string())==0);
+    }
+
+bool StringPointerWrapper::operator !=(StringPointerWrapper const &wrapper)
+    {
+    return(strcmp(wrapper.string(),this->string())!=0);
     }

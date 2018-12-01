@@ -10,7 +10,7 @@
 #define VectorPointerWrapper_hpp
 
 #include <stdio.h>
-#include "ArgonTypes.hpp"
+#include "CobaltTypes.hpp"
 #include "ObjectPointerWrapper.hpp"
 
 //

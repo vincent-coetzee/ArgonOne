@@ -19,6 +19,7 @@ long AssociationVectorPointerWrapper::copyContentsOf(Pointer pointer)
     for (long index = kAssociationVectorFixedSlotCount;index< kAssociationVectorFixedSlotCount + wrapper.count()*2;index+=2)
         {
         setWordAtIndexAtPointer(wordAtIndexAtPointer(index,wrapper.actualPointer),index,this->actualPointer);
+        setWordAtIndexAtPointer(wordAtIndexAtPointer(index+1,wrapper.actualPointer),index+1,this->actualPointer);
         }
     return(this->count());
     }
@@ -46,7 +47,7 @@ void AssociationVectorPointerWrapper::setCapacity(long count)
 void AssociationVectorPointerWrapper::addAssociation(long hash,Pointer pointer)
     {
     long index = this->count() * 2 + kAssociationVectorFixedSlotCount;
-    setWordAtIndexAtPointer(hash,index++,this->actualPointer);
+    setWordAtIndexAtPointer(((Word)hash),index++,this->actualPointer);
     setPointerAtIndexAtPointer(pointer,index,this->actualPointer);
     this->setCount(this->count() + 1);
     };
@@ -54,7 +55,7 @@ void AssociationVectorPointerWrapper::addAssociation(long hash,Pointer pointer)
 void AssociationVectorPointerWrapper::addWordAssociation(long hash,Word word)
     {
     long index = this->count() * 2 + kAssociationVectorFixedSlotCount;
-    setWordAtIndexAtPointer(hash,index++,this->actualPointer);
+    setWordAtIndexAtPointer(((Word)hash),index++,this->actualPointer);
     setWordAtIndexAtPointer(word,index,this->actualPointer);
     this->setCount(this->count() + 1);
     }
@@ -64,7 +65,7 @@ Pointer AssociationVectorPointerWrapper::pointerAtHash(long hash)
     long count = this->count() * 2 + kAssociationVectorFixedSlotCount;
     for (long index = kAssociationVectorFixedSlotCount;index<count;index+=2)
         {
-        if (wordAtIndexAtPointer(index,this->actualPointer) == hash)
+        if (wordAtIndexAtPointer(index,this->actualPointer) == ((Word)hash))
             {
             return(pointerAtIndexAtPointer(index+1,this->actualPointer));
             }
@@ -77,7 +78,7 @@ Word AssociationVectorPointerWrapper::wordAtHash(long hash)
     long count = this->count() * 2 + kAssociationVectorFixedSlotCount;
     for (long index = kAssociationVectorFixedSlotCount;index<count;index+=2)
         {
-        if (wordAtIndexAtPointer(index,this->actualPointer) == hash)
+        if (wordAtIndexAtPointer(index,this->actualPointer) == ((Word)hash))
             {
             return(wordAtIndexAtPointer(index+1,this->actualPointer));
             }

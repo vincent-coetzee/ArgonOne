@@ -7,7 +7,7 @@
 //
 
 #include "ObjectPointerWrapper.hpp"
-#include "ArgonPointers.hpp"
+#include "CobaltPointers.hpp"
 
 ObjectPointerWrapper::ObjectPointerWrapper(Pointer pointer)
     {
@@ -28,6 +28,16 @@ void ObjectPointerWrapper::setSlotCount(long count)
 bool ObjectPointerWrapper::isForwarded()
     {
     return(objectPointer->isForwarded());
+    }
+
+bool ObjectPointerWrapper::isHeader()
+    {
+    return(objectPointer->isHeader());
+    }
+
+void ObjectPointerWrapper::setIsHeader(bool flag)
+    {
+    objectPointer->setIsHeader(flag);
     }
 
 void ObjectPointerWrapper::setIsForwarded(bool flag)
@@ -69,17 +79,7 @@ Pointer ObjectPointerWrapper::traits()
     {
     return(objectPointer->traits);
     }
-
-Pointer ObjectPointerWrapper::mutex()
-    {
-    return(objectPointer->mutex);
-    }
-
-Pointer ObjectPointerWrapper::condition()
-    {
-    return(objectPointer->condition);
-    }
-
+    
 Word ObjectPointerWrapper::wordAtIndex(long index)
     {
     return(wordAtIndexAtPointer(index,this->actualPointer));

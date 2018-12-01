@@ -10,7 +10,8 @@
 #define ArgonInstruction_hpp
 
 #include <stdio.h>
-#include "ArgonTypes.hpp"
+#include "CobaltTypes.hpp"
+#include "String.hpp"
 
 //
 // Instruction field constants
@@ -45,8 +46,8 @@ class MachineInstruction
         void setImmediateSign(int);
         Word address();
         void setAddress(Word);
-        static char* bitStringFor(char* string,Pointer pointer);
-        static char* bitStringFor(char* string,Word word);
+        static String bitStringFor(Pointer pointer);
+        static String bitStringFor(Word word);
     private:
         Word instructionWord;
         Word addressWord;

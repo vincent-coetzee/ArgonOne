@@ -15,8 +15,7 @@
 class Hashable
     {
     public:
-        long virtual hashValue();
-        bool virtual operator ==(Hashable const &hashable);
+        virtual long hashValue() = 0;
     };
     
 #endif /* Hashable_hpp */

@@ -7,7 +7,7 @@
 //
 
 #include "ExtensionBlockPointerWrapper.hpp"
-#include "ArgonPointers.hpp"
+#include "CobaltPointers.hpp"
 
 ExtensionBlockPointerWrapper::ExtensionBlockPointerWrapper(Pointer pointer) : ObjectPointerWrapper(pointer)
     {

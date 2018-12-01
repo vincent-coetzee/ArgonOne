@@ -25,30 +25,26 @@ void MemorySpace::initMemory(long capacity)
     {
     basePointer = malloc(capacity);
     char string[200];
-    MachineInstruction::bitStringFor(string, basePointer);
-    printf("Base Pointer : %s\n",string);
     nextPointer = basePointer;
-    MachineInstruction::bitStringFor(string, nextPointer);
      printf("Next Pointer : %s\n",string);
     memoryTop = addIntToPointer(-kWordSize,addIntToPointer(capacity,basePointer));
-    MachineInstruction::bitStringFor(string, memoryTop);
      printf("Top Pointer  : %s\n",string);
     }
 
 MemorySpace::~MemorySpace()
     {
-    delete ((char*)basePointer);
+    free((char*)basePointer);
     }
 
-Pointer MemorySpace::allocateBlockWithSizeInBytes(long sizeInBytes)
+Pointer MemorySpace::allocateBlockWithSizeInWords(long sizeInWords)
     {
     Pointer pointer = nextPointer;
-    long bytesSize = ((sizeInBytes / kWordSize) + 1) * kWordSize;
+    long bytesSize = sizeInWords * kWordSize;
     if (addIntToPointer(bytesSize,nextPointer) >= memoryTop)
         {
         throw(RuntimeException::outOfMemory);
         }
-    memset(pointer,(int)sizeInBytes,0);
+    memset(pointer,(int)bytesSize,0);
     nextPointer = addIntToPointer(bytesSize,nextPointer);
     return(pointer);
     }

@@ -7,8 +7,9 @@
 //
 
 #include "MachineInstruction.hpp"
-#include "ArgonTypes.hpp"
+#include "CobaltTypes.hpp"
 #include <stdlib.h>
+#include "String.hpp"
 
 #define kInstructionReserved (((Word)4) << ((Word)60))
 #define kInstructionMode (((Word)15) << ((Word)56))
@@ -144,10 +145,11 @@ void MachineInstruction::setImmediate(int immediate)
         }
     };
 
-char* MachineInstruction::bitStringFor(char* string,Word word)
+String MachineInstruction::bitStringFor(Word word)
     {
     Word bitPattern = (unsigned long)9223372036854775808UL;
-    char* incomingString = string;
+    char bytes[200];
+    char*  string = bytes;
     for (int index=0;index<64;index++)
         {
         *string++ = (word & bitPattern ) == bitPattern ? '1' : '0';
@@ -158,14 +160,15 @@ char* MachineInstruction::bitStringFor(char* string,Word word)
         bitPattern >>= 1;
         }
     *string = 0;
-    return(incomingString);
+    return(String(bytes));
     }
 
-char* MachineInstruction::bitStringFor(char* string,Pointer pointer)
+String MachineInstruction::bitStringFor(Pointer pointer)
     {
     Word word = (Word)pointer;;
     Word bitPattern = (unsigned long)9223372036854775808UL;
-    char* incomingString = string;
+    char bytes[200];
+    char* string = bytes;
     for (int index=0;index<64;index++)
         {
         *string++ = (word & bitPattern ) == bitPattern ? '1' : '0';
@@ -176,5 +179,5 @@ char* MachineInstruction::bitStringFor(char* string,Pointer pointer)
         bitPattern >>= 1;
         }
     *string = 0;
-    return(incomingString);
+    return(String(bytes));
     }

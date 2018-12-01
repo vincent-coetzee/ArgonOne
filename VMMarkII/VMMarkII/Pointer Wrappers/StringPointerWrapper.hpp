@@ -10,7 +10,7 @@
 #define StringPointerWrapper_hpp
 
 #include <stdio.h>
-#include "ArgonTypes.hpp"
+#include "CobaltTypes.hpp"
 #include "ObjectPointerWrapper.hpp"
 #include "Hashable.hpp"
 
@@ -32,14 +32,16 @@ class StringPointerWrapper : public ObjectPointerWrapper,public Hashable
         StringPointerWrapper(Pointer pointer);
         long count();
         char* string() const;
-        void setString(char* string);
+        void setString(char const* string);
         void setExtensionBlockPointer(Pointer value);
         Pointer extensionBlockPointer();
     public:
         long virtual hashValue();
         bool virtual operator ==(StringPointerWrapper const &wrapper);
+        bool virtual operator !=(StringPointerWrapper const &wrapper);
+        bool virtual operator ==(Pointer const &pointer);
     };
-    
+
 #endif /* StringPointerWrapper_hpp */
 
 

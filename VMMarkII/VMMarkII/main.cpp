@@ -9,17 +9,18 @@
 #include <iostream>
 #include <pthread.h>
 
-#include "ArgonTypes.hpp"
+#include "CobaltTypes.hpp"
 #include "MachineInstruction.hpp"
 #include "Object.hpp"
-#include "Memory.hpp"
+#include "ObjectMemory.hpp"
 #include "ObjectPointerWrapper.hpp"
 #include "StringPointerWrapper.hpp"
 #include "VectorPointerWrapper.hpp"
-#include "ArgonPointers.hpp"
+#include "CobaltPointers.hpp"
 #include "AssociationVectorPointerWrapper.hpp"
 #include "MapPointerWrapper.hpp"
 #include "String.hpp"
+#include "RootArray.hpp"
 
 void testArgonInstruction(void);
 void testObjects(void);
@@ -30,6 +31,8 @@ void testPointers(void);
 void testStringPointers(void);
 void testVectorsAndGrowing(void);
 void testMaps(void);
+void testTraits(void);
+void testObjectMemory(void);
 
 int main(int argc, const char * argv[])
     {
@@ -39,9 +42,11 @@ int main(int argc, const char * argv[])
     std::cout << "Size of cond is " << sizeof(pthread_mutex_t) << "\n";
     std::cout << "Size of Word is " << sizeof(Word) << "\n";
     std::cout << "Size of char is " << sizeof(char) << "\n";
+    testStringPointers();
+    testObjectMemory();
+    testTraits();
     testMaps();
     testVectorsAndGrowing();
-    testStringPointers();
     testPointers();
     testMemory();
     testTagging();
@@ -50,10 +55,84 @@ int main(int argc, const char * argv[])
     return 0;
     };
 
+void testObjectMemory()
+    {
+    ObjectMemory::shared = new ObjectMemory(10*1024*1024);
+    ObjectMemory* objectMemory = ObjectMemory::shared;
+    Pointer traitsMap = objectMemory->allocateMap();
+    MapPointerWrapper mapWrapper = MapPointerWrapper(traitsMap);
+    Pointer behavior = objectMemory->allocateTraits("Argon::Behavior", NULL, 0, NULL,0);
+    String aString = String("Argon::Behavior");
+    mapWrapper.addPointerForKey(behavior, &aString);
+    Pointer voidTraits = objectMemory->allocateTraits("Argon::Void", NULL, 0, NULL,0);
+    aString = String("Argon::Void");
+    mapWrapper.addPointerForKey(voidTraits, &aString);
+    aString = String("Argon::Number");
+    Pointer traits[10];
+    traits[0] = behavior;
+    Pointer numberTraits = objectMemory->allocateTraits(aString.characters(),traits, 1, NULL,0);
+    mapWrapper.addPointerForKey(numberTraits, &aString);
+    aString = String("Argon::Integer");
+    traits[0] = numberTraits;
+    Pointer integerTraits = objectMemory->allocateTraits(aString.characters(),traits, 1, NULL,0);
+    mapWrapper.addPointerForKey(integerTraits, &aString);
+    aString = "Argon::Behavior";
+    Pointer newTraits = mapWrapper.pointerForKey(&aString);
+    std::cout << newTraits;
+    RootArray* rootArray = new RootArray(50);
+    rootArray->addRootAtOrigin(traitsMap, &traitsMap);
+    ObjectMemory::shared->dumpBusyWords();
+    objectMemory->collectGarbage(rootArray);
+    }
+
+void testTraits()
+    {
+    Pointer traitsMap = ObjectMemory::shared->allocateMap();
+    MapPointerWrapper mapWrapper = MapPointerWrapper(traitsMap);
+    Pointer behavior = ObjectMemory::shared->allocateTraits("Argon::Behavior", NULL, 0, NULL,0);
+    String aString = String("Argon::Behavior");
+    std::cout << aString.hashValue();
+    mapWrapper.addPointerForKey(behavior, &aString);
+    Pointer voidTraits = ObjectMemory::shared->allocateTraits("Argon::Void", NULL, 0, NULL,0);
+    aString = String("Argon::Void");
+    mapWrapper.addPointerForKey(voidTraits, &aString);
+    aString = String("Argon::Number");
+    Pointer traits[10];
+    traits[0] = behavior;
+    Pointer numberTraits = ObjectMemory::shared->allocateTraits(aString.characters(),traits, 1, NULL,0);
+    mapWrapper.addPointerForKey(numberTraits, &aString);
+    aString = String("Argon::Integer");
+    traits[0] = numberTraits;
+    Pointer integerTraits = ObjectMemory::shared->allocateTraits(aString.characters(),traits, 1, NULL,0);
+    mapWrapper.addPointerForKey(integerTraits, &aString);
+    aString = "Argon::Behavior";
+    std::cout << aString.hashValue();
+    Pointer newTraits = mapWrapper.pointerForKey(&aString);
+    std::cout << "The name of this traits is " << TraitsPointerWrapper(newTraits).stringName();
+    }
+
 void testMaps()
     {
-    Pointer associations = Memory::shared->allocateAssociationVectorOfSizeInWords(200);
+    char chunk[1000];
+    
+    Pointer mainPointer = (Pointer)chunk;
+    Pointer aPointer = (Pointer)10;
+    setPointerAtIndexAtPointer(aPointer,0,mainPointer);
+    aPointer = (Pointer)20;
+    setPointerAtIndexAtPointer(aPointer,1,mainPointer);
+    assert(wordAtIndexAtPointer(0,mainPointer) == 10);
+    assert(wordAtIndexAtPointer(1,mainPointer) == 20);
+    assert(pointerAtIndexAtPointer(0,mainPointer) == (Pointer)10);
+    assert(pointerAtIndexAtPointer(1,mainPointer) == (Pointer)20);
+    setWordAtIndexAtPointer(100,2,mainPointer);
+    setWordAtIndexAtPointer(200,3,mainPointer);
+    assert(wordAtIndexAtPointer(2,mainPointer) == 100);
+    assert(wordAtIndexAtPointer(3,mainPointer) == 200);
+    Pointer associations = ObjectMemory::shared->allocateAssociationVectorOfSizeInWords(200);
     AssociationVectorPointerWrapper wrapper1 = AssociationVectorPointerWrapper(associations);
+    ObjectMemory::shared->dumpWordsAtPointerForLength(associations, 10);
+    wrapper1.count();
+    wrapper1.capacity();
     assert(wrapper1.count() == 0);
     for (long index=0;index<190;index++)
         {
@@ -65,17 +144,45 @@ void testMaps()
         std::cout << "Index = "  << index << " word found is " << aWord << "\n";
         assert(aWord == index+1);
         }
-    Pointer mapPointer = Memory::shared->allocateMap();
+    Pointer mapPointer = ObjectMemory::shared->allocateMap();
     MapPointerWrapper map = MapPointerWrapper(mapPointer);
     assert(map.count() == 0);
-    map.addWordForKey(201010,String((char*)"This is a new string"));
-    Word answer = map.wordForKey(String((char*)"This is a new string"));
+    String string1 = String((char*)"This is a new string");
+    map.addWordForKey(201010,&string1);
+    String string2 = String((char*)"This is a new string");
+    Word answer = map.wordForKey(&string2);
     std::cout << answer;
+    assert(map.count() == 1);
+    string1 = String((char*)"This is a newer string than the old one");
+    map.addWordForKey(41619873,&string1);
+    string2 = String((char*)"This is a newer string than the old one");
+    answer = map.wordForKey(&string2);
+    assert(answer == 41619873);
+    std::cout << answer;
+    for (long index=100;index<41223;index++)
+        {
+        char array[300];
+        sprintf(array, "%ld",index);
+        string1 = String(array);
+        if (index == 21111)
+            {
+            printf("halt");
+            }
+        map.addWordForKey(index,&string1);
+        }
+    for (long index=100;index<41223;index++)
+        {
+        char array[300];
+        sprintf(array, "%ld",index);
+        string1 = String(array);
+        answer = map.wordForKey(&string1);
+        assert(answer == index);
+        }
     }
 
 void testVectorsAndGrowing()
     {
-    Pointer vector1 = Memory::shared->allocateVectorWithCapacityInWords(20);
+    Pointer vector1 = ObjectMemory::shared->allocateVectorWithCapacityInWords(20);
     VectorPointerWrapper wrapper = VectorPointerWrapper(vector1);
     for (int index=0;index<50;index++)
         {
@@ -92,13 +199,19 @@ void testVectorsAndGrowing()
     
 void testStringPointers()
     {
-    StringPointerWrapper wrapper = StringPointerWrapper(Memory::shared->allocateString((char*)"This is a somewhat long test string that can be used where a string is needed"));
+    StringPointerWrapper wrapper = StringPointerWrapper(ObjectMemory::shared->allocateString((char*)"This is a somewhat long test string that can be used where a string is needed"));
     printf("The string is %s\n",wrapper.string());
+    StringPointerWrapper second = StringPointerWrapper(ObjectMemory::shared->allocateString((char*)"This is a test string string is needed"));
+    assert(wrapper != second);
+    StringPointerWrapper third = StringPointerWrapper(ObjectMemory::shared->allocateString((char*)"This is a somewhat long test string that can be used where a string is needed"));
+    assert(third == wrapper);
+    assert(third != second);
     };
 
 void testPointers()
     {
-    Pointer block = Memory::shared->allocateBlock(320);
+    char space[1024];
+    Pointer block = (Pointer)space;
     setWordAtIndexAtPointer(211,0,block);
     Word testWord = wordAtIndexAtPointer(0,block);
     assert(testWord == 211);
@@ -112,16 +225,12 @@ void testPointers()
 
 void testMemory()
     {
-    Pointer objectPointer = Memory::shared->allocateObject(10, kTypeVector,128, NULL);
+    Pointer objectPointer = ObjectMemory::shared->allocateObject(10, kTypeVector,128, NULL);
     ObjectPointerWrapper wrapper(objectPointer);
     Word header =  wrapper.wordAtIndex(0);
     char string[200];
-    MachineInstruction::bitStringFor(string, objectPointer);
-    printf("Object pointer : %s\n",string);
-    MachineInstruction::bitStringFor(string, header);
-    printf("Object header  : %s\n",string);
     char newString[200] = "This is a string";
-    Pointer stringPointer = Memory::shared->allocateString(newString);
+    Pointer stringPointer = ObjectMemory::shared->allocateString(newString);
     StringPointerWrapper stringWrapper(stringPointer);
     stringWrapper.count();
     printf("String count is %ld string is %s\n",stringWrapper.count(),stringWrapper.string());
@@ -136,10 +245,9 @@ void testTagging()
     Object* pointer = new Object();
     Pointer taggedPointer = taggedPointer(pointer,kBitsObject);
     Pointer untaggedPointer = untaggedPointer(taggedPointer);
-    char string[200];
-    printf("Object Pointer   : %s\n",MachineInstruction::bitStringFor(string,(unsigned char*)pointer));
-    printf("Tagged Pointer   : %s\n",MachineInstruction::bitStringFor(string,taggedPointer));
-    printf("Untagged Pointer : %s\n",MachineInstruction::bitStringFor(string,untaggedPointer));
+    assert(isTaggedPointer(taggedPointer));
+    assert(!isTaggedPointer(untaggedPointer));
+    assert(tagOfPointer(taggedPointer) == 4);
     };
 
 void testObjects()
@@ -149,15 +257,31 @@ void testObjects()
     firstObject->setType(kTypeVector);
     firstObject->setIsForwarded(true);
     firstObject->setGeneration(1);
-    firstObject->setFlags(128);
+    firstObject->setFlags(64);
     firstObject->setSlotCount(11);
     Word tempObject = (Word)firstObject;
     Object* second = (Object*)tempObject;
     assert(second->type() == kTypeVector);
     assert(second->isForwarded() == 1);
     assert(second->generation() == 1);
-    assert(second->flags() == 128);
+    assert(second->flags() == 64);
     assert(second->slotCount() == 11);
+    Word data[10];
+    firstObject = (Object*)data;
+    firstObject->setType(kTypeVector);
+    firstObject->setGeneration(300);
+    firstObject->setSlotCount(10);
+    firstObject->setIsForwarded(true);
+    Word copyData[10];
+    for (int index=0;index<10;index++)
+        {
+        copyData[index] = data[index];
+        }
+    second = (Object*)copyData;
+    assert(second->slotCount() == firstObject->slotCount());
+    assert(second->type() == firstObject->type());
+    assert(second->generation() == firstObject->generation());
+    assert(second->isForwarded() == firstObject->isForwarded());
     };
 
 void testArgonInstruction()

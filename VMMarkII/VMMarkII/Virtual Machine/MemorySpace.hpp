@@ -10,19 +10,17 @@
 #define MemorySpace_hpp
 
 #include <stdio.h>
-#include "ArgonTypes.hpp"
+#include "CobaltTypes.hpp"
+
+#define spaceContainsPointer(s,p) (s->basePointer <= p && s->memoryTop > p)
 
 class MemorySpace
     {
     public:
         MemorySpace(long capacity);
         ~MemorySpace();
-        Pointer allocateBlockWithSizeInBytes(long sizeInBytes);
-        Pointer allocateObject(int slotCount,int flags,Pointer traits);
-        Pointer allocateString(char* string);
-        Pointer allocateTraits(char* name,Pointer* parents);
-        Pointer allocateMap(int capacity);
-        Pointer allocateExtensionBlockCapacityInBytes(long capacity);
+        Pointer allocateBlockWithSizeInWords(long sizeInWords);
+        friend class ObjectMemory;
     private:
         Pointer basePointer;
         Pointer nextPointer;
