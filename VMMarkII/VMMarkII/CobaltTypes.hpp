@@ -21,17 +21,16 @@ typedef void* Pointer;
 //
 // The masks for tagging a pointer
 //
-#define kBitsMask (((Word)7) << ((Word)61))
-#define kBitsInteger (((Word)0) << ((Word)61))
-#define kBitsFloat (((Word)1) << ((Word)61))
-#define kBitsByte (((Word)2) << ((Word)61))
-#define kBitsBoolean (((Word)3) << ((Word)61))
-#define kBitsObject (((Word)4) << ((Word)61))
-#define kBitsDate (((Word)5) << ((Word)61))
-#define kBitsHandler (((Word)6) << ((Word)61))
+#define kBitsMask (((Word)7) << ((Word)60))
+#define kBitsInteger (((Word)0) << ((Word)60))
+#define kBitsObject (((Word)1) << ((Word)60))
+#define kBitsByte (((Word)2) << ((Word)60))
+#define kBitsBoolean (((Word)3) << ((Word)60))
+#define kBitsDate (((Word)4) << ((Word)60))
+#define kBitsFloat (((Word)5) << ((Word)60))
 
-
-#define kBitsShift ((Word)61)
+#define kBitsShift ((Word)60)
+#define kRawBitsObject ((Word)1)
 //
 // Special register numbers
 //
@@ -58,8 +57,9 @@ typedef void* Pointer;
 #define kTypeExtensionBlock (8)
 #define kTypeAssociationVector (9)
 #define kTypeTraits (10)
+#define kTypeHandler (11)
 
-#define kMaximumType (10)
+#define kMaximumType (11)
 
 //
 // Some miscellaneous numbers

@@ -13,7 +13,6 @@
 // Tagging and untagging pointers
 //
 #define untaggedPointer(p) ((Pointer)((((Word)p) & ~kBitsMask)))
-#define taggedPointer(p,t) ((Pointer)((((Word)p) & ~kBitsMask) | t))
 #define taggedHandlerPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsHandler))
 #define taggedObjectPointer(p) ((void*)((((Word)p) & ~kBitsMask) | kBitsObject))
 #define taggedBoolean(b) (kBitsBoolean | b)
@@ -26,8 +25,8 @@
 #define untaggedDate(d) (d & ~kBitsMask)
 #define untaggedFloat(f) (f & ~kBitsFloat)
 #define untaggedInteger(i) (i & ~kBitsMask)
-#define isTaggedPointer(p) ((((Word)p) & kBitsMask) != 0)
-#define isTaggedWord(w) ((w & kBitsMask) != 0)
+#define isTaggedObjectPointer(p) ((((Word)p) & kBitsObject) != 0)
+#define isTaggedObjectWord(w) ((w & kBitsObject) != 0)
 #define tagOfPointer(p) ((((Word)p) & kBitsMask) >> kBitsShift)
 #define pointerTaggedWithTag(p,t) (((Word)p) | ((t & kBitsMask) << kBitsShift))
 //

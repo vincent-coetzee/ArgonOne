@@ -54,7 +54,7 @@ class VMViewController: NSViewController
     @IBOutlet var instructionListView:ListView!
     @IBOutlet var stackListView:ListView!
     
-    public private(set) var vm:VirtualMachine!
+//    public private(set) var vm:VirtualMachine!
     private var currentDisplayFormat:DisplayFormat = .decimal
     private var currentDisplayLength:Int = 64
     
@@ -98,42 +98,6 @@ class VMViewController: NSViewController
         case .binary:
             return(Argon.bitString(of: UInt(bitPattern: Int(field)),length: currentDisplayLength))
             }
-        }
-    
-    private func updateViews(from:VMState)
-        {
-        self.BPField.stringValue = formattedField(from.BP)
-        self.IPField.stringValue = formattedField(from.IP)
-        self.SPField.stringValue = formattedField(from.SP)
-//        self.GPR0Field.stringValue = formattedField(from.GPR0)
-//        self.GPR1Field.stringValue = formattedField(from.GPR1)
-//        self.GPR2Field.stringValue = formattedField(from.GPR2)
-//        self.GPR3Field.stringValue = formattedField(from.GPR3)
-//        self.GPR4Field.stringValue = formattedField(from.GPR4)
-//        self.GPR5Field.stringValue = formattedField(from.GPR5)
-//        self.GPR6Field.stringValue = formattedField(from.GPR6)
-//        self.GPR7Field.stringValue = formattedField(from.GPR7)
-//        self.GPR8Field.stringValue = formattedField(from.GPR8)
-//        self.GPR9Field.stringValue = formattedField(from.GPR9)
-//        self.GPR10Field.stringValue = formattedField(from.GPR10)
-//        self.GPR11Field.stringValue = formattedField(from.GPR11)
-//        self.GPR12Field.stringValue = formattedField(from.GPR12)
-//        self.GPR13Field.stringValue = formattedField(from.GPR13)
-//        self.GPR14Field.stringValue = formattedField(from.GPR14)
-//        self.GPR15Field.stringValue = formattedField(from.GPR15)
-//        self.FPR0Field.stringValue = formattedField(from.FPRS[0])"
-//        self.FPR1Field.stringValue = formattedField(from.FPRS[1])"
-//        self.FPR2Field.stringValue = formattedField(from.FPRS[2])"
-//        self.FPR3Field.stringValue = formattedField(from.FPRS[3])"
-//        self.FPR4Field.stringValue = formattedField(from.FPRS[4])"
-//        self.FPR5Field.stringValue = formattedField(from.FPRS[5])"
-//        self.FPR6Field.stringValue = formattedField(from.FPRS[6])"
-//        self.FPR7Field.stringValue = formattedField(from.FPRS[7])"
-        let stack = from.stack.map{"\($0)"}
-        self.stackListView.list = stack
-        self.zeroField.stringValue = "\(from.flagZero)"
-        self.ltField.stringValue = "\(from.flagLessThan)"
-        self.lteField.stringValue = "\(from.flagLessThanEqual)"
         }
         
     @IBAction func onStepClicked(_ sender:Any?)

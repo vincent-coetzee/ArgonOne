@@ -31,7 +31,6 @@ public class ArgonGenericMethodNode:ArgonMethodNode,ArgonExportableItem,ArgonRel
     public private(set) var allowsAnyArity = false
     public var fullName:ArgonName = ArgonName("")
     public private(set) var returnTraits:ArgonTraitsNode = ArgonStandardsNode.shared.voidTraits
-    public var directives:ArgonMethodDirective = []
     
     public var hasInlineDirective:Bool
         {
@@ -117,6 +116,7 @@ public class ArgonGenericMethodNode:ArgonMethodNode,ArgonExportableItem,ArgonRel
             self.parameters = instance.parameters
             parameterCount = instance.parameters.count
             }
+        instance.directives = directives
         instance.moduleName = self.moduleName
         instances.append(instance)
         let traitsList = instances.map {$0.parameters.map {$0.traits}}

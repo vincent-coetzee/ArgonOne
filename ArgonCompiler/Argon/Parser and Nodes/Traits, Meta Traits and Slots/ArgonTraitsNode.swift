@@ -124,7 +124,6 @@ public class ArgonTraitsNode:ArgonExpressionNode,ArgonParseScope,Comparable,Argo
     
     public var name:ArgonName = ArgonName("ERROR")
     private var slots = ArgonSlotList()
-    private var systemSlots = ArgonSlotList()
     public var typeTemplates:[ArgonTypeTemplateNode] = []
     public private(set) var slotLayouts:[ArgonName:ArgonSlotLayoutNode] = [:]
     public private(set) var instanceSlotCount:Int = 0
@@ -164,6 +163,11 @@ public class ArgonTraitsNode:ArgonExpressionNode,ArgonParseScope,Comparable,Argo
     public var isInteger:Bool
         {
         return(false)
+        }
+    
+    public var firstSlotOffset:Int
+        {
+        return(24)
         }
     
     public override var traits:ArgonTraitsNode
@@ -427,7 +431,7 @@ public class ArgonTraitsNode:ArgonExpressionNode,ArgonParseScope,Comparable,Argo
                 slot.type = realType
                 }
             }
-        var offset = 24
+        var offset = self.firstSlotOffset
         for slot in slots
             {
             if !slot.type.isTemplateType || (slot.type.isTemplateType && !slot.type.isHollowTemplateType)

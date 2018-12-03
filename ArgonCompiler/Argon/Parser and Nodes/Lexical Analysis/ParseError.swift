@@ -109,4 +109,5 @@ public enum ParseError:Error
     case parameterWithNameExpected(String)
     case asExpected
     case symbolExpected
+    case inlineRequiresStatic
     }

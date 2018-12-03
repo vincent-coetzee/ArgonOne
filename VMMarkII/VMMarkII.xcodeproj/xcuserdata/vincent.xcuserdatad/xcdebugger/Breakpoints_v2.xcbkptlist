@@ -79,27 +79,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VMMarkII/main.cpp"
-            timestampString = "565388704.944795"
+            timestampString = "565549371.752634"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
-            landmarkName = "testTagging()"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VMMarkII/main.cpp"
-            timestampString = "565388704.945084"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "280"
-            endingLineNumber = "280"
+            startingLineNumber = "308"
+            endingLineNumber = "308"
             landmarkName = "testObjects()"
             landmarkType = "9">
          </BreakpointContent>
@@ -111,11 +95,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VMMarkII/main.cpp"
-            timestampString = "565388704.945151"
+            timestampString = "565549371.753072"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "testObjectMemory()"
             landmarkType = "9">
          </BreakpointContent>
@@ -127,11 +111,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VMMarkII/Virtual Machine/ObjectMemory.cpp"
-            timestampString = "565388704.945206"
+            timestampString = "565548922.353526"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "268"
-            endingLineNumber = "268"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
             landmarkName = "ObjectMemory::copyRootsFromTo(RootArray* rootArray,MemorySpace* fromSpace,MemorySpace* toSpace)"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,14 +126,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "VMMarkII/Virtual Machine/ObjectMemory.cpp"
-            timestampString = "565388704.945784"
+            filePath = "VMMarkII/main.cpp"
+            timestampString = "565549371.753598"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "252"
-            endingLineNumber = "252"
-            landmarkName = "ObjectMemory::copyRootsFromTo(RootArray* rootArray,MemorySpace* fromSpace,MemorySpace* toSpace)"
-            landmarkType = "7">
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "testObjectMemory()"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -158,14 +142,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "VMMarkII/Virtual Machine/ObjectMemory.cpp"
-            timestampString = "565388704.946068"
+            filePath = "VMMarkII/main.cpp"
+            timestampString = "565549371.7539999"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
-            landmarkName = "ObjectMemory::copyRoot(Pointer outerRoot,Pointer* freePointer)"
-            landmarkType = "7">
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "testObjectMemory()"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

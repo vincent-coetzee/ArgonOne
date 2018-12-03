@@ -11,6 +11,7 @@ import SharedMemory
 
 public class ArgonMethodNode:ArgonExpressionNode,ArgonParseScope,ThreeAddress,ArgonCodeContainer
     {
+    public var directives:ArgonMethodDirective = []
     private var threeAddressInstructions:[ThreeAddressInstruction] = []
     public var instructionList = VMInstructionList()
     public var parameters:[ArgonParameterNode] = []
@@ -27,6 +28,11 @@ public class ArgonMethodNode:ArgonExpressionNode,ArgonParseScope,ThreeAddress,Ar
     public var primitiveNumber:Int = 0
     public private(set) var id:Int
     private var handlers:[ArgonHandlerStatementNode] = []
+    
+    public var hasSystemDirective:Bool
+        {
+        return(directives.contains(.system))
+        }
     
     public var lastLHS: ThreeAddress
         {
@@ -82,6 +88,11 @@ public class ArgonMethodNode:ArgonExpressionNode,ArgonParseScope,ThreeAddress,Ar
             {
             return(address as! ArgonMethodNode == self)
             }
+        return(false)
+        }
+    
+    public var isOperatorBased:Bool
+        {
         return(false)
         }
     

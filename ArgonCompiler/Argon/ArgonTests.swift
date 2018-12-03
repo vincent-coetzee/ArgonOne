@@ -36,25 +36,25 @@ public class ArgonTests
     
     public static func testDataSegment() throws
         {
-        let vm = try VirtualMachine()
-        let memory = vm.memory!
-        let dataSegment = memory.dataSegment
-        let address = addressOfNextFreeWordsOfSizeInDataSegment(160, dataSegment)
-        let word:Word = 397456
-        setWordAtPointer(word,address)
-        let newWord = wordAtPointer(address)
-        assert(word == newWord)
-        let threadMemory = allocateThreadMemoryWithCapacity(102*1024)
-        for index:Word in 1...20
-            {
-            pushWord(threadMemory,index)
-            }
-        let rootArray = allocateRootArray()
-        addStackContentsToRootArray(threadMemory, rootArray)
-        for index:Word in stride(from:20,to:1,by:-1)
-            {
-            assert( index == popWord(threadMemory))
-            }
+//        let vm = try VirtualMachine()
+//        let memory = vm.memory!
+//        let dataSegment = memory.dataSegment
+//        let address = addressOfNextFreeWordsOfSizeInDataSegment(160, dataSegment)
+//        let word:Word = 397456
+//        setWordAtPointer(word,address)
+//        let newWord = wordAtPointer(address)
+//        assert(word == newWord)
+//        let threadMemory = allocateThreadMemoryWithCapacity(102*1024)
+//        for index:Word in 1...20
+//            {
+//            pushWord(threadMemory,index)
+//            }
+//        let rootArray = allocateRootArray()
+//        addStackContentsToRootArray(threadMemory, rootArray)
+//        for index:Word in stride(from:20,to:1,by:-1)
+//            {
+//            assert( index == popWord(threadMemory))
+//            }
         }
     
     public static func testVMInstructions()

@@ -18,83 +18,99 @@ public class ArgonStandardsNode:ArgonTopLevelNode
         self.shared.initPrimitives()
         }
     
-    public private(set) var booleanTraits:ArgonTraitsNode
-    public private(set) var integerTraits:ArgonTraitsNode
-    public private(set) var errorTraits:ArgonTraitsNode
-    public private(set) var voidTraits:ArgonTraitsNode
-    public private(set) var stringTraits:ArgonTraitsNode
-    public private(set) var floatTraits:ArgonTraitsNode
-    public private(set) var closureTraits:ArgonTraitsNode
-    public private(set) var symbolTraits:ArgonTraitsNode
-    public private(set) var vectorTraits:ArgonTraitsNode
-    public private(set) var anyTraits:ArgonTraitsNode
-    public private(set) var behaviorTraits:ArgonTraitsNode
-    public private(set) var traitsTraits:ArgonTraitsNode
-    public private(set) var doubleTraits:ArgonTraitsNode
-    public private(set) var polymorphicArgumentTraits:ArgonTraitsNode
-    public private(set) var handlerBlockTraits:ArgonTraitsNode
+    public private(set) var booleanTraits:ArgonSystemTraitsNode
+    public private(set) var integerTraits:ArgonSystemTraitsNode
+    public private(set) var errorTraits:ArgonSystemTraitsNode
+    public private(set) var voidTraits:ArgonSystemTraitsNode
+    public private(set) var stringTraits:ArgonSystemTraitsNode
+    public private(set) var floatTraits:ArgonSystemTraitsNode
+    public private(set) var closureTraits:ArgonSystemTraitsNode
+    public private(set) var symbolTraits:ArgonSystemTraitsNode
+    public private(set) var vectorTraits:ArgonSystemTraitsNode
+    public private(set) var anyTraits:ArgonSystemTraitsNode
+    public private(set) var behaviorTraits:ArgonSystemTraitsNode
+    public private(set) var traitsTraits:ArgonSystemTraitsNode
+    public private(set) var doubleTraits:ArgonSystemTraitsNode
+    public private(set) var polymorphicArgumentTraits:ArgonSystemTraitsNode
+    public private(set) var handlerBlockTraits:ArgonSystemTraitsNode
+    public private(set) var mapTraits:ArgonSystemTraitsNode
+    public private(set) var dateTraits:ArgonSystemTraitsNode
     
     public override init(name:ArgonName)
         {
-        voidTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Void"))
+        voidTraits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Void"))
         voidTraits.asArgonTraits()
-        polymorphicArgumentTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::PolymorphicArgument"))
+        polymorphicArgumentTraits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::PolymorphicArgument"))
         polymorphicArgumentTraits.parents = [voidTraits]
         polymorphicArgumentTraits.asArgonTraits()
-        behaviorTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Behaviour"))
+        behaviorTraits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Behaviour"))
         behaviorTraits.asArgonTraits()
-        handlerBlockTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::HandlerBlock"))
+        handlerBlockTraits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::HandlerBlock"))
         handlerBlockTraits.parents = [behaviorTraits]
         handlerBlockTraits.asArgonTraits()
-        traitsTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::TraitsTraits"))
-        anyTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Any"))
+        traitsTraits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::TraitsTraits"))
+        anyTraits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Any"))
         anyTraits.parents = [behaviorTraits]
         anyTraits.asArgonTraits()
-        errorTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Error"))
+        errorTraits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Error"))
         errorTraits.parents = [behaviorTraits]
         errorTraits.asArgonTraits()
-        closureTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Closure"))
+        closureTraits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Closure"))
         closureTraits.parents = [behaviorTraits]
         closureTraits.asArgonTraits()
-        let method = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Method"))
+        let method = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Method"))
         method.parents = [behaviorTraits]
         method.asArgonTraits()
-        let genericMethod = ArgonProxyTraitsNode(fullName: ArgonName("Argon::GenericMethod"))
+        let genericMethod = ArgonSystemTraitsNode(fullName: ArgonName("Argon::GenericMethod"))
         genericMethod.parents = [method]
         genericMethod.asArgonTraits()
-        let traits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Traits"))
+        let traits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Traits"))
         traits.parents = [behaviorTraits]
         traits.asArgonTraits()
         traitsTraits.parents = [traits]
         traitsTraits.asArgonTraits()
-        let collection = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Collection"))
+        let collection = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Collection"))
         collection.parents = [traits]
         collection.asArgonTraits()
-        let vector = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Vector"))
+        let vector = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Vector"))
         vector.parents = [collection]
         vector.asArgonTraits()
         vectorTraits = vector
-        stringTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::String"))
+        let map = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Map"))
+        map.parents = [collection]
+        map.asArgonTraits()
+        mapTraits = map
+        stringTraits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::String"))
         stringTraits.parents = [vector]
         stringTraits.asArgonTraits()
-        let number = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Number"))
+        let number = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Number"))
         number.parents = [traits]
         number.asArgonTraits()
-        integerTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Integer"))
+        integerTraits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Integer"))
         integerTraits.parents = [number]
         integerTraits.asArgonTraits()
-        symbolTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Symbol"))
+        symbolTraits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Symbol"))
         symbolTraits.parents = [stringTraits]
         symbolTraits.asArgonTraits()
-        booleanTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Boolean"))
+        booleanTraits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Boolean"))
         booleanTraits.parents = [symbolTraits]
         booleanTraits.asArgonTraits()
-        floatTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Float"))
-        doubleTraits = ArgonProxyTraitsNode(fullName: ArgonName("Argon::Double"))
+        floatTraits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Float"))
+        doubleTraits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Double"))
         doubleTraits.parents = [number]
         doubleTraits.asArgonTraits()
         floatTraits.parents = [number]
         floatTraits.asArgonTraits()
+        map.addSystemSlot(name:"header",offset:0,traits:integerTraits)
+        map.addSystemSlot(name:"traits",offset:8,traits:traitsTraits)
+        map.addSystemSlot(name:"monitor",offset:16,traits:behaviorTraits)
+        map.addSystemSlot(name:"count",offset:24,traits:integerTraits)
+        map.addSystemSlot(name:"capacity",offset:32,traits:integerTraits)
+        stringTraits.addSystemSlot(name:"header",offset:0,traits:integerTraits)
+        stringTraits.addSystemSlot(name:"traits",offset:8,traits:traitsTraits)
+        stringTraits.addSystemSlot(name:"monitor",offset:16,traits:behaviorTraits)
+        stringTraits.addSystemSlot(name:"count",offset:24,traits:integerTraits)
+        stringTraits.addSystemSlot(name:"extensionBlock",offset:32,traits:behaviorTraits)
         super.init(name:name)
         self.add(node: polymorphicArgumentTraits)
         self.add(node: voidTraits)

@@ -13,17 +13,19 @@
 #include "CobaltTypes.hpp"
 
 #define kHeaderMarkerMask (((Word)1) << ((Word)56))
-#define kHeaderForwardedMask (((Word)1) << ((Word)55))
-#define kHeaderSlotCountMask (((Word)65535) << ((Word)39))
-#define kHeaderGenerationMask (((Word)65535) << ((Word)23))
-#define kHeaderTypeMask (((Word)65535) << ((Word)7))
-#define kHeaderFlagsMask (((Word)127) << ((Word)0))
+#define kHandlerMarkerMask (((Word)1) << ((Word)55))
+#define kHeaderForwardedMask (((Word)1) << ((Word)54))
+#define kHeaderSlotCountMask (((Word)65535) << ((Word)38))
+#define kHeaderGenerationMask (((Word)65535) << ((Word)22))
+#define kHeaderTypeMask (((Word)65535) << ((Word)6))
+#define kHeaderFlagsMask (((Word)63) << ((Word)0))
 
 #define kHeaderMarkerShift ((Word)56)
-#define kHeaderForwardedShift ((Word)55)
-#define kHeaderSlotCountShift ((Word)39)
-#define kHeaderGenerationShift ((Word)23)
-#define kHeaderTypeShift ((Word)7)
+#define kHandlerMarkerShift ((Word)55)
+#define kHeaderForwardedShift ((Word)54)
+#define kHeaderSlotCountShift ((Word)38)
+#define kHeaderGenerationShift ((Word)22)
+#define kHeaderTypeShift ((Word)6)
 #define kHeaderFlagsShift ((Word)0)
 
 struct Object
@@ -36,6 +38,8 @@ struct Object
         Object();
         Object(Word headerValue);
         ~Object();
+        bool isHandler();
+        void setIsHandler(bool flag);
         bool isHeader();
         void setIsHeader(bool value);
         bool isForwarded();

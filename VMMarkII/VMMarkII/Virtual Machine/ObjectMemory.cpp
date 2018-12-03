@@ -24,6 +24,7 @@
 #include "RootArray.hpp"
 
 #define isValidType(p) (((Object*)p)->type() >= 0 || ((Object*)p)->type() <= kMaximumType)
+#define pointsToHeader(p) (((Object*)untaggedPointer(p))->isHeader())
 
 ObjectMemory* ObjectMemory::shared = new ObjectMemory(1024*1024*10);
 
@@ -203,34 +204,12 @@ void ObjectMemory::copySpaceToSpace(MemorySpace* fromSpace,MemorySpace* toSpace)
     toSpace->memoryTop = fromSpace->memoryTop;
     }
 
-Pointer ObjectMemory::copyRoot(Pointer outerRoot,Pointer* freePointer)
+void ObjectMemory::collectGarbage(RootArray* rootArray)
     {
-    Word header;
-    
-    Pointer root = untaggedPointer(outerRoot);
-    printf("Copying a root at 0x%ld\n",(long)root);
-    Object* objectPointer = (Object*)root;
-    printf(objectPointer->isHeader() ? "Is header\n" : "Not header\n");
-    header = objectPointer->header;
-    printf("Scanning object at 0x%lX \nHeader below\n",(unsigned long)objectPointer);
-    std::cout << MachineInstruction::bitStringFor(header) << "\n";
-    printf("Object is type %ld slot count %ld\n",objectPointer->type(),objectPointer->slotCount());
-    if (objectPointer->isForwarded())
-        {
-//        printf("FOUND FORWARDED\n");
-        return(*((Pointer*)(pointerByAddingLong(root,kWordSize))));
-        }
-    objectPointer->setGeneration(objectPointer->generation());
-    printf("Object slot count %ld \n",objectPointer->slotCount());
-    long totalBytes = objectPointer->slotCount() * kWordSize;
-    WordPointer newRoot = *((WordPointer*)freePointer);
-    *freePointer = pointerByAddingLong(*freePointer,totalBytes);
-    memcpy(newRoot,root,totalBytes);
-    printf("Copied %ld bytes from 0x%lX to 0x%lX\n",totalBytes,(unsigned long)root,(unsigned long)newRoot);
-    objectPointer->setIsForwarded(true);
-    objectPointer->traits = newRoot;
-    *((Pointer*)(pointerByAddingLong(root,kWordSize))) = newRoot;
-    return(newRoot);
+    this->mutex->lock();
+    this->copyRootsFromTo(rootArray,fromSpace,toSpace);
+    rootArray->updateRoots();
+    this->mutex->unlock();
     }
 
 void ObjectMemory::copyRootsFromTo(RootArray* rootArray,MemorySpace* fromSpace,MemorySpace* toSpace)
@@ -263,25 +242,54 @@ void ObjectMemory::copyRootsFromTo(RootArray* rootArray,MemorySpace* fromSpace,M
         for (int index=1;index<slotCount;index++)
             {
             Pointer innerWord = *((Pointer*)innerPointer);
-            if (isTaggedPointer(innerWord) && fromSpace->memoryTop > untaggedPointer(innerWord))
+            unsigned long tag = tagOfPointer(innerWord);
+            if (isTaggedObjectPointer(innerWord) && tag == kRawBitsObject)
                 {
-                unsigned long tag = tagOfPointer(innerWord);
-                printf("Found tagged pointer at %08lX following pointer\n",(unsigned long)innerWord);
+                printf("Found tagged pointer at 0x%08lX following pointer\n",(unsigned long)innerWord);
                 *((Pointer*)innerPointer) = (void*)pointerTaggedWithTag(copyRoot((char*)innerWord,&freePointer),tag);
                 }
             else
                 {
-                printf("Ignoring 0x%lX as pointer\n",(unsigned long)innerWord);
+                printf("Ignoring 0x%lX as pointer because it's not tagged\n",(unsigned long)innerWord);
                 }
             innerPointer = pointerByAddingLong(innerPointer,kWordSize);
             }
         }
+    printf("toSpace base pointer = 0x%lX next pointer is 0x%lX\n",toSpace->basePointer,toSpace->nextPointer);
+    printf("fromSpace base pointer = 0x%lX next pointer is 0x%lX\n",fromSpace->basePointer,fromSpace->nextPointer);
+    printf("Free pointer = 0x%lX\n",freePointer);
+    toSpace->nextPointer = freePointer;
+    fromSpace->reset();
     }
-void ObjectMemory::collectGarbage(RootArray* rootArray)
+
+Pointer ObjectMemory::copyRoot(Pointer outerRoot,Pointer* freePointer)
     {
-    mutex->lock();
-    copyRootsFromTo(rootArray,fromSpace,toSpace);
-    mutex->unlock();
+    Word header;
+    
+    Pointer root = untaggedPointer(outerRoot);
+    printf("Copying a root at 0x%ld\n",(long)root);
+    Object* objectPointer = (Object*)root;
+    printf(objectPointer->isHeader() ? "Is header\n" : "Not header\n");
+    header = objectPointer->header;
+    printf("Scanning object at 0x%lX \nHeader below\n",(unsigned long)objectPointer);
+    std::cout << MachineInstruction::bitStringFor(header) << "\n";
+    printf("Object is type %ld slot count %ld\n",objectPointer->type(),objectPointer->slotCount());
+    if (objectPointer->isForwarded())
+        {
+//        printf("FOUND FORWARDED\n");
+        return(*((Pointer*)(pointerByAddingLong(root,kWordSize))));
+        }
+    objectPointer->setGeneration(objectPointer->generation());
+    printf("Object slot count %ld \n",objectPointer->slotCount());
+    long totalBytes = objectPointer->slotCount() * kWordSize;
+    WordPointer newRoot = *((WordPointer*)freePointer);
+    *freePointer = pointerByAddingLong(*freePointer,totalBytes);
+    memcpy(newRoot,root,totalBytes);
+    printf("Copied %ld bytes from 0x%lX to 0x%lX\n",totalBytes,(unsigned long)root,(unsigned long)newRoot);
+    objectPointer->setIsForwarded(true);
+    objectPointer->traits = newRoot;
+    *((Pointer*)(pointerByAddingLong(root,kWordSize))) = newRoot;
+    return(newRoot);
     }
 
 void ObjectMemory::dumpBusyWords()
@@ -301,15 +309,15 @@ void ObjectMemory::dumpWordsAtPointerForLength(Pointer pointer,long length)
         if (objectPointer.isHeader())
             {
             bool excluded = false;
-            if (isTaggedWord(theWord) && spaceContainsPointer(toSpace,(Pointer)theWord) && isValidType((Pointer)theWord))
+            if (isTaggedObjectWord(theWord) && spaceContainsPointer(toSpace,(Pointer)theWord) && isValidType((Pointer)theWord))
                 {
                 excluded = true;
                 }
-            printf("0x%8lX %s Type %02ld SlotCount:%04ld %s\n",(((unsigned long)pointer)+index*kWordSize),bitString.characters(),objectPointer.type(),objectPointer.slotCount(),(isTaggedWord(theWord) ? (excluded ? "Excluded" : "Tagged") : ""));
+            printf("0x%8lX %s Type %02ld SlotCount:%04ld %s\n",(((unsigned long)pointer)+index*kWordSize),bitString.characters(),objectPointer.type(),objectPointer.slotCount(),(isTaggedObjectWord(theWord) ? (excluded ? "Excluded" : "Tagged") : ""));
             }
         else
             {
-            printf("0x%8lX %s %s\n",(((unsigned long)pointer)+index*kWordSize),bitString.characters(),(isTaggedWord(theWord) ? "Tagged" : ""));
+            printf("0x%8lX %s %s\n",(((unsigned long)pointer)+index*kWordSize),bitString.characters(),(isTaggedObjectWord(theWord) ? "Tagged" : ""));
             }
         }
     }

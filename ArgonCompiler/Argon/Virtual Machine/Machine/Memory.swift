@@ -54,7 +54,6 @@ public class Memory
     private var fromSpace:UnsafeMutablePointer<Space>
     public private(set) var toSpace:UnsafeMutablePointer<Space>
     public private(set) var dataSegment = allocateDataSegmentWithCapacity(10)
-    private var globalReferences:[String:GlobalMemoryReference] = [:]
     private var memoryMutexPointer = UnsafeMutablePointer<pthread_mutex_t>.allocate(capacity: 1)
     private var dataSegmentOffset = 8
     
@@ -103,28 +102,28 @@ public class Memory
     
     public func addRoot(name:String,pointer:Pointer)
         {
-        let index = globalReferences.count
-        let address = addressOfNextFreeWordsOfSizeInDataSegment(Int32(ArgonWordSize),dataSegment)
-        setPointerAtIndexAtPointer(pointer,0,address)
-        let reference = GlobalMemoryReference(name: name, dataSegmentAddress: address, index: index, address: pointer)
-        globalReferences[name] = reference
+//        let index = globalReferences.count
+//        let address = addressOfNextFreeWordsOfSizeInDataSegment(Int32(ArgonWordSize),dataSegment)
+//        setPointerAtIndexAtPointer(pointer,0,address)
+//        let reference = GlobalMemoryReference(name: name, dataSegmentAddress: address, index: index, address: pointer)
+//        globalReferences[name] = reference
         }
     
     private func updateGlobalsFrom(rootArray:Pointer)
         {
-        for global in globalReferences.values
-            {
-            let holder = rootAtIndexInArray(rootArray,Int32(global.rootArrayIndex))
-            global.address = holder.pointee.address
-            }
+//        for global in globalReferences.values
+//            {
+//            let holder = rootAtIndexInArray(rootArray,Int32(global.rootArrayIndex))
+//            global.address = holder.pointee.address
+//            }
         }
     
     private func addGlobalsToRootArray(rootArray:Pointer)
         {
-        for global in globalReferences.values
-            {
-            global.rootArrayIndex = addRootToRootArray(Memory.kSourceGlobal,Memory.kSourceThreadInvalid,global.index,global.address,rootArray)
-            }
+//        for global in globalReferences.values
+//            {
+//            global.rootArrayIndex = addRootToRootArray(Memory.kSourceGlobal,Memory.kSourceThreadInvalid,global.index,global.address,rootArray)
+//            }
         }
     public func copyToSpace(size: Int, to pointer:UnsafeMutableRawPointer)
         {
@@ -521,57 +520,61 @@ public class Memory
     
     public func traits(atName name:String) throws -> Pointer?
         {
-        return(try MapPointerWrapper(globalReferences["traitsMap"]!.address,objectMemory: self).pointer(forKey: name))
+//        return(try MapPointerWrapper(globalReferences["traitsMap"]!.address,objectMemory: self).pointer(forKey: name))
+        return(nil)
         }
     
     public func setTraits(_ traits:Pointer,atName name:String) throws
         {
-        try MapPointerWrapper(globalReferences["traitsMap"]!.address,objectMemory: self).setPointer(traits,forKey: name)
+//        try MapPointerWrapper(globalReferences["traitsMap"]!.address,objectMemory: self).setPointer(traits,forKey: name)
         }
     
     public func method(atName name:String) throws -> Pointer?
         {
-        return(try MapPointerWrapper(globalReferences["methodMap"]!.address,objectMemory: self).pointer(forKey: name))
+//        return(try MapPointerWrapper(globalReferences["methodMap"]!.address,objectMemory: self).pointer(forKey: name))
+        return(nil)
         }
     
     public func setMethod(_ pointer:Pointer,atName name:String) throws
         {
-        try MapPointerWrapper(globalReferences["methodMap"]!.address,objectMemory: self).setPointer(pointer,forKey: name)
+//        try MapPointerWrapper(globalReferences["methodMap"]!.address,objectMemory: self).setPointer(pointer,forKey: name)
         }
     
     public func symbol(atSymbol symbol:String) throws -> Pointer?
         {
-        return(SymbolTreePointerWrapper(globalReferences["symbolTree"]!.address).find(symbol:symbol))
+//        return(SymbolTreePointerWrapper(globalReferences["symbolTree"]!.address).find(symbol:symbol))
+        return(nil)
         }
     
-    public func setSymbol(_ symbol:String) throws -> Pointer
+    public func setSymbol(_ symbol:String) throws
         {
-        return(try SymbolTreePointerWrapper(globalReferences["symbolTree"]!.address).add(symbol: symbol, memory: self))
+//        return(try SymbolTreePointerWrapper(globalReferences["symbolTree"]!.address).add(symbol: symbol, memory: self))
+//        return(Pointer())
         }
     
-    public func collectGarbage(_ threads:[VMThread])
+    public func collectGarbage()
         {
-        pthread_mutex_lock(memoryMutexPointer)
-        defer
-            {
-            pthread_mutex_unlock(memoryMutexPointer)
-            }
-        let rootArray = allocateRootArray()
-        self.addGlobalsToRootArray(rootArray:rootArray)
-        var index = 0
-        for thread in threads
-            {
-            thread.addRootContentsToRootArray(threadIndex:index,rootArray:rootArray)
-            index += 1
-            }
-        addDataContentsToRootArray(self.dataSegment,rootArray)
-        copyRootsFromTo(rootArray,fromSpace, toSpace)
-        self.updateGlobalsFrom(rootArray:rootArray)
-        for thread in threads
-            {
-//            thread.updateRootContentsFrom(rootArray:rootArray)
-            }
-        freeRootArray(rootArray)
+//        pthread_mutex_lock(memoryMutexPointer)
+//        defer
+//            {
+//            pthread_mutex_unlock(memoryMutexPointer)
+//            }
+//        let rootArray = allocateRootArray()
+//        self.addGlobalsToRootArray(rootArray:rootArray)
+//        var index = 0
+//        for thread in threads
+//            {
+//            thread.addRootContentsToRootArray(threadIndex:index,rootArray:rootArray)
+//            index += 1
+//            }
+//        addDataContentsToRootArray(self.dataSegment,rootArray)
+//        copyRootsFromTo(rootArray,fromSpace, toSpace)
+//        self.updateGlobalsFrom(rootArray:rootArray)
+//        for thread in threads
+//            {
+////            thread.updateRootContentsFrom(rootArray:rootArray)
+//            }
+//        freeRootArray(rootArray)
         }
     
     func testMaps() throws

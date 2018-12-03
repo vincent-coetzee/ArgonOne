@@ -20,11 +20,13 @@ class MemorySpace
         MemorySpace(long capacity);
         ~MemorySpace();
         Pointer allocateBlockWithSizeInWords(long sizeInWords);
+        void reset();
         friend class ObjectMemory;
     private:
         Pointer basePointer;
         Pointer nextPointer;
         Pointer memoryTop;
+        long capacity;
     private:
         void initMemory(long capacity);
     };

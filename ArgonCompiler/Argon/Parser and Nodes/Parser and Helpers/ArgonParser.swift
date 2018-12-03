@@ -253,7 +253,11 @@ public class ArgonParser
     
     private func parseEntity() throws
         {
-        if token.isMacro
+        if token.isPrefix || token.isPostfix || token.isInfix
+            {
+            try self.parseOperator();
+            }
+        else if token.isMacro
             {
             try self.parseMacro()
             }
@@ -298,6 +302,10 @@ public class ArgonParser
             {
             try self.parseEntity()
             }
+        }
+    
+    private func parseOperator() throws
+        {
         }
     
     private func parseParentTraits(inTraits traits:ArgonTraitsNode) throws
@@ -1289,6 +1297,10 @@ public class ArgonParser
                     {
                     try self.nextToken()
                     }
+                }
+            if directives.contains(.inline) && !directives.contains(.static)
+                {
+                throw(ParseError.inlineRequiresStatic)
                 }
             self.pendingMethodDirectives = directives
             }

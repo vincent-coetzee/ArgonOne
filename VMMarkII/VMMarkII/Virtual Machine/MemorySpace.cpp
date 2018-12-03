@@ -19,6 +19,7 @@ Pointer addIntToPointer(unsigned long value,Pointer pointer)
 MemorySpace::MemorySpace(long capacity)
     {
     initMemory(capacity);
+    this->capacity = capacity;
     }
 
 void MemorySpace::initMemory(long capacity)
@@ -29,6 +30,12 @@ void MemorySpace::initMemory(long capacity)
      printf("Next Pointer : %s\n",string);
     memoryTop = addIntToPointer(-kWordSize,addIntToPointer(capacity,basePointer));
      printf("Top Pointer  : %s\n",string);
+    }
+
+void MemorySpace::reset()
+    {
+    nextPointer = basePointer;
+    memoryTop = addIntToPointer(-kWordSize,addIntToPointer(capacity,basePointer));
     }
 
 MemorySpace::~MemorySpace()

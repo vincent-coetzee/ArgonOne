@@ -35,6 +35,20 @@ void Object::setIsHeader(bool flag)
     header |= bit;
     }
 
+bool Object::isHandler()
+    {
+    return(((header & kHandlerMarkerMask) >> kHandlerMarkerShift) == 1 ? true : false);
+    }
+
+void Object::setIsHandler(bool flag)
+    {
+    Word bit = ((flag == true) ? 1 : 0);
+    bit <<= kHandlerMarkerShift;
+    bit &= kHandlerMarkerMask;
+    header &= ~kHandlerMarkerMask;
+    header |= bit;
+    }
+
 bool Object::isForwarded()
     {
     return(((header & kHeaderForwardedMask) >> kHeaderForwardedShift) == 1 ? true : false);

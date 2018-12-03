@@ -62,7 +62,6 @@ executable GoFishing
     //
     // A multimethod generic on the animal
     //
-     @(inline,system)
     method swimAround(animal::Cetacean,value::Integer) -> Integer
         {
         return(value)
@@ -70,28 +69,37 @@ executable GoFishing
     //
     // A second instance of the multimethod
     //
-    @(inline,system)
     method swimAround(animal::Fish,value::Integer) -> Integer
         {
         return(value)
         }
 
-    @(inline,system)
     method swimAround(animal::Fish,value::Number) -> Integer
         {
         return(3)
         }
 
-     @(inline,system)
     method swimAround(animal::Cetacean,value::Number) -> Integer
         {
         return(2)
         }
 
-    @(inline,static)
     method print(value::Behaviour)
         {
         primitive<1>
+        }
+
+    //
+    // This an operator based method, that we be used whenever two strings are being
+    // compared. It will be statically dispatched (i.e. via CALL not via DISP ) because
+    // it has been flagged as static. The inline annotation requests that the compiler
+    // inline this method where possible. Inline will only work in conjunction with a
+    // static annotation
+    //
+    @(static,system,inline)
+    operator ==(lhs::String,rhs::String) -> Boolean
+        {
+
         }
 
     method random(someTraits::Traits,lowerBound::Number,upperBound::Number) -> Number

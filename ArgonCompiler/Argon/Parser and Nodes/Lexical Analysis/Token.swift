@@ -239,6 +239,26 @@ public struct Token:CustomStringConvertible,Codable
         return(type == .keyword && keyword == .method)
         }
     
+    public var isOperator:Bool
+        {
+        return(type == .keyword && keyword == .operator)
+        }
+    
+    public var isPrefix:Bool
+        {
+        return(type == .keyword && keyword == .prefix)
+        }
+    
+    public var isPostfix:Bool
+        {
+        return(type == .keyword && keyword == .postfix)
+        }
+    
+    public var isInfix:Bool
+        {
+        return(type == .keyword && keyword == .infix)
+        }
+    
     public var isDirective:Bool
         {
         return(type == .keyword && (keyword == .static || keyword == .dynamic || keyword == .system || keyword == .inline))

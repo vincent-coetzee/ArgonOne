@@ -17,7 +17,7 @@ class Root
     {
     public:
         Pointer address;
-        Pointer rootOrigin;
+        Pointer* rootOrigin;
     };
 
 class RootArray
@@ -25,7 +25,7 @@ class RootArray
     public:
         RootArray(long capacity);
         ~RootArray();
-        void addRootAtOrigin(Pointer root,Pointer rootOrigin);
+        void addRootAtOrigin(Pointer root,Pointer* rootOrigin);
         Root rootAtIndex(long index);
         void updateRoots();
         friend class ObjectMemory;

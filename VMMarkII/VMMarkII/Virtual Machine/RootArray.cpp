@@ -22,7 +22,7 @@ RootArray::~RootArray()
     delete [] elements;
     }
 
-void RootArray::addRootAtOrigin(Pointer root,Pointer rootOrigin)
+void RootArray::addRootAtOrigin(Pointer root,Pointer* rootOrigin)
     {
     Root aRoot;
     
@@ -38,6 +38,11 @@ void RootArray::addRootAtOrigin(Pointer root,Pointer rootOrigin)
 
 void RootArray::updateRoots()
     {
+    for (long index=0;index<count;index++)
+        {
+        Root aRoot = elements[index];
+        *aRoot.rootOrigin = taggedObjectPointer(aRoot.address);
+        }
     }
 
 void RootArray::growArray()

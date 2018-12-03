@@ -42,9 +42,9 @@ int main(int argc, const char * argv[])
     std::cout << "Size of cond is " << sizeof(pthread_mutex_t) << "\n";
     std::cout << "Size of Word is " << sizeof(Word) << "\n";
     std::cout << "Size of char is " << sizeof(char) << "\n";
-    testStringPointers();
-    testObjectMemory();
     testTraits();
+    testObjectMemory();
+    testStringPointers();
     testMaps();
     testVectorsAndGrowing();
     testPointers();
@@ -79,10 +79,38 @@ void testObjectMemory()
     aString = "Argon::Behavior";
     Pointer newTraits = mapWrapper.pointerForKey(&aString);
     std::cout << newTraits;
+    Pointer traitsMapBefore = traitsMap;
     RootArray* rootArray = new RootArray(50);
     rootArray->addRootAtOrigin(traitsMap, &traitsMap);
     ObjectMemory::shared->dumpBusyWords();
     objectMemory->collectGarbage(rootArray);
+    delete rootArray;
+    printf("Traits Map before GC %010lX \n",(unsigned long)traitsMapBefore);
+    printf("Traits Map after GC %010lX \n",(unsigned long)traitsMap);
+    mapWrapper = MapPointerWrapper(traitsMap);
+    String firstName = String("Argon::Behavior");
+    Pointer traitsObject = mapWrapper.pointerForKey(&firstName);
+    TraitsPointerWrapper secondWrapper = TraitsPointerWrapper(traitsObject);
+    std::cout << "Lookup of Argon::Behavior found -> " << secondWrapper.name() << "\n";
+    firstName = "Argon::Number";
+    Pointer someTraits = mapWrapper.pointerForKey(&firstName);
+    TraitsPointerWrapper thirdWrapper = TraitsPointerWrapper(someTraits);
+    std::cout << "Lookup of Argon::Number found -> " << thirdWrapper.name() << "\n";
+    traitsMapBefore = traitsMap;
+    rootArray = new RootArray(50);
+    rootArray->addRootAtOrigin(traitsMap, &traitsMap);
+    objectMemory->collectGarbage(rootArray);
+    printf("Traits Map before GC %010lX \n",(unsigned long)traitsMapBefore);
+    printf("Traits Map after GC %010lX \n",(unsigned long)traitsMap);
+    mapWrapper = MapPointerWrapper(traitsMap);
+    firstName = String("Argon::Behavior");
+    traitsObject = mapWrapper.pointerForKey(&firstName);
+    secondWrapper = TraitsPointerWrapper(traitsObject);
+    std::cout << "Lookup of Argon::Behavior found -> " << secondWrapper.name() << "\n";
+    firstName = "Argon::Number";
+    someTraits = mapWrapper.pointerForKey(&firstName);
+    thirdWrapper = TraitsPointerWrapper(someTraits);
+    std::cout << "Lookup of Argon::Number found -> " << thirdWrapper.name() << "\n";
     }
 
 void testTraits()
@@ -243,11 +271,11 @@ void testRawPointers()
 void testTagging()
     {
     Object* pointer = new Object();
-    Pointer taggedPointer = taggedPointer(pointer,kBitsObject);
+    Pointer taggedPointer = taggedObjectPointer(pointer);
     Pointer untaggedPointer = untaggedPointer(taggedPointer);
-    assert(isTaggedPointer(taggedPointer));
-    assert(!isTaggedPointer(untaggedPointer));
-    assert(tagOfPointer(taggedPointer) == 4);
+    assert(isTaggedObjectPointer(taggedPointer));
+    assert(!isTaggedObjectPointer(untaggedPointer));
+    assert(tagOfPointer(taggedPointer) == (kBitsObject>>kBitsShift));
     };
 
 void testObjects()
@@ -257,14 +285,14 @@ void testObjects()
     firstObject->setType(kTypeVector);
     firstObject->setIsForwarded(true);
     firstObject->setGeneration(1);
-    firstObject->setFlags(64);
+    firstObject->setFlags(31);
     firstObject->setSlotCount(11);
     Word tempObject = (Word)firstObject;
     Object* second = (Object*)tempObject;
     assert(second->type() == kTypeVector);
     assert(second->isForwarded() == 1);
     assert(second->generation() == 1);
-    assert(second->flags() == 64);
+    assert(second->flags() == 31);
     assert(second->slotCount() == 11);
     Word data[10];
     firstObject = (Object*)data;

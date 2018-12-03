@@ -10,8 +10,26 @@ import Foundation
 import SharedMemory
 
 
-public class VMInstruction:NSObject
+public class VMInstruction:NSObject,FileWritable
     {
+    public static func read(from:UnsafeMutablePointer<FILE>) throws -> FileWritable
+        {
+        let pointer = UnsafeMutableRawPointer.allocate(byteCount: 128, alignment: 8)
+        fread(pointer,8,1,from)
+        let instruction = VMInstruction(pointer.load(as: Word.self))
+        if instruction.mode == .address
+            {
+            fread(pointer,8,1,from)
+            instruction.addressWord = pointer.load(as: Word.self)
+            }
+        return(instruction)
+        }
+    
+    public func write(to:UnsafeMutablePointer<FILE>) throws
+        {
+        
+        }
+    
     public enum RelocationType:Int
         {
         case immediate = 0

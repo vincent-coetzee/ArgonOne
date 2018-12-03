@@ -40,7 +40,7 @@ public class TokenStream
     private let digits = NSCharacterSet.decimalDigits
     private let whitespace = NSCharacterSet.whitespaces
     private let newline = NSCharacterSet.newlines
-    private let symbols = CharacterSet(charactersIn: "#()[]=:.{},<>-+*/%!&|~^@")
+    private let symbols = CharacterSet(charactersIn: "#()[]=:.{},<>-+*/%!&|~^@!$?\\~")
     private var tokenStart:String.Index = "".startIndex
     private var tokenStop:String.Index = "".startIndex
     private var lineStart:String.Index = "".startIndex
