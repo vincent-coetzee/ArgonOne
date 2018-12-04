@@ -57,4 +57,27 @@ public class ArgonMethod:ArgonModulePart
         primitiveNumber = aDecoder.decodeInteger(forKey: "primitiveNumber")
         super.init(coder:aDecoder)
         }
+    
+    required public init(archiver: CArchiver) throws
+        {
+        returnType = try ArgonTraits(archiver: archiver)
+        moduleName = try String(archiver: archiver)
+        parameters = try [ArgonParameter](archiver: archiver)
+        code = try ArgonCodeBlock(archiver: archiver)
+        isPrimitive = try Bool(archiver: archiver)
+        primitiveNumber = try Int(archiver: archiver)
+        try super.init(archiver: archiver)
+        }
+    
+    public override func write(archiver: CArchiver) throws
+        {
+        try archiver.write(object: self)
+        try super.write(archiver: archiver)
+        try returnType.write(archiver: archiver)
+        try moduleName.write(archiver: archiver)
+        try parameters.write(archiver: archiver)
+        try code.write(archiver: archiver)
+        try isPrimitive.write(archiver: archiver)
+        try primitiveNumber.write(archiver: archiver)
+        }
     }

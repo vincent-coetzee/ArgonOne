@@ -10,6 +10,8 @@ import Foundation
 
 public enum ParseError:Error
     {
+    case invalidModulePart
+    case invalidToken
     case invalidCharacter(String)
     case libraryOrExecutableExpected
     case identifierExpected
@@ -110,4 +112,15 @@ public enum ParseError:Error
     case asExpected
     case symbolExpected
     case inlineRequiresStatic
+    case dateDayExpected
+    case dateMonthExpected
+    case dateYearExpected
+    case dateHourExpected
+    case dateMinuteExpected
+    case dateSecondExpected
+    case dateTimeZoneExpected
+    case dateSeparatorExpected
+    case dateTimeSeparatorExpected
+    case operatorKeywordExpected
+    case notImplemented
     }

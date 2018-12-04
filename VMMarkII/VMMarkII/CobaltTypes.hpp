@@ -61,6 +61,24 @@ typedef void* Pointer;
 
 #define kMaximumType (11)
 
+#define kGenericMethodKind (0)
+#define kTraitsKind (1)
+#define kClosureKind (2)
+#define kStringKind (3)
+#define kSymbolKind (4)
+#define kGlobalKind (5)
+#define kNoneKind (6)
+#define kIntegerKind (7)
+#define kFloatKind (8)
+#define kBooleanKind (9)
+#define kTreeKind (10)
+#define kHandlerKind (11)
+#define kMethodKind (12)
+
+#define kMarkerObjectsEnd 0xCAFED00D
+#define kMarkerReference 0xBEADBABE
+#define kMarkerObject 0xDEADBEEF
+
 //
 // Some miscellaneous numbers
 //

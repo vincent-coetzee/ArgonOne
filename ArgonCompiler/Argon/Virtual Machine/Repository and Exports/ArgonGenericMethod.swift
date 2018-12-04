@@ -356,6 +356,33 @@ public class ArgonGenericMethod:ArgonModulePart
         super.init(coder:aDecoder)
         }
     
+    
+    required public init(archiver: CArchiver) throws
+        {
+        try kind = ArgonModuleItemKind(archiver: archiver)
+        try instances = [ArgonMethod](archiver: archiver)
+        try returnTraits = ArgonTraits(archiver: archiver)
+        var count = 0
+        fread(&count,MemoryLayout<Int>.size,1,archiver.file)
+        parameterCount = count
+        fread(&count,MemoryLayout<Int>.size,1,archiver.file)
+        allowsAnyArity = count == 1
+        try super.init(archiver: archiver)
+        }
+    
+    public override func write(archiver: CArchiver) throws
+        {
+        try archiver.write(object: self)
+        try super.write(archiver: archiver)
+        try kind.write(archiver: archiver)
+        try instances.write(archiver: archiver)
+        try returnTraits.write(archiver: archiver)
+        var count = parameterCount
+        fwrite(&count,MemoryLayout<Int>.size,1,archiver.file)
+        count = allowsAnyArity ? 1 : 0
+        fwrite(&count,MemoryLayout<Int>.size,1,archiver.file)
+        }
+    
     public func updateParameters(from:Memory) throws
         {
         for instance in instances

@@ -24,7 +24,7 @@ public class ArgonSystemTraitsNode:ArgonTraitsNode
     
     public override func resolve(name:ArgonName) -> ArgonParseNode?
         {
-        if !containingScope!.enclosingMethod()!.hasSystemDirective
+        if let scope = containingScope,let method = scope.enclosingMethod(),method.hasSystemDirective
             {
             return(super.resolve(name:name))
             }

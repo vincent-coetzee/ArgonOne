@@ -23,6 +23,20 @@ public enum ArgonModuleItemKind:Int
     case boolean
     case tree
     case handler
+    case method
+    
+    public init(archiver: CArchiver) throws
+        {
+        var type:Int = 0
+        fread(&type,MemoryLayout<Int>.size,1,archiver.file)
+        self.init(rawValue: type)!
+        }
+    
+    public func write(archiver: CArchiver) throws
+        {
+        var type = self.rawValue
+        fwrite(&type,MemoryLayout<Int>.size,1,archiver.file)
+        }
     }
 
 public protocol ArgonModuleItem
@@ -68,4 +82,20 @@ public class ArgonModule:ArgonModulePart
         source = aDecoder.decodeObject(forKey: "source") as! String
         super.init(coder:aDecoder)
         }
+    
+    required public init(archiver: CArchiver) throws
+        {
+        source = try String(archiver: archiver)
+        relocations = try ArgonRelocationTable(archiver: archiver)
+        try super.init(archiver: archiver)
+        }
+    
+    public override func write(archiver: CArchiver) throws
+        {
+        try archiver.write(object: self)
+        try super.write(archiver: archiver)
+        try source.write(archiver: archiver)
+        try relocations.write(archiver: archiver)
+        }
+    
     }

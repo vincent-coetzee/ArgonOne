@@ -44,4 +44,19 @@ public class ArgonExecutable:ArgonModule
         {
         super.init(fullName: fullName)
         }
+    
+    required public init(archiver: CArchiver) throws
+        {
+        entryPoint = try ArgonCodeBlock(archiver: archiver)
+        executableInit = try ArgonCodeBlock(archiver: archiver)
+        try super.init(archiver: archiver)
+        }
+    
+    public override func write(archiver: CArchiver) throws
+        {
+        try archiver.write(object: self)
+        try entryPoint.write(archiver: archiver)
+        try executableInit.write(archiver: archiver)
+        try super.write(archiver: archiver)
+        }
     }

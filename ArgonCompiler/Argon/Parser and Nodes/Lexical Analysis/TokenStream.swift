@@ -8,6 +8,18 @@
 
 import Foundation
 
+public struct OperatorToken
+    {
+    var characters:[Character] = []
+    var tokenKey:Int = 0
+    
+    init(characters:[Character],tokenKey:Int)
+        {
+        self.characters = characters
+        self.tokenKey = tokenKey
+        }
+    }
+
 public struct SourceLocation:Codable
     {
     let lineNumber:Int
@@ -45,6 +57,7 @@ public class TokenStream
     private var tokenStop:String.Index = "".startIndex
     private var lineStart:String.Index = "".startIndex
     private var lineStop:String.Index = "".startIndex
+    private var operatorTokens:[OperatorToken] = []
     public var parseComments:Bool = false
     
     private var atEnd:Bool
@@ -106,6 +119,11 @@ public class TokenStream
             lineStop = offset
             }
         return(currentChar)
+        }
+    
+    public func addOperatorToken(characters:[Character],for index:Int)
+        {
+        operatorTokens.append(OperatorToken(characters:characters,tokenKey:index))
         }
     
     public func rewindChar()
@@ -333,13 +351,44 @@ public class TokenStream
         return(false)
         }
     
-    private func isSymbol(_ char:Unicode.Scalar)
+    private func currentCharactersMatch(token:OperatorToken) -> Bool
         {
+        var unwindCount = 0
+        for index in 0..<token.characters.count
+            {
+            if Character(currentChar) != token.characters[index]
+                {
+                for _ in 0..<unwindCount
+                    {
+                    self.rewindChar()
+                    }
+                return(false)
+                }
+            self.nextChar()
+            unwindCount += 1
+            }
+        return(true)
+        }
+    
+    private func nextOperatorToken() throws -> OperatorToken?
+        {
+        for token in operatorTokens
+            {
+            if self.currentCharactersMatch(token: token)
+                {
+                return(token)
+                }
+            }
+        return(nil)
         }
     
     private func nextSymbol() throws -> Token
         {
-        if currentChar == "#"
+        if let operatorToken = try self.nextOperatorToken()
+            {
+            return(Token(operator:operatorToken.tokenKey,self.sourceLocation()))
+            }
+        else if currentChar == "#"
             {
             nextChar()
             var string = "#"
@@ -489,6 +538,11 @@ public class TokenStream
             {
             nextChar()
             return(Token(symbol:.not,self.sourceLocation()))
+            }
+        else if currentChar == "$"
+            {
+            nextChar()
+            return(Token(symbol:.dollar,self.sourceLocation()))
             }
         else if currentChar == "-"
             {

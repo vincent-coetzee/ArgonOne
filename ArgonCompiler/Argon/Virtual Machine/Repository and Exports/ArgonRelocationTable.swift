@@ -10,7 +10,7 @@ import Foundation
 
 public typealias ArgonRelocationEntryConversion = () -> ArgonRelocatable
 
-public class ArgonRelocationTableEntry:NSObject,NSCoding
+public class ArgonRelocationTableEntry:NSObject,NSCoding,FileWritable
     {
     public static func ==(lhs:ArgonRelocationTableEntry,rhs:ArgonRelocationTableEntry) -> Bool
         {
@@ -144,9 +144,64 @@ public class ArgonRelocationTableEntry:NSObject,NSCoding
         self.item = aDecoder.decodeObject(forKey:"item")!
         self.labels = aDecoder.decodeObject(forKey:"labels") as! [String]
         }
+    
+    required public init(archiver: CArchiver) throws
+        {
+        fread(&kind,MemoryLayout<Int>.size,1,archiver.file)
+        switch(kind)
+            {
+            case .closure:
+                try self.item = ArgonClosure(archiver: archiver)
+            case .global:
+                try self.item = ArgonGlobal(archiver: archiver)
+            case .handler:
+                try self.item = ArgonHandler(archiver: archiver)
+            case .genericMethod:
+                try self.item = ArgonGenericMethod(archiver: archiver)
+            case .symbol:
+                try self.item = ArgonSymbol(archiver: archiver)
+            case .string:
+                try self.item = ArgonString(archiver: archiver)
+            case .method:
+                try self.item = ArgonMethod(archiver: archiver)
+            case .traits:
+                try self.item = ArgonTraits(archiver: archiver)
+            default:
+                throw(ParseError.invalidModulePart)
+            }
+        try labels.write(archiver: archiver)
+        }
+    
+    public func write(archiver: CArchiver) throws
+        {
+        var kindValue = kind.rawValue
+        fwrite(&kindValue,MemoryLayout<Int>.size,1,archiver.file)
+        switch(kind)
+            {
+            case .closure:
+                try (self.item as! ArgonClosure).write(archiver: archiver)
+            case .global:
+                try (self.item as! ArgonGlobal).write(archiver: archiver)
+            case .handler:
+                try (self.item as! ArgonHandler).write(archiver: archiver)
+            case .genericMethod:
+                try (self.item as! ArgonGenericMethod).write(archiver: archiver)
+            case .symbol:
+                try (self.item as! ArgonSymbol).write(archiver: archiver)
+            case .string:
+                try (self.item as! ArgonString).write(archiver: archiver)
+            case .method:
+                try (self.item as! ArgonMethod).write(archiver: archiver)
+            case .traits:
+                try (self.item as! ArgonTraits).write(archiver: archiver)
+            default:
+                break
+            }
+        labels = try [String](archiver: archiver)
+        }
     }
 
-public class ArgonRelocationTable:NSObject,NSCoding
+public class ArgonRelocationTable:NSObject,NSCoding,FileWritable
     {
     public static let shared = ArgonRelocationTable()
     public private(set) var traitsByFullName:[String:ArgonTraits] = [:]
@@ -275,7 +330,18 @@ public class ArgonRelocationTable:NSObject,NSCoding
     public override init()
         {
         }
-        
+    
+    required public init(archiver: CArchiver) throws
+        {
+        entries = try [ArgonRelocationTableEntry](archiver: archiver)
+        }
+    
+    public func write(archiver: CArchiver) throws
+        {
+        try archiver.write(object: self)
+        try entries.write(archiver: archiver)
+        }
+    
     public func encode(with aCoder: NSCoder)
         {
         aCoder.encode(entries,forKey:"entries")

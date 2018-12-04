@@ -168,7 +168,16 @@ class ArgonSourceFileViewController: NSViewController,Dependent,NSMenuDelegate
                 {
                 path += ".argonexe"
                 }
-            NSKeyedArchiver.archiveRootObject(thePackage, toFile: path)
+            do
+                {
+                let archiver = CArchiver(path: path)
+                try ArgonRelocationTable.shared.write(archiver: archiver)
+                try archiver.fclose()
+                }
+            catch
+                {
+                print("Exception was \(error)")
+                }
             }
         }
     

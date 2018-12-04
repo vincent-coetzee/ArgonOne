@@ -14,6 +14,7 @@ public protocol ArgonParseScope
     func enclosingModule() -> ArgonParseModule
     func enclosingClosure() -> ArgonClosureNode?
     func add(node:ArgonParseNode)
+    func add(method: ArgonMethodNode)
     func add(variable:ArgonVariableNode)
     func add(statement: ArgonMethodStatementNode)
     func add(constant: ArgonNamedConstantNode)
@@ -26,6 +27,10 @@ public protocol ArgonParseScope
 
 extension ArgonParseScope
     {
+    public func add(method: ArgonMethodNode)
+        {
+        }
+        
     public func isGlobalScope() -> Bool
         {
         return(false)

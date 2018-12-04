@@ -9,7 +9,7 @@
 import Foundation
 import SharedMemory
 
-public class ArgonSlotLayout:NSObject,NSCoding
+public class ArgonSlotLayout:NSObject,NSCoding,FileWritable
     {
     public private(set) var name:String
     public private(set) var offsetInInstance:Int
@@ -35,6 +35,20 @@ public class ArgonSlotLayout:NSObject,NSCoding
         self.traits = aDecoder.decodeObject(forKey:"traits") as! ArgonTraits
         self.offsetInInstance = aDecoder.decodeInteger(forKey:"offsetInInstance")
         self.name = aDecoder.decodeObject(forKey:"name") as! String
+        }
+    
+    required public init(archiver: CArchiver) throws
+        {
+        name = try String(archiver: archiver)
+        offsetInInstance = try Int(archiver: archiver)
+        traits = try ArgonTraits(archiver: archiver)
+        }
+    
+    public func write(archiver: CArchiver) throws
+        {
+        try name.write(archiver: archiver)
+        try offsetInInstance.write(archiver: archiver)
+        try traits.write(archiver: archiver)
         }
     }
 
@@ -117,6 +131,30 @@ public class ArgonTraits:ArgonModulePart
         super.init(coder: aDecoder)
         }
     
+    required public init(archiver: CArchiver) throws
+        {
+        let layouts = try [ArgonSlotLayout](archiver: archiver)
+        slotLayouts = [:]
+        for slot in layouts
+            {
+            slotLayouts[slot.name] = slot
+            }
+        parents = try [ArgonTraits](archiver: archiver)
+        typeTemplates = try [ArgonTypeTemplate](archiver: archiver)
+        kind = try ArgonModuleItemKind(archiver: archiver)
+        try super.init(archiver: archiver)
+        }
+    
+    public override func write(archiver: CArchiver) throws
+        {
+        try archiver.write(object: self)
+        try super.write(archiver: archiver)
+        try Array(slotLayouts.values).write(archiver: archiver)
+        try parents.write(archiver: archiver)
+        try typeTemplates.write(archiver: archiver)
+        try kind.write(archiver: archiver)
+        }
+    
     public func inherits(from: ArgonTraits) -> Bool
         {
         if self == from
@@ -146,7 +184,7 @@ public class ArgonTraits:ArgonModulePart
         }
     }
 
-public class ArgonTypeTemplate:NSObject,NSCoding
+public class ArgonTypeTemplate:NSObject,NSCoding,FileWritable
     {
     public static func ==(lhs:ArgonTypeTemplate,rhs:ArgonTypeTemplate) -> Bool
         {
@@ -175,5 +213,20 @@ public class ArgonTypeTemplate:NSObject,NSCoding
         name = aDecoder.decodeObject(forKey: "name") as! String
         traits = aDecoder.decodeObject(forKey: "traits") as! ArgonTraits
         definingTraits = aDecoder.decodeObject(forKey: "definingTraits") as! String
+        }
+    
+    required public init(archiver: CArchiver) throws
+        {
+        name = try String(archiver: archiver)
+        traits = try ArgonTraits(archiver: archiver)
+        definingTraits = try String(archiver: archiver)
+        try super.init()
+        }
+    
+    public func write(archiver: CArchiver) throws
+        {
+        try name.write(archiver: archiver)
+        try traits.write(archiver: archiver)
+        try definingTraits.write(archiver: archiver)
         }
     }

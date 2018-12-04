@@ -22,6 +22,7 @@ class String: public Hashable
         long count() const;
         String operator +(char* characters);
         String operator +(String const &string);
+        bool operator ==(String const &string);
         char* characters() const;
         long virtual hashValue() override;
         void print();

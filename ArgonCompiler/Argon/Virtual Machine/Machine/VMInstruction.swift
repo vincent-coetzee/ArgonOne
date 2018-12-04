@@ -12,24 +12,6 @@ import SharedMemory
 
 public class VMInstruction:NSObject,FileWritable
     {
-    public static func read(from:UnsafeMutablePointer<FILE>) throws -> FileWritable
-        {
-        let pointer = UnsafeMutableRawPointer.allocate(byteCount: 128, alignment: 8)
-        fread(pointer,8,1,from)
-        let instruction = VMInstruction(pointer.load(as: Word.self))
-        if instruction.mode == .address
-            {
-            fread(pointer,8,1,from)
-            instruction.addressWord = pointer.load(as: Word.self)
-            }
-        return(instruction)
-        }
-    
-    public func write(to:UnsafeMutablePointer<FILE>) throws
-        {
-        
-        }
-    
     public enum RelocationType:Int
         {
         case immediate = 0
@@ -712,7 +694,25 @@ public class VMInstruction:NSObject,FileWritable
         self.relocationLabel = instruction.relocationLabel
         }
     
+    required public init(archiver:CArchiver) throws
+        {
+        fread(&instructionWord,Int(ArgonWordSize),1,archiver.file)
+        super.init()
+        if self.mode == .address
+            {
+            fread(&addressWord,Int(ArgonWordSize),1,archiver.file)
+            }
+        }
     
+    public func write(archiver:CArchiver) throws
+        {
+        fwrite(&instructionWord,Int(ArgonWordSize),1,archiver.file)
+        if self.mode == .address
+            {
+            fwrite(&addressWord,Int(ArgonWordSize),1,archiver.file)
+            }
+        }
+        
     public func specialRegistersUsed() -> [MachineRegister]
         {
         var specialRegisters:[MachineRegister] = []
@@ -916,5 +916,17 @@ public class VMInlineMarkerInstruction:VMInstruction
         {
         self.genericMethodId = methodId
         super.init(0)
+        }
+    
+    required public init(archiver: CArchiver) throws
+        {
+        throw(ParseError.notImplemented)
+        try super.init(archiver: archiver)
+        }
+    
+    public override func write(archiver: CArchiver) throws
+        {
+        throw(ParseError.notImplemented)
+        try super.write(archiver: archiver)
         }
     }

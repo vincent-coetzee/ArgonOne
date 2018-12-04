@@ -89,4 +89,47 @@ public class ArgonNamedConstant:ArgonModulePart
             }
         super.init(coder: aDecoder)
         }
+    
+    required public init(archiver: CArchiver) throws
+        {
+        kind = try ArgonModuleItemKind(archiver: archiver)
+        switch(kind)
+            {
+            case .boolean:
+                value = try Bool(archiver: archiver)
+            case .symbol:
+                value = try String(archiver: archiver)
+            case .string:
+                value = try String(archiver: archiver)
+            case .integer:
+                value = try Int(archiver: archiver)
+            case .float:
+                throw(ParseError.notImplemented)
+            default:
+                value = try Int(archiver: archiver)
+            }
+        try super.init(archiver: archiver)
+        }
+    
+    public override func write(archiver: CArchiver) throws
+        {
+        try archiver.write(object: self)
+        try super.write(archiver: archiver)
+        try kind.write(archiver: archiver)
+        switch(kind)
+            {
+            case .boolean:
+                try (value as! Bool).write(archiver: archiver)
+            case .symbol:
+                try (value as! String).write(archiver: archiver)
+            case .string:
+                try (value as! String).write(archiver: archiver)
+            case .integer:
+                try (value as! Int).write(archiver: archiver)
+            case .float:
+                throw(ParseError.notImplemented)
+            default:
+                try (value as! Int).write(archiver: archiver)
+            }
+        }
     }

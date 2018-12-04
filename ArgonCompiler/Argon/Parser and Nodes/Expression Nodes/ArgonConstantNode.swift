@@ -27,7 +27,7 @@ public class ArgonConstantNode:ArgonExpressionNode,ThreeAddress,ArgonConstantVal
     public private(set) var literalInteger:Int?
     public private(set) var literalFloat:Float?
     public private(set) var literalBoolean:Bool?
-    public private(set) var machineLiteral:UInt64?
+    public private(set) var literalDate:DateTime?
     
     internal var _name:ArgonName?
     
@@ -65,6 +65,10 @@ public class ArgonConstantNode:ArgonExpressionNode,ThreeAddress,ArgonConstantVal
             return(_name!)
             }
         var string:String = ""
+        if _traits == ArgonStandardsNode.shared.dateTraits
+            {
+            string = "Date(\(literalDate!.day)/\(literalDate!.month)/\(literalDate!.year)"
+            }
         if _traits == ArgonStandardsNode.shared.integerTraits
             {
             string = "Integer(\(literalInteger!))"
@@ -180,6 +184,13 @@ public class ArgonConstantNode:ArgonExpressionNode,ThreeAddress,ArgonConstantVal
     init(void:Bool)
         {
         _traits = ArgonStandardsNode.shared.voidTraits
+        super.init()
+        }
+    
+    init(date:DateTime)
+        {
+        _traits = ArgonStandardsNode.shared.dateTraits
+        self.literalDate = date
         super.init()
         }
     

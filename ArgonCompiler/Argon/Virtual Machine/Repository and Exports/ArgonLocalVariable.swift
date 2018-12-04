@@ -29,4 +29,17 @@ public class ArgonLocalVariable:ArgonModulePart
         traits = aDecoder.decodeObject(forKey: "traits") as! ArgonTraits
         super.init(coder:aDecoder)
         }
+    
+    required public init(archiver: CArchiver) throws
+        {
+        traits = try ArgonTraits(archiver: archiver)
+        try super.init(archiver: archiver)
+        }
+    
+    public override func write(archiver: CArchiver) throws
+        {
+        try archiver.write(object: self)
+        try super.write(archiver: archiver)
+        try traits.write(archiver: archiver)
+        }
     }

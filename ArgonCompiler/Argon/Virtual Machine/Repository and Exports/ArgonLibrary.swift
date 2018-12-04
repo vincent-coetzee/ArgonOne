@@ -45,4 +45,17 @@ public class ArgonLibrary:ArgonModule
         globals = aDecoder.decodeObject(forKey: "globals") as! [ArgonGlobal]
         super.init(coder:aDecoder)
         }
+    
+    required public init(archiver: CArchiver) throws
+        {
+        throw(ParseError.notImplemented)
+        try super.init(archiver: archiver)
+        }
+    
+    public override func write(archiver: CArchiver) throws
+        {
+        try archiver.write(object: self)
+        throw(ParseError.notImplemented)
+        try super.write(archiver: archiver)
+        }
     }

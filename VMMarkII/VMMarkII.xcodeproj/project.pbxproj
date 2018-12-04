@@ -15,6 +15,22 @@
 		BF2657D521B28263003DF8D0 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF2657D321B28263003DF8D0 /* Thread.cpp */; };
 		BF2657DE21B2A841003DF8D0 /* List.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF2657DC21B2A841003DF8D0 /* List.cpp */; };
 		BF2657E121B2B92C003DF8D0 /* VirtualMachineManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF2657DF21B2B92C003DF8D0 /* VirtualMachineManager.cpp */; };
+		BF53E7A521B60B5C00E1CA19 /* CobaltExecutable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF53E7A321B60B5C00E1CA19 /* CobaltExecutable.cpp */; };
+		BF53E7A821B620C400E1CA19 /* CobaltGenericMethod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF53E7A621B620C400E1CA19 /* CobaltGenericMethod.cpp */; };
+		BF53E7AB21B6213900E1CA19 /* CobaltMethod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF53E7A921B6213900E1CA19 /* CobaltMethod.cpp */; };
+		BF53E7AE21B6214B00E1CA19 /* CobaltCodeBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF53E7AC21B6214B00E1CA19 /* CobaltCodeBlock.cpp */; };
+		BF53E7B121B6221000E1CA19 /* CobaltClosure.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF53E7AF21B6221000E1CA19 /* CobaltClosure.cpp */; };
+		BF53E7B421B6227300E1CA19 /* CobaltRelocationTable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF53E7B221B6227300E1CA19 /* CobaltRelocationTable.cpp */; };
+		BF53E7B721B6230500E1CA19 /* CobaltArtefact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF53E7B521B6230500E1CA19 /* CobaltArtefact.cpp */; };
+		BF53E7BA21B625D400E1CA19 /* CobaltRelocationEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF53E7B821B625D400E1CA19 /* CobaltRelocationEntry.cpp */; };
+		BF53E7BD21B628E200E1CA19 /* CobaltTraits.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF53E7BB21B628E200E1CA19 /* CobaltTraits.cpp */; };
+		BF53E7C021B629AD00E1CA19 /* CobaltString.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF53E7BE21B629AD00E1CA19 /* CobaltString.cpp */; };
+		BF53E7C321B62A1F00E1CA19 /* CobaltSymbol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF53E7C121B62A1F00E1CA19 /* CobaltSymbol.cpp */; };
+		BF53E7C621B62A7900E1CA19 /* CobaltGlobal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF53E7C421B62A7900E1CA19 /* CobaltGlobal.cpp */; };
+		BF53E7C921B62B4B00E1CA19 /* CobaltHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF53E7C721B62B4B00E1CA19 /* CobaltHandler.cpp */; };
+		BF53E7CC21B62C0E00E1CA19 /* CobaltSlotLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF53E7CA21B62C0E00E1CA19 /* CobaltSlotLayout.cpp */; };
+		BF53E7CF21B6340400E1CA19 /* CobaltParameter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF53E7CD21B6340400E1CA19 /* CobaltParameter.cpp */; };
+		BF53E7D221B639EE00E1CA19 /* CobaltTypeTemplate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF53E7D021B639EE00E1CA19 /* CobaltTypeTemplate.cpp */; };
 		BFC9E0FB21ADB3DE004E4FE2 /* String.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFC9E0F921ADB3DE004E4FE2 /* String.cpp */; };
 		BFC9E0FE21ADCA23004E4FE2 /* AssociationVectorPointerWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFC9E0FC21ADCA23004E4FE2 /* AssociationVectorPointerWrapper.cpp */; };
 		BFC9E10421ADEB22004E4FE2 /* Hashable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BFC9E10221ADEB22004E4FE2 /* Hashable.cpp */; };
@@ -60,6 +76,38 @@
 		BF2657DD21B2A841003DF8D0 /* List.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = List.hpp; sourceTree = "<group>"; };
 		BF2657DF21B2B92C003DF8D0 /* VirtualMachineManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = VirtualMachineManager.cpp; sourceTree = "<group>"; };
 		BF2657E021B2B92C003DF8D0 /* VirtualMachineManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VirtualMachineManager.hpp; sourceTree = "<group>"; };
+		BF53E7A321B60B5C00E1CA19 /* CobaltExecutable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CobaltExecutable.cpp; sourceTree = "<group>"; };
+		BF53E7A421B60B5C00E1CA19 /* CobaltExecutable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CobaltExecutable.hpp; sourceTree = "<group>"; };
+		BF53E7A621B620C400E1CA19 /* CobaltGenericMethod.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CobaltGenericMethod.cpp; sourceTree = "<group>"; };
+		BF53E7A721B620C400E1CA19 /* CobaltGenericMethod.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CobaltGenericMethod.hpp; sourceTree = "<group>"; };
+		BF53E7A921B6213900E1CA19 /* CobaltMethod.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CobaltMethod.cpp; sourceTree = "<group>"; };
+		BF53E7AA21B6213900E1CA19 /* CobaltMethod.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CobaltMethod.hpp; sourceTree = "<group>"; };
+		BF53E7AC21B6214B00E1CA19 /* CobaltCodeBlock.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CobaltCodeBlock.cpp; sourceTree = "<group>"; };
+		BF53E7AD21B6214B00E1CA19 /* CobaltCodeBlock.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CobaltCodeBlock.hpp; sourceTree = "<group>"; };
+		BF53E7AF21B6221000E1CA19 /* CobaltClosure.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CobaltClosure.cpp; sourceTree = "<group>"; };
+		BF53E7B021B6221000E1CA19 /* CobaltClosure.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CobaltClosure.hpp; sourceTree = "<group>"; };
+		BF53E7B221B6227300E1CA19 /* CobaltRelocationTable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CobaltRelocationTable.cpp; sourceTree = "<group>"; };
+		BF53E7B321B6227300E1CA19 /* CobaltRelocationTable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CobaltRelocationTable.hpp; sourceTree = "<group>"; };
+		BF53E7B521B6230500E1CA19 /* CobaltArtefact.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CobaltArtefact.cpp; sourceTree = "<group>"; };
+		BF53E7B621B6230500E1CA19 /* CobaltArtefact.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CobaltArtefact.hpp; sourceTree = "<group>"; };
+		BF53E7B821B625D400E1CA19 /* CobaltRelocationEntry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CobaltRelocationEntry.cpp; sourceTree = "<group>"; };
+		BF53E7B921B625D400E1CA19 /* CobaltRelocationEntry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CobaltRelocationEntry.hpp; sourceTree = "<group>"; };
+		BF53E7BB21B628E200E1CA19 /* CobaltTraits.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CobaltTraits.cpp; sourceTree = "<group>"; };
+		BF53E7BC21B628E200E1CA19 /* CobaltTraits.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CobaltTraits.hpp; sourceTree = "<group>"; };
+		BF53E7BE21B629AD00E1CA19 /* CobaltString.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CobaltString.cpp; sourceTree = "<group>"; };
+		BF53E7BF21B629AD00E1CA19 /* CobaltString.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CobaltString.hpp; sourceTree = "<group>"; };
+		BF53E7C121B62A1F00E1CA19 /* CobaltSymbol.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CobaltSymbol.cpp; sourceTree = "<group>"; };
+		BF53E7C221B62A1F00E1CA19 /* CobaltSymbol.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CobaltSymbol.hpp; sourceTree = "<group>"; };
+		BF53E7C421B62A7900E1CA19 /* CobaltGlobal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CobaltGlobal.cpp; sourceTree = "<group>"; };
+		BF53E7C521B62A7900E1CA19 /* CobaltGlobal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CobaltGlobal.hpp; sourceTree = "<group>"; };
+		BF53E7C721B62B4B00E1CA19 /* CobaltHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CobaltHandler.cpp; sourceTree = "<group>"; };
+		BF53E7C821B62B4B00E1CA19 /* CobaltHandler.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CobaltHandler.hpp; sourceTree = "<group>"; };
+		BF53E7CA21B62C0E00E1CA19 /* CobaltSlotLayout.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CobaltSlotLayout.cpp; sourceTree = "<group>"; };
+		BF53E7CB21B62C0E00E1CA19 /* CobaltSlotLayout.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CobaltSlotLayout.hpp; sourceTree = "<group>"; };
+		BF53E7CD21B6340400E1CA19 /* CobaltParameter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CobaltParameter.cpp; sourceTree = "<group>"; };
+		BF53E7CE21B6340400E1CA19 /* CobaltParameter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CobaltParameter.hpp; sourceTree = "<group>"; };
+		BF53E7D021B639EE00E1CA19 /* CobaltTypeTemplate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CobaltTypeTemplate.cpp; sourceTree = "<group>"; };
+		BF53E7D121B639EE00E1CA19 /* CobaltTypeTemplate.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CobaltTypeTemplate.hpp; sourceTree = "<group>"; };
 		BFC9E0F821ADADF0004E4FE2 /* CobaltPointers.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CobaltPointers.hpp; sourceTree = "<group>"; };
 		BFC9E0F921ADB3DE004E4FE2 /* String.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = String.cpp; sourceTree = "<group>"; };
 		BFC9E0FA21ADB3DE004E4FE2 /* String.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = String.hpp; sourceTree = "<group>"; };
@@ -103,6 +151,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF53E7A221B60B1F00E1CA19 /* Application Artefacts */ = {
+			isa = PBXGroup;
+			children = (
+				BF53E7B521B6230500E1CA19 /* CobaltArtefact.cpp */,
+				BF53E7B621B6230500E1CA19 /* CobaltArtefact.hpp */,
+				BF53E7AF21B6221000E1CA19 /* CobaltClosure.cpp */,
+				BF53E7B021B6221000E1CA19 /* CobaltClosure.hpp */,
+				BF53E7AC21B6214B00E1CA19 /* CobaltCodeBlock.cpp */,
+				BF53E7AD21B6214B00E1CA19 /* CobaltCodeBlock.hpp */,
+				BF53E7A321B60B5C00E1CA19 /* CobaltExecutable.cpp */,
+				BF53E7A421B60B5C00E1CA19 /* CobaltExecutable.hpp */,
+				BF53E7A621B620C400E1CA19 /* CobaltGenericMethod.cpp */,
+				BF53E7A721B620C400E1CA19 /* CobaltGenericMethod.hpp */,
+				BF53E7C421B62A7900E1CA19 /* CobaltGlobal.cpp */,
+				BF53E7C521B62A7900E1CA19 /* CobaltGlobal.hpp */,
+				BF53E7C721B62B4B00E1CA19 /* CobaltHandler.cpp */,
+				BF53E7C821B62B4B00E1CA19 /* CobaltHandler.hpp */,
+				BF53E7A921B6213900E1CA19 /* CobaltMethod.cpp */,
+				BF53E7AA21B6213900E1CA19 /* CobaltMethod.hpp */,
+				BF53E7CD21B6340400E1CA19 /* CobaltParameter.cpp */,
+				BF53E7CE21B6340400E1CA19 /* CobaltParameter.hpp */,
+				BF53E7B821B625D400E1CA19 /* CobaltRelocationEntry.cpp */,
+				BF53E7B921B625D400E1CA19 /* CobaltRelocationEntry.hpp */,
+				BF53E7B221B6227300E1CA19 /* CobaltRelocationTable.cpp */,
+				BF53E7B321B6227300E1CA19 /* CobaltRelocationTable.hpp */,
+				BF53E7CA21B62C0E00E1CA19 /* CobaltSlotLayout.cpp */,
+				BF53E7CB21B62C0E00E1CA19 /* CobaltSlotLayout.hpp */,
+				BF53E7BE21B629AD00E1CA19 /* CobaltString.cpp */,
+				BF53E7BF21B629AD00E1CA19 /* CobaltString.hpp */,
+				BF53E7C121B62A1F00E1CA19 /* CobaltSymbol.cpp */,
+				BF53E7C221B62A1F00E1CA19 /* CobaltSymbol.hpp */,
+				BF53E7BB21B628E200E1CA19 /* CobaltTraits.cpp */,
+				BF53E7BC21B628E200E1CA19 /* CobaltTraits.hpp */,
+				BF53E7D021B639EE00E1CA19 /* CobaltTypeTemplate.cpp */,
+				BF53E7D121B639EE00E1CA19 /* CobaltTypeTemplate.hpp */,
+			);
+			path = "Application Artefacts";
+			sourceTree = "<group>";
+		};
 		BFC9E0FF21ADDC55004E4FE2 /* Pointer Wrappers */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +264,7 @@
 		BFF8689421AA9A7F00DE0593 /* VMMarkII */ = {
 			isa = PBXGroup;
 			children = (
+				BF53E7A221B60B1F00E1CA19 /* Application Artefacts */,
 				BFC9E0F821ADADF0004E4FE2 /* CobaltPointers.hpp */,
 				BFF868B821AB0DB200DE0593 /* CobaltTypes.hpp */,
 				BFC9E10121ADDC95004E4FE2 /* Concurrency */,
@@ -252,6 +340,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF53E7D221B639EE00E1CA19 /* CobaltTypeTemplate.cpp in Sources */,
 				BFF8689E21AA9AD000DE0593 /* MachineInstruction.cpp in Sources */,
 				BF2657BF21B1E323003DF8D0 /* RootArray.cpp in Sources */,
 				BFC9E10421ADEB22004E4FE2 /* Hashable.cpp in Sources */,
@@ -259,21 +348,36 @@
 				BFF8689621AA9A7F00DE0593 /* main.cpp in Sources */,
 				BFF868BE21AB1FEC00DE0593 /* MemorySpace.cpp in Sources */,
 				BF2657D221B27BA7003DF8D0 /* VirtualMachine.cpp in Sources */,
+				BF53E7B421B6227300E1CA19 /* CobaltRelocationTable.cpp in Sources */,
 				BF2657E121B2B92C003DF8D0 /* VirtualMachineManager.cpp in Sources */,
+				BF53E7BA21B625D400E1CA19 /* CobaltRelocationEntry.cpp in Sources */,
+				BF53E7CF21B6340400E1CA19 /* CobaltParameter.cpp in Sources */,
+				BF53E7BD21B628E200E1CA19 /* CobaltTraits.cpp in Sources */,
+				BF53E7B121B6221000E1CA19 /* CobaltClosure.cpp in Sources */,
 				BF2657B921B1CF93003DF8D0 /* TraitsPointerWrapper.cpp in Sources */,
+				BF53E7C021B629AD00E1CA19 /* CobaltString.cpp in Sources */,
+				BF53E7AB21B6213900E1CA19 /* CobaltMethod.cpp in Sources */,
+				BF53E7B721B6230500E1CA19 /* CobaltArtefact.cpp in Sources */,
 				BFF868C721AC8A3000DE0593 /* MapPointerWrapper.cpp in Sources */,
 				BF2657CC21B20485003DF8D0 /* ScopedMutex.cpp in Sources */,
 				BFF868B721AB014D00DE0593 /* ExtensionBlockPointerWrapper.cpp in Sources */,
 				BFF868C421AC8A1D00DE0593 /* VectorPointerWrapper.cpp in Sources */,
 				BFF868A521AAB5A700DE0593 /* Object.cpp in Sources */,
 				BFF868BB21AB1B8100DE0593 /* Monitor.cpp in Sources */,
+				BF53E7CC21B62C0E00E1CA19 /* CobaltSlotLayout.cpp in Sources */,
 				BFF868A221AAB52700DE0593 /* ObjectMemory.cpp in Sources */,
 				BFF868AB21AAD47F00DE0593 /* ObjectPointerWrapper.cpp in Sources */,
 				BF2657DE21B2A841003DF8D0 /* List.cpp in Sources */,
+				BF53E7AE21B6214B00E1CA19 /* CobaltCodeBlock.cpp in Sources */,
 				BFC9E0FB21ADB3DE004E4FE2 /* String.cpp in Sources */,
+				BF53E7A821B620C400E1CA19 /* CobaltGenericMethod.cpp in Sources */,
 				BFC9E0FE21ADCA23004E4FE2 /* AssociationVectorPointerWrapper.cpp in Sources */,
+				BF53E7C921B62B4B00E1CA19 /* CobaltHandler.cpp in Sources */,
+				BF53E7C621B62A7900E1CA19 /* CobaltGlobal.cpp in Sources */,
 				BF2657C221B1E41C003DF8D0 /* Mutex.cpp in Sources */,
 				BFF868AE21AAF06B00DE0593 /* StringPointerWrapper.cpp in Sources */,
+				BF53E7C321B62A1F00E1CA19 /* CobaltSymbol.cpp in Sources */,
+				BF53E7A521B60B5C00E1CA19 /* CobaltExecutable.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

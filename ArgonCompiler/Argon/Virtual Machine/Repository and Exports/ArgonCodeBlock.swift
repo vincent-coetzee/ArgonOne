@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ArgonCodeBlock:NSObject,NSCoding,Collection
+public class ArgonCodeBlock:NSObject,NSCoding,Collection,FileWritable
     {
     public private(set) var instructions:[VMInstruction] = []
     
@@ -70,6 +70,30 @@ public class ArgonCodeBlock:NSObject,NSCoding,Collection
         {
         let codingInstructions = aDecoder.decodeObject(forKey: "instructions") as! [CodingInstruction]
         instructions = codingInstructions.map{VMInstruction($0)}
+        }
+    
+    required public init(archiver: CArchiver) throws
+        {
+        self.instructions = []
+        var count:Int = 0
+        fread(&count,MemoryLayout<Int>.size,1,archiver.file)
+        for _ in 0..<count
+            {
+            let instruction = try VMInstruction(archiver: archiver)
+            instructions.append(instruction)
+            }
+        }
+    
+    public func write(archiver: CArchiver) throws
+        {
+        try archiver.write(object: self)
+        var count:Int
+        count = instructions.count
+        fwrite(&count,MemoryLayout<Int>.size,1,archiver.file)
+        for instruction in instructions
+            {
+            try instruction.write(archiver: archiver)
+            }
         }
     
     public func index(after:Int) -> Int

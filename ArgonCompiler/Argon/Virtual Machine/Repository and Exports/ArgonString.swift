@@ -34,4 +34,17 @@ public class ArgonString:ArgonModulePart
         string = aDecoder.decodeObject(forKey: "string") as! String
         super.init(coder: aDecoder)
         }
+    
+    required public init(archiver: CArchiver) throws
+        {
+        self.string = try String(archiver: archiver)
+        try super.init(archiver: archiver)
+        }
+    
+    public override func write(archiver: CArchiver) throws
+        {
+        try archiver.write(object: self)
+        try super.write(archiver: archiver)
+        try self.string.write(archiver: archiver)
+        }
     }

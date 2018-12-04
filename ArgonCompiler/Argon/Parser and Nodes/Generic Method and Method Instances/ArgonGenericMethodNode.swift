@@ -42,7 +42,7 @@ public class ArgonGenericMethodNode:ArgonMethodNode,ArgonExportableItem,ArgonRel
         return(directives.contains(ArgonMethodDirective.static))
         }
     
-    public var hasSystemDirective:Bool
+    public override var hasSystemDirective:Bool
         {
         return(directives.contains(ArgonMethodDirective.system))
         }

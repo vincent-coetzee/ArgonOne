@@ -37,6 +37,11 @@ String::~String()
     actualCharacters = NULL;
     }
 
+bool String::operator ==(String const &string)
+    {
+    return(strcmp(this->characters(),string.characters()) == 0);
+    }
+
 String& String::operator= (const String &string)
     {
     if (characterCount > 0)

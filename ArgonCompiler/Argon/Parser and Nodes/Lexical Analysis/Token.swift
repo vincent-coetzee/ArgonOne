@@ -82,6 +82,7 @@ public struct Token:CustomStringConvertible,Codable
     var string:String = ""
     var double:Double = 0
     var byte:UInt8 = 0
+    var operatorKey:Int = 0
     
     public var description:String
         {
@@ -165,6 +166,13 @@ public struct Token:CustomStringConvertible,Codable
         {
         type = .identifier
         identifier = string
+        self.location = location
+        }
+    
+    init(operator value: Int,_ location:SourceLocation)
+        {
+        type = .operator
+        self.operatorKey = value
         self.location = location
         }
     
@@ -379,6 +387,11 @@ public struct Token:CustomStringConvertible,Codable
         return(type == .keyword && keyword == .entrypoint)
         }
     
+    public var isOperatorToken:Bool
+        {
+        return(type == .operator)
+        }
+    
     public var isImport:Bool
         {
         return(type == .keyword && keyword == .import)
@@ -554,6 +567,11 @@ public struct Token:CustomStringConvertible,Codable
         return(type == .at)
         }
     
+    public var isDollar:Bool
+        {
+        return(type == .dollar)
+        }
+    
     public var isDiv:Bool
         {
         return(type == .div)
@@ -653,6 +671,108 @@ public struct Token:CustomStringConvertible,Codable
                 }
             }
         }
+    
+    public var isOperatorSymbol:Bool
+        {
+        switch(type)
+            {
+            case .dollar:
+                return(true)
+            case .at:
+                return(true)
+            case .assign:
+                return(true)
+            case .semicolon:
+                return(true)
+            case .colon:
+               return(true)
+            case .hash:
+                return(true)
+            case .bang:
+                return(true)
+            case .lessThanEqual:
+                return(true)
+            case .greaterThanEqual:
+                return(true)
+            case .equal:
+                return(true)
+            case .doubleEqual:
+                return(true)
+            case .comma:
+                return(true)
+            case .minus:
+                return(true)
+            case .plus:
+                return(true)
+            case .mul:
+                return(true)
+            case .div:
+                return(true)
+            case .mod:
+                return(true)
+            case .bitAnd:
+                return(true)
+            case .bitOr:
+                return(true)
+            case .bitXor:
+                return(true)
+            case .bitNot:
+                return(true)
+            default:
+                return(false)
+            }
+        }
+    
+    public func symbolValue() throws -> String
+        {
+        switch(type)
+            {
+            case .dollar:
+                return("$")
+            case .at:
+                return("@")
+            case .assign:
+                return("=")
+            case .semicolon:
+                return(";")
+            case .colon:
+                return(":")
+            case .hash:
+                return("#")
+            case .bang:
+                return("!")
+            case .lessThanEqual:
+                return("<=")
+            case .greaterThanEqual:
+                return(">=")
+            case .equal:
+                return("==")
+            case .doubleEqual:
+                return("==")
+            case .comma:
+                return(",")
+            case .minus:
+                return("-")
+            case .plus:
+                return("+")
+            case .mul:
+                return("*")
+            case .div:
+                return("/")
+            case .mod:
+                return("%")
+            case .bitAnd:
+                return("&")
+            case .bitOr:
+                return("|")
+            case .bitXor:
+                return("^")
+            case .bitNot:
+                return("~")
+            default:
+                throw(ParseError.invalidToken)
+            }
+        }
     }
 
 public enum TokenType:Int,Equatable,Codable
@@ -711,6 +831,8 @@ public enum TokenType:Int,Equatable,Codable
     case traits
     case local
     case at
+    case dollar
+    case `operator`
     
     var isEnd:Bool
         {

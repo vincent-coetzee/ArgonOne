@@ -19,4 +19,17 @@ public class ArgonSymbol:ArgonString
         {
         super.init(coder:aDecoder)
         }
+    
+    required public init(archiver: CArchiver) throws
+        {
+        let aString = try String(archiver: archiver)
+        try super.init(string:aString)
+        }
+    
+    public override func write(archiver: CArchiver) throws
+        {
+        try archiver.write(object: self)
+        try super.write(archiver: archiver)
+        try string.write(archiver: archiver)
+        }
 }

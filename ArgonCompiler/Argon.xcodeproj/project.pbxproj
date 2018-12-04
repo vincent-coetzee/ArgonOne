@@ -109,6 +109,7 @@
 		BF50FB77215ED7050018E7AF /* ArgonImportNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50FB76215ED7050018E7AF /* ArgonImportNode.swift */; };
 		BF50FB79215ED7280018E7AF /* ArgonExportNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF50FB78215ED7280018E7AF /* ArgonExportNode.swift */; };
 		BF52472D2198609B0072A6D7 /* ArgonLineTrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF52472C2198609B0072A6D7 /* ArgonLineTrace.swift */; };
+		BF53E7A121B5FBEB00E1CA19 /* CArchiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF53E7A021B5FBEB00E1CA19 /* CArchiver.swift */; };
 		BF541FDC214829DB00961D52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF541FDB214829DB00961D52 /* AppDelegate.swift */; };
 		BF541FDE214829DB00961D52 /* ArgonSourceFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF541FDD214829DB00961D52 /* ArgonSourceFileViewController.swift */; };
 		BF541FE0214829DB00961D52 /* ArgonSourceFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF541FDF214829DB00961D52 /* ArgonSourceFile.swift */; };
@@ -193,6 +194,7 @@
 		BFB711D9217675B40069FBDA /* ThreeAddressTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB711D8217675B40069FBDA /* ThreeAddressTarget.swift */; };
 		BFB711DB217675E10069FBDA /* ThreeAddressOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB711DA217675E10069FBDA /* ThreeAddressOperation.swift */; };
 		BFB711DD217676C90069FBDA /* ThreeAddressBasicBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB711DC217676C90069FBDA /* ThreeAddressBasicBlock.swift */; };
+		BFC1204021B59CA10023BE7C /* DateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC1203F21B59CA10023BE7C /* DateTime.swift */; };
 		BFCAA3012167A85A005866AB /* ArgonCompilationUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCAA3002167A85A005866AB /* ArgonCompilationUnit.swift */; };
 		BFCCD646219377FF00B5EAD8 /* ArgonThreadStackFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCCD645219377FF00B5EAD8 /* ArgonThreadStackFrame.swift */; };
 		BFCCD64821937E3000B5EAD8 /* ArgonSpawnStatementNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCCD64721937E3000B5EAD8 /* ArgonSpawnStatementNode.swift */; };
@@ -372,6 +374,7 @@
 		BF50FB76215ED7050018E7AF /* ArgonImportNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonImportNode.swift; sourceTree = "<group>"; };
 		BF50FB78215ED7280018E7AF /* ArgonExportNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonExportNode.swift; sourceTree = "<group>"; };
 		BF52472C2198609B0072A6D7 /* ArgonLineTrace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonLineTrace.swift; sourceTree = "<group>"; };
+		BF53E7A021B5FBEB00E1CA19 /* CArchiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CArchiver.swift; sourceTree = "<group>"; };
 		BF541FD8214829DA00961D52 /* Argon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Argon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF541FDB214829DB00961D52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF541FDD214829DB00961D52 /* ArgonSourceFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonSourceFileViewController.swift; sourceTree = "<group>"; };
@@ -463,6 +466,7 @@
 		BFB711D8217675B40069FBDA /* ThreeAddressTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeAddressTarget.swift; sourceTree = "<group>"; };
 		BFB711DA217675E10069FBDA /* ThreeAddressOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeAddressOperation.swift; sourceTree = "<group>"; };
 		BFB711DC217676C90069FBDA /* ThreeAddressBasicBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeAddressBasicBlock.swift; sourceTree = "<group>"; };
+		BFC1203F21B59CA10023BE7C /* DateTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTime.swift; sourceTree = "<group>"; };
 		BFCAA3002167A85A005866AB /* ArgonCompilationUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonCompilationUnit.swift; sourceTree = "<group>"; };
 		BFCCD645219377FF00B5EAD8 /* ArgonThreadStackFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonThreadStackFrame.swift; sourceTree = "<group>"; };
 		BFCCD64721937E3000B5EAD8 /* ArgonSpawnStatementNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgonSpawnStatementNode.swift; sourceTree = "<group>"; };
@@ -573,6 +577,7 @@
 				BF447C69216989B80072BD2F /* ArgonType.swift */,
 				BF52472C2198609B0072A6D7 /* ArgonLineTrace.swift */,
 				BF0BE4F421A8934A00D98CD8 /* Symbol.swift */,
+				BFC1203F21B59CA10023BE7C /* DateTime.swift */,
 			);
 			path = "Support Types";
 			sourceTree = "<group>";
@@ -618,6 +623,7 @@
 				BF73734F2172C2E6000CA044 /* ArgonExport.swift */,
 				BF3F7061218C5FEE0002052B /* ArgonGenericMethod.swift */,
 				BF28AB6E2196FF8F00410CDD /* ArgonGlobal.swift */,
+				BF05A84E21A714F6002410A1 /* ArgonHandler.swift */,
 				BF73734B2172C27D000CA044 /* ArgonImport.swift */,
 				BF73734D2172C29D000CA044 /* ArgonLibrary.swift */,
 				BFA7C99A218F0AD1001C9640 /* ArgonLibraryFile.swift */,
@@ -634,8 +640,8 @@
 				BFA1AF7C219A008E0042156C /* ArgonSymbol.swift */,
 				BF1FBE89218BCA80000AAD5B /* ArgonTraits.swift */,
 				BF5F8D0E21A5C30B003D9D60 /* ArgonTree.swift */,
-				BF05A84E21A714F6002410A1 /* ArgonHandler.swift */,
 				BF16A25C21B344570071945B /* FileWritable.swift */,
+				BF53E7A021B5FBEB00E1CA19 /* CArchiver.swift */,
 			);
 			path = "Repository and Exports";
 			sourceTree = "<group>";
@@ -1171,6 +1177,7 @@
 				BF0E3D07214C4D4F004A402B /* TokenStream.swift in Sources */,
 				BFF800792187ACF1005A7E79 /* Column.swift in Sources */,
 				BF9A714B215ABB7D006439DB /* ArgonInstanceElement.swift in Sources */,
+				BFC1204021B59CA10023BE7C /* DateTime.swift in Sources */,
 				BFD75E3C2193685E006A305C /* ArgonExecutableFileViewController.swift in Sources */,
 				BFF997752185E36200F9F8CA /* SingleValueContainer.swift in Sources */,
 				BFF8006D21879723005A7E79 /* CartoucheView.swift in Sources */,
@@ -1241,6 +1248,7 @@
 				BFF767C6214ECC7C004FAA65 /* ArgonCompiler.swift in Sources */,
 				BFAAFD3D2194CA58007A2733 /* ArgonVariableInitializationStatementNode.swift in Sources */,
 				BFFB6B6F21921FE000CA0230 /* ArgonExecutableFile.swift in Sources */,
+				BF53E7A121B5FBEB00E1CA19 /* CArchiver.swift in Sources */,
 				BF14075A2183BD4C005A07EE /* SlotDisplayWrapper.swift in Sources */,
 				BF14E296216E7C0D00B01EAE /* ArgonTests.swift in Sources */,
 				BF8FA51B215497810077D370 /* MemoryViewController.swift in Sources */,

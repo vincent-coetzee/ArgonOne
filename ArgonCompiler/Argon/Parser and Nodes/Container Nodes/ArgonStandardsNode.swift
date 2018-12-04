@@ -97,7 +97,9 @@ public class ArgonStandardsNode:ArgonTopLevelNode
         booleanTraits.asArgonTraits()
         floatTraits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Float"))
         doubleTraits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Double"))
+        dateTraits = ArgonSystemTraitsNode(fullName: ArgonName("Argon::Date"))
         doubleTraits.parents = [number]
+        dateTraits.parents = [number]
         doubleTraits.asArgonTraits()
         floatTraits.parents = [number]
         floatTraits.asArgonTraits()
@@ -111,7 +113,11 @@ public class ArgonStandardsNode:ArgonTopLevelNode
         stringTraits.addSystemSlot(name:"monitor",offset:16,traits:behaviorTraits)
         stringTraits.addSystemSlot(name:"count",offset:24,traits:integerTraits)
         stringTraits.addSystemSlot(name:"extensionBlock",offset:32,traits:behaviorTraits)
+        dateTraits.addSystemSlot(name:"header",offset:0,traits:integerTraits)
+        dateTraits.addSystemSlot(name:"traits",offset:0,traits:traitsTraits)
+        dateTraits.addSystemSlot(name:"monitor",offset:0,traits:behaviorTraits)
         super.init(name:name)
+        self.add(node: dateTraits)
         self.add(node: polymorphicArgumentTraits)
         self.add(node: voidTraits)
         self.add(node: errorTraits)

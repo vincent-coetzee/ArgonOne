@@ -25,7 +25,7 @@ public class ArgonCapturedValue:ArgonExpressionNode,ThreeAddress
         }
     
     public private(set) var name:ArgonName = ArgonName()
-    private var _traits = ArgonStandardsNode.shared.voidTraits
+    private var _traits:ArgonTraitsNode = ArgonStandardsNode.shared.voidTraits
     public var offsetFromBP:Int = 0
     public var originalValue:ArgonExpressionNode
     

@@ -9,7 +9,7 @@
 import Foundation
 import SharedMemory
 
-public class ArgonModulePart:NSObject,ArgonRelocatable,NSCoding
+public class ArgonModulePart:NSObject,ArgonRelocatable,NSCoding,FileWritable
     {
     public internal(set) var name:String
     public internal(set) var fullName:String
@@ -57,6 +57,21 @@ public class ArgonModulePart:NSObject,ArgonRelocatable,NSCoding
         fullName = aDecoder.decodeObject(forKey: "fullName") as! String
         id = aDecoder.decodeInteger(forKey: "id")
         super.init()
+        }
+    
+    required public init(archiver: CArchiver) throws
+        {
+        name = try String(archiver: archiver)
+        fullName = try String(archiver: archiver)
+        fread(&id,MemoryLayout<Int>.size,1,archiver.file)
+        }
+    
+    public func write(archiver: CArchiver) throws
+        {
+        try archiver.write(object: self)
+        try name.write(archiver: archiver)
+        try fullName.write(archiver: archiver)
+        fwrite(&id,MemoryLayout<Int>.size,1,archiver.file)
         }
     }
 

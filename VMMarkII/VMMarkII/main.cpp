@@ -21,6 +21,7 @@
 #include "MapPointerWrapper.hpp"
 #include "String.hpp"
 #include "RootArray.hpp"
+#include "CobaltExecutable.hpp"
 
 void testArgonInstruction(void);
 void testObjects(void);
@@ -33,6 +34,7 @@ void testVectorsAndGrowing(void);
 void testMaps(void);
 void testTraits(void);
 void testObjectMemory(void);
+void testExecutable(void);
 
 int main(int argc, const char * argv[])
     {
@@ -42,6 +44,9 @@ int main(int argc, const char * argv[])
     std::cout << "Size of cond is " << sizeof(pthread_mutex_t) << "\n";
     std::cout << "Size of Word is " << sizeof(Word) << "\n";
     std::cout << "Size of char is " << sizeof(char) << "\n";
+    std::cout << "Size of long is " << sizeof(long) << "\n";
+    std::cout << "Size of long long is " << sizeof(long long) << "\n";
+    testExecutable();
     testTraits();
     testObjectMemory();
     testStringPointers();
@@ -54,6 +59,14 @@ int main(int argc, const char * argv[])
     testArgonInstruction();
     return 0;
     };
+
+void testExecutable()
+    {
+    CobaltExecutable executable("/Users/vincent/Desktop/NewFormatEXEFile.argonexe");
+    executable.open();
+    executable.readObjectTable();
+    executable.readObjects();
+    }
 
 void testObjectMemory()
     {

@@ -38,7 +38,7 @@ public class VMInstructionSelection:Collection
         }
     }
 
-public class VMInstructionList:Collection
+public class VMInstructionList:Collection,FileWritable
     {
     public private(set) var instructions:[VMInstruction] = []
     private var selectedIndex:Int = 0
@@ -78,6 +78,29 @@ public class VMInstructionList:Collection
     public init(_ instructions:[VMInstruction])
         {
         self.instructions = instructions
+        }
+    
+    required public init(archiver: CArchiver) throws
+        {
+        self.instructions = []
+        var count:Int = 0
+        fread(&count,MemoryLayout<Int>.size,1,archiver.file)
+        for _ in 0..<count
+            {
+            let instruction = try VMInstruction(archiver: archiver)
+            instructions.append(instruction)
+            }
+        }
+    
+    public func write(archiver: CArchiver) throws
+        {
+        var count:Int
+        count = instructions.count
+        fwrite(&count,MemoryLayout<Int>.size,1,archiver.file)
+        for instruction in instructions
+            {
+            try instruction.write(archiver: archiver)
+            }
         }
     
     public func setSelection(index:Int,count:Int)

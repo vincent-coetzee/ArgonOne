@@ -255,7 +255,7 @@ public class ArgonParser
         {
         if token.isPrefix || token.isPostfix || token.isInfix
             {
-            try self.parseOperator();
+            try self.parseOperatorMethod();
             }
         else if token.isMacro
             {
@@ -304,8 +304,78 @@ public class ArgonParser
             }
         }
     
-    private func parseOperator() throws
+    private func parseOperatorMethod() throws
         {
+        let location = token!.location
+        try self.nextToken()
+        if !token.isOperator
+            {
+            throw(ParseError.operatorKeywordExpected)
+            }
+        try self.nextToken()
+        var characters:[Character] = []
+        while !token.isLeftPar
+            {
+            if !token.isOperatorSymbol
+                {
+                throw(ParseError.symbolExpected)
+                }
+            let symbolValue = try token.symbolValue()
+            for character in symbolValue
+                {
+                characters.append(character)
+                }
+            try self.nextToken()
+            }
+        let name = characters.map{String($0)}.joined(separator: "")
+        let module = scope.enclosingModule()
+        let key = Argon.nextCounter
+        let argonName = ArgonName("\(name)$\(key)")
+        let method = ArgonMethodNode(name: argonName)
+        (module as! ArgonTopLevelNode).add(method: method)
+        self.tokenStream.addOperatorToken(characters: characters,for: key)
+        if pendingMethodDirectives != nil
+            {
+            method.directives = pendingMethodDirectives!
+            pendingMethodDirectives = nil
+            }
+        method.moduleName = scope!.enclosingModule().moduleName
+        codeContainers.append(method)
+        method.sourceLocation = location
+        let frame = ArgonStackFrame.push(scope:method)
+        frame.name = "METHOD \(name) LINE @\(token.location.lineNumber)"
+        defer
+            {
+            ArgonStackFrame.pop()
+            }
+        method.enclosingStackFrame = frame
+        try self.parseMethodParameters(into: method)
+        method.containingScope = scope
+        scope = method
+        defer
+            {
+            scope = method.containingScope
+            }
+        var returnType:ArgonType = ArgonStandardsNode.shared.voidTraits
+        if token.isResult
+            {
+            try self.nextToken()
+            returnType = try self.parseType()
+            }
+        method.returnType = returnType
+        try self.parseBraces
+            {
+            if token.isPrimitive
+                {
+                let number = try self.parsePrimitive()
+                method.isPrimitive = true
+                method.primitiveNumber = number
+                }
+            else
+                {
+                method.statements = try self.parseMethodBody()
+                }
+            }
         }
     
     private func parseParentTraits(inTraits traits:ArgonTraitsNode) throws
@@ -1979,7 +2049,11 @@ public class ArgonParser
     private func parseTerm() throws -> ArgonExpressionNode
         {
 //        print(#function)
-        if token.isString
+        if token.isDollar
+            {
+            return(try self.parseDateAndTime())
+            }
+        else if token.isString
             {
             let string = token.string
             try self.nextToken()
@@ -2029,6 +2103,103 @@ public class ArgonParser
             {
             return(ArgonConstantNode(void:true))
             }
+        }
+    
+    private func parseDateAndTime() throws -> ArgonExpressionNode
+        {
+        try self.nextToken()
+        if !token.isLeftPar
+            {
+            throw(ParseError.leftParExpected)
+            }
+        var date:DateTime?
+        try self.parseParenthesis
+            {
+            if !token.isInteger
+                {
+                throw(ParseError.dateDayExpected)
+                }
+            let day = token.integer
+            try self.nextToken()
+            if !token.isDiv
+                {
+                throw(ParseError.dateSeparatorExpected)
+                }
+            try self.nextToken()
+            if !token.isInteger
+                {
+                throw(ParseError.dateMonthExpected)
+                }
+            let month = token.integer
+            try self.nextToken()
+            if !token.isDiv
+                {
+                throw(ParseError.dateSeparatorExpected)
+                }
+            try self.nextToken()
+            if !token.isInteger
+                {
+                throw(ParseError.dateYearExpected)
+                }
+            let year = token.integer
+            try self.nextToken()
+            var hour = -1
+            var minute = -1
+            var second = -1
+            if token.isComma
+                {
+                try self.nextToken()
+                if !token.isInteger
+                    {
+                    throw(ParseError.dateHourExpected)
+                    }
+                hour = token.integer
+                try self.nextToken()
+                if !token.isColon
+                    {
+                    throw(ParseError.dateTimeSeparatorExpected)
+                    }
+                try self.nextToken()
+                if !token.isInteger
+                    {
+                    throw(ParseError.dateMinuteExpected)
+                    }
+                minute = token.integer
+                try self.nextToken()
+                if !token.isColon
+                    {
+                    throw(ParseError.dateTimeSeparatorExpected)
+                    }
+                try self.nextToken()
+                if !token.isInteger
+                    {
+                    throw(ParseError.dateSecondExpected)
+                    }
+                second = token.integer
+                try self.nextToken()
+                }
+            var timeZone:String?
+            if token.isComma
+                {
+                try self.nextToken()
+                if !token.isIdentifier
+                    {
+                    throw(ParseError.identifierExpected)
+                    }
+                timeZone = token.identifier!
+                try self.nextToken()
+                }
+            if hour != -1
+                {
+                date = DateTime(day:day,month:month,year:year,hour:hour,minute:minute,second:second,timeZone:timeZone)
+                
+                }
+            else
+                {
+                date = DateTime(day:day,month:month,year:year,timeZone:timeZone)
+                }
+            }
+        return(ArgonConstantNode(date:date!))
         }
     
     private func parseBracketedExpression() throws -> ArgonExpressionNode

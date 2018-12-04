@@ -16,6 +16,7 @@ public class ArgonTopLevelNode:ArgonScopeNode,ArgonParseModule,ArgonParseScope
     public var statements = ArgonStatementList()
     public var constants:[ArgonNamedConstantNode] = []
     public var globals:[ArgonGlobalVariableNode] = []
+    public var methods:[ArgonMethodNode] = []
     
     override init(name:ArgonName)
         {
@@ -26,6 +27,11 @@ public class ArgonTopLevelNode:ArgonScopeNode,ArgonParseModule,ArgonParseScope
     public func isGlobalScope() -> Bool
         {
         return(true)
+        }
+    
+    public func add(method: ArgonMethodNode)
+        {
+        methods.append(method)
         }
     
    public override func add(variable:ArgonVariableNode)
@@ -59,6 +65,13 @@ public class ArgonTopLevelNode:ArgonScopeNode,ArgonParseModule,ArgonParseScope
     
     public override func resolve(name:ArgonName) -> ArgonParseNode?
         {
+        for method in methods
+            {
+            if method.name == name
+                {
+                return(method)
+                }
+            }
         for constant in constants
             {
             if constant.name == name

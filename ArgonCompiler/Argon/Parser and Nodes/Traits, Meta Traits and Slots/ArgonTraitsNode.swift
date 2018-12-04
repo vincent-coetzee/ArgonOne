@@ -458,6 +458,10 @@ public class ArgonTraitsNode:ArgonExpressionNode,ArgonParseScope,Comparable,Argo
             }
         for parent in parents
             {
+            if parent is ArgonSystemTraitsNode
+                {
+                (parent as! ArgonSystemTraitsNode).containingScope = containingScope
+                }
             let parentItem = parent.resolve(name: name)
             if parentItem != nil
                 {

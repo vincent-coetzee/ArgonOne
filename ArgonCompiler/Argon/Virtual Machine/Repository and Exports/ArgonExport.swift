@@ -35,4 +35,17 @@ public class ArgonExport:ArgonModulePart
         itemName = aDecoder.decodeObject(forKey: "itemName") as? String
         super.init(coder:aDecoder)
         }
+    
+    required public init(archiver: CArchiver) throws
+        {
+        throw(ParseError.notImplemented)
+        try super.init(archiver:archiver)
+        }
+    
+    public override func write(archiver: CArchiver) throws
+        {
+        throw(ParseError.notImplemented)
+        try archiver.write(object: self)
+        try super.write(archiver: archiver)
+        }
     }
